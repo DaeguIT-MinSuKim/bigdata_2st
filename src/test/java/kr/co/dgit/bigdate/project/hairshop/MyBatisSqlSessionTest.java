@@ -1,5 +1,4 @@
-package kr.co.dgit.bigdate.mybatis_dev;
-
+package kr.co.dgit.bigdate.project.hairshop;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -8,9 +7,10 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import kr.co.dgit.bigdate.mybatis_dev.util.MyBatisSqlSessionFactory;
+import kr.or.dgit.bigdata.project.hairshop.util.MyBatisSqlSessionFactory;
 
-public class MybatisSqlSessionTest {
+
+public class MyBatisSqlSessionTest {
 	private static SqlSessionFactory sqlSessionFactory;
 
 	@BeforeClass

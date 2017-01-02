@@ -1,4 +1,4 @@
-package kr.co.dgit.bigdate.mybatis_dev.util;
+package kr.or.dgit.bigdata.project.hairshop.util;
 
 import java.io.IOException;
 import java.io.InputStream;

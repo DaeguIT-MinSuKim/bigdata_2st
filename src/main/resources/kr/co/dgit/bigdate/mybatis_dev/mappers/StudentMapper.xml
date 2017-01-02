@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.dgit.bigdate.mybatis_dev.mappers.StudentMapper">
-	<select id="findStudentById" parameterType="int" resultType="Student">
+<mapper namespace="kr.or.dgit.bigdata.project.hairshop.mapper.CustomertMapper">
+	<!-- <select id="findStudentById" parameterType="int" resultType="Student">
 		select stud_id, name, email, dob from students where stud_id=#{studId}
 	</select>
 	<insert id="insertStudent" parameterType="Student">
@@ -24,5 +24,5 @@
 	</select>
 	<select id="findStudentByAllForMap" resultType="map">
 		select stud_id, name, email, dob from students
-	</select>
+	</select> -->
 </mapper>
