@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data-sources>
-	<data-source id="mysql5-15943da169a-dde1cee5e9ac2e1" provider="mysql" driver="mysql5" name="MySQL - mysql(root)" create-date="1482902105567" login-date="1482902107550" save-password="true" show-system-objects="true" read-only="false">
+	<data-source id="mysql5-15943da169a-dde1cee5e9ac2e1" provider="mysql" driver="mysql5" name="MySQL - mysql(root)" create-date="1482902105567" login-date="1483329343972" save-password="true" show-system-objects="true" read-only="false">
 		<connection host="localhost" port="3306" server="" database="mysql" url="jdbc:mysql://localhost:3306/mysql" user="root" password="AQsJNFNMSwJl8w==" home="C:\Program Files\MySQL\MySQL Server 5.6" type="dev">
 			<network-handler type="PROXY" id="socks_proxy" enabled="false" user="" save-password="false">
 				<property name="socks-host" value=""/>
@@ -24,17 +24,18 @@
 			<bootstrap/>
 		</connection>
 	</data-source>
-	<data-source id="mysql5-15943dbc571-26055c099780ed59" provider="mysql" driver="mysql5" name="MySQL - mybatis_dev(user_mybatis_dev)" create-date="1482902222510" save-password="true" show-system-objects="true" read-only="false">
-		<connection host="localhost" port="3306" server="" database="mybatis_dev" url="jdbc:mysql://localhost:3306/mybatis_dev" user="user_mybatis_dev" password="AQsJNFNMSwJl8w==" home="C:\Program Files\MySQL\MySQL Server 5.6" type="dev">
-			<network-handler type="PROXY" id="socks_proxy" enabled="false" user="" save-password="false">
-				<property name="socks-host" value=""/>
-				<property name="socks-port" value="1080"/>
-			</network-handler>
+	<data-source id="mysql5-1595d9ade00-53cb6b3a445a2e05" provider="mysql" driver="mysql5" name="MySQL - hairshop(user_hairshop)" create-date="1483334174180" save-password="true" show-system-objects="true" read-only="false">
+		<connection host="localhost" port="3306" server="" database="hairshop" url="jdbc:mysql://localhost:3306/hairshop" user="user_hairshop" password="AQsJNFNMSwJl8w==" home="C:\Program Files\MySQL\MySQL Server 5.7" type="dev">
 			<network-handler type="TUNNEL" id="ssh_tunnel" enabled="false" user="" save-password="false">
+				<property name="sshConnectTimeout" value="10000"/>
 				<property name="port" value="22"/>
 				<property name="keyPath" value=""/>
 				<property name="host" value=""/>
 				<property name="authType" value="PASSWORD"/>
+			</network-handler>
+			<network-handler type="PROXY" id="socks_proxy" enabled="false" user="" save-password="false">
+				<property name="socks-host" value=""/>
+				<property name="socks-port" value="1080"/>
 			</network-handler>
 			<network-handler type="CONFIG" id="mysql_ssl" enabled="false" user="" save-password="false">
 				<property name="ssl.public.key.retrieve" value="false"/>
