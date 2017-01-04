@@ -5,13 +5,12 @@
 	<settings>		
 		<setting name="mapUnderscoreToCamelCase" value="true" />		
 	</settings>
-	<typeAliases>
-		
-		<package name="kr.co.dgit.bigdate.mybatis_dev.dto"/>
+	<typeAliases>		
+		<package name="kr.or.dgit.bigdata.project.hairshop.dto"/>
 	</typeAliases>
-	<typeHandlers>
-		<package name="kr.co.dgit.bigdate.mybatis_dev.typehandler" />
-	</typeHandlers>
+	<!-- <typeHandlers>
+		<package name="kr.co.dgit.bigdate.mybatis_dev.typehandler" /> 아직 typeHandeler만들기 전
+	</typeHandlers> -->
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
@@ -23,8 +22,7 @@
 			</dataSource>
 		</environment>
 	</environments>
-	<mappers>
-		<!-- <mapper resource="kr/co/dgit/bigdate/mybatis_dev/mappers/StudentMapper.xml" /> -->
-		<package name="kr.co.dgit.bigdate.mybatis_dev.mappers" />
+	<mappers>		
+		<package name="kr.or.dgit.bigdata.project.hairshop.mapper" />
 	</mappers>
 </configuration>

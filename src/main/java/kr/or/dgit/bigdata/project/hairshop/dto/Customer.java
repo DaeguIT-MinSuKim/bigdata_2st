@@ -9,9 +9,7 @@ public class Customer {
 	private Date cDoJoin;
 	private int cPhone;
 	
-	public Customer() {
-		// TODO Auto-generated constructor stub
-	}
+	public Customer() {}
 	
 	public Customer(int cNo) {
 		super();
@@ -83,8 +81,7 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [cNo=" + cNo + ", cName=" + cName + ", cDob=" + cDob + ", cDoJoin=" + cDoJoin + ", cPhone="
-				+ cPhone + "]";
+		return "Customer [cNo=" + cNo + ", cName=" + cName + ", cDob=" + cDob + ", cDoJoin=" + cDoJoin + ", cPhone="+ cPhone + "]";
 	}
 
 	@Override
@@ -128,9 +125,5 @@ public class Customer {
 		if (cPhone != other.cPhone)
 			return false;
 		return true;
-	}
-
-	
-	
-	
+	}	
 }
