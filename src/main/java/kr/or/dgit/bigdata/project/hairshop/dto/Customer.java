@@ -7,10 +7,10 @@ public class Customer {
 	private String cName;
 	private Date cDob;
 	private Date cDoJoin;
-	private int cPhone;
+	private String cPhone;//휴대폰 번호 0으로 시작해서 int형 대신에 String으로 바꿔 봤어요. - 유진
 	
 	public Customer() {}
-	
+	// 생성자들중에 제가 테스트하는 도중 필요해서 이름, 이름+폰번호 생성자 추가했어요 - 유진
 	public Customer(int cNo) {
 		super();
 		this.cNo = cNo;
@@ -22,6 +22,17 @@ public class Customer {
 		this.cName = cName;
 	}
 	
+	public Customer(String cName) {
+		super();
+		this.cName = cName;
+	}
+
+	public Customer(String cName, String cPhone) {
+		super();
+		this.cName = cName;
+		this.cPhone = cPhone;
+	}
+
 	public Customer(String cName, Date cDob) {
 		super();
 		this.cName = cName;
@@ -30,7 +41,7 @@ public class Customer {
 
 	
 
-	public Customer(int cNo, String cName, Date cDob, Date cDoJoin, int cPhone) {
+	public Customer(int cNo, String cName, Date cDob, Date cDoJoin, String cPhone) {
 		super();
 		this.cNo = cNo;
 		this.cName = cName;
@@ -71,11 +82,11 @@ public class Customer {
 		this.cDoJoin = cDoJoin;
 	}
 
-	public int getcPhone() {
+	public String getcPhone() {
 		return cPhone;
 	}
 
-	public void setcPhone(int cPhone) {
+	public void setcPhone(String cPhone) {
 		this.cPhone = cPhone;
 	}
 
@@ -92,7 +103,7 @@ public class Customer {
 		result = prime * result + ((cDob == null) ? 0 : cDob.hashCode());
 		result = prime * result + ((cName == null) ? 0 : cName.hashCode());
 		result = prime * result + cNo;
-		result = prime * result + cPhone;
+		result = prime * result + ((cPhone == null) ? 0 : cPhone.hashCode());;
 		return result;
 	}
 

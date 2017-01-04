@@ -22,11 +22,17 @@ public class CustomerServiceTest {
 	public static void tearDownAfterClass() throws Exception {
 		customerService = null;
 	}
-
+	
 	@Test
 	public void testselectByAll() {
 		List<Customer> list = customerService.selectByAll();
 		Assert.assertNotNull(list);
 	}
-
+	@Test
+	public void testselectByName() {
+		Customer customer = new Customer("이유진");
+		customer.setcPhone("010-111-1111");
+		List<Customer> list = customerService.selectByName(customer);
+		Assert.assertNotNull(list);
+	}
 }

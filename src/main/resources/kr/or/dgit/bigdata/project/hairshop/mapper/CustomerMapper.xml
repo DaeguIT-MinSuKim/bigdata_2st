@@ -4,6 +4,15 @@
 	<select id="selectByAll" resultType="customer">
 		select cNo, cName, cDob, cDoJoin, cPhone from customer;
 	</select>
+	<!-- 고객의 이름을 가지고 검색할 때 경우에 따라 휴대폰 번호도 같이 검색조건에 들어갈 수 있도록 if문 추가 ver.유진 -->
+	<select id="selectByName" resultType="customer">
+		select cNo, cName, cDob, cDoJoin, cPhone from customer 
+		where cName=#{cName}
+		<if test="cPhone != null">
+			and cPhone like #{cPhone}
+		</if>
+	</select>
+	
 	<!-- <select id="findStudentById" parameterType="int" resultType="Student">
 		select stud_id, name, email, dob from students where stud_id=#{studId}
 	</select>

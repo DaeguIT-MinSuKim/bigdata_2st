@@ -8,6 +8,6 @@ public interface CustomerMapper {
 	void deleteItem(Customer idx);
 	void updateItem(Customer item);
 	Customer selectByNo(int idx);
-	Customer selectByName(Customer name);
+	List<Customer> selectByName(Customer name);// 이름으로 검색했을 때 여러명이 나올 수 가 있어서 List 형식으로 변경했어요. - 유진
 	List<Customer> selectByAll();
 }

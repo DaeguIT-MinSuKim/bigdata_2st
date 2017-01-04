@@ -39,9 +39,18 @@ public class CustomerService implements CustomerMapper{
 		return null;
 	}
 
-	public Customer selectByName(Customer name) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Customer> selectByName(Customer customer) {
+		//이름으로 검색하는 메소드 추가했어요. - ver.유진
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectByName(Customer) - start");
+		}
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		CustomerMapper customerMapper = sqlSession.getMapper(CustomerMapper.class);
+		try{
+			return customerMapper.selectByName(customer);			
+		}finally{
+			sqlSession.close();
+		}
 	}
 	
 	public List<Customer> selectByAll() {
