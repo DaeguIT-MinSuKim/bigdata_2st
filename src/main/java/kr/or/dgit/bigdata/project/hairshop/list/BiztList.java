@@ -8,7 +8,7 @@ public class BiztList extends AbstractList {
 	 * Create the panel.
 	 */
 	public BiztList() {
-
+		
 	}
 
 }
