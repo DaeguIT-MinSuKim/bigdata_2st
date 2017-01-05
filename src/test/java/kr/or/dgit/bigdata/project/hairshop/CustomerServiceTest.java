@@ -1,4 +1,4 @@
-package kr.co.dgit.bigdate.project.hairshop;
+package kr.or.dgit.bigdata.project.hairshop;
 
 import static org.junit.Assert.*;
 
