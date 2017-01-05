@@ -1,114 +1,140 @@
--- ¹Ì¿ë½Ç
+-- ë¯¸ìš©ì‹¤
 DROP SCHEMA IF EXISTS hairshop;
 
--- ¹Ì¿ë½Ç
+-- ë¯¸ìš©ì‹¤
 CREATE SCHEMA hairshop;
 
--- °í°´
+-- ê³ ê°
 CREATE TABLE hairshop.customer (
-	cNo     INTEGER     NOT NULL COMMENT '°í°´¹øÈ£', -- °í°´¹øÈ£
-	cName   VARCHAR(20) NULL     COMMENT '°í°´¸í', -- °í°´¸í
-	cDob    DATE        NULL     COMMENT '»ı³â¿ùÀÏ', -- »ı³â¿ùÀÏ
-	cDoJoin DATE        NULL     COMMENT '°¡ÀÔÀÏÀÚ', -- °¡ÀÔÀÏÀÚ
-	cPhone  VARCHAR(15) NOT NULL COMMENT 'Æù¹øÈ£' -- Æù¹øÈ£
+	cNo     INTEGER     NOT NULL COMMENT 'ê³ ê°ë²ˆí˜¸', -- ê³ ê°ë²ˆí˜¸
+	cName   VARCHAR(20) NULL     COMMENT 'ê³ ê°ëª…', -- ê³ ê°ëª…
+	cDob    DATE        NULL     COMMENT 'ìƒë…„ì›”ì¼', -- ìƒë…„ì›”ì¼
+	cDoJoin DATE        NULL     COMMENT 'ê°€ì…ì¼ì', -- ê°€ì…ì¼ì
+	cPhone  VARCHAR(15) NOT NULL COMMENT 'í°ë²ˆí˜¸' -- í°ë²ˆí˜¸
 )
-COMMENT '°í°´';
+COMMENT 'ê³ ê°';
 
--- °í°´
+-- ê³ ê°
 ALTER TABLE hairshop.customer
-	ADD CONSTRAINT PK_customer -- °í°´ ±âº»Å°
+	ADD CONSTRAINT PK_customer -- ê³ ê° ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			cNo -- °í°´¹øÈ£
+			cNo -- ê³ ê°ë²ˆí˜¸
 		);
 
 ALTER TABLE hairshop.customer
-	MODIFY COLUMN cNo INTEGER NOT NULL AUTO_INCREMENT COMMENT '°í°´¹øÈ£';
+	MODIFY COLUMN cNo INTEGER NOT NULL AUTO_INCREMENT COMMENT 'ê³ ê°ë²ˆí˜¸';
 
--- ÀÌº¥Æ®
+-- ì´ë²¤íŠ¸
 CREATE TABLE hairshop.event (
-	eNo       INTEGER     NOT NULL COMMENT 'ÀÌº¥Æ®¹øÈ£', -- ÀÌº¥Æ®¹øÈ£
-	eName     VARCHAR(20) NULL     COMMENT 'ÀÌº¥Æ®¸í', -- ÀÌº¥Æ®¸í
-	eDiscount DOUBLE      NULL     COMMENT 'ÇÒÀÎÀ²' -- ÇÒÀÎÀ²
+	eNo       INTEGER     NOT NULL COMMENT 'ì´ë²¤íŠ¸ë²ˆí˜¸', -- ì´ë²¤íŠ¸ë²ˆí˜¸
+	eName     VARCHAR(20) NULL     COMMENT 'ì´ë²¤íŠ¸ëª…', -- ì´ë²¤íŠ¸ëª…
+	eDiscount DOUBLE      NULL     COMMENT 'í• ì¸ìœ¨' -- í• ì¸ìœ¨
 )
-COMMENT 'ÀÌº¥Æ®';
+COMMENT 'ì´ë²¤íŠ¸';
 
--- ÀÌº¥Æ®
+-- ì´ë²¤íŠ¸
 ALTER TABLE hairshop.event
-	ADD CONSTRAINT PK_event -- ÀÌº¥Æ® ±âº»Å°
+	ADD CONSTRAINT PK_event -- ì´ë²¤íŠ¸ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			eNo -- ÀÌº¥Æ®¹øÈ£
+			eNo -- ì´ë²¤íŠ¸ë²ˆí˜¸
 		);
 
 ALTER TABLE hairshop.event
-	MODIFY COLUMN eNo INTEGER NOT NULL AUTO_INCREMENT COMMENT 'ÀÌº¥Æ®¹øÈ£';
+	MODIFY COLUMN eNo INTEGER NOT NULL AUTO_INCREMENT COMMENT 'ì´ë²¤íŠ¸ë²ˆí˜¸';
 
--- Çì¾îÁ¤º¸ 
+-- í—¤ì–´ì •ë³´ 
 CREATE TABLE hairshop.hairinfo (
-	hNo    INTEGER     NOT NULL COMMENT 'Çì¾î¹øÈ£', -- Çì¾î¹øÈ£
-	hName  VARCHAR(20) NULL     COMMENT 'Çì¾î¸í', -- Çì¾î¸í
-	hPrice INTEGER     NULL     COMMENT '´Ü°¡' -- ´Ü°¡
+	hNo    INTEGER     NOT NULL COMMENT 'í—¤ì–´ë²ˆí˜¸', -- í—¤ì–´ë²ˆí˜¸
+	hName  VARCHAR(20) NULL     COMMENT 'í—¤ì–´ëª…', -- í—¤ì–´ëª…
+	hPrice INTEGER     NULL     COMMENT 'ë‹¨ê°€' -- ë‹¨ê°€
 )
-COMMENT 'Çì¾îÁ¤º¸ ';
+COMMENT 'í—¤ì–´ì •ë³´ ';
 
--- Çì¾îÁ¤º¸ 
+-- í—¤ì–´ì •ë³´ 
 ALTER TABLE hairshop.hairinfo
-	ADD CONSTRAINT PK_hairinfo -- Çì¾îÁ¤º¸  ±âº»Å°
+	ADD CONSTRAINT PK_hairinfo -- í—¤ì–´ì •ë³´  ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			hNo -- Çì¾î¹øÈ£
+			hNo -- í—¤ì–´ë²ˆí˜¸
 		);
 
 ALTER TABLE hairshop.hairinfo
-	MODIFY COLUMN hNo INTEGER NOT NULL AUTO_INCREMENT COMMENT 'Çì¾î¹øÈ£';
+	MODIFY COLUMN hNo INTEGER NOT NULL AUTO_INCREMENT COMMENT 'í—¤ì–´ë²ˆí˜¸';
 
--- ¿µ¾÷
+-- ì˜ì—…
 CREATE TABLE hairshop.market (
-	mNo   INTEGER NOT NULL COMMENT '¿µ¾÷¹øÈ£', -- ¿µ¾÷¹øÈ£
-	mDate DATE    NULL     COMMENT '¿µ¾÷ÀÏÀÚ', -- ¿µ¾÷ÀÏÀÚ
-	mTime DATE    NULL     COMMENT '¹æ¹®½Ã°£', -- ¹æ¹®½Ã°£
-	cNo   INTEGER NULL     COMMENT '°í°´¹øÈ£', -- °í°´¹øÈ£
-	hNo   INTEGER NULL     COMMENT 'Çì¾î¹øÈ£', -- Çì¾î¹øÈ£
-	eNo   INTEGER NULL     COMMENT 'ÀÌº¥Æ®¹øÈ£' -- ÀÌº¥Æ®¹øÈ£
+	mNo   INTEGER NOT NULL COMMENT 'ì˜ì—…ë²ˆí˜¸', -- ì˜ì—…ë²ˆí˜¸
+	mDate DATE    NULL     COMMENT 'ì˜ì—…ì¼ì', -- ì˜ì—…ì¼ì
+	mTime TIME    NULL     COMMENT 'ë°©ë¬¸ì‹œê°„', -- ë°©ë¬¸ì‹œê°„
+	cNo   INTEGER NULL     COMMENT 'ê³ ê°ë²ˆí˜¸', -- ê³ ê°ë²ˆí˜¸
+	hNo   INTEGER NULL     COMMENT 'í—¤ì–´ë²ˆí˜¸', -- í—¤ì–´ë²ˆí˜¸
+	eNo   INTEGER NULL     COMMENT 'ì´ë²¤íŠ¸ë²ˆí˜¸' -- ì´ë²¤íŠ¸ë²ˆí˜¸
 )
-COMMENT '¿µ¾÷';
+COMMENT 'ì˜ì—…';
 
--- ¿µ¾÷
+-- ì˜ì—…
 ALTER TABLE hairshop.market
-	ADD CONSTRAINT PK_market -- ¿µ¾÷ ±âº»Å°
+	ADD CONSTRAINT PK_market -- ì˜ì—… ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			mNo -- ¿µ¾÷¹øÈ£
+			mNo -- ì˜ì—…ë²ˆí˜¸
 		);
 
 ALTER TABLE hairshop.market
-	MODIFY COLUMN mNo INTEGER NOT NULL AUTO_INCREMENT COMMENT '¿µ¾÷¹øÈ£';
+	MODIFY COLUMN mNo INTEGER NOT NULL AUTO_INCREMENT COMMENT 'ì˜ì—…ë²ˆí˜¸';
 
--- ¿µ¾÷
+-- ì˜ì—…
 ALTER TABLE hairshop.market
-	ADD CONSTRAINT FK_customer_TO_market -- °í°´ -> ¿µ¾÷
+	ADD CONSTRAINT FK_customer_TO_market -- ê³ ê° -> ì˜ì—…
 		FOREIGN KEY (
-			cNo -- °í°´¹øÈ£
+			cNo -- ê³ ê°ë²ˆí˜¸
 		)
-		REFERENCES hairshop.customer ( -- °í°´
-			cNo -- °í°´¹øÈ£
+		REFERENCES hairshop.customer ( -- ê³ ê°
+			cNo -- ê³ ê°ë²ˆí˜¸
 		);
 
--- ¿µ¾÷
+-- ì˜ì—…
 ALTER TABLE hairshop.market
-	ADD CONSTRAINT FK_hairinfo_TO_market -- Çì¾îÁ¤º¸  -> ¿µ¾÷
+	ADD CONSTRAINT FK_hairinfo_TO_market -- í—¤ì–´ì •ë³´  -> ì˜ì—…
 		FOREIGN KEY (
-			hNo -- Çì¾î¹øÈ£
+			hNo -- í—¤ì–´ë²ˆí˜¸
 		)
-		REFERENCES hairshop.hairinfo ( -- Çì¾îÁ¤º¸ 
-			hNo -- Çì¾î¹øÈ£
+		REFERENCES hairshop.hairinfo ( -- í—¤ì–´ì •ë³´ 
+			hNo -- í—¤ì–´ë²ˆí˜¸
 		);
 
--- ¿µ¾÷
+-- ì˜ì—…
 ALTER TABLE hairshop.market
-	ADD CONSTRAINT FK_event_TO_market -- ÀÌº¥Æ® -> ¿µ¾÷
+	ADD CONSTRAINT FK_event_TO_market -- ì´ë²¤íŠ¸ -> ì˜ì—…
 		FOREIGN KEY (
-			eNo -- ÀÌº¥Æ®¹øÈ£
+			eNo -- ì´ë²¤íŠ¸ë²ˆí˜¸
 		)
-		REFERENCES hairshop.event ( -- ÀÌº¥Æ®
-			eNo -- ÀÌº¥Æ®¹øÈ£
+		REFERENCES hairshop.event ( -- ì´ë²¤íŠ¸
+			eNo -- ì´ë²¤íŠ¸ë²ˆí˜¸
 		);
 		
--- exerd Æ÷¿öµù »ı¼º Å¬¸³º¸µå
+-- insert ì‹œì‘
+		
+insert into customer values
+(1, 'ê³ ì—°ì •','1990-02-20','2001-05-10','010-123-1234'),
+(2, 'ê¹€ì—°ì§€','1992-09-09','2000-03-02','010-456-4567'),
+(3, 'ì´ë‚˜ë¼','1987-06-09','2001-08-08','010-789-7890'),
+(4, 'ìµœìˆœí˜¸','1990-10-11','2001-08-02','010-147-1472');
+
+insert into event values 
+(1, 'ê¸°íš' ,0.5),(2, 'ìƒì¼' ,0.3),(3, 'ì¼ë°˜' ,0.0),(4, 'ì¡°ì¡°' ,0.2);
+
+insert into hairinfo values (1,'ì»¤íŠ¸',15000),
+(2,'ë“œë¼ì´',12000),
+(3,'ìƒ´í‘¸',5000),
+(4,'íŒ',38500),
+(5,'ë§¤ì§',95000),
+(6,'íŠ¸ë¦¬íŠ¸ë¨¼íŠ¸',35000),
+(7,'ì•°í”Œ',18000),
+(8,'ê¸°íƒ€',16000);
+
+insert into market values
+(1,'2000-05-10','15:00:00',1,5,3),
+(2,'2000-05-11','11:15:00',3,2,2),
+(3,'2001-05-12','04:00:00',2,1,3),
+(4,'2001-05-14','05:10:00',4,7,2),
+(5,'2001-05-14','09:30:00',2,4,4);
+
