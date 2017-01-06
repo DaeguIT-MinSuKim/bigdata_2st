@@ -8,6 +8,7 @@ public class Customer {
 	private Date cDob;
 	private Date cDoJoin;
 	private int cPhone;
+	private boolean cDel;
 	
 	public Customer() {
 		// TODO Auto-generated constructor stub
@@ -39,6 +40,17 @@ public class Customer {
 		this.cDob = cDob;
 		this.cDoJoin = cDoJoin;
 		this.cPhone = cPhone;
+	}
+	
+	
+	public Customer(int cNo, String cName, Date cDob, Date cDoJoin, int cPhone, boolean cDel) {
+		super();
+		this.cNo = cNo;
+		this.cName = cName;
+		this.cDob = cDob;
+		this.cDoJoin = cDoJoin;
+		this.cPhone = cPhone;
+		this.cDel = cDel;
 	}
 
 	public int getcNo() {
@@ -79,6 +91,14 @@ public class Customer {
 
 	public void setcPhone(int cPhone) {
 		this.cPhone = cPhone;
+	}
+	
+	public boolean iscDel() {
+		return cDel;
+	}
+
+	public void setcDel(boolean cDel) {
+		this.cDel = cDel;
 	}
 
 	@Override
