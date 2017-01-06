@@ -7,5 +7,7 @@
 	<update id="updateCustomer" parameterType="Customer">
 		update customer set cName=#{cName}, cDob=#{cDob}, cDoJoin=#{cDoJoin}, cPhone=#{cPhone}, cDel=#{cDel} where cNo=#{cNo}
 	</update>
-	
+	<delete id="deleteCustomer" parameterType="int">
+		delete from customer where cNo=#{cNo}
+	</delete>
 </mapper>

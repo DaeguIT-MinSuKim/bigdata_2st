@@ -35,7 +35,7 @@ public class CustomerServiceTest {
 
 		int res = customerService.insertCustomer(insCtm);
 		Assert.assertEquals(1, res);
-	}*/
+	}
 	@Test
 	public void testUdateCustomer() {
 		GregorianCalendar cal1 = new GregorianCalendar(1995, 11, 10);
@@ -51,5 +51,13 @@ public class CustomerServiceTest {
 		int res = customerService.updateCustomer(insCtm);
 		Assert.assertEquals(1, res);
 	}
-
+	@Test
+	public void testDelectCustomer() {
+		
+		int delCustomer =  customerService.deleteCustomer(6);
+		Assert.assertSame(1, delCustomer);
+	
+	}*/
+	
+	
 }

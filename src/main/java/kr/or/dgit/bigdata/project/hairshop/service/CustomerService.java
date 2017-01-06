@@ -52,6 +52,23 @@ public class CustomerService{
 		
 	}
 	
+	public int deleteCustomer(int id) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteCustomer(Customer) - start");
+		}
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			CustomerMapper customerMapper = sqlSession.getMapper(CustomerMapper.class);
+			int res = customerMapper.deleteCustomer(id);
+			sqlSession.commit();
+			return res;
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
+	
 	
 	
 
