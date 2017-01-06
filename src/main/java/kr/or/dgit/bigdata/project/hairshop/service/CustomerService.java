@@ -22,13 +22,12 @@ public class CustomerService{
 	
 	private static final Logger logger = Logger.getLogger(CustomerService.class);
 
-	
 	public int insertCustomer(Customer customer) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("insertCustomer(Customer) - start");
 		}
-		
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+
 		try {
 			CustomerMapper customerMapper = sqlSession.getMapper(CustomerMapper.class);
 			int res = customerMapper.insertCustomer(customer);

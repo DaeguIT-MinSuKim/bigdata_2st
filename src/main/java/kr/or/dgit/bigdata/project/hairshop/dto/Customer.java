@@ -10,10 +10,8 @@ public class Customer {
 	private String cPhone;
 	private boolean cDel;
 	
-	public Customer() {
-		// TODO Auto-generated constructor stub
-	}
-	
+	public Customer() {}
+	// 생성자들중에 제가 테스트하는 도중 필요해서 이름, 이름+폰번호 생성자 추가했어요 - 유진
 	public Customer(int cNo) {
 		super();
 		this.cNo = cNo;
@@ -25,6 +23,17 @@ public class Customer {
 		this.cName = cName;
 	}
 	
+	public Customer(String cName) {
+		super();
+		this.cName = cName;
+	}
+
+	public Customer(String cName, String cPhone) {
+		super();
+		this.cName = cName;
+		this.cPhone = cPhone;
+	}
+
 	public Customer(String cName, Date cDob) {
 		super();
 		this.cName = cName;
@@ -110,4 +119,5 @@ public class Customer {
 	
 	
 	
+
 }
