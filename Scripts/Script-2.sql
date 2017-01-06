@@ -62,10 +62,10 @@ ALTER TABLE hairshop.hairinfo
 	MODIFY COLUMN hNo INTEGER NOT NULL AUTO_INCREMENT COMMENT '헤어번호';
 
 -- 영업
-CREATE TABLE hairshop.market (
-	mNo   INTEGER NOT NULL COMMENT '영업번호', -- 영업번호
-	mDate DATE    NULL     COMMENT '영업일자', -- 영업일자
-	mTime TIME    NULL     COMMENT '방문시간', -- 방문시간
+CREATE TABLE hairshop.biz (
+	bNo   INTEGER NOT NULL COMMENT '영업번호', -- 영업번호
+	bDate DATE    NULL     COMMENT '영업일자', -- 영업일자
+	bTime TIME    NULL     COMMENT '방문시간', -- 방문시간
 	cNo   INTEGER NULL     COMMENT '고객번호', -- 고객번호
 	hNo   INTEGER NULL     COMMENT '헤어번호', -- 헤어번호
 	eNo   INTEGER NULL     COMMENT '이벤트번호' -- 이벤트번호
@@ -73,18 +73,18 @@ CREATE TABLE hairshop.market (
 COMMENT '영업';
 
 -- 영업
-ALTER TABLE hairshop.market
-	ADD CONSTRAINT PK_market -- 영업 기본키
+ALTER TABLE hairshop.biz
+	ADD CONSTRAINT PK_biz -- 영업 기본키
 		PRIMARY KEY (
-			mNo -- 영업번호
+			bNo -- 영업번호
 		);
 
-ALTER TABLE hairshop.market
-	MODIFY COLUMN mNo INTEGER NOT NULL AUTO_INCREMENT COMMENT '영업번호';
+ALTER TABLE hairshop.biz
+	MODIFY COLUMN bNo INTEGER NOT NULL AUTO_INCREMENT COMMENT '영업번호';
 
 -- 영업
-ALTER TABLE hairshop.market
-	ADD CONSTRAINT FK_customer_TO_market -- 고객 -> 영업
+ALTER TABLE hairshop.biz
+	ADD CONSTRAINT FK_customer_TO_biz -- 고객 -> 영업
 		FOREIGN KEY (
 			cNo -- 고객번호
 		)
@@ -93,8 +93,8 @@ ALTER TABLE hairshop.market
 		);
 
 -- 영업
-ALTER TABLE hairshop.market
-	ADD CONSTRAINT FK_hairinfo_TO_market -- 헤어정보  -> 영업
+ALTER TABLE hairshop.biz
+	ADD CONSTRAINT FK_hairinfo_TO_biz -- 헤어정보  -> 영업
 		FOREIGN KEY (
 			hNo -- 헤어번호
 		)
@@ -103,8 +103,8 @@ ALTER TABLE hairshop.market
 		);
 
 -- 영업
-ALTER TABLE hairshop.market
-	ADD CONSTRAINT FK_event_TO_market -- 이벤트 -> 영업
+ALTER TABLE hairshop.biz
+	ADD CONSTRAINT FK_event_TO_biz -- 이벤트 -> 영업
 		FOREIGN KEY (
 			eNo -- 이벤트번호
 		)
@@ -131,7 +131,7 @@ insert into hairinfo values (1,'커트',15000),
 (7,'앰플',18000),
 (8,'기타',16000);
 
-insert into market values
+insert into biz values
 (1,'2000-05-10','15:00:00',1,5,3),
 (2,'2000-05-11','11:15:00',3,2,2),
 (3,'2001-05-12','04:00:00',2,1,3),
