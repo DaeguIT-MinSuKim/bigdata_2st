@@ -4,4 +4,13 @@
 	<insert id="insertCustomer" parameterType="Customer" useGeneratedKeys="true" keyProperty="cNo">
 		 insert into customer(cName,cDob,cDoJoin, cPhone, cDel) values(#{cName},#{cDob},#{cDoJoin},#{cPhone},#{cDel});
 	</insert>
+	<update id="updateCustomer" parameterType="Customer">
+		update customer set cName=#{cName}, cDob=#{cDob}, cDoJoin=#{cDoJoin}, cPhone=#{cPhone}, cDel=#{cDel} where cNo=#{cNo}
+	</update>
+	<delete id="deleteCustomer" parameterType="int">
+		delete from customer where cNo=#{cNo}
+	</delete>
+	<select id="searchCustomerByName" parameterType="hashmap" resultType="Customer">
+		select cNo, cName, cDob, cDoJoin, cPhone, cDel from customer where cName=#{cName}
+	</select>
 </mapper>
