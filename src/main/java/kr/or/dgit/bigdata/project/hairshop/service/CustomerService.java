@@ -18,48 +18,14 @@ public class CustomerService implements CustomerMapper{
 	public CustomerService() {}
 	
 	private static final Logger logger = Logger.getLogger(CustomerService.class);
+
+	@Override
+	public void insertCustomer(Customer item) {
+		// TODO Auto-generated method stub
+		
+	}
 	
-	@Override
-	public void insertItem(Customer item) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteItem(Customer idx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateItem(Customer item) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Customer selectByNo(int idx) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Customer selectByName(Customer name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Customer> selectByAll() {
-		logger.debug("selectByAll()");
-		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
-		CustomerMapper studentDao =sqlSession.getMapper(CustomerMapper.class);
-		try {
-			return studentDao.selectByAll();
-		} finally {
-			sqlSession.close();
-		}
-	}
+	
 	
 
 }
