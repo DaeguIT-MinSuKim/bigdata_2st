@@ -86,7 +86,20 @@ public class CustomerService{
 		}
 		
 	}
-	
+	public List<Customer> selectByAll() {
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectByAll() - start");
+		}
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			CustomerMapper customerMapper = sqlSession.getMapper(CustomerMapper.class);
+			return customerMapper.selectByAll();
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
 	
 
 }

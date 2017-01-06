@@ -13,4 +13,7 @@
 	<select id="searchCustomerByName" parameterType="hashmap" resultType="Customer">
 		select cNo, cName, cDob, cDoJoin, cPhone, cDel from customer where cName=#{cName}
 	</select>
+	<select id="selectByAll" resultType="customer">
+		select cNo, cName, cDob, cDoJoin, cPhone from customer;
+	</select>
 </mapper>

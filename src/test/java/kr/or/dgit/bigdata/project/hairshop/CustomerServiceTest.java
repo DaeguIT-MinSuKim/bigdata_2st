@@ -1,6 +1,5 @@
 package kr.or.dgit.bigdata.project.hairshop;
 
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,10 +61,16 @@ public class CustomerServiceTest {
 	
 	}*/
 	@Test
-	public void testSearchCustomerByName() {
+	public void testSearchCustomerByName() { // 이름 검색이긴 하지만 map의 키값만 교체하면 번호나 휴대폰 등 다른 변수로도 검색 가능
 		Map<String, Object> map = new HashMap<>();
 		map.put("cName","노창균");
 		List<Customer> customer = customerService.searchCustomerByName(map);
+		Assert.assertNotNull(customer);
+	}
+	@Test
+	public void testSelectByAll() {
+		
+		List<Customer> customer = customerService.selectByAll();
 		Assert.assertNotNull(customer);
 	}
 	
