@@ -24,7 +24,7 @@ public class CustomerServiceTest {
 	public static void tearDownAfterClass() throws Exception {
 	}
 
-	@Test
+	/*@Test
 	public void testInsertCustomer() {
 		GregorianCalendar cal1 = new GregorianCalendar(1983, 11, 10);
 		GregorianCalendar cal2 = new GregorianCalendar(2017, 1, 6);
@@ -39,7 +39,7 @@ public class CustomerServiceTest {
 		int res = customerService.insertCustomer(insCtm);
 		Assert.assertEquals(1, res);
 	}
-	/*@Test
+	@Test
 	public void testUdateCustomer() {
 		GregorianCalendar cal1 = new GregorianCalendar(1995, 11, 10);
 		GregorianCalendar cal2 = new GregorianCalendar(2017, 1, 6);
