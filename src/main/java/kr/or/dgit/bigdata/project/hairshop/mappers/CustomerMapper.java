@@ -1,11 +1,10 @@
 package kr.or.dgit.bigdata.project.hairshop.mappers;
 
-import java.util.List;
-
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 
 public interface CustomerMapper {
-	int insertCustomer(Customer item);
+	int insertCustomer(Customer customer);
+	int updateCustomer(Customer customer);
 	/*void deleteItem(Customer idx);
 	void updateItem(Customer item);
 	Customer selectByNo(int idx);

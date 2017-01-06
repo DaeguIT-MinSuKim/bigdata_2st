@@ -35,6 +35,23 @@ public class CustomerService{
 		
 	}
 	
+	public int updateCustomer(Customer customer) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("updateCustomer(Customer) - start");
+		}
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			CustomerMapper customerMapper = sqlSession.getMapper(CustomerMapper.class);
+			int res = customerMapper.updateCustomer(customer);
+			sqlSession.commit();
+			return res;
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
+	
 	
 	
 
