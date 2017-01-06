@@ -1,15 +1,13 @@
 package kr.or.dgit.bigdata.project.hairshop.service;
 
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
-import kr.or.dgit.bigdata.project.hairshop.mapper.CustomerMapper;
+import kr.or.dgit.bigdata.project.hairshop.mappers.CustomerMapper;
 import kr.or.dgit.bigdata.project.hairshop.util.MyBatisSqlSessionFactory;
 
-public class CustomerService implements CustomerMapper{
+public class CustomerService{
 	private static final CustomerService instance = new CustomerService();
 	
 	public static CustomerService getInstance() {
@@ -18,10 +16,22 @@ public class CustomerService implements CustomerMapper{
 	public CustomerService() {}
 	
 	private static final Logger logger = Logger.getLogger(CustomerService.class);
-
-	@Override
-	public void insertCustomer(Customer item) {
-		// TODO Auto-generated method stub
+	
+	
+	public int insertCustomer(Customer customer) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("insertCustomer(Customer) - start");
+		}
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			CustomerMapper customerMapper = sqlSession.getMapper(CustomerMapper.class);
+			int res = customerMapper.insertCustomer(customer);
+			sqlSession.commit();
+			return res;
+		} finally {
+			sqlSession.close();
+		}
 		
 	}
 	
