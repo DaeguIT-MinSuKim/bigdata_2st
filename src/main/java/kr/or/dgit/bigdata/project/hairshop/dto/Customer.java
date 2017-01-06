@@ -3,90 +3,69 @@ package kr.or.dgit.bigdata.project.hairshop.dto;
 import java.util.Date;
 
 public class Customer {
+	/* 변수 */
 	private int cNo;
 	private String cName;
 	private Date cDob;
 	private Date cDoJoin;
-	private int cPhone;
-	
-	public Customer() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	public Customer(int cNo) {
-		super();
-		this.cNo = cNo;
-	}
-	
-	public Customer(int cNo, String cName) {
-		super();
-		this.cNo = cNo;
-		this.cName = cName;
-	}
-	
-	public Customer(String cName, Date cDob) {
-		super();
-		this.cName = cName;
-		this.cDob = cDob;
-	}
-
-	
-
-	public Customer(int cNo, String cName, Date cDob, Date cDoJoin, int cPhone) {
-		super();
-		this.cNo = cNo;
-		this.cName = cName;
-		this.cDob = cDob;
-		this.cDoJoin = cDoJoin;
-		this.cPhone = cPhone;
-	}
-
+	private String cPhone;
+	private boolean cDel;
+	/* GET/SET */
 	public int getcNo() {
 		return cNo;
 	}
-
 	public void setcNo(int cNo) {
 		this.cNo = cNo;
 	}
-
 	public String getcName() {
 		return cName;
 	}
-
 	public void setcName(String cName) {
 		this.cName = cName;
 	}
-
 	public Date getcDob() {
 		return cDob;
 	}
-
 	public void setcDob(Date cDob) {
 		this.cDob = cDob;
 	}
-
 	public Date getcDoJoin() {
 		return cDoJoin;
 	}
-
 	public void setcDoJoin(Date cDoJoin) {
 		this.cDoJoin = cDoJoin;
 	}
-
-	public int getcPhone() {
+	public String getcPhone() {
 		return cPhone;
 	}
-
-	public void setcPhone(int cPhone) {
+	public void setcPhone(String cPhone) {
 		this.cPhone = cPhone;
 	}
-
+	public boolean iscDel() {
+		return cDel;
+	}
+	public void setcDel(boolean cDel) {
+		this.cDel = cDel;
+	}
 	@Override
 	public String toString() {
 		return "Customer [cNo=" + cNo + ", cName=" + cName + ", cDob=" + cDob + ", cDoJoin=" + cDoJoin + ", cPhone="
 				+ cPhone + "]";
 	}
-
+	/* 생성자 */
+	public Customer() {}
+	public Customer(String cName) {
+		super();
+		this.cName = cName;
+	}
+	public Customer(int cNo, String cName, Date cDob, Date cDoJoin, String cPhone) {
+		super();
+		this.cNo = cNo;
+		this.cName = cName;
+		this.cDob = cDob;
+		this.cDoJoin = cDoJoin;
+		this.cPhone = cPhone;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -95,10 +74,9 @@ public class Customer {
 		result = prime * result + ((cDob == null) ? 0 : cDob.hashCode());
 		result = prime * result + ((cName == null) ? 0 : cName.hashCode());
 		result = prime * result + cNo;
-		result = prime * result + cPhone;
+		result = prime * result + ((cPhone == null) ? 0 : cPhone.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -125,12 +103,13 @@ public class Customer {
 			return false;
 		if (cNo != other.cNo)
 			return false;
-		if (cPhone != other.cPhone)
+		if (cPhone == null) {
+			if (other.cPhone != null)
+				return false;
+		} else if (!cPhone.equals(other.cPhone))
 			return false;
 		return true;
 	}
-
-	
 	
 	
 }
