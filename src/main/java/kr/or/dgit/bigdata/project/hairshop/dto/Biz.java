@@ -51,7 +51,7 @@ public class Biz {
 		return String.format("Biz [bNo=%s, bDate=%s, bTime=%s, cNo=%s, hNO=%s, eNo=%s]", bNo, bDate, bTime, cNo, hNO,
 				eNo);
 	}
-	
+	 
 	
 	
 }
