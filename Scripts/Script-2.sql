@@ -10,7 +10,8 @@ CREATE TABLE hairshop.customer (
 	cName   VARCHAR(20) NULL     COMMENT '고객명', -- 고객명
 	cDob    DATE        NULL     COMMENT '생년월일', -- 생년월일
 	cDoJoin DATE        NULL     COMMENT '가입일자', -- 가입일자
-	cPhone  VARCHAR(15) NOT NULL COMMENT '폰번호' -- 폰번호
+	cPhone  VARCHAR(15) NOT NULL COMMENT '폰번호', -- 폰번호
+	cDel    BOOLEAN     NULL     COMMENT '탈퇴여부' -- 탈퇴여부
 )
 COMMENT '고객';
 
@@ -110,14 +111,13 @@ ALTER TABLE hairshop.market
 		REFERENCES hairshop.event ( -- 이벤트
 			eNo -- 이벤트번호
 		);
-		
 -- insert 시작
 		
 insert into customer values
-(1, '고연정','1990-02-20','2001-05-10','010-123-1234'),
-(2, '김연지','1992-09-09','2000-03-02','010-456-4567'),
-(3, '이나라','1987-06-09','2001-08-08','010-789-7890'),
-(4, '최순호','1990-10-11','2001-08-02','010-147-1472');
+(1, '고연정','1990-02-20','2001-05-10','010-123-1234',false),
+(2, '김연지','1992-09-09','2000-03-02','010-456-4567',false),
+(3, '이나라','1987-06-09','2001-08-08','010-789-7890',false),
+(4, '최순호','1990-10-11','2001-08-02','010-147-1472',false);
 
 insert into event values 
 (1, '기획' ,0.5),(2, '생일' ,0.3),(3, '일반' ,0.0),(4, '조조' ,0.2);
