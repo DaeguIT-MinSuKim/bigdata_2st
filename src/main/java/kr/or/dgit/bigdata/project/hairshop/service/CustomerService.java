@@ -1,5 +1,8 @@
 package kr.or.dgit.bigdata.project.hairshop.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 
@@ -68,7 +71,20 @@ public class CustomerService{
 		}
 		
 	}
-	
+	public List<Customer> searchCustomerByName(Map<String, Object> map) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("searchCustomerByName(Map<String, Object>) - start");
+		}
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			CustomerMapper customerMapper = sqlSession.getMapper(CustomerMapper.class);
+			return customerMapper.searchCustomerByName(map);
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
 	
 	
 

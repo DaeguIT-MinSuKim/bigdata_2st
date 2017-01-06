@@ -10,4 +10,7 @@
 	<delete id="deleteCustomer" parameterType="int">
 		delete from customer where cNo=#{cNo}
 	</delete>
+	<select id="searchCustomerByName" parameterType="hashmap" resultType="Customer">
+		select cNo, cName, cDob, cDoJoin, cPhone, cDel from customer where cName=#{cName}
+	</select>
 </mapper>

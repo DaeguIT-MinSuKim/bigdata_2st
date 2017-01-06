@@ -1,6 +1,8 @@
 package kr.or.dgit.bigdata.project.hairshop;
 
-import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -58,6 +60,13 @@ public class CustomerServiceTest {
 		Assert.assertSame(1, delCustomer);
 	
 	}*/
+	@Test
+	public void testSearchCustomerByName() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("cName","노창균");
+		List<Customer> customer = customerService.searchCustomerByName(map);
+		Assert.assertNotNull(customer);
+	}
 	
 	
 }
