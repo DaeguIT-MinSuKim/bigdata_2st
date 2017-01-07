@@ -113,16 +113,16 @@ ALTER TABLE hairshop.biz
 		);
 -- insert 시작
 		
-insert into customer values
+insert into hairshop.customer values
 (1, '고연정','1990-02-20','2001-05-10','010-123-1234',false),
 (2, '김연지','1992-09-09','2000-03-02','010-456-4567',false),
 (3, '이나라','1987-06-09','2001-08-08','010-789-7890',false),
 (4, '최순호','1990-10-11','2001-08-02','010-147-1472',false);
 
-insert into event values 
+insert into hairshop.event values 
 (1, '기획' ,0.5),(2, '생일' ,0.3),(3, '일반' ,0.0),(4, '조조' ,0.2);
 
-insert into hairinfo values (1,'커트',15000),
+insert into hairshop.hairinfo values (1,'커트',15000),
 (2,'드라이',12000),
 (3,'샴푸',5000),
 (4,'펌',38500),
@@ -131,10 +131,11 @@ insert into hairinfo values (1,'커트',15000),
 (7,'앰플',18000),
 (8,'기타',16000);
 
-insert into biz values
+insert into hairshop.biz values
 (1,'2000-05-10','15:00:00',1,5,3),
 (2,'2000-05-11','11:15:00',3,2,2),
 (3,'2001-05-12','04:00:00',2,1,3),
 (4,'2001-05-14','05:10:00',4,7,2),
 (5,'2001-05-14','09:30:00',2,4,4);
+
 
