@@ -20,3 +20,6 @@ from hairshop.biz b, hairshop.hairInfo h
 where b.hNo = h.hNo
 group by b.hNo; -- 헤어스타일별 주문수 카운트
 
+select b.bNo, b.bDate, h.hName, h.hPrice, e.eName, (h.hPrice*(1-e.eDiscount)) as resultPrice from hairshop.biz b 
+left outer join hairshop.hairinfo h on b.hNo = h.hNo left outer join hairshop.event e on b.eNo = e.eNo 
+where b.bDate >= '2001-01-01' and b.bDate <= '2001-12-12' order by bNo desc; -- 날짜 검색 테이블
