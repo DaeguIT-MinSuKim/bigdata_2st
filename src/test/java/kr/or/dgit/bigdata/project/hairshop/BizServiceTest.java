@@ -43,9 +43,29 @@ public class BizServiceTest {
 		biz.setbDateEnd(bDateEnd);
 		
 		List<Biz> bList = BizService.getInstance().selectBizAndHairInfoEventByDate(biz);
+		Assert.assertNotNull(bList);		
+	}
+	
+	
+	@Test
+	public void testSelectYearOrMonthAllFromBiz() {
+		List<Biz> bList = BizService.getInstance().selectYearOrMonthAllFromBiz();
 		Assert.assertNotNull(bList);
 		
 	}
 	
+	@Test
+	public void testSelectCountTotalFrombiz() {
+		List<Biz> bList = BizService.getInstance().selectCountTotalFrombiz();
+		Assert.assertNotNull(bList);
+		
+	}
+	
+	@Test
+	public void testSelectCountStyleForGraph() {
+		List<Biz> bList = BizService.getInstance().selectCountStyleForGraph();
+		Assert.assertNotNull(bList);
+		
+	}
 	
 }

@@ -56,4 +56,49 @@ public class BizService {
 		}
 		
 	}
+	
+	public List<Biz> selectYearOrMonthAllFromBiz() {
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectYearOrMonthAllFromBiz() - start");
+		}
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
+			return bizMapper.selectYearOrMonthAllFromBiz();
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
+	
+	public List<Biz> selectCountTotalFrombiz() {
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectCountTotalFrombiz() - start");
+		}
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
+			return bizMapper.selectCountTotalFrombiz();
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
+	
+	public List<Biz> selectCountStyleForGraph() {
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectCountStyleForGraph() - start");
+		}
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
+			return bizMapper.selectCountStyleForGraph();
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
 }
