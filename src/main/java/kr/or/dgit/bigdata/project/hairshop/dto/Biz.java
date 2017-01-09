@@ -10,6 +10,10 @@ public class Biz {
 	private Customer cNo;
 	private Hairinfo hNO;
 	private HairEvent eNo;
+	private Date bDateStart;
+	private Date bDateEnd;
+	
+	
 	public int getbNo() {
 		return bNo;
 	}
@@ -45,6 +49,18 @@ public class Biz {
 	}
 	public void seteNo(HairEvent eNo) {
 		this.eNo = eNo;
+	}
+	public Date getbDateStart() {
+		return bDateStart;
+	}
+	public void setbDateStart(Date bDateStart) {
+		this.bDateStart = bDateStart;
+	}
+	public Date getbDateEnd() {
+		return bDateEnd;
+	}
+	public void setbDateEnd(Date bDateEnd) {
+		this.bDateEnd = bDateEnd;
 	}
 	@Override
 	public String toString() {

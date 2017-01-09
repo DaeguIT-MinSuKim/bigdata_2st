@@ -1,10 +1,9 @@
 package kr.or.dgit.bigdata.project.hairshop.service;
 
-import org.apache.log4j.Logger;
-
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.HairEvent;
 import kr.or.dgit.bigdata.project.hairshop.mappers.HairEventMapper;
@@ -99,3 +98,4 @@ public class HairEventService {
 		}
 	}	
 }
+
