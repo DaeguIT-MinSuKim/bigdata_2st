@@ -70,7 +70,5 @@ public class HairEvent {
 		if (eNo != other.eNo)
 			return false;
 		return true;
-	}
-	
-	
+	}	
 }
