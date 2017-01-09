@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 
-public class CustomerManage extends JPanel {
+public class CustomerManageInsert extends JPanel {
 	private JTextField txtCno;
 	private JTextField txtCname;
 	private JTextField txtDob;
@@ -26,7 +26,7 @@ public class CustomerManage extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public CustomerManage() {
+	public CustomerManageInsert() {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel pnInsert = new JPanel();
