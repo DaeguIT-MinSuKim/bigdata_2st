@@ -31,7 +31,7 @@ public class CustomerManageEdit extends JPanel {
 		
 		JPanel pnInsert = new JPanel();
 		pnInsert.setBorder(new EmptyBorder(10, 10, 10, 10));
-		add(pnInsert, BorderLayout.NORTH);
+		add(pnInsert, BorderLayout.CENTER);
 		pnInsert.setLayout(new GridLayout(5, 2, 5, 5));
 		
 		JLabel lblCno = new JLabel("고객번호");
@@ -96,7 +96,7 @@ public class CustomerManageEdit extends JPanel {
 		txtDojoin.setColumns(10);
 		
 		JPanel pnTable = new JPanel();
-		add(pnTable, BorderLayout.CENTER);
+		add(pnTable, BorderLayout.SOUTH);
 		pnTable.setLayout(new BorderLayout(0, 0));
 		
 		table = new JTable();
