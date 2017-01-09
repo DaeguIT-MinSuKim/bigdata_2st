@@ -16,26 +16,26 @@ import java.awt.Color;
 public class CustomerManageEdit extends JPanel {
 	private JTextField txtCno;
 	private JTextField txtCname;
-	private JTextField txtDob;
-	private JTextField txtDojoin;
 	private JTextField txtP1;
 	private JTextField txtP2;
 	private JTextField txtP3;
 	private JTable table;
+	private JTextField txtD1;
+	private JTextField txtD2;
+	private JTextField txtD3;
+	private JTextField txtDJ1;
+	private JTextField txtDJ2;
+	private JTextField txtDJ3;
 
 	/**
 	 * Create the panel.
 	 */
-	
-	
-	
-	
 	public CustomerManageEdit() {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel pnInsert = new JPanel();
 		pnInsert.setBorder(new EmptyBorder(10, 10, 10, 10));
-		add(pnInsert, BorderLayout.CENTER);
+		add(pnInsert, BorderLayout.NORTH);
 		pnInsert.setLayout(new GridLayout(5, 2, 5, 5));
 		
 		JLabel lblCno = new JLabel("고객번호");
@@ -87,20 +87,62 @@ public class CustomerManageEdit extends JPanel {
 		lblDob.setHorizontalAlignment(SwingConstants.CENTER);
 		pnInsert.add(lblDob);
 		
-		txtDob = new JTextField();
-		pnInsert.add(txtDob);
-		txtDob.setColumns(10);
+		JPanel pnDob = new JPanel();
+		pnDob.setBorder(new EmptyBorder(0, 0, 0, 0));
+		pnInsert.add(pnDob);
+		pnDob.setLayout(new GridLayout(0, 5, 0, 0));
+		
+		txtD1 = new JTextField();
+		txtD1.setColumns(10);
+		pnDob.add(txtD1);
+		
+		JLabel label = new JLabel("-");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		pnDob.add(label);
+		
+		txtD2 = new JTextField();
+		txtD2.setColumns(10);
+		pnDob.add(txtD2);
+		
+		JLabel label_1 = new JLabel("-");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		pnDob.add(label_1);
+		
+		txtD3 = new JTextField();
+		txtD3.setColumns(10);
+		pnDob.add(txtD3);
 		
 		JLabel lblDojoin = new JLabel("가입일자");
 		lblDojoin.setHorizontalAlignment(SwingConstants.CENTER);
 		pnInsert.add(lblDojoin);
 		
-		txtDojoin = new JTextField();
-		pnInsert.add(txtDojoin);
-		txtDojoin.setColumns(10);
+		JPanel pnDJ = new JPanel();
+		pnDJ.setBorder(new EmptyBorder(0, 0, 0, 0));
+		pnInsert.add(pnDJ);
+		pnDJ.setLayout(new GridLayout(0, 5, 0, 0));
+		
+		txtDJ1 = new JTextField();
+		txtDJ1.setColumns(10);
+		pnDJ.add(txtDJ1);
+		
+		JLabel label_2 = new JLabel("-");
+		label_2.setHorizontalAlignment(SwingConstants.CENTER);
+		pnDJ.add(label_2);
+		
+		txtDJ2 = new JTextField();
+		txtDJ2.setColumns(10);
+		pnDJ.add(txtDJ2);
+		
+		JLabel label_3 = new JLabel("-");
+		label_3.setHorizontalAlignment(SwingConstants.CENTER);
+		pnDJ.add(label_3);
+		
+		txtDJ3 = new JTextField();
+		txtDJ3.setColumns(10);
+		pnDJ.add(txtDJ3);
 		
 		JPanel pnTable = new JPanel();
-		add(pnTable, BorderLayout.SOUTH);
+		add(pnTable, BorderLayout.CENTER);
 		pnTable.setLayout(new BorderLayout(0, 0));
 		
 		table = new JTable();
@@ -108,7 +150,7 @@ public class CustomerManageEdit extends JPanel {
 			new Object[][] {
 			},
 			new String[] {
-				"New column", "New column", "New column", "New column"
+					"고객 번호", "고객명", "생년월일", "가입일자", "전화번호"
 			}
 		));
 		pnTable.add(table, BorderLayout.NORTH);
@@ -131,20 +173,54 @@ public class CustomerManageEdit extends JPanel {
 		this.txtCname = txtCname;
 	}
 
-	public JTextField getTxtDob() {
-		return txtDob;
+	
+
+	public JTextField getTxtD1() {
+		return txtD1;
 	}
 
-	public void setTxtDob(JTextField txtDob) {
-		this.txtDob = txtDob;
+	public void setTxtD1(JTextField txtD1) {
+		this.txtD1 = txtD1;
 	}
 
-	public JTextField getTxtDojoin() {
-		return txtDojoin;
+	public JTextField getTxtD2() {
+		return txtD2;
 	}
 
-	public void setTxtDojoin(JTextField txtDojoin) {
-		this.txtDojoin = txtDojoin;
+	public void setTxtD2(JTextField txtD2) {
+		this.txtD2 = txtD2;
+	}
+
+	public JTextField getTxtD3() {
+		return txtD3;
+	}
+
+	public void setTxtD3(JTextField txtD3) {
+		this.txtD3 = txtD3;
+	}
+
+	public JTextField getTxtDJ1() {
+		return txtDJ1;
+	}
+
+	public void setTxtDJ1(JTextField txtDJ1) {
+		this.txtDJ1 = txtDJ1;
+	}
+
+	public JTextField getTxtDJ2() {
+		return txtDJ2;
+	}
+
+	public void setTxtDJ2(JTextField txtDJ2) {
+		this.txtDJ2 = txtDJ2;
+	}
+
+	public JTextField getTxtDJ3() {
+		return txtDJ3;
+	}
+
+	public void setTxtDJ3(JTextField txtDJ3) {
+		this.txtDJ3 = txtDJ3;
 	}
 
 	public JTextField getTxtP1() {
@@ -178,6 +254,8 @@ public class CustomerManageEdit extends JPanel {
 	public void setTable(JTable table) {
 		this.table = table;
 	}
+	
+	
 	
 
 }
