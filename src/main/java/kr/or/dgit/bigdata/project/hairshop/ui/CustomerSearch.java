@@ -62,7 +62,13 @@ public class CustomerSearch extends JPanel {
 		add(scrollPane, BorderLayout.CENTER);
 		
 		table = new JTable();
-		/*table.setModel(new DefaultTableModel(,)}));*/
+		table.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+						"고객 번호", "고객명", "생년월일", "가입일자", "전화번호" 
+				}
+			));
 		scrollPane.setViewportView(table);
 		
 		
