@@ -10,10 +10,12 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CustomerSearch extends JPanel {
 	private JTable table;
-	private JTextField textField;
+	private JTextField txtSearch;
 
 	/**
 	 * Create the panel.
@@ -28,11 +30,16 @@ public class CustomerSearch extends JPanel {
 		JLabel lblSearch = new JLabel("검색 : ");
 		pnSearch.add(lblSearch);
 		
-		textField = new JTextField();
-		pnSearch.add(textField);
-		textField.setColumns(10);
+		txtSearch = new JTextField();
+		pnSearch.add(txtSearch);
+		txtSearch.setColumns(10);
 		
 		JButton btnOk = new JButton("확인");
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtSearch.
+			}
+		});
 		pnSearch.add(btnOk);
 		
 		JScrollPane scrollPane = new JScrollPane();
