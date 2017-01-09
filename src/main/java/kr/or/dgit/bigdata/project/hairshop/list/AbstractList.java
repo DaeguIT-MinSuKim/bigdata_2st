@@ -8,6 +8,9 @@ import javax.swing.table.TableColumnModel;
 public abstract class AbstractList extends JTable {
 	private JTable table;
 	
+	public AbstractList() {
+	}
+
 	public void tableCellAlignment(int align, int... idx) {
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 		dtcr.setHorizontalAlignment(align);
