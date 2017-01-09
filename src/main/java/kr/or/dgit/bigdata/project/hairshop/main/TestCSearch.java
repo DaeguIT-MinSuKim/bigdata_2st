@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
 
-public class TestMain extends JFrame {
+public class TestCSearch extends JFrame {
 
 	private JPanel contentPane;
 
@@ -19,7 +19,7 @@ public class TestMain extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TestMain frame = new TestMain();
+					TestCSearch frame = new TestCSearch();
 					frame.setBounds(100, 100, 1100, 700);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -32,7 +32,7 @@ public class TestMain extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TestMain() {
+	public TestCSearch() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1097, 724);

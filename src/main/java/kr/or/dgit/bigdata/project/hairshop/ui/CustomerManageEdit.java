@@ -26,6 +26,10 @@ public class CustomerManageEdit extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	
+	
+	
+	
 	public CustomerManageEdit() {
 		setLayout(new BorderLayout(0, 0));
 		
@@ -110,5 +114,70 @@ public class CustomerManageEdit extends JPanel {
 		pnTable.add(table, BorderLayout.NORTH);
 
 	}
+
+	public JTextField getTxtCno() {
+		return txtCno;
+	}
+
+	public void setTxtCno(JTextField txtCno) {
+		this.txtCno = txtCno;
+	}
+
+	public JTextField getTxtCname() {
+		return txtCname;
+	}
+
+	public void setTxtCname(JTextField txtCname) {
+		this.txtCname = txtCname;
+	}
+
+	public JTextField getTxtDob() {
+		return txtDob;
+	}
+
+	public void setTxtDob(JTextField txtDob) {
+		this.txtDob = txtDob;
+	}
+
+	public JTextField getTxtDojoin() {
+		return txtDojoin;
+	}
+
+	public void setTxtDojoin(JTextField txtDojoin) {
+		this.txtDojoin = txtDojoin;
+	}
+
+	public JTextField getTxtP1() {
+		return txtP1;
+	}
+
+	public void setTxtP1(JTextField txtP1) {
+		this.txtP1 = txtP1;
+	}
+
+	public JTextField getTxtP2() {
+		return txtP2;
+	}
+
+	public void setTxtP2(JTextField txtP2) {
+		this.txtP2 = txtP2;
+	}
+
+	public JTextField getTxtP3() {
+		return txtP3;
+	}
+
+	public void setTxtP3(JTextField txtP3) {
+		this.txtP3 = txtP3;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+	
 
 }

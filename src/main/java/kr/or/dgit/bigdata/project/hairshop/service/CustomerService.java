@@ -101,5 +101,20 @@ public class CustomerService{
 		
 	}
 	
+	public List<Customer> searchCustomerByNoForJoin(Map<String, Object> map) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("searchCustomerByName(Map<String, Object>) - start");
+		}
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			CustomerMapper customerMapper = sqlSession.getMapper(CustomerMapper.class);
+			return customerMapper.searchCustomerByNoForJoin(map);
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
+	
 
 }
