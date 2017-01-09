@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.border.EmptyBorder;
 
 public class CustomerSearch extends JPanel {
 	private JTable table;
@@ -21,6 +22,7 @@ public class CustomerSearch extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel pnSearch = new JPanel();
+		pnSearch.setBorder(new EmptyBorder(10, 10, 10, 10));
 		add(pnSearch, BorderLayout.NORTH);
 		
 		JLabel lblSearch = new JLabel("검색 : ");
