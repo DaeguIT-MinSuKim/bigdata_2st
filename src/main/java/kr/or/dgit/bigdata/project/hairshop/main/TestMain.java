@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
 
 public class TestMain extends JFrame {
 
@@ -39,6 +40,9 @@ public class TestMain extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
+		CustomerSearch panel = new CustomerSearch();
+		contentPane.add(panel, BorderLayout.CENTER);
 	}
 
 }

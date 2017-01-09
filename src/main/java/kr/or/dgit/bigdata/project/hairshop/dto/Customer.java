@@ -115,6 +115,10 @@ public class Customer {
 		return "Customer [cNo=" + cNo + ", cName=" + cName + ", cDob=" + cDob + ", cDoJoin=" + cDoJoin + ", cPhone="
 				+ cPhone + "]";
 	}
+	public String[] toArray() {
+		
+		return  new String[] {cNo+"", cName, cDob+"", cDoJoin+"", cPhone};
+	}
 
 	
 	
