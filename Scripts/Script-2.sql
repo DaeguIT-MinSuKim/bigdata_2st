@@ -66,9 +66,9 @@ CREATE TABLE hairshop.biz (
 	bNo   INTEGER NOT NULL COMMENT '영업번호', -- 영업번호
 	bDate DATE    NULL     COMMENT '영업일자', -- 영업일자
 	bTime TIME    NULL     COMMENT '방문시간', -- 방문시간
-	bcNo   INTEGER NULL     COMMENT '고객번호', -- 고객번호
-	bhNo   INTEGER NULL     COMMENT '헤어번호', -- 헤어번호
-	beNo   INTEGER NULL     COMMENT '이벤트번호' -- 이벤트번호
+	cNo   INTEGER NULL     COMMENT '고객번호', -- 고객번호
+	hNo   INTEGER NULL     COMMENT '헤어번호', -- 헤어번호
+	eNo   INTEGER NULL     COMMENT '이벤트번호' -- 이벤트번호
 )
 COMMENT '영업';
 
@@ -86,7 +86,7 @@ ALTER TABLE hairshop.biz
 ALTER TABLE hairshop.biz
 	ADD CONSTRAINT FK_customer_TO_biz -- 고객 -> 영업
 		FOREIGN KEY (
-			bcNo -- 고객번호
+			cNo -- 고객번호
 		)
 		REFERENCES hairshop.customer ( -- 고객
 			cNo -- 고객번호
@@ -96,7 +96,7 @@ ALTER TABLE hairshop.biz
 ALTER TABLE hairshop.biz
 	ADD CONSTRAINT FK_hairinfo_TO_biz -- 헤어정보  -> 영업
 		FOREIGN KEY (
-			bhNo -- 헤어번호
+			hNo -- 헤어번호
 		)
 		REFERENCES hairshop.hairinfo ( -- 헤어정보 
 			hNo -- 헤어번호
@@ -106,7 +106,7 @@ ALTER TABLE hairshop.biz
 ALTER TABLE hairshop.biz
 	ADD CONSTRAINT FK_event_TO_biz -- 이벤트 -> 영업
 		FOREIGN KEY (
-			beNo -- 이벤트번호
+			eNo -- 이벤트번호
 		)
 		REFERENCES hairshop.event ( -- 이벤트
 			eNo -- 이벤트번호
@@ -143,9 +143,3 @@ select hNo, hPrice from hairinfo where hName="커트";
 select eDiscount, eNo from event where eName="생일";
 
 insert into Biz values(null, "2016-01-10","12:12:00","2","2","2");*/
-
-select b.bNo, b.bDate, h.hName, h.hPrice, e.eName, (h.hPrice*(1-e.eDiscount)) as resultPrice from hairshop.biz b left outer join hairshop.hairinfo h on b.bhNo = h.hNo left outer join hairshop.event e on b.beNo = e.eNo order by bNo desc;
-
-select b.bNo, b.bDate, h.hName, h.hPrice, e.eName, (h.hPrice*(1-e.eDiscount)) as resultPrice from hairshop.biz b left outer join hairshop.hairinfo h on b.bhNo = h.hNo left outer join hairshop.event e on b.beNo = e.eNo where b.bDate >= '2001-01-01' and b.bDate <= '2001-11-11' order by bNo desc;
-
-select b.bNo, b.bDate, c.cName, h.hName, e.eName, (h.hPrice*(1-e.eDiscount)) as resultPrice from hairshop.biz b left outer join hairshop.hairinfo h on b.bhNo = h.hNo left outer join hairshop.customer c on b.bcNo = c.cNo left outer join hairshop.event e on b.beNo = e.eNo order by b.bNo desc;
