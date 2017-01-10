@@ -97,4 +97,23 @@ public class HairEventService {
 			logger.debug("deleteEvent(HairEvent) - end");
 		}
 	}	
+	
+	public List<HairEvent> selectEventByName(HairEvent hairEvent){
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectEventByName(HairEvent) - start");
+		}
+
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		HairEventMapper hairEventMapper = sqlSession.getMapper(HairEventMapper.class);
+		try{
+			List<HairEvent> elist = hairEventMapper.selectEventByName(hairEvent);
+
+			if (logger.isDebugEnabled()) {
+				logger.debug("selectEventByName(HairEvent) - end");
+			}
+			return elist;
+		}finally{
+			sqlSession.close();
+		}		
+	}
 }

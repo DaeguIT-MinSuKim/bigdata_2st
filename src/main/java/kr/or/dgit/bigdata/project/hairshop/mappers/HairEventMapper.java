@@ -22,4 +22,7 @@ public interface HairEventMapper {
 	
 	@Delete("delete from event where eNo=#{eNo}")
 	public void deleteEvent(HairEvent event);
+	
+	@Select("select eDiscount, eNo from event where eName=#{eName}")
+	public List<HairEvent> selectEventByName(HairEvent hairEvent);
 }

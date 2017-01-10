@@ -140,3 +140,4 @@ insert into hairshop.biz values
 
 select hNo, hPrice from hairinfo where hName="커트";
 
+select eDiscount, eNo from event where eName="생일";

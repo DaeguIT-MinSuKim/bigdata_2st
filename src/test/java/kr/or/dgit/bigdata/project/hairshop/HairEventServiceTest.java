@@ -33,4 +33,16 @@ public class HairEventServiceTest {
 			System.out.println(hList.get(i).geteDiscountForm());
 		}
 	}
+	
+	@Test
+	public void testSelectEventByName() {
+		HairEvent he = new HairEvent();
+		he.seteName("생일");
+		
+		List<HairEvent> hList = hairEventService.selectEventByName(he);
+		Assert.assertNotNull(hList);
+		for(int i=0;i < hList.size();i++){
+			System.out.println(hList.get(i).geteDiscountForm());
+		}
+	}
 }
