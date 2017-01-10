@@ -15,16 +15,18 @@ import javax.swing.UIManager;
 import javax.swing.DefaultComboBoxModel;
 
 public class HairOrder extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
+	private JTextField tfBNo;
+	private JTextField tfBDate;
+	private JTextField tfBTime;
+	private JTextField tfCName;
+	private JTextField tfCNo;
+	private JTextField tfHNo;
+	private JTextField tfHPrice;
+	private JTextField tfEDiscount;
+	private JTextField tfENo;
+	private JTextField tfTotal;
+	String[] eventArr = {"기획", "생일", "일반", "조조"};
+	String[] hairInfo = {"커트", "드라이", "샴푸", "펌", "매직", "트리트먼트", "앰플", "기타"};
 
 	/**
 	 * Create the panel.
@@ -38,9 +40,9 @@ public class HairOrder extends JPanel {
 		lblBNo.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblBNo);
 		
-		textField = new JTextField();
-		add(textField);
-		textField.setColumns(10);
+		tfBNo = new JTextField();
+		add(tfBNo);
+		tfBNo.setColumns(10);
 		
 		JLabel lblGap1 = new JLabel("");
 		add(lblGap1);
@@ -52,57 +54,57 @@ public class HairOrder extends JPanel {
 		lblBData.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblBData);
 		
-		textField_1 = new JTextField();
-		add(textField_1);
-		textField_1.setColumns(10);
+		tfBDate = new JTextField();
+		add(tfBDate);
+		tfBDate.setColumns(10);
 		
 		JLabel lblBTime = new JLabel("방문시간");
 		lblBTime.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblBTime);
 		
-		textField_2 = new JTextField();
-		add(textField_2);
-		textField_2.setColumns(10);
+		tfBTime = new JTextField();
+		add(tfBTime);
+		tfBTime.setColumns(10);
 		
 		JLabel lblCName = new JLabel("고객명");
 		lblCName.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblCName);
 		
-		textField_3 = new JTextField();
-		add(textField_3);
-		textField_3.setColumns(10);
+		tfCName = new JTextField();
+		add(tfCName);
+		tfCName.setColumns(10);
 		
 		JLabel lblCNO = new JLabel("고객번호");
 		lblCNO.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblCNO);
 		
-		textField_4 = new JTextField();
-		add(textField_4);
-		textField_4.setColumns(10);
+		tfCNo = new JTextField();
+		add(tfCNo);
+		tfCNo.setColumns(10);
 		
 		JLabel lblHName = new JLabel("헤어명");
 		lblHName.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblHName);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"커트", "드라이", "샴푸", "펌", "매직", "트리트먼트", "앰플", "기타"}));
-		add(comboBox);
+		JComboBox cmbHName = new JComboBox();
+		cmbHName.setModel(new DefaultComboBoxModel(hairInfo));
+		add(cmbHName);
 		
 		JLabel lblHNO = new JLabel("헤어번호");
 		lblHNO.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblHNO);
 		
-		textField_5 = new JTextField();
-		add(textField_5);
-		textField_5.setColumns(10);
+		tfHNo = new JTextField();
+		add(tfHNo);
+		tfHNo.setColumns(10);
 		
 		JLabel lblHPrice = new JLabel("단가");
 		lblHPrice.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblHPrice);
 		
-		textField_6 = new JTextField();
-		add(textField_6);
-		textField_6.setColumns(10);
+		tfHPrice = new JTextField();
+		add(tfHPrice);
+		tfHPrice.setColumns(10);
 		
 		JLabel lblGap3 = new JLabel("");
 		add(lblGap3);
@@ -114,33 +116,33 @@ public class HairOrder extends JPanel {
 		lblEName.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblEName);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"기획", "생일", "일반", "조조"}));
-		add(comboBox_1);
+		JComboBox cmbEName = new JComboBox();
+		cmbEName.setModel(new DefaultComboBoxModel(eventArr));
+		add(cmbEName);
 		
 		JLabel lblEDiscount = new JLabel("할인율");
 		lblEDiscount.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblEDiscount);
 		
-		textField_7 = new JTextField();
-		add(textField_7);
-		textField_7.setColumns(10);
+		tfEDiscount = new JTextField();
+		add(tfEDiscount);
+		tfEDiscount.setColumns(10);
 		
 		JLabel lblENO = new JLabel("이벤트번호");
 		lblENO.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblENO);
 		
-		textField_8 = new JTextField();
-		add(textField_8);
-		textField_8.setColumns(10);
+		tfENo = new JTextField();
+		add(tfENo);
+		tfENo.setColumns(10);
 		
 		JLabel lblTotalPrice = new JLabel("금액");
 		lblTotalPrice.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblTotalPrice);
 		
-		textField_9 = new JTextField();
-		add(textField_9);
-		textField_9.setColumns(10);
+		tfTotal = new JTextField();
+		add(tfTotal);
+		tfTotal.setColumns(10);
 
 	}
 
