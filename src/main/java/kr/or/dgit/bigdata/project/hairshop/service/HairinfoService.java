@@ -6,10 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/hotfix_yujin
 import kr.or.dgit.bigdata.project.hairshop.mappers.HairinfoMapper;
 import kr.or.dgit.bigdata.project.hairshop.util.MyBatisSqlSessionFactory;
 
@@ -100,7 +97,6 @@ public class HairinfoService {
 		if (logger.isDebugEnabled()) {
 			logger.debug("deleteHairInfo(hairinfo) - end");
 		}
-<<<<<<< HEAD
 	}
 	public List<Hairinfo> selectHairInfoByName(Hairinfo hName){
 		if (logger.isDebugEnabled()) {
@@ -120,7 +116,4 @@ public class HairinfoService {
 			sqlSession.close();
 		}		
 	}
-=======
-	}	
->>>>>>> refs/remotes/origin/hotfix_yujin
 }
