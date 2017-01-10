@@ -1,23 +1,28 @@
 package kr.or.dgit.bigdata.project.hairshop.main;
 
-import javax.swing.JFrame;
-import java.awt.FlowLayout;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
-import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 public class FrontScreen extends JFrame {
+	/* FIELDS */// 밑에 이벤트 핸들러 추가시 에러가 나서 전역변수로 뺐어요. by 이유진
+	private JLabel lblBizmng;
+	private JLabel lblOrdermng;
+	private JLabel lblBizreport;
+	private JLabel lblSetting;
+
 	public FrontScreen() {
 		setTitle("DGIT 헤어샵");
 		getContentPane().setBackground(new Color(255, 192, 203));
 		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 50, 180));
 		
-		JLabel lblBizmng = new JLabel();
+		lblBizmng = new JLabel();
 		lblBizmng.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -34,7 +39,7 @@ public class FrontScreen extends JFrame {
 		lblBizmng.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\bigdata_2st\\img\\Man-Suit-2.png"));
 		getContentPane().add(lblBizmng);
 		
-		JLabel lblOrdermng = new JLabel();
+		lblOrdermng = new JLabel();
 		lblOrdermng.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -50,7 +55,7 @@ public class FrontScreen extends JFrame {
 		lblOrdermng.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\bigdata_2st\\img\\Pen.png"));
 		getContentPane().add(lblOrdermng);
 		
-		JLabel lblBizreport = new JLabel();
+		lblBizreport = new JLabel();
 		lblBizreport.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -66,7 +71,7 @@ public class FrontScreen extends JFrame {
 		lblBizreport.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\bigdata_2st\\img\\Calendar.png"));
 		getContentPane().add(lblBizreport);
 		
-		JLabel lblSetting = new JLabel();
+		lblSetting = new JLabel();
 		lblSetting.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {

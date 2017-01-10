@@ -9,7 +9,6 @@
 		<result property="cPhone" column="cPhone"/>
 		<result property="cDel" column="cDel"/>
 	</resultMap>
-
 	<insert id="insertCustomer" parameterType="Customer" useGeneratedKeys="true" keyProperty="cNo">
 		 insert into customer(cName,cDob,cDoJoin, cPhone, cDel) values(#{cName},#{cDob},#{cDoJoin},#{cPhone},#{cDel});
 	</insert>

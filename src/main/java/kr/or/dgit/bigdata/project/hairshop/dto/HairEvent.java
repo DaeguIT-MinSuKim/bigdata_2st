@@ -30,6 +30,10 @@ public class HairEvent {
 	}
 	/* CONSTURCTOR */
 	public HairEvent() {}
+	public HairEvent(int eNo) {
+		super();
+		this.eNo = eNo;
+	}
 	public HairEvent(String eName, double eDiscount) {
 		super();
 		this.eName = eName;
@@ -37,19 +41,15 @@ public class HairEvent {
 	}
 	/* METHODS */
 	@Override
+	public String toString() {
+		return String.format("Event [eName=%s]", eName);
+	}
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(eDiscount);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((eName == null) ? 0 : eName.hashCode());
 		result = prime * result + eNo;
 		return result;
-	}
-	@Override
-	public String toString() {
-		return String.format("Event [eName=%s]", eName);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -60,17 +60,9 @@ public class HairEvent {
 		if (getClass() != obj.getClass())
 			return false;
 		HairEvent other = (HairEvent) obj;
-		if (Double.doubleToLongBits(eDiscount) != Double.doubleToLongBits(other.eDiscount))
-			return false;
-		if (eName == null) {
-			if (other.eName != null)
-				return false;
-		} else if (!eName.equals(other.eName))
-			return false;
 		if (eNo != other.eNo)
 			return false;
 		return true;
 	}
-	
 	
 }
