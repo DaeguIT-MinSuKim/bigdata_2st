@@ -23,11 +23,7 @@
 	</environments>
 
 	<mappers>
-<<<<<<< HEAD
 		<package name="kr.or.dgit.bigdata.project.hairshop.mappers" />
-=======
-		
-		<package name="kr.or.dgit.bigdata.project.hairshop.mapper" />
->>>>>>> refs/remotes/origin/hotfix_yujin
+
 	</mappers>
 </configuration>
