@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.bigdata.project.hairshop.mappers.CustomerMapper">
+	<resultMap type="Customer" id="RSMverCustomer">
+		<id property="cNo" column="cNo"/>
+		<result property="cName" column="cName"/>
+		<result property="cDob" column="cDob"/>
+		<result property="cDoJoin" column="cDoJoin"/>
+		<result property="cPhone" column="cPhone"/>
+		<result property="cDel" column="cDel"/>
+	</resultMap>
+
 	<insert id="insertCustomer" parameterType="Customer" useGeneratedKeys="true" keyProperty="cNo">
 		 insert into customer(cName,cDob,cDoJoin, cPhone, cDel) values(#{cName},#{cDob},#{cDoJoin},#{cPhone},#{cDel});
 	</insert>

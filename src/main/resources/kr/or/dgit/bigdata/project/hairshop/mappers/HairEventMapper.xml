@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.bigdata.project.hairshop.mappers.HairEventMapper">
+	<resultMap type="HairEvent" id="RSMverHairevent">
+		<id property="eNo" column="eNo"/>
+		<result property="eName" column="eName"/>
+		<result property="eDiscount" column="eDiscount"/>		
+	</resultMap>
+</mapper>
