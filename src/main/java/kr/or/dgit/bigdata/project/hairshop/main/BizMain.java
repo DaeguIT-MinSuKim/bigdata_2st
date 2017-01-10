@@ -7,9 +7,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import kr.or.dgit.bigdata.project.hairshop.list.BiztList;
+
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 public class BizMain extends JFrame {
 
 	private JPanel contentPane;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -37,6 +43,12 @@ public class BizMain extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+		
+		table = new BiztList(false);
+		scrollPane.setViewportView(table);
 	}
 
 }

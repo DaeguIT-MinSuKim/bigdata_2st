@@ -109,16 +109,11 @@ public class Customer {
 		return "Customer [cNo=" + cNo + ", cName=" + cName + ", cDob=" + cDob + ", cDoJoin=" + cDoJoin + ", cPhone="
 				+ cPhone + "]";
 	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cDoJoin == null) ? 0 : cDoJoin.hashCode());
-		result = prime * result + ((cDob == null) ? 0 : cDob.hashCode());
-		result = prime * result + ((cName == null) ? 0 : cName.hashCode());
 		result = prime * result + cNo;
-		result = prime * result + ((cPhone == null) ? 0 : cPhone.hashCode());
 		return result;
 	}
 	@Override
@@ -130,28 +125,10 @@ public class Customer {
 		if (getClass() != obj.getClass())
 			return false;
 		Customer other = (Customer) obj;
-		if (cDoJoin == null) {
-			if (other.cDoJoin != null)
-				return false;
-		} else if (!cDoJoin.equals(other.cDoJoin))
-			return false;
-		if (cDob == null) {
-			if (other.cDob != null)
-				return false;
-		} else if (!cDob.equals(other.cDob))
-			return false;
-		if (cName == null) {
-			if (other.cName != null)
-				return false;
-		} else if (!cName.equals(other.cName))
-			return false;
 		if (cNo != other.cNo)
-			return false;
-		if (cPhone == null) {
-			if (other.cPhone != null)
-				return false;
-		} else if (!cPhone.equals(other.cPhone))
 			return false;
 		return true;
 	}
+	
+	
 }

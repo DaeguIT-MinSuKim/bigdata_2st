@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.bigdata.project.hairshop.mappers.BizMapper">
+	<resultMap type="Biz" id="BizWithCsEventInfo">
+		<id property="bNo" column="bNo"/>
+		<result property="bDate" column="bDate"/>
+		<result property="bTime" column="bTime"/>
+		<association property="Customer" resultMap="kr.or.dgit.bigdata.project.hairshop.mappers.CustomerMapper.RSMverCustomer"/>
+		<association property="HairEvent" resultMap="kr.or.dgit.bigdata.project.hairshop.mappers.HairEventMapper.RSMverHairevent"/>
+		<association property="Hairinfo" resultMap="kr.or.dgit.bigdata.project.hairshop.mappers.HairinfoMapper.RSMverHairinfo"/>
+	</resultMap>
+	<select id="selectAllBiz" resultMap="BizWithCsEventInfo">
+		select b.bNo, b.bDate,b.bTime,c.cNo,c.cName, c.cDob, c.cDoJoin, c.cPhone, c.cDel, 
+		h.hNo, h.hName, h.hPrice, e.eNo, e.eName, e.eDiscount from hairshop.biz b 
+		left outer join hairshop.customer c on b.cNo = c.cNo
+		left outer join hairshop.hairinfo h on b.hNo = h.hNo 
+		left outer join hairshop.event e on b.eNo = e.eNo
+	</select>
+</mapper>

@@ -30,6 +30,10 @@ public class Hairinfo {
 	}
 	/* CONSTRUCTOR */
 	public Hairinfo() {}
+	public Hairinfo(int hNo) {
+		super();
+		this.hNo = hNo;
+	}
 	public Hairinfo(String hName, int hPrice) {
 		super();
 		this.hName = hName;
@@ -38,7 +42,7 @@ public class Hairinfo {
 	/* METHODS */
 	@Override
 	public String toString() {
-		return String.format("%s",hName);
+		return String.format("%s", hName);
 	}
 	@Override
 	public int hashCode() {
@@ -59,5 +63,6 @@ public class Hairinfo {
 		if (hNo != other.hNo)
 			return false;
 		return true;
-	}	
+	}
+	
 }

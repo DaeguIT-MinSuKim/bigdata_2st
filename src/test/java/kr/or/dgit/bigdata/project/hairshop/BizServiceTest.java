@@ -1,7 +1,5 @@
 package kr.or.dgit.bigdata.project.hairshop;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -23,7 +21,7 @@ public class BizServiceTest {
 	public static void tearDownAfterClass() throws Exception {
 		bizService = null;
 	}
-
+/*
 	@Test
 	public void testSelectBizAndHairInfoEvent() {
 		List<Biz> bList = BizService.getInstance().selectBizAndHairInfoEvent();
@@ -43,15 +41,48 @@ public class BizServiceTest {
 		biz.setbDateEnd(bDateEnd);
 		
 		List<Biz> bList = BizService.getInstance().selectBizAndHairInfoEventByDate(biz);
-		Assert.assertNotNull(bList);		
+		Assert.assertNotNull(bList);
+		for(Biz b:bList){
+			System.out.println(b);
+		}
+		
 	}
-	
 	
 	@Test
 	public void testSelectYearOrMonthAllFromBiz() {
-		List<Biz> bList = BizService.getInstance().selectYearOrMonthAllFromBiz();
-		Assert.assertNotNull(bList);
 		
+		List<Biz> bList = BizService.getInstance().selectYearOrMonthAllFromBiz("2000-05-10","2000-05-11");
+		Assert.assertNotNull(bList);
+		for(Biz b:bList){
+			System.out.println(b);
+		}
+	}
+	*/
+	@Test
+	public void testSelectAllBiz() {
+		List<Biz> bList = BizService.getInstance().selectAllBiz();
+		Assert.assertNotNull(bList);
+		for(Biz b:bList){
+			System.out.println(b);
+		}
+	}
+	/*
+	@Test
+	public void testSelectYearOrMonthFromBiz() {
+		
+		List<Biz> bList = BizService.getInstance().selectYearOrMonthFromBiz("2001-05-10","2001-05-16");
+		Assert.assertNotNull(bList);
+		for(Biz b:bList){
+			System.out.println(b);
+		}
+	}
+	
+	@Test
+	public void testSelectYearOrMonthFromBizCalTotal() {		
+		HashMap<String, Integer> bList = BizService.getInstance().selectYearOrMonthFromBizCalTotal("2001-05-10","2001-05-16");
+		Assert.assertNotNull(bList);
+		System.out.println(bList.get("cnt"));
+		System.out.println(bList.get("sum"));
 	}
 	
 	@Test
@@ -67,5 +98,5 @@ public class BizServiceTest {
 		Assert.assertNotNull(bList);
 		
 	}
-	
+	*/
 }
