@@ -22,8 +22,8 @@ public interface BizMapper {
 	
 	@Select("select h.hName as hairStyle, count(b.hNo) as sumOrder from hairshop.biz b, hairshop.hairInfo h where b.hNo = h.hNo group by b.hNo")
 	public List<Biz> selectCountStyleForGraph();
+	
 	/* ver. 이유진 */
-	@Select("select bNo, bDate, bTime, cNo, hNo, eNo from hairshop.biz where bDate >= #{param1} and bDate <#{param2}")
 	public List<Biz> selectYearOrMonthFromBiz(String startDate, String endDate);
 	
 	@Select("select count(bNo) as cnt, sum(h.hPrice*(1-e.eDiscount)) as sum from hairshop.biz b left outer join hairshop.hairinfo h on b.hNo = h.hNo left outer join hairshop.event e  on e.eNo = b.eNo where b.bDate >= #{param1} and b.bDate < #{param2}")

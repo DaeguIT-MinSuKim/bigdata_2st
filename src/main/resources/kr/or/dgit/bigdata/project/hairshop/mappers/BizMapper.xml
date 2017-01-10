@@ -10,10 +10,18 @@
 		<association property="bhNo" resultMap="kr.or.dgit.bigdata.project.hairshop.mappers.HairinfoMapper.RSMverHairinfo"/>
 	</resultMap>
 	<select id="selectAllBiz" resultMap="BizWithCsEventInfo">
-		select b.bNo, b.bDate,b.bTime,c.cNo,c.cName, c.cDob, c.cDoJoin, c.cPhone, c.cDel, 
-		h.hNo, h.hName, h.hPrice, e.eNo, e.eName, e.eDiscount from hairshop.biz b 
+		select b.bNo, b.bDate,b.bTime,c.cNo,c.cName, c.cDel, 
+		h.hNo, h.hName, h.hPrice, e.eNo, e.eName from hairshop.biz b 
 		left outer join hairshop.customer c on b.cNo = c.cNo
 		left outer join hairshop.hairinfo h on b.hNo = h.hNo 
 		left outer join hairshop.event e on b.eNo = e.eNo
+	</select>
+	<select id="selectYearOrMonthFromBiz" resultMap="BizWithCsEventInfo">
+		select b.bNo, b.bDate,b.bTime,c.cNo,c.cName, c.cDel, 
+		h.hNo, h.hName, h.hPrice, e.eNo, e.eName from hairshop.biz b 
+		left outer join hairshop.customer c on b.cNo = c.cNo
+		left outer join hairshop.hairinfo h on b.hNo = h.hNo 
+		left outer join hairshop.event e on b.eNo = e.eNo
+		where bDate &gt;= #{param1} and bDate &lt;#{param2}
 	</select>
 </mapper>

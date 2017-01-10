@@ -25,11 +25,11 @@ public class BiztList extends JTable {
 		setTableWithData(isReport, listBy, year);		
 	}
 	
-	private void setTableWithData(Boolean isReport) {
+	public void setTableWithData(Boolean isReport) {
 		// 보고서에 구현할 테이블인지 여부만 확인(보고서가 아닌경우에만 호출)==보고서 외 영업테이블 사용시
 		setModel(new DefaultTableModel(getDatas(isReport, null, 0), getColumnNames(isReport)));
 	}
-	private void setTableWithData(Boolean isReport, String listBy, int year) {
+	public void setTableWithData(Boolean isReport, String listBy, int year) {
 		setModel(new DefaultTableModel(getDatas(isReport, listBy, year), getColumnNames(isReport)));		
 	}
 

@@ -66,7 +66,7 @@ public class BizServiceTest {
 			System.out.println(b);
 		}
 	}
-	/*
+	
 	@Test
 	public void testSelectYearOrMonthFromBiz() {
 		
@@ -76,7 +76,7 @@ public class BizServiceTest {
 			System.out.println(b);
 		}
 	}
-	
+	/*
 	@Test
 	public void testSelectYearOrMonthFromBizCalTotal() {		
 		HashMap<String, Integer> bList = BizService.getInstance().selectYearOrMonthFromBizCalTotal("2001-05-10","2001-05-16");
