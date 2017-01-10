@@ -9,7 +9,6 @@
 		<result property="cPhone" column="cPhone"/>
 		<result property="cDel" column="cDel"/>
 	</resultMap>
-	
 	<insert id="insertCustomer" parameterType="Customer" useGeneratedKeys="true" keyProperty="cNo">
 		 insert into customer(cName,cDob,cDoJoin, cPhone, cDel) values(#{cName},#{cDob},#{cDoJoin},#{cPhone},#{cDel});
 	</insert>
@@ -21,6 +20,9 @@
 	</delete>
 	<select id="searchCustomerByName" parameterType="hashmap" resultType="Customer">
 		select cNo, cName, cDob, cDoJoin, cPhone, cDel from customer where cName=#{cName}
+	</select>
+	<select id="searchCustomerByNoForJoin" parameterType="hashmap" resultType="Customer">
+		select cNo, cName, cDob, cDoJoin, cPhone from customer where cNo=#{cNo}
 	</select>
 	<select id="selectByAll" resultType="customer">
 		select cNo, cName, cDob, cDoJoin, cPhone from customer;

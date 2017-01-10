@@ -36,7 +36,7 @@ public class FrontScreen extends JFrame {
 		});
 		lblBizmng.setForeground(Color.GRAY);
 		lblBizmng.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		lblBizmng.setIcon(new ImageIcon("C:\\workspace\\workspace_java\\bigdata_2st\\img\\Man-Suit-2.png"));
+		lblBizmng.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\bigdata_2st\\img\\Man-Suit-2.png"));
 		getContentPane().add(lblBizmng);
 		
 		lblOrdermng = new JLabel();
@@ -52,7 +52,7 @@ public class FrontScreen extends JFrame {
 		});
 		lblOrdermng.setForeground(Color.GRAY);
 		lblOrdermng.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		lblOrdermng.setIcon(new ImageIcon("C:\\workspace\\workspace_java\\bigdata_2st\\img\\Pen.png"));
+		lblOrdermng.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\bigdata_2st\\img\\Pen.png"));
 		getContentPane().add(lblOrdermng);
 		
 		lblBizreport = new JLabel();
@@ -68,7 +68,7 @@ public class FrontScreen extends JFrame {
 		});
 		lblBizreport.setForeground(Color.GRAY);
 		lblBizreport.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		lblBizreport.setIcon(new ImageIcon("C:\\workspace\\workspace_java\\bigdata_2st\\img\\Calendar.png"));
+		lblBizreport.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\bigdata_2st\\img\\Calendar.png"));
 		getContentPane().add(lblBizreport);
 		
 		lblSetting = new JLabel();
@@ -82,7 +82,7 @@ public class FrontScreen extends JFrame {
 				lblSetting.setText("");
 			}
 		});
-		lblSetting.setIcon(new ImageIcon("C:\\workspace\\workspace_java\\bigdata_2st\\img\\Thunderbolt-Display.png"));
+		lblSetting.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\bigdata_2st\\img\\Thunderbolt-Display.png"));
 		lblSetting.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		lblSetting.setForeground(Color.GRAY);
 		getContentPane().add(lblSetting);

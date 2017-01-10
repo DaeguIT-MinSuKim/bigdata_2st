@@ -30,5 +30,6 @@ public interface BizMapper {
 	public HashMap<String, Integer> selectYearOrMonthFromBizCalTotal(String startDate, String endDate);
 	
 	public List<Biz> selectAllBiz();
+
 }
-                             
+      
