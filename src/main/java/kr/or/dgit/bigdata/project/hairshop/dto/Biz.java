@@ -3,17 +3,16 @@ package kr.or.dgit.bigdata.project.hairshop.dto;
 import java.sql.Time;
 import java.util.Date;
 
-import org.apache.log4j.lf5.util.DateFormatManager;
-
 public class Biz {
 	private int bNo;
 	private Date bDate;
 	private Time bTime; // java.util.* 이 아닌 java.sql.Time 로 import해서 사용함.
-	private Customer bcNo;
-	private Hairinfo bhNo;
-	private HairEvent beNo;
+	private Customer cNo;
+	private Hairinfo hNO;
+	private HairEvent eNo;
 	private Date bDateStart;
 	private Date bDateEnd;
+	
 	
 	public int getbNo() {
 		return bNo;
@@ -33,23 +32,23 @@ public class Biz {
 	public void setbTime(Time bTime) {
 		this.bTime = bTime;
 	}
-	public Customer getBcNo() {
-		return bcNo;
+	public Customer getcNo() {
+		return cNo;
 	}
-	public void setBcNo(Customer bcNo) {
-		this.bcNo = bcNo;
+	public void setcNo(Customer cNo) {
+		this.cNo = cNo;
 	}
-	public Hairinfo getBhNo() {
-		return bhNo;
+	public Hairinfo gethNO() {
+		return hNO;
 	}
-	public void setBhNo(Hairinfo bhNo) {
-		this.bhNo = bhNo;
+	public void sethNO(Hairinfo hNO) {
+		this.hNO = hNO;
 	}
-	public HairEvent getBeNo() {
-		return beNo;
+	public HairEvent geteNo() {
+		return eNo;
 	}
-	public void setBeNo(HairEvent beNo) {
-		this.beNo = beNo;
+	public void seteNo(HairEvent eNo) {
+		this.eNo = eNo;
 	}
 	public Date getbDateStart() {
 		return bDateStart;
@@ -63,23 +62,12 @@ public class Biz {
 	public void setbDateEnd(Date bDateEnd) {
 		this.bDateEnd = bDateEnd;
 	}
-	
-	public String getBizPrice() {	
-		//주문금액 가져오는 메소드(toArray용)
-		return String.format("%,d원", (int)(bhNo.gethPrice()*(1-beNo.geteDiscount())));
-	}
 	@Override
 	public String toString() {
-		return String.format("Biz [bNo=%s, bDate=%s, bTime=%s, cNo=%s, hNO=%s, eNo=%s]", bNo, bDate, bTime, bcNo, bhNo,
-				beNo);
+		return String.format("Biz [bNo=%s, bDate=%s, bTime=%s, cNo=%s, hNO=%s, eNo=%s]", bNo, bDate, bTime, cNo, hNO,
+				eNo);
 	}
-	public String[] toArray(Boolean isReport) {
-		DateFormatManager dfm = new DateFormatManager("yyyy-MM-dd");
-		if(isReport==true){			
-			return new String[]{bNo+"", dfm.format(bDate), bcNo.getcName(), bhNo.gethName(), beNo.geteName(), getBizPrice()};
-		}else{
-			return new String[]{bNo+"", dfm.format(bDate), bhNo.gethName(), bhNo.gethPriceForm(), beNo.geteName(), getBizPrice()};
-		}
-		
-	}	
+	 
+	
+	
 }
