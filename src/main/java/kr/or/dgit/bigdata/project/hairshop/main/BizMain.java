@@ -31,7 +31,7 @@ public class BizMain extends JFrame implements ItemListener {
 	private JRadioButton rbMonth;
 	private JRadioButton rbYear;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JComboBox<Integer> comboBox;
+	private JComboBox<String> comboBox;
 	private JScrollPane scrollPane;
 
 	/**
@@ -114,9 +114,10 @@ public class BizMain extends JFrame implements ItemListener {
 		comboBox = new JComboBox<>();
 		comboBox.setEnabled(false);
 		comboBox.addItemListener(this);
-		comboBox.addItem(2000);
-		comboBox.addItem(2001);		
-		comboBox.addItem(2002);
+		comboBox.addItem("년도선택");
+		comboBox.addItem("2000");
+		comboBox.addItem("2001");		
+		comboBox.addItem("2002");
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();		
 		gbc_comboBox.gridwidth = 2;
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
@@ -144,8 +145,10 @@ public class BizMain extends JFrame implements ItemListener {
 		comboBox.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				int year = (int) comboBox.getSelectedItem();	
-				((BiztList) table).setTableWithData(true, "month", year);
+				if(!comboBox.getSelectedItem().toString().equals("년도선택")){
+					int year = Integer.parseInt(comboBox.getSelectedItem().toString());	
+					((BiztList) table).setTableWithData(true, "month", year);
+				}
 			}
 		});
 		
