@@ -71,7 +71,7 @@ public class BizServiceTest {
 		Assert.assertNotNull(bList);
 		
 	}
-	public void testInsertBiz() {
+	/*public void testInsertBiz() {
 		
 		GregorianCalendar cal2 = new GregorianCalendar(2017, 1, 6);
 		Time t = new Time(9, 9, 9);
@@ -87,14 +87,14 @@ public class BizServiceTest {
 		HairEvent he = new HairEvent();
 		he.seteNo(3);
 		
-		biz.setcNo(c);
-		System.out.println(biz.getcNo());
-		biz.sethNO(hi);		
-		biz.seteNo(he);
+		biz.setBcNo(c);
 		
-/*
+		biz.setBhNo(hi);		
+		biz.setBeNo(he);
+		
+
 		int res = bizService.insertBiz(biz);
-		Assert.assertEquals(1, res);*/
-	}
+		Assert.assertEquals(1, res);
+	}*/
 	
 }
