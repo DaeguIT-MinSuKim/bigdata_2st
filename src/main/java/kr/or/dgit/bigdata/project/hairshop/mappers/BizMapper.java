@@ -3,9 +3,11 @@ package kr.or.dgit.bigdata.project.hairshop.mappers;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
+import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
 
 public interface BizMapper {
 	@Select("select b.bNo, b.bDate, h.hName, h.hPrice, e.eName, (h.hPrice*(1-e.eDiscount)) as resultPrice from hairshop.biz b left outer join hairshop.hairinfo h on b.hNo = h.hNo left outer join hairshop.event e on b.eNo = e.eNo order by bNo desc")
@@ -22,4 +24,7 @@ public interface BizMapper {
 	
 	@Select("select h.hName as hairStyle, count(b.hNo) as sumOrder from hairshop.biz b, hairshop.hairInfo h where b.hNo = h.hNo group by b.hNo")
 	public List<Biz> selectCountStyleForGraph();
+	
+	@Insert("insert into Biz values(null,#{bDate},#{bTime},#{cNo},#{hNo},#{eNo})")
+	public int insertBiz(Biz biz);
 }

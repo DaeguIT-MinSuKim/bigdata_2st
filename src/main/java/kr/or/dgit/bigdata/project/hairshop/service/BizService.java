@@ -7,7 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
+import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.mappers.BizMapper;
+import kr.or.dgit.bigdata.project.hairshop.mappers.CustomerMapper;
 import kr.or.dgit.bigdata.project.hairshop.util.MyBatisSqlSessionFactory;
 
 public class BizService {
@@ -96,6 +98,23 @@ public class BizService {
 		try {
 			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
 			return bizMapper.selectCountStyleForGraph();
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
+	
+	public int insertBiz(Biz biz) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("insertBiz(Biz) - start");
+		}
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+
+		try {
+			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
+			int res = bizMapper.insertBiz(biz);
+			sqlSession.commit();
+			return res;
 		} finally {
 			sqlSession.close();
 		}

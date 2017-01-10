@@ -141,3 +141,5 @@ insert into hairshop.biz values
 select hNo, hPrice from hairinfo where hName="커트";
 
 select eDiscount, eNo from event where eName="생일";
+
+insert into Biz values(null, "2016-01-10","12:12:00","2","2","2");
