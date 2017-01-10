@@ -37,6 +37,7 @@ public class HairEvent {
 	}
 
 	/* CONSTURCTOR */
+
 	public HairEvent() {
 	}
 	public HairEvent(int eNo) {
@@ -74,5 +75,4 @@ public class HairEvent {
 			return false;
 		return true;
 	}
-
 }

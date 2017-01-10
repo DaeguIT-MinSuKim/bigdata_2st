@@ -64,4 +64,5 @@ public class Hairinfo {
 			return false;
 		return true;
 	}
+	
 }

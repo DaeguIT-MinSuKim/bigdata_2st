@@ -7,9 +7,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import kr.or.dgit.bigdata.project.hairshop.dto.HairEvent;
 import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
-import kr.or.dgit.bigdata.project.hairshop.service.HairEventService;
 import kr.or.dgit.bigdata.project.hairshop.service.HairinfoService;
 
 public class HairinfoServiceTest {
@@ -44,4 +42,8 @@ public class HairinfoServiceTest {
 			System.out.println(hList.get(i).gethPriceForm());
 		}
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refs/remotes/origin/hotfix_yujin

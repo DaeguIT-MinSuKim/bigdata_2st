@@ -1,7 +1,10 @@
 package kr.or.dgit.bigdata.project.hairshop.service;
 
+<<<<<<< HEAD
 import org.apache.log4j.Logger;
 
+=======
+>>>>>>> refs/remotes/origin/hotfix_yujin
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -98,6 +101,7 @@ public class HairEventService {
 			logger.debug("deleteEvent(HairEvent) - end");
 		}
 	}	
+<<<<<<< HEAD
 
 	public List<HairEvent> selectEventByName(HairEvent hairEvent){
 		if (logger.isDebugEnabled()) {
@@ -118,3 +122,7 @@ public class HairEventService {
 		}		
 	}
 }
+=======
+}
+
+>>>>>>> refs/remotes/origin/hotfix_yujin

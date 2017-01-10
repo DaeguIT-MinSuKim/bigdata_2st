@@ -1,6 +1,7 @@
 package kr.or.dgit.bigdata.project.hairshop.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -20,6 +21,8 @@ public class BizService {
 
 	/*FIELDS*/
 	private static final BizService instance = new BizService();
+
+	private static final String String = null;
 	/*GET*/
 	public static BizService getInstance() {
 		return instance;
@@ -59,7 +62,49 @@ public class BizService {
 		
 	}
 	
-	public List<Biz> selectYearOrMonthAllFromBiz() {
+	public List<Biz> selectAllBiz() {
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectAllBiz() - start");
+		}
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
+			return bizMapper.selectAllBiz();
+		} finally {
+			sqlSession.close();
+		}		
+	}
+	
+	public List<Biz> selectYearOrMonthFromBiz(String startDate, String endDate) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectYearOrMonthFromBiz() - start");
+		}
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
+			return bizMapper.selectYearOrMonthFromBiz(startDate, endDate);
+		} finally {
+			sqlSession.close();
+		}		
+	}	
+	
+	public HashMap<String, Integer> selectYearOrMonthFromBizCalTotal(String startDate, String endDate) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectYearOrMonthFromBizCalTotal() - start");
+		}
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
+			return bizMapper.selectYearOrMonthFromBizCalTotal(startDate, endDate);
+		} finally {
+			sqlSession.close();
+		}		
+	}
+	
+	public List<Biz> selectYearOrMonthAllFromBiz(String startDate, String endDate) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectYearOrMonthAllFromBiz() - start");
 		}
@@ -67,7 +112,7 @@ public class BizService {
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try {
 			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
-			return bizMapper.selectYearOrMonthAllFromBiz();
+			return bizMapper.selectYearOrMonthAllFromBiz(startDate, endDate);
 		} finally {
 			sqlSession.close();
 		}

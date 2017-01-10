@@ -45,4 +45,8 @@ public class HairEventServiceTest {
 			System.out.println(hList.get(i).geteDiscountForm());
 		}
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refs/remotes/origin/hotfix_yujin

@@ -2,10 +2,4 @@
 /build/
 /.gradle/
 /.settings/
-<<<<<<< HEAD
 /.classpath/
-=======
-/.classpath
-/.project
-/Scripts/
->>>>>>> refs/remotes/origin/hotfix_yujin

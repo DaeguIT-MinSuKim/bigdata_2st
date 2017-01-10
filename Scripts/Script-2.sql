@@ -137,9 +137,15 @@ insert into hairshop.biz values
 (3,'2001-05-12','04:00:00',2,1,3),
 (4,'2001-05-14','05:10:00',4,7,2),
 (5,'2001-05-14','09:30:00',2,4,4);
+<<<<<<< HEAD
 /*
 select hNo, hPrice from hairinfo where hName="커트";
 
 select eDiscount, eNo from event where eName="생일";
+=======
+insert into hairshop.biz values
+(6,'2001-12-10','15:00:00',1,5,3),
+(6,'2001-12-31','15:00:00',1,6,2),
+>>>>>>> refs/remotes/origin/hotfix_yujin
 
 insert into Biz values(null, "2016-01-10","12:12:00","2","2","2");*/
