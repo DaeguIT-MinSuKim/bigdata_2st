@@ -5,9 +5,9 @@
 		<id property="bNo" column="bNo"/>
 		<result property="bDate" column="bDate"/>
 		<result property="bTime" column="bTime"/>
-		<association property="Customer" resultMap="kr.or.dgit.bigdata.project.hairshop.mappers.CustomerMapper.RSMverCustomer"/>
-		<association property="HairEvent" resultMap="kr.or.dgit.bigdata.project.hairshop.mappers.HairEventMapper.RSMverHairevent"/>
-		<association property="Hairinfo" resultMap="kr.or.dgit.bigdata.project.hairshop.mappers.HairinfoMapper.RSMverHairinfo"/>
+		<association property="bcNo" resultMap="kr.or.dgit.bigdata.project.hairshop.mappers.CustomerMapper.RSMverCustomer"/>
+		<association property="beNo" resultMap="kr.or.dgit.bigdata.project.hairshop.mappers.HairEventMapper.RSMverHairevent"/>
+		<association property="bhNo" resultMap="kr.or.dgit.bigdata.project.hairshop.mappers.HairinfoMapper.RSMverHairinfo"/>
 	</resultMap>
 	<select id="selectAllBiz" resultMap="BizWithCsEventInfo">
 		select b.bNo, b.bDate,b.bTime,c.cNo,c.cName, c.cDob, c.cDoJoin, c.cPhone, c.cDel, 

@@ -9,9 +9,9 @@
 	<typeAliases>
 		<package name="kr.or.dgit.bigdata.project.hairshop.dto" />
 	</typeAliases>
-	<typeHandlers>
+	<!-- <typeHandlers>
 		<package name="kr.or.dgit.bigdata.project.hairshop.typehandler"/>
-	</typeHandlers>
+	</typeHandlers> -->
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
