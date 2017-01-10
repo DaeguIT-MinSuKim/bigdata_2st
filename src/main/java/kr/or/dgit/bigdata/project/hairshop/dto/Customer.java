@@ -9,20 +9,22 @@ public class Customer {
 	private Date cDoJoin;
 	private String cPhone;
 	private boolean cDel;
-	
-	public Customer() {}
+
+	public Customer() {
+	}
+
 	// 생성자들중에 제가 테스트하는 도중 필요해서 이름, 이름+폰번호 생성자 추가했어요 - 유진
 	public Customer(int cNo) {
 		super();
 		this.cNo = cNo;
 	}
-	
+
 	public Customer(int cNo, String cName) {
 		super();
 		this.cNo = cNo;
 		this.cName = cName;
 	}
-	
+
 	public Customer(String cName) {
 		super();
 		this.cName = cName;
@@ -40,8 +42,6 @@ public class Customer {
 		this.cDob = cDob;
 	}
 
-	
-
 	public Customer(int cNo, String cName, Date cDob, Date cDoJoin, String cPhone) {
 		super();
 		this.cNo = cNo;
@@ -50,8 +50,7 @@ public class Customer {
 		this.cDoJoin = cDoJoin;
 		this.cPhone = cPhone;
 	}
-	
-	
+
 	public Customer(int cNo, String cName, Date cDob, Date cDoJoin, String cPhone, boolean cDel) {
 		super();
 		this.cNo = cNo;
@@ -92,7 +91,7 @@ public class Customer {
 
 	public void setcDoJoin(Date cDoJoin) {
 		this.cDoJoin = cDoJoin;
-	}	
+	}
 
 	public String getcPhone() {
 		return cPhone;
@@ -101,7 +100,7 @@ public class Customer {
 	public void setcPhone(String cPhone) {
 		this.cPhone = cPhone;
 	}
-	
+
 	public boolean iscDel() {
 		return cDel;
 	}
@@ -115,9 +114,5 @@ public class Customer {
 		return "Customer [cNo=" + cNo + ", cName=" + cName + ", cDob=" + cDob + ", cDoJoin=" + cDoJoin + ", cPhone="
 				+ cPhone + "]";
 	}
-
-	
-	
-	
 
 }

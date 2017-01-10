@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.bigdata.project.hairshop.mappers.CustomerMapper">
+
 	<insert id="insertCustomer" parameterType="Customer" useGeneratedKeys="true" keyProperty="cNo">
 		 insert into customer(cName,cDob,cDoJoin, cPhone, cDel) values(#{cName},#{cDob},#{cDoJoin},#{cPhone},#{cDel});
 	</insert>
+	
 	<update id="updateCustomer" parameterType="Customer">
 		update customer set cName=#{cName}, cDob=#{cDob}, cDoJoin=#{cDoJoin}, cPhone=#{cPhone}, cDel=#{cDel} where cNo=#{cNo}
 	</update>
+	
 	<delete id="deleteCustomer" parameterType="int">
 		delete from customer where cNo=#{cNo}
 	</delete>
+	
 	<select id="searchCustomerByName" parameterType="hashmap" resultType="Customer">
 		select cNo, cName, cDob, cDoJoin, cPhone, cDel from customer where cName=#{cName}
 	</select>
+	
 	<select id="selectByAll" resultType="customer">
 		select cNo, cName, cDob, cDoJoin, cPhone from customer;
 	</select>
+	
 </mapper>
