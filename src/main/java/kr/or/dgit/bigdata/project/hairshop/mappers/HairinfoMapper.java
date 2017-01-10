@@ -23,4 +23,7 @@ public interface HairinfoMapper {
 	
 	@Delete("delete from hairinfo where hNo=#{hNo}")
 	public void deleteHairInfo(Hairinfo event);
+	
+	@Select("select hNo, hPrice from hairinfo where hName=#{hName}")
+	public List<Hairinfo> selectHairInfoByName(Hairinfo hName);
 }

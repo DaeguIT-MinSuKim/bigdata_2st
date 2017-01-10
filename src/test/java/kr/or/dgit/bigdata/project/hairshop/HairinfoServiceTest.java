@@ -32,4 +32,16 @@ public class HairinfoServiceTest {
 			System.out.println(hList.get(i).gethPriceForm());
 		}
 	}
+	
+	@Test
+	public void testSelectHairInfoByName() {
+		Hairinfo h = new Hairinfo();
+		h.sethName("커트");
+		
+		List<Hairinfo> hList = hairinfoService.selectHairInfoByName(h);
+		Assert.assertNotNull(hList);
+		for(int i=0;i < hList.size();i++){
+			System.out.println(hList.get(i).gethPriceForm());
+		}
+	}
 }

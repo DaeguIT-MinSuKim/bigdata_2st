@@ -138,4 +138,5 @@ insert into hairshop.biz values
 (4,'2001-05-14','05:10:00',4,7,2),
 (5,'2001-05-14','09:30:00',2,4,4);
 
+select hNo, hPrice from hairinfo where hName="커트";
 

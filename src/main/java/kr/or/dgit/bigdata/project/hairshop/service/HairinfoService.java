@@ -97,4 +97,23 @@ public class HairinfoService {
 			logger.debug("deleteHairInfo(hairinfo) - end");
 		}
 	}	
+	
+	public List<Hairinfo> selectHairInfoByName(Hairinfo hName){
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectHairInfoByName(Hairinfo) - start");
+		}
+
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		HairinfoMapper hairinfoMapper = sqlSession.getMapper(HairinfoMapper.class);
+		try{
+			List<Hairinfo> hlist = hairinfoMapper.selectHairInfoByName(hName);
+
+			if (logger.isDebugEnabled()) {
+				logger.debug("selectHairInfoByName(Hairinfo) - end");
+			}
+			return hlist;
+		}finally{
+			sqlSession.close();
+		}		
+	}
 }
