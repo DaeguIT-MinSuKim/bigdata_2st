@@ -42,6 +42,7 @@ public class HairMain extends JFrame {
 	private JButton btnSave;
 	private JButton btnYear;
 	private JButton btnToMain4;
+	private JButton btnHairInfo;
 
 	/**
 	 * Launch the application.
@@ -129,6 +130,11 @@ public class HairMain extends JFrame {
 		btnOrder = new JButton("주문");
 		btnOrder.setBackground(new Color(248, 248, 255));
 		pnHairOderBtns.add(btnOrder);
+		
+		btnHairInfo = new JButton("헤어정보");
+		btnHairInfo.setToolTipText("해당 고객의 헤어 스타일 내역으로 이동합니다.");
+		btnHairInfo.setBackground(new Color(248, 248, 255));
+		pnHairOderBtns.add(btnHairInfo);
 		
 		btnToMain2 = new JButton("메인화면");
 		btnToMain2.setBackground(new Color(248, 248, 255));
