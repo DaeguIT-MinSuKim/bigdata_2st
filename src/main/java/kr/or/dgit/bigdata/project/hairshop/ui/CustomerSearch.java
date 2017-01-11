@@ -1,6 +1,8 @@
 package kr.or.dgit.bigdata.project.hairshop.ui;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -24,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
+import kr.or.dgit.bigdata.project.hairshop.main.HairMain;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import javax.swing.ListSelectionModel;
 
@@ -35,7 +38,7 @@ public class CustomerSearch extends JPanel {
 	private String dob;
 	private String doJoin;
 	private String phone;
-
+	
 	/**
 	 * Create the panel.
 	 */
@@ -89,8 +92,13 @@ public class CustomerSearch extends JPanel {
 				doJoin = table.getValueAt(table.getSelectedRow(), 3).toString();
 				phone = table.getValueAt(table.getSelectedRow(), 4).toString();
 				
-				JOptionPane.showConfirmDialog(null, cName+", "+dob+", "+phone+"회원의 정보를 수정 하시겠습니까?");
+				HairMain hm = new HairMain();
+				hm.editCustomerInfo(cName, dob, phone);
+				
+				//editCustomerInfo();
 			}
+
+			
 		});
 		scrollPane.setViewportView(table);
 		
@@ -181,7 +189,42 @@ public class CustomerSearch extends JPanel {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}	
+
+	/*	public int getJopBtnIndex() {
+		return jopBtnIndex;
 	}
 
-	
+	public void setJopBtnIndex(int jopBtnIndex) {
+		this.jopBtnIndex = jopBtnIndex;
+	}
+
+	private void editCustomerInfo() { // 수정 및 주문 등 버튼 들어간 JOptionPane 설정
+		Object[] options ={"수정","삭제","주문","헤어정보"};
+		
+		jopBtnIndex = JOptionPane.showOptionDialog(null, cName+"["+dob+", "+phone+"]", "회원 관리", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, null, options, options[3]);
+		System.out.println("JOptionPane btn index: "+jopBtnIndex);
+		
+		
+		HairMain hm = new HairMain();
+		switch (jopBtnIndex) {
+		case 0:				
+			hm.setCl((CardLayout)(pnCusSearchCards.getLayout()));
+	        hm.getCl().show(pnCusSearchCards, "name_1666378783739869");
+	        jopBtnIndex=4;
+			break;
+		case 1:
+			
+			break;
+		case 2:
+			
+			break;
+		case 3:
+			
+			break;
+		default:
+			break;
+		}
+		
+	}*/
 }

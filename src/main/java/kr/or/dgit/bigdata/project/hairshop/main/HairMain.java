@@ -1,21 +1,23 @@
 package kr.or.dgit.bigdata.project.hairshop.main;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
-import java.awt.CardLayout;
-import javax.swing.JButton;
-import java.awt.GridLayout;
-import java.awt.Color;
-import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
+
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
+import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
 
 public class HairMain extends JFrame {
 
@@ -51,7 +53,8 @@ public class HairMain extends JFrame {
 	private CustomerSearch pnSearchSub;
 	private CustomerManageInsert pnCusAdd;
 	private CustomerManageEdit pnCusEdit;
-	private JButton btnSearch;
+	private JButton btnSearch;	
+	private int jopBtnIndex=4;
 
 	/**
 	 * Launch the application.
@@ -68,6 +71,7 @@ public class HairMain extends JFrame {
 				}
 			}
 		});
+		
 	}
 
 	/**
@@ -103,7 +107,8 @@ public class HairMain extends JFrame {
 		pnCusSearch.add(pnCusSearchCards, BorderLayout.CENTER);
 		pnCusSearchCards.setLayout(new CardLayout(0, 0));
 		
-		pnSearchSub = new CustomerSearch();
+		pnSearchSub = new CustomerSearch();		
+		
 		pnCusSearchCards.add(pnSearchSub, "name_1666323161344197");
 		
 		pnCusAdd = new CustomerManageInsert();
@@ -232,7 +237,19 @@ public class HairMain extends JFrame {
 		pnBizGraphMain.setBackground(new Color(255, 192, 203));
 		pnBizGraph.add(pnBizGraphMain, BorderLayout.CENTER);
 		
+		
+		
 	}
+	
+
+	public JPanel getPnCusSearchCards() {
+		return pnCusSearchCards;
+	}
+
+	public void setPnCusSearchCards(JPanel pnCusSearchCards) {
+		this.pnCusSearchCards = pnCusSearchCards;
+	} 
+
 
 	protected void btnAddActionPerformed(ActionEvent e) {
 		CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
@@ -241,5 +258,36 @@ public class HairMain extends JFrame {
 	protected void btnSearchActionPerformed(ActionEvent e) {
 		CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
         cl.show(pnCusSearchCards, "name_1666323161344197");
+	}
+	
+	public void editCustomerInfo(String cName, String dob, String phone) { // 수정 및 주문 등 버튼 들어간 JOptionPane 설정
+		Object[] options ={"수정","삭제","주문","헤어정보"};
+		
+		jopBtnIndex = JOptionPane.showOptionDialog(null, cName+"["+dob+", "+phone+"]", "회원 관리", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, null, options, options[3]);
+		
+		if (jopBtnIndex == 0) {
+			CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
+	        cl.show(pnCusSearchCards, "name_1666378783739869");
+		}
+		
+		/*switch (jopBtnIndex) {
+		case 0:		
+			System.out.println("JOptionPane btn index: "+jopBtnIndex);
+			CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
+	        cl.show(pnCusSearchCards, "name_1666378783739869");
+			break;
+		case 1:
+			
+			break;
+		case 2:
+			
+			break;
+		case 3:
+			
+			break;
+		default:
+			break;
+		}*/
+		
 	}
 }
