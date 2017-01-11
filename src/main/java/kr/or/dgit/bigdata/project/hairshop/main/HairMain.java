@@ -11,6 +11,11 @@ import java.awt.CardLayout;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.Color;
+import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
+import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
 
 public class HairMain extends JFrame {
 
@@ -23,7 +28,7 @@ public class HairMain extends JFrame {
 	private JPanel pnBizGraph;
 	private JTabbedPane tabbedPane;
 	private JPanel pnHomeMain;
-	private JPanel pnCusSearchMain;
+	private JPanel pnCusSearchCards;
 	private JPanel pnCusSearchBtns;
 	private JButton btnAdd;
 	private JButton btnToMain1;
@@ -43,6 +48,10 @@ public class HairMain extends JFrame {
 	private JButton btnYear;
 	private JButton btnToMain4;
 	private JButton btnHairInfo;
+	private CustomerSearch pnSearchSub;
+	private CustomerManageInsert pnCusAdd;
+	private CustomerManageEdit pnCusEdit;
+	private JButton btnSearch;
 
 	/**
 	 * Launch the application.
@@ -89,10 +98,19 @@ public class HairMain extends JFrame {
 		pnCusSearch.setToolTipText("고객검색 및 회원 추가, 삭제");
 		pnCusSearch.setLayout(new BorderLayout(0, 0));
 		
-		pnCusSearchMain = new JPanel();
-		pnCusSearchMain.setBackground(new Color(255, 192, 203));
-		pnCusSearch.add(pnCusSearchMain, BorderLayout.CENTER);
-		pnCusSearchMain.setLayout(new BorderLayout(0, 0));
+		pnCusSearchCards = new JPanel();
+		pnCusSearchCards.setBackground(new Color(255, 192, 203));
+		pnCusSearch.add(pnCusSearchCards, BorderLayout.CENTER);
+		pnCusSearchCards.setLayout(new CardLayout(0, 0));
+		
+		pnSearchSub = new CustomerSearch();
+		pnCusSearchCards.add(pnSearchSub, "name_1666323161344197");
+		
+		pnCusAdd = new CustomerManageInsert();
+		pnCusSearchCards.add(pnCusAdd, "name_1666358524774753");
+		
+		pnCusEdit = new CustomerManageEdit();
+		pnCusSearchCards.add(pnCusEdit, "name_1666378783739869");
 		
 		pnCusSearchBtns = new JPanel();
 		pnCusSearchBtns.setBorder(new EmptyBorder(10, 30, 10, 10));
@@ -100,7 +118,21 @@ public class HairMain extends JFrame {
 		pnCusSearch.add(pnCusSearchBtns, BorderLayout.EAST);
 		pnCusSearchBtns.setLayout(new GridLayout(4, 0, 0, 20));
 		
+		btnSearch = new JButton("회원검색");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnSearchActionPerformed(e);
+			}
+		});
+		btnSearch.setBackground(new Color(248, 248, 255));
+		pnCusSearchBtns.add(btnSearch);
+		
 		btnAdd = new JButton("회원추가");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnAddActionPerformed(e);
+			}
+		});
 		btnAdd.setBackground(new Color(248, 248, 255));
 		pnCusSearchBtns.add(btnAdd);
 		
@@ -202,4 +234,12 @@ public class HairMain extends JFrame {
 		
 	}
 
+	protected void btnAddActionPerformed(ActionEvent e) {
+		CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
+        cl.show(pnCusSearchCards, "name_1666358524774753");
+	}
+	protected void btnSearchActionPerformed(ActionEvent e) {
+		CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
+        cl.show(pnCusSearchCards, "name_1666323161344197");
+	}
 }

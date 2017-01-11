@@ -3,29 +3,38 @@ package kr.or.dgit.bigdata.project.hairshop.ui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
+import javax.swing.ListSelectionModel;
 
 public class CustomerSearch extends JPanel {
 	private JTable table;
 	private JTextField txtSearch;
 	private String cName;
+	private int cNo;
+	private String dob;
+	private String doJoin;
+	private String phone;
 
 	/**
 	 * Create the panel.
@@ -52,8 +61,6 @@ public class CustomerSearch extends JPanel {
 				reloadData();
 				
 				
-				
-				
 			}
 		});
 		pnSearch.add(btnOk);
@@ -62,6 +69,8 @@ public class CustomerSearch extends JPanel {
 		add(scrollPane, BorderLayout.CENTER);
 		
 		table = new JTable();
+		table.setCellSelectionEnabled(true);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(new DefaultTableModel(
 				new Object[][] {
 				},
@@ -69,6 +78,20 @@ public class CustomerSearch extends JPanel {
 						"고객 번호", "고객명", "생년월일", "가입일자", "전화번호" 
 				}
 			));
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				
+				cNo = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()); // 선택한 열의 0번째 인덱스 행을 출력
+				cName = table.getValueAt(table.getSelectedRow(), 1).toString();
+				dob = table.getValueAt(table.getSelectedRow(), 2).toString();
+				doJoin = table.getValueAt(table.getSelectedRow(), 3).toString();
+				phone = table.getValueAt(table.getSelectedRow(), 4).toString();
+				
+				JOptionPane.showConfirmDialog(null, cName+", "+dob+", "+phone+"회원의 정보를 수정 하시겠습니까?");
+			}
+		});
 		scrollPane.setViewportView(table);
 		
 		
@@ -120,4 +143,45 @@ public class CustomerSearch extends JPanel {
 		}
 	}
 
+	public String getcName() {
+		return cName;
+	}
+
+	public void setcName(String cName) {
+		this.cName = cName;
+	}
+
+	public int getcNo() {
+		return cNo;
+	}
+
+	public void setcNo(int cNo) {
+		this.cNo = cNo;
+	}
+
+	public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+	public String getDoJoin() {
+		return doJoin;
+	}
+
+	public void setDoJoin(String doJoin) {
+		this.doJoin = doJoin;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	
 }
