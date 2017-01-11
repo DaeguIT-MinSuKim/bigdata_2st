@@ -1,4 +1,4 @@
-package kr.or.dgit.bigdata.project.hairshop.main;
+package kr.or.dgit.bigdata.project.hairshop.test;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

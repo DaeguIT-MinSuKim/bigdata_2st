@@ -9,6 +9,10 @@
 		<association property="beNo" resultMap="kr.or.dgit.bigdata.project.hairshop.mappers.HairEventMapper.RSMverHairevent"/>
 		<association property="bhNo" resultMap="kr.or.dgit.bigdata.project.hairshop.mappers.HairinfoMapper.RSMverHairinfo"/>
 	</resultMap>
+	<parameterMap type="Biz" id="parameterBizWithCsEventInfo">
+		<parameter property="bDate"/>
+		<parameter property="bTime"/>
+	</parameterMap>
 	<select id="selectAllBiz" resultMap="BizWithCsEventInfo">
 		select b.bNo, b.bDate,b.bTime,c.cNo,c.cName, c.cDel, 
 		h.hNo, h.hName, h.hPrice, e.eNo, e.eName from hairshop.biz b 
@@ -24,4 +28,7 @@
 		left outer join hairshop.event e on b.eNo = e.eNo
 		where bDate &gt;= #{param1} and bDate &lt;#{param2}
 	</select>
+	<insert id="insertBiz" parameterMap="parameterBizWithCsEventInfo" useGeneratedKeys="true" keyProperty="bNo">
+		insert into hairshop.biz values(#{bDate},#{bTime},#{bcNo},#{bhNo},#{beNo});
+	</insert>
 </mapper>

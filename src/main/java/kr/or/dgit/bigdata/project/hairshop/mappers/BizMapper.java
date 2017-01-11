@@ -3,6 +3,7 @@ package kr.or.dgit.bigdata.project.hairshop.mappers;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
@@ -30,6 +31,10 @@ public interface BizMapper {
 	public HashMap<String, Integer> selectYearOrMonthFromBizCalTotal(String startDate, String endDate);
 	
 	public List<Biz> selectAllBiz();
+	
+	/* test 중 */
+	
+	public void insertBiz();
 
 }
       
