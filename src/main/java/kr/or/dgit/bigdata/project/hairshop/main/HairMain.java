@@ -19,6 +19,7 @@ public class HairMain extends JFrame {
 			public void run() {
 				try {
 					HairMain frame = new HairMain();
+					frame.setBounds(100, 100, 1100, 700);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
