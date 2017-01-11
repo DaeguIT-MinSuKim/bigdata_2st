@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
+import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 
 public interface BizMapper {
 	@Select("select b.bNo, b.bDate, h.hName, h.hPrice, e.eName, (h.hPrice*(1-e.eDiscount)) as resultPrice from hairshop.biz b left outer join hairshop.hairinfo h on b.hNo = h.hNo left outer join hairshop.event e on b.eNo = e.eNo order by bNo desc")
@@ -32,9 +33,11 @@ public interface BizMapper {
 	
 	public List<Biz> selectAllBiz();
 	
+	public List<Biz> selectFromBizByCustomer(int cNo);
+	
 	/* test 중 */
 	
-	public void insertBiz();
+	public void insertBiz(Biz biz);
 
 }
       

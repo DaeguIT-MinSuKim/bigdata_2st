@@ -86,6 +86,20 @@ public class CustomerService{
 		}
 		
 	}
+	public Customer searchCustomerByNo(int cNo) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("searchCustomerByNo(int) - start");
+		}
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			CustomerMapper customerMapper = sqlSession.getMapper(CustomerMapper.class);
+			return customerMapper.searchCustomerByNo(cNo);
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
 	public List<Customer> selectByAll() {
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectByAll() - start");

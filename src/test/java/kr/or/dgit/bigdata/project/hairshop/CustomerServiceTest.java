@@ -73,6 +73,11 @@ public class CustomerServiceTest {
 		List<Customer> customer = customerService.selectByAll();
 		Assert.assertNotNull(customer);
 	}
+	@Test
+	public void testSearchCustomerByNo() {		
+		Customer customer = customerService.searchCustomerByNo(1);
+		Assert.assertNotNull(customer);
+	}
 	
 	
 }

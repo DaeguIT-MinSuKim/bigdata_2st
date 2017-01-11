@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
+import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 
 public class CustomerMain extends JFrame {
 
@@ -37,6 +39,16 @@ public class CustomerMain extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
+		Customer customer = CustomerService.getInstance().searchCustomerByNo(3);
+		CustomerHairinfo panel = new CustomerHairinfo();
+		HairInfoPanel panel_1 = new HairInfoPanel();
+		panel.setHairInfoPanel(panel_1);
+		panel.setTextFields(customer);
+		contentPane.add(panel, BorderLayout.NORTH);		
+		contentPane.add(panel_1, BorderLayout.CENTER);
+		
+		
 	}
 
 }

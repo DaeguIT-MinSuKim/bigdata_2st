@@ -20,6 +20,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import kr.or.dgit.bigdata.project.hairshop.list.BiztList;
+import kr.or.dgit.bigdata.project.hairshop.list.ReportTable;
 
 public class BizMain extends JFrame implements ItemListener {
 
@@ -128,7 +129,7 @@ public class BizMain extends JFrame implements ItemListener {
 		
 		scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
-		table = new BiztList();
+		table = new ReportTable();
 		scrollPane.setViewportView(table);
 	}
 
@@ -140,6 +141,7 @@ public class BizMain extends JFrame implements ItemListener {
 			rbMonthItemStateChanged(arg0);
 		}
 	}
+	
 	protected void rbMonthItemStateChanged(ItemEvent arg0) {
 		comboBox.setEnabled(true);
 		comboBox.addItemListener(new ItemListener() {
@@ -147,16 +149,15 @@ public class BizMain extends JFrame implements ItemListener {
 			public void itemStateChanged(ItemEvent e) {
 				if(!comboBox.getSelectedItem().toString().equals("년도선택")){
 					int year = Integer.parseInt(comboBox.getSelectedItem().toString());	
-					((BiztList) table).setTableWithData(true, "month", year);
+					((ReportTable) table).setTableWithData("month", year);
 				}
 			}
-		});
-		
-		
+		});		
 	}
+	
 	protected void rbYearItemStateChanged(ItemEvent arg0) {
 		comboBox.setEnabled(false);
-		((BiztList) table).setTableWithData(true, "year", 0);
+		((ReportTable) table).setTableWithData("year");
 	}
 
 }

@@ -30,4 +30,11 @@ public class HairinfoServiceTest {
 			System.out.println(hList.get(i).gethPriceForm());
 		}
 	}
+	@Test
+	public void testselectHairInfoByNo() {
+		Hairinfo h =  new Hairinfo(2);
+		Hairinfo temp = hairinfoService.selectHairInfoByNo(h);
+		Assert.assertNotNull(temp);
+		System.out.println(temp);
+	}
 }
