@@ -41,6 +41,7 @@ public class HairMain extends JFrame {
 	private JPanel pnBizGraphMain;
 	private JButton btnSave;
 	private JButton btnYear;
+	private JButton btnToMain4;
 
 	/**
 	 * Launch the application.
@@ -179,6 +180,10 @@ public class HairMain extends JFrame {
 		btnYear = new JButton("연도별");
 		btnYear.setBackground(new Color(248, 248, 255));
 		pnBizListBtns.add(btnYear);
+		
+		btnToMain4 = new JButton("메인화면");
+		btnToMain4.setBackground(new Color(248, 248, 255));
+		pnBizListBtns.add(btnToMain4);
 		
 		pnBizGraph = new JPanel();
 		tabbedPane.addTab("영업그래프", null, pnBizGraph, null);
