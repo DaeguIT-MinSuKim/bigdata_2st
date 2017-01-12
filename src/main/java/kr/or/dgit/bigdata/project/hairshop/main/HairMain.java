@@ -10,11 +10,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
+import kr.or.dgit.bigdata.project.hairshop.ui.CustomDialog;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
@@ -54,7 +54,7 @@ public class HairMain extends JFrame {
 	private CustomerManageInsert pnCusAdd;
 	private CustomerManageEdit pnCusEdit;
 	private JButton btnSearch;	
-	private int jopBtnIndex=4;
+	private CustomDialog dialog; 
 
 	/**
 	 * Launch the application.
@@ -260,34 +260,6 @@ public class HairMain extends JFrame {
         cl.show(pnCusSearchCards, "name_1666323161344197");
 	}
 	
-	public void editCustomerInfo(String cName, String dob, String phone) { // 수정 및 주문 등 버튼 들어간 JOptionPane 설정
-		Object[] options ={"수정","삭제","주문","헤어정보"};
-		
-		jopBtnIndex = JOptionPane.showOptionDialog(null, cName+"["+dob+", "+phone+"]", "회원 관리", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, null, options, options[3]);
-		
-		if (jopBtnIndex == 0) {
-			CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
-	        cl.show(pnCusSearchCards, "name_1666378783739869");
-		}
-		
-		/*switch (jopBtnIndex) {
-		case 0:		
-			System.out.println("JOptionPane btn index: "+jopBtnIndex);
-			CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
-	        cl.show(pnCusSearchCards, "name_1666378783739869");
-			break;
-		case 1:
-			
-			break;
-		case 2:
-			
-			break;
-		case 3:
-			
-			break;
-		default:
-			break;
-		}*/
-		
-	}
+	
+	
 }
