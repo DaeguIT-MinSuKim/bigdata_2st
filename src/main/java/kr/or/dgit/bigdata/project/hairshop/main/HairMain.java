@@ -138,10 +138,23 @@ public class HairMain extends JFrame {
 				
 				int jopBtnIndex = JOptionPane.showOptionDialog(null, cName+"["+dob+", "+phone+"]", "회원 관리", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, null, options, options[3]);
 				
-				if (jopBtnIndex == 0) {
+				switch (jopBtnIndex) {
+				case 0:		
+					System.out.println("JOptionPane btn index: "+jopBtnIndex);
 					CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
 			        cl.show(pnCusSearchCards, "name_1666378783739869");
-			        jopBtnIndex = 4;
+					break;
+				case 1:
+					
+					break;
+				case 2:
+					
+					break;
+				case 3:
+					
+					break;
+				default:
+					break;
 				}
 				// 수정 패널에 setTxt
 				pnCusEdit.setTxtInCusEdit(cNo, cName, dob, doJoin, phone);
