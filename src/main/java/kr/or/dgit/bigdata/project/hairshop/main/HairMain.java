@@ -58,7 +58,11 @@ public class HairMain extends JFrame {
 	private CustomerManageInsert pnCusAdd;
 	private CustomerManageEdit pnCusEdit;
 	private JButton btnSearch;	
-	private CustomDialog dialog; 
+	private int cNo;
+	private String cName;
+	private String dob;
+	private String doJoin;
+	private String phone;
 
 	/**
 	 * Launch the application.
@@ -121,11 +125,11 @@ public class HairMain extends JFrame {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				
-				int cNo = Integer.parseInt(tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 0).toString()); // 선택한 열의 0번째 인덱스 행을 출력
-				String cName = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 1).toString();
-				String dob = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 2).toString();
-				String doJoin = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 3).toString();
-				String phone = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 4).toString();
+				cNo = Integer.parseInt(tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 0).toString()); // 선택한 열의 0번째 인덱스 행을 출력
+				cName = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 1).toString();
+				dob = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 2).toString();
+				doJoin = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 3).toString();
+				phone = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 4).toString();
 				Object[] options ={"수정","삭제","주문","헤어정보"};
 				
 				int jopBtnIndex = JOptionPane.showOptionDialog(null, cName+"["+dob+", "+phone+"]", "회원 관리", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, null, options, options[3]);
