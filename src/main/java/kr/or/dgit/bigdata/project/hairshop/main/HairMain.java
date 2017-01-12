@@ -47,14 +47,9 @@ public class HairMain extends JFrame {
 	private HairOrderSearch pnOrderListMain;
 	private JPanel pnOrderListBtns;
 	private JButton btnToMain3;
-	private JPanel pnBizListMain;
-	private JPanel pnBizListBtns;
-	private JButton btnDate;
-	private JButton btnMonth;
+	private BizReport pnBizListMain;
 	private JPanel pnBizGraphMain;
 	private JButton btnSave;
-	private JButton btnYear;
-	private JButton btnToMain4;
 	private JButton btnHairInfo;
 	private CustomerSearch pnSearchSub;
 	private CustomerManageInsert pnCusAdd;
@@ -257,37 +252,13 @@ public class HairMain extends JFrame {
 		pnBizList = new JPanel();
 		pnBizList.setLayout(new BorderLayout(0,0));
 		tabbedPane.addTab("영업현황", null, pnBizList, null);
-		BizReport brPanel = new BizReport();
-		pnBizList.add(brPanel, BorderLayout.CENTER);
 		
 		pnBizList.setToolTipText("날짜, 월별 ,연도별 영업현황이 나타납니다.");
 		pnBizList.setLayout(new BorderLayout(0, 0));
 		
-		pnBizListMain = new JPanel();
+		pnBizListMain = new BizReport();
 		pnBizListMain.setBackground(new Color(255, 192, 203));
 		pnBizList.add(pnBizListMain, BorderLayout.CENTER);
-		
-		pnBizListBtns = new JPanel();
-		pnBizListBtns.setBorder(new EmptyBorder(10, 30, 10, 10));
-		pnBizListBtns.setBackground(Color.PINK);
-		pnBizList.add(pnBizListBtns, BorderLayout.EAST);
-		pnBizListBtns.setLayout(new GridLayout(4, 0, 0, 20));
-		
-		btnDate = new JButton("기간별");
-		btnDate.setBackground(new Color(248, 248, 255));
-		pnBizListBtns.add(btnDate);
-		
-		btnMonth = new JButton("월별");
-		btnMonth.setBackground(new Color(248, 248, 255));
-		pnBizListBtns.add(btnMonth);
-		
-		btnYear = new JButton("연도별");
-		btnYear.setBackground(new Color(248, 248, 255));
-		pnBizListBtns.add(btnYear);
-		
-		btnToMain4 = new JButton("메인화면");
-		btnToMain4.setBackground(new Color(248, 248, 255));
-		pnBizListBtns.add(btnToMain4);
 		
 		pnBizGraph = new JPanel();
 		tabbedPane.addTab("영업그래프", null, pnBizGraph, null);
