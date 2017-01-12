@@ -8,7 +8,7 @@ public class BizReport extends JPanel {
 	 * Create the panel.
 	 */
 	public BizReport() {
-
+		
 	}
 
 }
