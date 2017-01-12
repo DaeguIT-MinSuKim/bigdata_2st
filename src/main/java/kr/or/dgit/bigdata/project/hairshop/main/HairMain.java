@@ -17,6 +17,8 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomDialog;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
@@ -60,6 +62,7 @@ public class HairMain extends JFrame {
 	private String dob;
 	private String doJoin;
 	private String phone;
+	private int cardIndex;
 
 	/**
 	 * Launch the application.
@@ -141,8 +144,13 @@ public class HairMain extends JFrame {
 					CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
 			        cl.show(pnCusSearchCards, "name_1666378783739869");
 			        btnSave.setEnabled(true);
+			        cardIndex =2;
 					break;
 				case 1:
+					int jopi = JOptionPane.showConfirmDialog(null, cName+"회원을 정말 삭제하시겠습니까?");
+					if (jopi == 0) {
+						CustomerService.getInstance().deleteCustomer(cNo);
+					}
 					
 					break;
 				case 2:
@@ -291,11 +299,13 @@ public class HairMain extends JFrame {
 		CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
         cl.show(pnCusSearchCards, "name_1666358524774753");
         btnSave.setEnabled(false);
+        cardIndex =0;
 	}
 	protected void btnSearchActionPerformed(ActionEvent e) {
 		CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
         cl.show(pnCusSearchCards, "name_1666323161344197");
         btnSave.setEnabled(true);
+        cardIndex =1;
 	}
 	
 	
