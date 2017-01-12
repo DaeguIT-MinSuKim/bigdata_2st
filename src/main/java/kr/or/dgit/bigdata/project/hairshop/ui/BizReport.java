@@ -145,4 +145,6 @@ public class BizReport extends JPanel implements ActionListener {
 		pBizReport.setResTable(year);
 		revalidate();
 	}
+
 }
+

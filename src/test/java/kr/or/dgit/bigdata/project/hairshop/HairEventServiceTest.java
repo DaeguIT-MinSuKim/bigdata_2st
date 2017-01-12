@@ -33,4 +33,11 @@ public class HairEventServiceTest {
 			System.out.println(hList.get(i).geteDiscountForm());
 		}
 	}
+	@Test
+	public void testselectEventByNo() {
+		HairEvent h = new HairEvent(2);
+		HairEvent temp = hairEventService.selectEventByNo(h);
+		Assert.assertNotNull(temp);
+		System.out.println(temp);
+	}
 }

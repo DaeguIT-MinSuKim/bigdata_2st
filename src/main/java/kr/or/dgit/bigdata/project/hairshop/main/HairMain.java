@@ -17,7 +17,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
+import kr.or.dgit.bigdata.project.hairshop.ui.BizReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomDialog;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
@@ -159,7 +159,7 @@ public class HairMain extends JFrame {
 				default:
 					break;
 				}
-				// 해당 패널에 setTxt
+				// 각각 해당 패널에 setTxt 
 				pnCusEdit.setTxtInCusEdit(cNo, cName, dob, doJoin, phone);
 				pnOrderListMain.setTxtInHairIfo(cNo, cName, dob);
 				
@@ -255,7 +255,11 @@ public class HairMain extends JFrame {
 		pnOrderListBtns.add(btnToMain3);
 		
 		pnBizList = new JPanel();
+		pnBizList.setLayout(new BorderLayout(0,0));
 		tabbedPane.addTab("영업현황", null, pnBizList, null);
+		BizReport brPanel = new BizReport();
+		pnBizList.add(brPanel, BorderLayout.CENTER);
+		
 		pnBizList.setToolTipText("날짜, 월별 ,연도별 영업현황이 나타납니다.");
 		pnBizList.setLayout(new BorderLayout(0, 0));
 		
