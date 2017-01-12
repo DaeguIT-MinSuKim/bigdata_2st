@@ -146,6 +146,7 @@ public class HairMain extends JFrame {
 					break;
 				case 2:
 					tabbedPane.setSelectedComponent(pnHairOder);
+					pnHairOderMain.setTxtInOrder(cNo, cName);
 					break;
 				case 3:
 					tabbedPane.setEnabledAt(3, true);
