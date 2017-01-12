@@ -140,6 +140,7 @@ public class HairMain extends JFrame {
 					System.out.println("JOptionPane btn index: "+jopBtnIndex);
 					CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
 			        cl.show(pnCusSearchCards, "name_1666378783739869");
+			        btnSave.setEnabled(true);
 					break;
 				case 1:
 					
@@ -196,6 +197,7 @@ public class HairMain extends JFrame {
 		pnCusSearchBtns.add(btnAdd);
 		
 		btnSave = new JButton("저장");
+		btnSave.setEnabled(false);
 		btnSave.setBackground(new Color(248, 248, 255));
 		pnCusSearchBtns.add(btnSave);
 		
@@ -288,10 +290,12 @@ public class HairMain extends JFrame {
 	protected void btnAddActionPerformed(ActionEvent e) {
 		CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
         cl.show(pnCusSearchCards, "name_1666358524774753");
+        btnSave.setEnabled(false);
 	}
 	protected void btnSearchActionPerformed(ActionEvent e) {
 		CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
         cl.show(pnCusSearchCards, "name_1666323161344197");
+        btnSave.setEnabled(true);
 	}
 	
 	
