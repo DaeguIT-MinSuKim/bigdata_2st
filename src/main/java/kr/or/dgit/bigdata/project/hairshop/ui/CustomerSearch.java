@@ -81,25 +81,7 @@ public class CustomerSearch extends JPanel {
 						"고객 번호", "고객명", "생년월일", "가입일자", "전화번호" 
 				}
 			));
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				
-				cNo = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()); // 선택한 열의 0번째 인덱스 행을 출력
-				cName = table.getValueAt(table.getSelectedRow(), 1).toString();
-				dob = table.getValueAt(table.getSelectedRow(), 2).toString();
-				doJoin = table.getValueAt(table.getSelectedRow(), 3).toString();
-				phone = table.getValueAt(table.getSelectedRow(), 4).toString();
-				
-				/*HairMain hm = new HairMain();
-				hm.editCustomerInfo(cName, dob, phone);*/
-				
-				//editCustomerInfo();
-			}
-
-			
-		});
+		
 		scrollPane.setViewportView(table);
 		
 		
