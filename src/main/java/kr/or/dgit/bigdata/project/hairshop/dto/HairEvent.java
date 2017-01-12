@@ -42,7 +42,7 @@ public class HairEvent {
 	/* METHODS */
 	@Override
 	public String toString() {
-		return String.format("Event [eName=%s]", eName);
+		return String.format("%s", eDiscount);
 	}
 	@Override
 	public int hashCode() {

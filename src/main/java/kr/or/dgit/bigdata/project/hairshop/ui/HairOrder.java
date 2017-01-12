@@ -1,18 +1,27 @@
 package kr.or.dgit.bigdata.project.hairshop.ui;
 
-import javax.swing.JPanel;
+import java.awt.Color;
 import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import java.sql.Time;
+import java.util.Date;
+import java.util.List;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import java.awt.Color;
-import javax.swing.border.TitledBorder;
-import javax.swing.UIManager;
-import javax.swing.DefaultComboBoxModel;
+
+import org.apache.log4j.lf5.util.DateFormatManager;
+
+import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
+import kr.or.dgit.bigdata.project.hairshop.dto.HairEvent;
+import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
+import kr.or.dgit.bigdata.project.hairshop.service.BizService;
+import kr.or.dgit.bigdata.project.hairshop.service.HairEventService;
+import kr.or.dgit.bigdata.project.hairshop.service.HairinfoService;
 
 public class HairOrder extends JPanel {
 	private JTextField tfBNo;
@@ -25,8 +34,10 @@ public class HairOrder extends JPanel {
 	private JTextField tfEDiscount;
 	private JTextField tfENo;
 	private JTextField tfTotal;
-	String[] eventArr = {"기획", "생일", "일반", "조조"};
+	 String[] eventArr = {"기획", "생일", "일반", "조조"};
 	String[] hairArr = {"커트", "드라이", "샴푸", "펌", "매직", "트리트먼트", "앰플", "기타"};
+	private JComboBox cmbHName;
+	private JComboBox cmbEName;
 
 	/**
 	 * Create the panel.
@@ -71,6 +82,7 @@ public class HairOrder extends JPanel {
 		add(lblCName);
 		
 		tfCName = new JTextField();
+		tfCName.setEditable(false);
 		add(tfCName);
 		tfCName.setColumns(10);
 		
@@ -79,6 +91,7 @@ public class HairOrder extends JPanel {
 		add(lblCNO);
 		
 		tfCNo = new JTextField();
+		tfCNo.setEditable(false);
 		add(tfCNo);
 		tfCNo.setColumns(10);
 		
@@ -86,7 +99,7 @@ public class HairOrder extends JPanel {
 		lblHName.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblHName);
 		
-		JComboBox cmbHName = new JComboBox();
+		cmbHName = new JComboBox();
 		cmbHName.setModel(new DefaultComboBoxModel(hairArr));
 		add(cmbHName);
 		
@@ -116,7 +129,7 @@ public class HairOrder extends JPanel {
 		lblEName.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblEName);
 		
-		JComboBox cmbEName = new JComboBox();
+		cmbEName = new JComboBox();
 		cmbEName.setModel(new DefaultComboBoxModel(eventArr));
 		add(cmbEName);
 		
@@ -143,7 +156,42 @@ public class HairOrder extends JPanel {
 		tfTotal = new JTextField();
 		add(tfTotal);
 		tfTotal.setColumns(10);
-
+		
+		
 	}
-
+	public void setTxtInOrder(int cNo, String cName){
+		tfCNo.setText(cNo+"");
+		tfCName.setText(cName);
+		
+		List<Biz> bList = BizService.getInstance().selectAllBiz();
+		int bNo = bList.size()+1;
+		tfBNo.setText(bNo+"");
+		DateFormatManager dfm = new DateFormatManager("yyyy-MM-dd");
+		Date nowDate = new Date(); 		
+		tfBDate.setText(dfm.format(nowDate));
+		Time nowTime =new Time(nowDate.getTime());
+		tfBTime.setText(nowTime.toString());
+		
+		int hNo = cmbHName.getSelectedIndex()+1;
+		Hairinfo h =  new Hairinfo(hNo);
+		Hairinfo tempH = HairinfoService.getInstance().selectHairInfoByNo(h);
+		
+		tfHNo.setText(hNo+"");
+		tfHPrice.setText(tempH.toString());
+		
+		
+		int eNo = cmbEName.getSelectedIndex()+1;
+		HairEvent he = new HairEvent(eNo);
+		HairEvent tempHe = HairEventService.getInstance().selectEventByNo(he);
+		
+		tfEDiscount.setText(tempHe.toString());
+		tfENo.setText(eNo+"");
+		
+		double totalPrice = Integer.parseInt(tempH.toString())*(1-Double.parseDouble(tempHe.toString()));
+		int tp = (int)totalPrice;
+		//h.hPrice*(1-e.eDiscount)
+		tfTotal.setText(tp+"");
+		
+	}
+	
 }
