@@ -1,34 +1,27 @@
 package kr.or.dgit.bigdata.project.hairshop.ui;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
-import kr.or.dgit.bigdata.project.hairshop.main.HairMain;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
-import javax.swing.ListSelectionModel;
 
 public class CustomerSearch extends JPanel {
 	private JTable table;

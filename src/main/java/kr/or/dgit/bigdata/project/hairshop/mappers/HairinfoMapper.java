@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import kr.or.dgit.bigdata.project.hairshop.dto.HairEvent;
 import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
 
 public interface HairinfoMapper {

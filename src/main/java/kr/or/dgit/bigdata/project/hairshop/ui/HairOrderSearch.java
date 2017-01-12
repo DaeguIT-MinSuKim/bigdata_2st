@@ -1,14 +1,15 @@
 package kr.or.dgit.bigdata.project.hairshop.ui;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JScrollPane;
 import java.awt.GridLayout;
+
 import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 public class HairOrderSearch extends JPanel {
 	private JTextField txtName;

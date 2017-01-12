@@ -8,9 +8,7 @@ import java.sql.SQLException;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 
-import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.dto.HairEvent;
-import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
 
 public class HairEventTypeHandler extends BaseTypeHandler<HairEvent> {
 

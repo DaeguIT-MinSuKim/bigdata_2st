@@ -1,4 +1,4 @@
-package kr.or.dgit.bigdata.project.hairshop.test;
+package kr.or.dgit.bigdata.project.hairshop.list;
 
 import java.awt.BorderLayout;
 
@@ -6,10 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
-import kr.or.dgit.bigdata.project.hairshop.list.ReportTable;
-
 public class BizReportPanel extends JPanel {
-	private ReportTable resTable;
+	private BizReportTable resTable;
 
 	/**
 	 * Create the panel.
@@ -23,7 +21,7 @@ public class BizReportPanel extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane);
 		
-		resTable = new ReportTable();
+		resTable = new BizReportTable();
 		scrollPane.setViewportView(resTable);
 		
 		if(!title.equals("월별")){

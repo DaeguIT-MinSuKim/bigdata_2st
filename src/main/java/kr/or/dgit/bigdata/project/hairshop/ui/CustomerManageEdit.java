@@ -1,17 +1,15 @@
 package kr.or.dgit.bigdata.project.hairshop.ui;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import java.awt.GridLayout;
+
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
+import javax.swing.table.DefaultTableModel;
 
 public class CustomerManageEdit extends JPanel {
 	private JTextField txtCno;

@@ -1,21 +1,18 @@
-package kr.or.dgit.bigdata.project.hairshop.test;
+package kr.or.dgit.bigdata.project.hairshop.list;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
-import kr.or.dgit.bigdata.project.hairshop.list.BiztList;
+public class CustomerHairInfoPanel extends JPanel {
 
-public class HairInfoPanel extends JPanel {
+	private CustomerHairTable table;
 
-	private BiztList table;
-
-	public BiztList getTable() {
+	public CustomerHairTable getTable() {
 		return table;
 	}
 
@@ -23,7 +20,7 @@ public class HairInfoPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public HairInfoPanel() {
+	public CustomerHairInfoPanel() {
 		setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uD5E4\uC5B4 \uC815\uBCF4", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		
 		setLayout(new BorderLayout(0, 0));
@@ -31,7 +28,7 @@ public class HairInfoPanel extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane);
 		
-		table = new BiztList();
+		table = new CustomerHairTable();
 		scrollPane.setViewportView(table);
 	}
 	

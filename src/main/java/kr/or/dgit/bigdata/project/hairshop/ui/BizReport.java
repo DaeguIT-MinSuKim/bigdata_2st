@@ -7,18 +7,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
-import kr.or.dgit.bigdata.project.hairshop.test.BIzSearchTest;
-import kr.or.dgit.bigdata.project.hairshop.test.BizReportPanel;
-import kr.or.dgit.bigdata.project.hairshop.test.CustomerHairinfo;
-import kr.or.dgit.bigdata.project.hairshop.test.HairInfoPanel;
-import javax.swing.JComboBox;
+import kr.or.dgit.bigdata.project.hairshop.list.BizReportPanel;
+import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairInfoPanel;
+import kr.or.dgit.bigdata.project.hairshop.list.SearchTermPanel;
 
 public class BizReport extends JPanel implements ActionListener {
-
+	/* main 화면 영업현황 tab 선택시 나타날 메인 화면 */
 	private JPanel pnBizListMain;
 	private JPanel pnBizListBtns;
 	private JButton btnDate;
@@ -88,8 +86,8 @@ public class BizReport extends JPanel implements ActionListener {
 	}
 	protected void btnDateActionPerformed(ActionEvent e) {
 		pnBizListMain.removeAll();
-		BIzSearchTest pSearchDate = new BIzSearchTest();
-		HairInfoPanel pHairInfo = new HairInfoPanel();
+		SearchTermPanel pSearchDate = new SearchTermPanel();
+		CustomerHairInfoPanel pHairInfo = new CustomerHairInfoPanel();
 		pSearchDate.setResPanel(pHairInfo);
 		pnBizListMain.add(pSearchDate, BorderLayout.NORTH);
 		pnBizListMain.add(pHairInfo, BorderLayout.CENTER);
@@ -129,16 +127,7 @@ public class BizReport extends JPanel implements ActionListener {
 		repaint();
 	}
 	protected void btnToMain4ActionPerformed(ActionEvent e) {
-		pnBizListMain.removeAll();
-		CustomerHairinfo chi = new CustomerHairinfo();		
-		HairInfoPanel hip = new HairInfoPanel();
-		chi.setHairInfoPanel(hip);
-		chi.setTextFields(CustomerService.getInstance().searchCustomerByNo(2));
-		
-		pnBizListMain.add(chi, BorderLayout.NORTH);
-		pnBizListMain.add(hip, BorderLayout.CENTER);
-		revalidate();
-		repaint();
+		/* main 화면으로 돌아가는 메소드. 향후 추가 예정 */
 	}
 	protected void btnSearchActionPerformed(ActionEvent e) {
 		int year = (int) cmbYear.getSelectedItem();

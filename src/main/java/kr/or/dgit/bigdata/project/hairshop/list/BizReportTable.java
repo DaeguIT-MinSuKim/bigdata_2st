@@ -11,14 +11,13 @@ import javax.swing.table.DefaultTableModel;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
-import kr.or.dgit.bigdata.project.hairshop.ui.BizReport;
 
 @SuppressWarnings("serial")
-public class ReportTable extends JTable {
+public class BizReportTable extends JTable {
 	Calendar cal = Calendar.getInstance();
 	final int THISYEAR = cal.get(Calendar.YEAR);// 올해
 
-	public ReportTable() {}
+	public BizReportTable() {}
 
 	public void setTableWithData(String listBy) {
 		setModel(new DefaultTableModel(getDatas(listBy, 0), getColumnNames()));		
@@ -30,10 +29,10 @@ public class ReportTable extends JTable {
 		setTableWidthAlignment();
 	}
 	private void setTableWidthAlignment() {
-		AbstractList.setTable(this);
-		AbstractList.tableCellAlignment(SwingConstants.CENTER, 0,1,2,3,4);
-		AbstractList.tableCellAlignment(SwingConstants.RIGHT, 5);
-		AbstractList.tableSetWidth(100,300,200,200,200,400);		
+		TableForm.setTable(this);
+		TableForm.tableCellAlignment(SwingConstants.CENTER, 0,1,2,3,4);
+		TableForm.tableCellAlignment(SwingConstants.RIGHT, 5);
+		TableForm.tableSetWidth(100,300,200,200,200,400);		
 	}
 	private String[][] getDatas(String listBy, int year) {				
 		/* 월별 조회를 선택할 시  월별로 데이터 정렬하는 메소드  - 년도별과 깔끔하게 메소드 합칠 수 있는 방법 있으면 알려주세요! by. 이유진 */

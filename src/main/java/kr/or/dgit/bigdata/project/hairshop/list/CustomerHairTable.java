@@ -1,8 +1,5 @@
 package kr.or.dgit.bigdata.project.hairshop.list;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JTable;
@@ -14,9 +11,9 @@ import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
 
 @SuppressWarnings("serial")
-public class BiztList extends JTable {	
+public class CustomerHairTable extends JTable {	
 	/* 헤어 검색이나 고객헤어정보 panel에서 table 사용 할 때 */
-	public BiztList() {}
+	public CustomerHairTable() {}
 	
 	public void setTableWithData(Customer customer) {
 		setModel(new DefaultTableModel(getDatas(customer), getColumnNames()));
@@ -24,10 +21,10 @@ public class BiztList extends JTable {
 	}
 	
 	private void setTableWidthAlignment() {
-		AbstractList.setTable(this);
-		AbstractList.tableCellAlignment(SwingConstants.CENTER, 0,1,2,4);
-		AbstractList.tableCellAlignment(SwingConstants.RIGHT, 3,5);
-		AbstractList.tableSetWidth(100,300,200,400,200,400);		
+		TableForm.setTable(this);
+		TableForm.tableCellAlignment(SwingConstants.CENTER, 0,1,2,4);
+		TableForm.tableCellAlignment(SwingConstants.RIGHT, 3,5);
+		TableForm.tableSetWidth(100,300,200,400,200,400);		
 	}
 
 	public void setTableWithData(String startDate, String endDate) {
@@ -43,7 +40,7 @@ public class BiztList extends JTable {
 			Datas[i]=  list.get(i).toArray(false);
 		}
 		if(!list.isEmpty()){
-			String[] tList = ReportTable.getcntSumIntValue(startDate, endDate);
+			String[] tList = BizReportTable.getcntSumIntValue(startDate, endDate);
 			Datas[list.size()] = new String[]{"","","","","총 금액  : ",tList[1]};
 		}
 		return Datas;		

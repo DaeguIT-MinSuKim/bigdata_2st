@@ -1,6 +1,5 @@
 package kr.or.dgit.bigdata.project.hairshop;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -9,13 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
-import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
-import kr.or.dgit.bigdata.project.hairshop.dto.HairEvent;
-import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
-import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
-import kr.or.dgit.bigdata.project.hairshop.service.HairEventService;
-import kr.or.dgit.bigdata.project.hairshop.service.HairinfoService;
 
 public class BizServiceTest {
 	private static BizService bizService;

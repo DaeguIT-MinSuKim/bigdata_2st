@@ -17,8 +17,10 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
+import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairInfoPanel;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizReport;
-import kr.or.dgit.bigdata.project.hairshop.ui.CustomDialog;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
@@ -47,14 +49,9 @@ public class HairMain extends JFrame {
 	private HairOrderSearch pnOrderListMain;
 	private JPanel pnOrderListBtns;
 	private JButton btnToMain3;
-	private JPanel pnBizListMain;
-	private JPanel pnBizListBtns;
-	private JButton btnDate;
-	private JButton btnMonth;
+	private BizReport pnBizListMain;
 	private JPanel pnBizGraphMain;
 	private JButton btnSave;
-	private JButton btnYear;
-	private JButton btnToMain4;
 	private JButton btnHairInfo;
 	private CustomerSearch pnSearchSub;
 	private CustomerManageInsert pnCusAdd;
@@ -65,6 +62,8 @@ public class HairMain extends JFrame {
 	private String dob;
 	private String doJoin;
 	private String phone;
+	private JTable tableInSearch;
+	private CustomerHairInfoPanel hip;
 
 	/**
 	 * Launch the application.
@@ -124,8 +123,7 @@ public class HairMain extends JFrame {
 		pnSearchSub = new CustomerSearch();		
 		
 		pnCusSearchCards.add(pnSearchSub, "name_1666323161344197");		
-		// table 관련 이벤트 독립
-		JTable tableInSearch = pnSearchSub.getTable();
+		tableInSearch = pnSearchSub.getTable();
 		tableInSearch.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
@@ -155,6 +153,7 @@ public class HairMain extends JFrame {
 				case 3:
 					tabbedPane.setEnabledAt(3, true);
 					tabbedPane.setSelectedComponent(pnOrderList);
+					hip.getTable().setTableWithData(new Customer(cNo));	// 넘겨받은 고객번호로 검색한 데이터를 table에 넣는 메소드 ver.이유진
 					break;
 				default:
 					break;
@@ -243,6 +242,9 @@ public class HairMain extends JFrame {
 		pnOrderListMain = new HairOrderSearch();
 		pnOrderListMain.setBackground(new Color(255, 192, 203));
 		pnOrderList.add(pnOrderListMain, BorderLayout.CENTER);
+		/* 고객 헤어 정보를  보여줄 table을 담고있는 패널 ver.이유진*/
+		hip = new CustomerHairInfoPanel();
+		pnOrderListMain.add(hip, BorderLayout.CENTER);
 		
 		pnOrderListBtns = new JPanel();
 		pnOrderListBtns.setBorder(new EmptyBorder(10, 30, 10, 10));
@@ -255,39 +257,13 @@ public class HairMain extends JFrame {
 		pnOrderListBtns.add(btnToMain3);
 		
 		pnBizList = new JPanel();
-		pnBizList.setLayout(new BorderLayout(0,0));
 		tabbedPane.addTab("영업현황", null, pnBizList, null);
-		BizReport brPanel = new BizReport();
-		pnBizList.add(brPanel, BorderLayout.CENTER);
-		
 		pnBizList.setToolTipText("날짜, 월별 ,연도별 영업현황이 나타납니다.");
 		pnBizList.setLayout(new BorderLayout(0, 0));
-		
-		pnBizListMain = new JPanel();
+		/* 영업현황 패널 ver.이유진*/
+		pnBizListMain = new BizReport();
 		pnBizListMain.setBackground(new Color(255, 192, 203));
 		pnBizList.add(pnBizListMain, BorderLayout.CENTER);
-		
-		pnBizListBtns = new JPanel();
-		pnBizListBtns.setBorder(new EmptyBorder(10, 30, 10, 10));
-		pnBizListBtns.setBackground(Color.PINK);
-		pnBizList.add(pnBizListBtns, BorderLayout.EAST);
-		pnBizListBtns.setLayout(new GridLayout(4, 0, 0, 20));
-		
-		btnDate = new JButton("기간별");
-		btnDate.setBackground(new Color(248, 248, 255));
-		pnBizListBtns.add(btnDate);
-		
-		btnMonth = new JButton("월별");
-		btnMonth.setBackground(new Color(248, 248, 255));
-		pnBizListBtns.add(btnMonth);
-		
-		btnYear = new JButton("연도별");
-		btnYear.setBackground(new Color(248, 248, 255));
-		pnBizListBtns.add(btnYear);
-		
-		btnToMain4 = new JButton("메인화면");
-		btnToMain4.setBackground(new Color(248, 248, 255));
-		pnBizListBtns.add(btnToMain4);
 		
 		pnBizGraph = new JPanel();
 		tabbedPane.addTab("영업그래프", null, pnBizGraph, null);

@@ -1,4 +1,4 @@
-package kr.or.dgit.bigdata.project.hairshop.test;
+package kr.or.dgit.bigdata.project.hairshop.list;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,33 +14,31 @@ import javax.swing.SwingConstants;
 
 import org.apache.log4j.lf5.util.DateFormatManager;
 
-import kr.or.dgit.bigdata.project.hairshop.list.BiztList;
-
-public class BIzSearchTest extends JPanel implements ActionListener {
+public class SearchTermPanel extends JPanel implements ActionListener {
 	/* FIELDS */
 	private JTextField tfStartDate;
 	private JTextField tfEndDate;
 	private JButton btnSearch;
-	private HairInfoPanel resPanel;
+	private CustomerHairInfoPanel resPanel;
 	private JComboBox<Integer> comboBox;
 	private JButton btnOk;
 	/* GET/SET */
-	public void setResPanel(HairInfoPanel resPanel) {
+	public void setResPanel(CustomerHairInfoPanel resPanel) {
 		this.resPanel = resPanel;
 	}
 
 	/* CONSTURUCTOR */
-	public BIzSearchTest() {
-		JLabel lblNewLabel = new JLabel("기간 검색");
-		add(lblNewLabel);
+	public SearchTermPanel() {
+		JLabel lblTitle = new JLabel("기간 검색");
+		add(lblTitle);
 		
 		tfStartDate = new JTextField();
 		add(tfStartDate);
 		tfStartDate.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("~");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblNewLabel_1);
+		JLabel lbltemp = new JLabel("~");
+		lbltemp.setHorizontalAlignment(SwingConstants.CENTER);
+		add(lbltemp);
 		
 		tfEndDate = new JTextField();
 		add(tfEndDate);
@@ -76,7 +74,7 @@ public class BIzSearchTest extends JPanel implements ActionListener {
 			JOptionPane.showMessageDialog(null, "검색범위가 불명확합니다.", "경고", JOptionPane.WARNING_MESSAGE);
 			return;
 		}		
-		((BiztList)resPanel.getTable()).setTableWithData(startDate, endDate);
+		((CustomerHairTable)resPanel.getTable()).setTableWithData(startDate, endDate);
 	}
 
 	private boolean isVailable(String startDate, String endDate) {

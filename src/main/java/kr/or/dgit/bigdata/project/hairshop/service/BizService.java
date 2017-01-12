@@ -1,6 +1,5 @@
 package kr.or.dgit.bigdata.project.hairshop.service;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -8,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
-import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.mappers.BizMapper;
 import kr.or.dgit.bigdata.project.hairshop.util.MyBatisSqlSessionFactory;
 
