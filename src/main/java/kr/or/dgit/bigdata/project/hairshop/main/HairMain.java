@@ -115,6 +115,10 @@ public class HairMain extends JFrame {
 		pnCusSearch.add(pnCusSearchCards, BorderLayout.CENTER);
 		pnCusSearchCards.setLayout(new CardLayout(0, 0));
 		
+
+		
+		
+		
 		pnSearchSub = new CustomerSearch();		
 		
 		pnCusSearchCards.add(pnSearchSub, "name_1666323161344197");		
@@ -137,13 +141,16 @@ public class HairMain extends JFrame {
 				if (jopBtnIndex == 0) {
 					CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
 			        cl.show(pnCusSearchCards, "name_1666378783739869");
+			        jopBtnIndex = 4;
 				}
+				// 수정 패널에 setTxt
+				pnCusEdit.setTxtInCusEdit(cNo, cName, dob, doJoin, phone);
+				
 				
 			}
 		
 		
 		});
-		
 		
 		pnCusAdd = new CustomerManageInsert();
 		pnCusSearchCards.add(pnCusAdd, "name_1666358524774753");

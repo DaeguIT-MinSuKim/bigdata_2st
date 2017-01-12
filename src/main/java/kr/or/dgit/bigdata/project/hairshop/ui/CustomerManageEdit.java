@@ -43,6 +43,7 @@ public class CustomerManageEdit extends JPanel {
 		pnInsert.add(lblCno);
 		
 		txtCno = new JTextField();
+		txtCno.setEditable(false);
 		pnInsert.add(txtCno);
 		txtCno.setColumns(10);
 		
