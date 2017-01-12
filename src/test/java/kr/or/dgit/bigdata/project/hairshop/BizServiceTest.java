@@ -1,5 +1,6 @@
 package kr.or.dgit.bigdata.project.hairshop;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -57,7 +58,7 @@ public class BizServiceTest {
 			System.out.println(b);
 		}
 	}
-	*/
+
 	@Test
 	public void testSelectAllBiz() {
 		List<Biz> bList = BizService.getInstance().selectAllBiz();
@@ -76,6 +77,16 @@ public class BizServiceTest {
 			System.out.println(b);
 		}
 	}
+		*/
+	/*@Test
+	public void testSelectCountTotalFrombiz() {
+		List<Biz> bList = bizService.selectCountTotalFrombiz();
+		Assert.assertNotNull(bList);
+		
+		System.out.println(bList.toString());
+		
+	}*/
+	
 	/*
 	@Test
 	public void testSelectYearOrMonthFromBizCalTotal() {		
@@ -99,4 +110,39 @@ public class BizServiceTest {
 		
 	}
 	*/
+	
+/*	@Test
+	public void testSelectCountTotalCustomer() {
+		int tCus = BizService.getInstance().selectCountTotalCustomer();
+		Assert.assertNotNull(tCus);
+		System.out.println(tCus);
+		
+	}
+	
+	@Test
+	public void testSelectCountTotalBiz() {
+		int tBiz = BizService.getInstance().selectCountTotalBiz();
+		Assert.assertNotNull(tBiz);
+		System.out.println(tBiz);
+		
+	}
+	
+	@Test
+	public void testSelectCountTotalPrice() {
+		int tPrice = BizService.getInstance().selectCountTotalPrice();
+		Assert.assertNotNull(tPrice);
+		System.out.println(tPrice);
+		
+	}*/
+	
+	@Test
+	public void testSelectCountTotalEachHairBiz() {
+		int hairType = BizService.getInstance().selectCountTotalEachHairBiz(1);
+		Assert.assertNotNull(hairType);
+		System.out.println(hairType);
+		
+	}
+
+	
+	
 }

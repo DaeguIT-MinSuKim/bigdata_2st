@@ -30,6 +30,8 @@ public class BizService {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	
 	public List<Biz> selectBizAndHairInfoEvent() {
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectBizAndHairInfoEvent() - start");
@@ -44,6 +46,8 @@ public class BizService {
 		}
 		
 	}
+	
+	
 	
 	public List<Biz> selectBizAndHairInfoEventByDate(Biz biz) {
 		if (logger.isDebugEnabled()) {
@@ -146,4 +150,83 @@ public class BizService {
 		}
 		
 	}
+	
+	public List<Integer> selectCountTotalFrombizToInteger() {
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectCountTotalFrombiz() - start");
+		}
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
+			return bizMapper.selectCountTotalFrombizToInteger();
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
+	
+	
+	
+	public int selectCountTotalCustomer(){
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectCountTotalCustomer() - start");
+		}	
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
+			return bizMapper.selectCountTotalCustomer();
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
+	
+	public int selectCountTotalBiz(){
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectCountTotalBiz() - start");
+		}	
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
+			return bizMapper.selectCountTotalBiz();
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
+	
+	public int selectCountTotalPrice(){
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectCountTotalPrice() - start");
+		}	
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
+			return bizMapper.selectCountTotalPrice();
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
+	
+	public int selectCountTotalEachHairBiz(int hNo){
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectCountTotalEachHairBiz() - start");
+		}	
+		
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
+			return bizMapper.selectCountTotalEachHairBiz(hNo);
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
+	
+	
 }

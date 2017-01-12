@@ -30,6 +30,20 @@ public interface BizMapper {
 	public HashMap<String, Integer> selectYearOrMonthFromBizCalTotal(String startDate, String endDate);
 	
 	public List<Biz> selectAllBiz();
-
+	
+	@Select("select (select count(*) from hairshop.customer tc where tc.cDel = false) as totalCustomer, count(b.bNo) as totalBiz, sum(h.hPrice*(1-e.eDiscount)) as totalMoney from hairshop.biz b left outer join hairshop.hairinfo h on b.hNo = h.hNo left outer join hairshop.customer c on b.cNo = c.cNo left outer join hairshop.event e on b.eNo = e.eNo")
+	public List<Integer> selectCountTotalFrombizToInteger();
+	
+	@Select("select count(cName) from hairshop.customer tc where tc.cDel = false")
+	public int selectCountTotalCustomer();
+		
+	@Select("select count(bNo) from hairshop.biz")
+	public int selectCountTotalBiz();
+	
+	@Select("select sum(h.hPrice*(1-e.eDiscount)) from hairshop.biz b left outer join hairshop.hairinfo h on b.hNo = h.hNo left outer join hairshop.customer c on b.cNo = c.cNo left outer join hairshop.event e on b.eNo = e.eNo")
+	public int selectCountTotalPrice();
+	
+	@Select("select count(hNo) from hairshop.biz where hNo=#{hNo}")
+	public int selectCountTotalEachHairBiz(int hNo);
 }
       

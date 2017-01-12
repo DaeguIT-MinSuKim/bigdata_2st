@@ -12,10 +12,16 @@ import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.Color;
 import javax.swing.JScrollPane;
-import kr.or.dgit.bigdata.project.hairshop.graph.BizGraph3;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import java.awt.Dimension;
+import kr.or.dgit.bigdata.project.hairshop.graph.ChartPanelP;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import kr.or.dgit.bigdata.project.hairshop.ui.BizHairTotalReport;
+import kr.or.dgit.bigdata.project.hairshop.ui.BizHairTotalReport;
 
 public class TestHairMain extends JFrame {
 
@@ -47,8 +53,14 @@ public class TestHairMain extends JFrame {
 	private JButton btnYear;
 	private JButton btnToMain4;
 	private JButton btnHairInfo;
-	private JPanel pnBizGraphMain;
-	private BizGraph3 chartPanel;
+	private ChartPanelP panel;
+	private JFreeChart chart;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private BizHairTotalReport panel_1;
 
 	/**
 	 * Launch the application.
@@ -209,16 +221,16 @@ public class TestHairMain extends JFrame {
 		pnBizGraph = new JPanel();
 		tabbedPane.addTab("영업그래프", null, pnBizGraph, null);
 		pnBizGraph.setToolTipText("영업 현황 통계 그래프가 나타납니다.");
-		pnBizGraph.setLayout(new BorderLayout(0, 0));
+		pnBizGraph.setLayout(null);
 		
-		pnBizGraphMain = new JPanel();
-		pnBizGraph.add(pnBizGraphMain, BorderLayout.CENTER);
-		pnBizGraphMain.setLayout(new BorderLayout(0, 0));
+		panel_1 = new BizHairTotalReport();
+		panel_1.setBounds(195, 12, 690, 171);
+		pnBizGraph.add(panel_1);
 		
-		chartPanel = new BizGraph3((String) null, (String) null);
-		chartPanel.setPreferredSize(new Dimension(560, 367));
-		pnBizGraphMain.add(chartPanel);
+		panel = new ChartPanelP(chart);
+		panel.setBounds(195, 195, 690, 430);
+		pnBizGraph.add(panel);
+				
 
 	}
-
 }
