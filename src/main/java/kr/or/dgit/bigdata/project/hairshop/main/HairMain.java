@@ -13,12 +13,17 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
-
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizReport;
+import kr.or.dgit.bigdata.project.hairshop.ui.CustomDialog;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
+import kr.or.dgit.bigdata.project.hairshop.ui.HairOrder;
+import kr.or.dgit.bigdata.project.hairshop.ui.HairOrderSearch;
 
 public class HairMain extends JFrame {
 
@@ -35,11 +40,11 @@ public class HairMain extends JFrame {
 	private JPanel pnCusSearchBtns;
 	private JButton btnAdd;
 	private JButton btnToMain1;
-	private JPanel pnHairOderMain;
+	private HairOrder pnHairOderMain;
 	private JPanel pnHairOderBtns;
 	private JButton btnOrder;
 	private JButton btnToMain2;
-	private JPanel pnOrderListMain;
+	private HairOrderSearch pnOrderListMain;
 	private JPanel pnOrderListBtns;
 	private JButton btnToMain3;
 	private JPanel pnBizListMain;
@@ -55,7 +60,11 @@ public class HairMain extends JFrame {
 	private CustomerManageInsert pnCusAdd;
 	private CustomerManageEdit pnCusEdit;
 	private JButton btnSearch;	
-	private int jopBtnIndex=4;
+	private int cNo;
+	private String cName;
+	private String dob;
+	private String doJoin;
+	private String phone;
 
 	/**
 	 * Launch the application.
@@ -108,9 +117,56 @@ public class HairMain extends JFrame {
 		pnCusSearch.add(pnCusSearchCards, BorderLayout.CENTER);
 		pnCusSearchCards.setLayout(new CardLayout(0, 0));
 		
+
+		
+		
+		
 		pnSearchSub = new CustomerSearch();		
 		
-		pnCusSearchCards.add(pnSearchSub, "name_1666323161344197");
+		pnCusSearchCards.add(pnSearchSub, "name_1666323161344197");		
+		// table 관련 이벤트 독립
+		JTable tableInSearch = pnSearchSub.getTable();
+		tableInSearch.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				
+				cNo = Integer.parseInt(tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 0).toString()); // 선택한 열의 0번째 인덱스 행을 출력
+				cName = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 1).toString();
+				dob = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 2).toString();
+				doJoin = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 3).toString();
+				phone = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 4).toString();
+				Object[] options ={"수정","삭제","주문","헤어정보"};
+				
+				int jopBtnIndex = JOptionPane.showOptionDialog(null, cName+"["+dob+", "+phone+"]", "회원 관리", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, null, options, options[3]);
+				
+				switch (jopBtnIndex) {
+				case 0:		
+					System.out.println("JOptionPane btn index: "+jopBtnIndex);
+					CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
+			        cl.show(pnCusSearchCards, "name_1666378783739869");
+					break;
+				case 1:
+					
+					break;
+				case 2:
+					tabbedPane.setSelectedComponent(pnHairOder);
+					break;
+				case 3:
+					tabbedPane.setEnabledAt(3, true);
+					tabbedPane.setSelectedComponent(pnOrderList);
+					break;
+				default:
+					break;
+				}
+				// 각각 해당 패널에 setTxt 
+				pnCusEdit.setTxtInCusEdit(cNo, cName, dob, doJoin, phone);
+				pnOrderListMain.setTxtInHairIfo(cNo, cName, dob);
+				
+			}
+		
+		
+		});
 		
 		pnCusAdd = new CustomerManageInsert();
 		pnCusSearchCards.add(pnCusAdd, "name_1666358524774753");
@@ -155,7 +211,7 @@ public class HairMain extends JFrame {
 		pnHairOder.setToolTipText("헤어주문");
 		pnHairOder.setLayout(new BorderLayout(0, 0));
 		
-		pnHairOderMain = new JPanel();
+		pnHairOderMain = new HairOrder();
 		pnHairOderMain.setBackground(new Color(255, 192, 203));
 		pnHairOder.add(pnHairOderMain, BorderLayout.CENTER);
 		
@@ -180,11 +236,11 @@ public class HairMain extends JFrame {
 		
 		pnOrderList = new JPanel();
 		tabbedPane.addTab("헤어주문검색", null, pnOrderList, null);
-		tabbedPane.setEnabledAt(3, false); // 고객 검색 후 true로 활성화
+		tabbedPane.setEnabledAt(3, false); // true로 바꾸면 활성화
 		pnOrderList.setToolTipText("고객의 헤어주문내역이 나타납니다.");
 		pnOrderList.setLayout(new BorderLayout(0, 0));
 		
-		pnOrderListMain = new JPanel();
+		pnOrderListMain = new HairOrderSearch();
 		pnOrderListMain.setBackground(new Color(255, 192, 203));
 		pnOrderList.add(pnOrderListMain, BorderLayout.CENTER);
 		
@@ -203,7 +259,7 @@ public class HairMain extends JFrame {
 		tabbedPane.addTab("영업현황", null, pnBizList, null);
 		BizReport brPanel = new BizReport();
 		pnBizList.add(brPanel, BorderLayout.CENTER);
-		/*
+		
 		pnBizList.setToolTipText("날짜, 월별 ,연도별 영업현황이 나타납니다.");
 		pnBizList.setLayout(new BorderLayout(0, 0));
 		
@@ -232,7 +288,7 @@ public class HairMain extends JFrame {
 		btnToMain4 = new JButton("메인화면");
 		btnToMain4.setBackground(new Color(248, 248, 255));
 		pnBizListBtns.add(btnToMain4);
-		*/
+		
 		pnBizGraph = new JPanel();
 		tabbedPane.addTab("영업그래프", null, pnBizGraph, null);
 		pnBizGraph.setToolTipText("영업 현황 통계 그래프가 나타납니다.");
@@ -265,34 +321,6 @@ public class HairMain extends JFrame {
         cl.show(pnCusSearchCards, "name_1666323161344197");
 	}
 	
-	public void editCustomerInfo(String cName, String dob, String phone) { // 수정 및 주문 등 버튼 들어간 JOptionPane 설정
-		Object[] options ={"수정","삭제","주문","헤어정보"};
-		
-		jopBtnIndex = JOptionPane.showOptionDialog(null, cName+"["+dob+", "+phone+"]", "회원 관리", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, null, options, options[3]);
-		
-		if (jopBtnIndex == 0) {
-			CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
-	        cl.show(pnCusSearchCards, "name_1666378783739869");
-		}
-		
-		/*switch (jopBtnIndex) {
-		case 0:		
-			System.out.println("JOptionPane btn index: "+jopBtnIndex);
-			CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
-	        cl.show(pnCusSearchCards, "name_1666378783739869");
-			break;
-		case 1:
-			
-			break;
-		case 2:
-			
-			break;
-		case 3:
-			
-			break;
-		default:
-			break;
-		}*/
-		
-	}
+	
+	
 }

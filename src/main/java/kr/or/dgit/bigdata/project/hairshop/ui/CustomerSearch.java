@@ -81,25 +81,7 @@ public class CustomerSearch extends JPanel {
 						"고객 번호", "고객명", "생년월일", "가입일자", "전화번호" 
 				}
 			));
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				
-				cNo = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()); // 선택한 열의 0번째 인덱스 행을 출력
-				cName = table.getValueAt(table.getSelectedRow(), 1).toString();
-				dob = table.getValueAt(table.getSelectedRow(), 2).toString();
-				doJoin = table.getValueAt(table.getSelectedRow(), 3).toString();
-				phone = table.getValueAt(table.getSelectedRow(), 4).toString();
-				
-				HairMain hm = new HairMain();
-				hm.editCustomerInfo(cName, dob, phone);
-				
-				//editCustomerInfo();
-			}
-
-			
-		});
+		
 		scrollPane.setViewportView(table);
 		
 		
@@ -189,42 +171,23 @@ public class CustomerSearch extends JPanel {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}	
+	}		
 
-	/*	public int getJopBtnIndex() {
-		return jopBtnIndex;
+	public JTable getTable() {
+		return table;
 	}
 
-	public void setJopBtnIndex(int jopBtnIndex) {
-		this.jopBtnIndex = jopBtnIndex;
+	public void setTable(JTable table) {
+		this.table = table;
 	}
 
-	private void editCustomerInfo() { // 수정 및 주문 등 버튼 들어간 JOptionPane 설정
-		Object[] options ={"수정","삭제","주문","헤어정보"};
-		
-		jopBtnIndex = JOptionPane.showOptionDialog(null, cName+"["+dob+", "+phone+"]", "회원 관리", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, null, options, options[3]);
-		System.out.println("JOptionPane btn index: "+jopBtnIndex);
-		
-		
-		HairMain hm = new HairMain();
-		switch (jopBtnIndex) {
-		case 0:				
-			hm.setCl((CardLayout)(pnCusSearchCards.getLayout()));
-	        hm.getCl().show(pnCusSearchCards, "name_1666378783739869");
-	        jopBtnIndex=4;
-			break;
-		case 1:
-			
-			break;
-		case 2:
-			
-			break;
-		case 3:
-			
-			break;
-		default:
-			break;
-		}
-		
-	}*/
+	public JTextField getTxtSearch() {
+		return txtSearch;
+	}
+
+	public void setTxtSearch(JTextField txtSearch) {
+		this.txtSearch = txtSearch;
+	}
+	
+	
 }
