@@ -159,7 +159,7 @@ public class HairMain extends JFrame {
 				default:
 					break;
 				}
-				// 해당 패널에 setTxt
+				// 각각 해당 패널에 setTxt 
 				pnCusEdit.setTxtInCusEdit(cNo, cName, dob, doJoin, phone);
 				pnOrderListMain.setTxtInHairIfo(cNo, cName, dob);
 				
