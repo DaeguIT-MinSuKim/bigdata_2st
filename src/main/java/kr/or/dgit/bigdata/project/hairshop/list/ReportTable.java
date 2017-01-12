@@ -40,11 +40,16 @@ public class ReportTable extends JTable {
 					System.out.println(list.get(0).toString());
 				}					
 				if(!bList.isEmpty()){
-					HashMap<String,Integer> calList = BizService.getInstance().selectYearOrMonthFromBizCalTotal(startDate, endDate);
-					String[] sList = new String[]{"", i+"월 소계", "", "",calList.get("cnt")+"건" ,calList.get("sum")+"원"};
+					String[] tList = getcntSumIntValue(startDate, endDate);					
+					String[] sList = new String[]{"", i+"월 소계", "", "",tList[0] ,tList[1]};
 					list.add(sList);
 				}					
-			}				
+			}
+			if(!list.isEmpty()){
+				String[] tList = getcntSumIntValue(year+"-01-01", (year+1)+"01-01");	
+				String[] sList = new String[]{"", "", "", "","총 계 : " , tList[1]};
+				list.add(sList);
+			}
 			return setDatas(list);
 			
 		}else{
@@ -59,21 +64,35 @@ public class ReportTable extends JTable {
 					list.add(b.toArray(true));
 				}
 				if(!bList.isEmpty()){
-					HashMap<String,Integer> calList = BizService.getInstance().selectYearOrMonthFromBizCalTotal(startDate, endDate);
-					String[] sList = new String[]{"", i+"년 소계", "", "",calList.get("cnt")+"건" ,calList.get("sum")+"원"};
+					String[] tList = getcntSumIntValue(startDate, endDate);
+					String[] sList = new String[]{"", i+"년 소계", "", "",tList[0] ,tList[1]};
 					list.add(sList);
 				}
+			}
+			if(!list.isEmpty()){
+				String[] tList = getcntSumIntValue("1945-01-01", (THISYEAR+1)+"01-01");
+				String[] sList = new String[]{"", "", "", "","총 계 : " , tList[1]};
+				list.add(sList);
 			}
 			return setDatas(list);
 		}
 	}
 
+	public static String[] getcntSumIntValue(String startDate, String endDate) {
+		// DB에서 계산하여 넘어온 더블형의 값을 int로 변환
+		HashMap<String,Object> calList = BizService.getInstance().selectYearOrMonthFromBizCalTotal(startDate,endDate);
+		double dSum = (Double) calList.get("sum");
+		int iSum = (int)(dSum);
+		return new String[]{calList.get("cnt")+"건",String.format("%,d 원", iSum)};
+	}
+
 	private String[][] setDatas(ArrayList<Object> list) {
 		/* 월별/년도별 보고서 출력시 전제 ArrayList를 String 이중배열로 전환하는 메소드 */
 		String Datas[][] = new String[list.size()][];
+		
 		for(int i=0;i<list.size();i++){
 			Datas[i] = (String[]) list.get(i);
-		}
+		}		
 		return Datas;
 	}
 	

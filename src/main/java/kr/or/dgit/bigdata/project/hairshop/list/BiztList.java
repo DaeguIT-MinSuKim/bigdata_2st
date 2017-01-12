@@ -28,14 +28,16 @@ public class BiztList extends JTable {
 	private String[][] getDatas(String startDate, String endDate) {				
 		/* 보고서 출력이 아닌 기존 프로그램에서 영업관련 테이블이 필요한 경우 (isReport==false) */
 		List<Biz> list = BizService.getInstance().selectYearOrMonthFromBiz(startDate, endDate);
-		String[][] Datas = new String[list.size()][];
+		String[][] Datas = new String[list.size()+1][];
 		for(int i=0; i<list.size(); i++){
 			Datas[i]=  list.get(i).toArray(false);
 		}
-			return Datas;		
+		String[] tList = ReportTable.getcntSumIntValue(startDate, endDate);
+		Datas[list.size()] = new String[]{"","","","","총 금액  : ",tList[1]};
+	
+		return Datas;		
 	}
 	private String[][] getDatas(Customer customer) {				
-		/* 보고서 출력이 아닌 기존 프로그램에서 영업관련 테이블이 필요한 경우 (isReport==false) */
 		List<Biz> list = BizService.getInstance().selectFromBizByCustomer(customer.getcNo());
 		String[][] Datas = new String[list.size()][];
 		for(int i=0; i<list.size(); i++){

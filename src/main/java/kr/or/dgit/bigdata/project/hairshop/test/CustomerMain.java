@@ -40,7 +40,7 @@ public class CustomerMain extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		Customer customer = CustomerService.getInstance().searchCustomerByNo(3);
+		Customer customer = CustomerService.getInstance().searchCustomerByNo(1);
 		CustomerHairinfo panel = new CustomerHairinfo();
 		HairInfoPanel panel_1 = new HairInfoPanel();
 		panel.setHairInfoPanel(panel_1);

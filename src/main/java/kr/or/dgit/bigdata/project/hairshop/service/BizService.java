@@ -101,7 +101,7 @@ public class BizService {
 		}		
 	}	
 	
-	public HashMap<String, Integer> selectYearOrMonthFromBizCalTotal(String startDate, String endDate) {
+	public HashMap<String, Object> selectYearOrMonthFromBizCalTotal(String startDate, String endDate) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectYearOrMonthFromBizCalTotal() - start");
 		}
