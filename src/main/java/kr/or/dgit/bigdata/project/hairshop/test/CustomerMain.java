@@ -1,4 +1,4 @@
-package kr.or.dgit.bigdata.project.hairshop.main;
+package kr.or.dgit.bigdata.project.hairshop.test;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -6,9 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
+import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
+import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 
-public class TestCSearch extends JFrame {
+public class CustomerMain extends JFrame {
 
 	private JPanel contentPane;
 
@@ -19,8 +20,7 @@ public class TestCSearch extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TestCSearch frame = new TestCSearch();
-					frame.setBounds(100, 100, 1100, 700);
+					CustomerMain frame = new CustomerMain();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,17 +32,23 @@ public class TestCSearch extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TestCSearch() {
-		setResizable(false);
+	public CustomerMain() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1097, 724);
+		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		CustomerSearch panel = new CustomerSearch();
-		contentPane.add(panel, BorderLayout.CENTER);
+		Customer customer = CustomerService.getInstance().searchCustomerByNo(1);
+		CustomerHairinfo panel = new CustomerHairinfo();
+		HairInfoPanel panel_1 = new HairInfoPanel();
+		panel.setHairInfoPanel(panel_1);
+		panel.setTextFields(customer);
+		contentPane.add(panel, BorderLayout.NORTH);		
+		contentPane.add(panel_1, BorderLayout.CENTER);
+		
+		
 	}
 
 }

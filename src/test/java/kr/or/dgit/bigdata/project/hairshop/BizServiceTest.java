@@ -1,5 +1,6 @@
 package kr.or.dgit.bigdata.project.hairshop;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -8,7 +9,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
+import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
+import kr.or.dgit.bigdata.project.hairshop.dto.HairEvent;
+import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
+import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
+import kr.or.dgit.bigdata.project.hairshop.service.HairEventService;
+import kr.or.dgit.bigdata.project.hairshop.service.HairinfoService;
 
 public class BizServiceTest {
 	private static BizService bizService;
@@ -59,6 +66,14 @@ public class BizServiceTest {
 	}
 	*/
 	@Test
+	public void testSelectFromBizByCustomer() {
+		List<Biz> bList = BizService.getInstance().selectFromBizByCustomer(1);
+		Assert.assertNotNull(bList);
+		for(Biz b:bList){
+			System.out.println(b);
+		}
+	}
+	@Test
 	public void testSelectAllBiz() {
 		List<Biz> bList = BizService.getInstance().selectAllBiz();
 		Assert.assertNotNull(bList);
@@ -66,7 +81,6 @@ public class BizServiceTest {
 			System.out.println(b);
 		}
 	}
-	
 	@Test
 	public void testSelectYearOrMonthFromBiz() {
 		
@@ -98,5 +112,19 @@ public class BizServiceTest {
 		Assert.assertNotNull(bList);
 		
 	}
-	*/
+	*//*
+	@Test
+	public void testInsertBiz(){
+		Biz biz = new Biz();
+		biz.setbDate(new Date());
+		biz.setbDate(new Date());
+		Customer bcNo = CustomerService.getInstance().searchCustomerByNo(1);
+		HairEvent beNo = HairEventService.getInstance().selectEventByNo(new HairEvent(2));
+		Hairinfo bhNo = HairinfoService.getInstance().selectHairInfoByNo(new Hairinfo(2));
+		biz.setBhNo(bhNo);
+		biz.setBcNo(bcNo);
+		biz.setBeNo(beNo);		
+		BizService.getInstance().insertBiz(biz);
+		
+	}*/
 }

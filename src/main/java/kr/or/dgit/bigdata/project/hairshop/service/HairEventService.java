@@ -44,6 +44,24 @@ public class HairEventService {
 			sqlSession.close();
 		}		
 	}
+	public HairEvent selectEventByNo(HairEvent hairEvent){
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectEventByNo(HairEvent) - start");
+		}
+
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		HairEventMapper hairEventMapper = sqlSession.getMapper(HairEventMapper.class);
+		try{
+			HairEvent temp = hairEventMapper.selectEventByNo(hairEvent);
+
+			if (logger.isDebugEnabled()) {
+				logger.debug("selectEventByNo(HairEvent) - end");
+			}
+			return temp;
+		}finally{
+			sqlSession.close();
+		}		
+	}
 	
 	// 지금 단계에서는 필요하진 않지만 횩시 몰라서 추가했어요. 아직 테스트는 안해봤으니 이 기능들이 들어간다면 테스트 부터 하고 적용시켜야 할 것 같습니다. by 이유진
 	public void insertEvent(HairEvent hairEvent){

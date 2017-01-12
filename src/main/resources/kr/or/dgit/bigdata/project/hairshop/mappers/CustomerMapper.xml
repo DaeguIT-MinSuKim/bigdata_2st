@@ -21,6 +21,9 @@
 	<select id="searchCustomerByName" parameterType="hashmap" resultType="Customer">
 		select cNo, cName, cDob, cDoJoin, cPhone, cDel from customer where cName=#{cName}
 	</select>
+	<select id="searchCustomerByNo" parameterType="int" resultType="Customer">
+		select cNo, cName, cDob, cDoJoin, cPhone, cDel from customer where cNo=#{cNo}
+	</select>
 	<select id="searchCustomerByNoForJoin" parameterType="hashmap" resultType="Customer">
 		select cNo, cName, cDob, cDoJoin, cPhone from customer where cNo=#{cNo}
 	</select>
