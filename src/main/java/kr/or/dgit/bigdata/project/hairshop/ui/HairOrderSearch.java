@@ -1,23 +1,37 @@
 package kr.or.dgit.bigdata.project.hairshop.ui;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JScrollPane;
 import java.awt.GridLayout;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
+import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
+import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
+import kr.or.dgit.bigdata.project.hairshop.list.BiztList;
+import kr.or.dgit.bigdata.project.hairshop.service.BizService;
+import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 
 public class HairOrderSearch extends JPanel {
 	private JTextField txtName;
 	private JTextField txtNo;
-	private JTable table;
 	private JTextField txtD1;
 	private JTextField txtD2;
 	private JTextField txtD3;
-
+	private JTable table;
+	private String[] chi = { "영업번호", "영업일자", "헤어명", "단가", "이벤트명","금액" };
 	/**
 	 * Create the panel.
 	 */
@@ -78,16 +92,64 @@ public class HairOrderSearch extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, BorderLayout.CENTER);
 		
+		table = new BiztList();
 		table = new JTable();
+		table.setCellSelectionEnabled(true);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				chi
+			));
+		
 		scrollPane.setViewportView(table);
 
+	}
+	public void reloadData() {
+		DefaultTableModel model = new DefaultTableModel(getRowData(Integer.parseInt(txtNo.getText())), getColumnData());
+		table.setModel(model);
+		tableSetAlignWith();		
+	}
+	String[][] getRowData(int cNo) {
+		
+		List<Biz> list = BizService.getInstance().selectFromBizByCustomer(1);
+
+		String[][] rowDatas = new String[list.size()][];
+		for (int i = 0; i < list.size(); i++) {
+			rowDatas[i] = list.get(i).toArray(false);
+		}
+
+		return rowDatas;
+	}
+	String[] getColumnData() {
+
+		return chi;
+	}
+	protected void tableSetWidth(int... width) {//
+		TableColumnModel model = table.getColumnModel();
+		for (int i = 0; i < width.length; i++) {
+			model.getColumn(i).setPreferredWidth(width[i]);
+		}
+	}
+	protected void tableSetAlignWith() {//
+		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4);
+		tableSetWidth(60, 100, 200, 200, 200);
+	}
+	
+	protected void tableCellAlignment(int align, int... idx) {//
+		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
+		dtcr.setHorizontalAlignment(align);
+		TableColumnModel model = table.getColumnModel();
+		for (int i = 0; i < idx.length; i++) {
+			model.getColumn(idx[i]).setCellRenderer(dtcr);
+		}
 	}
 	
 	public void setTxtInHairIfo(int cNo, String cName, String dob){
 		String[] dobArr =  dob.split("-");
 		
-		txtName.setText(cNo+"");
-		txtNo.setText(cName);		
+		txtNo.setText(cNo+"");
+		txtName.setText(cName);		
 		txtD1.setText(dobArr[0]); 
 		txtD2.setText(dobArr[1]);
 		txtD3.setText(dobArr[2]);
