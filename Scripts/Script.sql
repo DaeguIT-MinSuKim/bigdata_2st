@@ -9,3 +9,11 @@ insert into hairshop.biz values
 
 select year(bDate) , month(bDate) from biz;
 select * from biz; 
+
+CREATE OR REPLACE VIEW hairshop.view_biz
+AS select b.bNo, b.bDate,b.bTime,c.cNo,c.cName, c.cDel, 
+		h.hNo, h.hName, h.hPrice, e.eNo, e.eName from hairshop.biz b 
+		left outer join hairshop.customer c on b.cNo = c.cNo
+		left outer join hairshop.hairinfo h on b.hNo = h.hNo 
+		left outer join hairshop.event e on b.eNo = e.eNo
+;

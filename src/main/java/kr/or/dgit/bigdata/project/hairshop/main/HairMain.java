@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
+import kr.or.dgit.bigdata.project.hairshop.ui.BizReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
@@ -198,7 +199,11 @@ public class HairMain extends JFrame {
 		pnOrderListBtns.add(btnToMain3);
 		
 		pnBizList = new JPanel();
+		pnBizList.setLayout(new BorderLayout(0,0));
 		tabbedPane.addTab("영업현황", null, pnBizList, null);
+		BizReport brPanel = new BizReport();
+		pnBizList.add(brPanel, BorderLayout.CENTER);
+		/*
 		pnBizList.setToolTipText("날짜, 월별 ,연도별 영업현황이 나타납니다.");
 		pnBizList.setLayout(new BorderLayout(0, 0));
 		
@@ -227,7 +232,7 @@ public class HairMain extends JFrame {
 		btnToMain4 = new JButton("메인화면");
 		btnToMain4.setBackground(new Color(248, 248, 255));
 		pnBizListBtns.add(btnToMain4);
-		
+		*/
 		pnBizGraph = new JPanel();
 		tabbedPane.addTab("영업그래프", null, pnBizGraph, null);
 		pnBizGraph.setToolTipText("영업 현황 통계 그래프가 나타납니다.");

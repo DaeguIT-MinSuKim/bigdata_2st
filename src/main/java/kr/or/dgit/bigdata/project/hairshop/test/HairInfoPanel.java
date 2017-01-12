@@ -13,9 +13,9 @@ import kr.or.dgit.bigdata.project.hairshop.list.BiztList;
 
 public class HairInfoPanel extends JPanel {
 
-	private JTable table;
+	private BiztList table;
 
-	public JTable getTable() {
+	public BiztList getTable() {
 		return table;
 	}
 

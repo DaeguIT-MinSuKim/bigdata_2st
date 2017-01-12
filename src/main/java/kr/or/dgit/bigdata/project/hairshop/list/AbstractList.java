@@ -6,10 +6,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 @SuppressWarnings("serial")
-public abstract class AbstractList extends JTable {
-	private JTable table;
+public class AbstractList extends JTable {
+	private static JTable table;
+	
+	public static void setTable(JTable table) {
+		AbstractList.table = table;
+	}
 
-	public void tableCellAlignment(int align, int... idx) {
+	public static void tableCellAlignment(int align, int... idx) {
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 		dtcr.setHorizontalAlignment(align);
 
@@ -19,20 +23,12 @@ public abstract class AbstractList extends JTable {
 		}
 	}
 
-	public void tableSetWidth(int... width) {
+	public static void tableSetWidth(int... width) {
 		TableColumnModel cModel = table.getColumnModel();
 
 		for (int i = 0; i < width.length; i++) {
 			cModel.getColumn(i).setPreferredWidth(width[i]);
 		}
 	}
-	
-	public void setTableWithData(){
-		table.setModel(new DefaultTableModel(getDatas(), getColumn()));
-	}
 
-	public abstract String[] getColumn();
-
-	public abstract String[][] getDatas();
-	
 }

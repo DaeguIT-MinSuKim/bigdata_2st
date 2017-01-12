@@ -1,85 +1,54 @@
 package kr.or.dgit.bigdata.project.hairshop.test;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 
 import org.apache.log4j.lf5.util.DateFormatManager;
 
 import kr.or.dgit.bigdata.project.hairshop.list.BiztList;
 
-public class BIzSearchTest extends JFrame implements ActionListener {
-
-	private JPanel contentPane;
+public class BIzSearchTest extends JPanel implements ActionListener {
+	/* FIELDS */
 	private JTextField tfStartDate;
 	private JTextField tfEndDate;
-	private JTable table;
 	private JButton btnSearch;
-	private JPanel panel_1;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					BIzSearchTest frame = new BIzSearchTest();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	private HairInfoPanel resPanel;
+	private JComboBox<Integer> comboBox;
+	private JButton btnOk;
+	/* GET/SET */
+	public void setResPanel(HairInfoPanel resPanel) {
+		this.resPanel = resPanel;
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	/* CONSTURUCTOR */
 	public BIzSearchTest() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.NORTH);
-		
 		JLabel lblNewLabel = new JLabel("기간 검색");
-		panel.add(lblNewLabel);
+		add(lblNewLabel);
 		
 		tfStartDate = new JTextField();
-		panel.add(tfStartDate);
+		add(tfStartDate);
 		tfStartDate.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("~");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblNewLabel_1);
+		add(lblNewLabel_1);
 		
 		tfEndDate = new JTextField();
-		panel.add(tfEndDate);
+		add(tfEndDate);
 		tfEndDate.setColumns(10);
 		
 		btnSearch = new JButton("검색");
 		btnSearch.addActionListener(this);
-		panel.add(btnSearch);
-		
-		panel_1 = new HairInfoPanel();
-		contentPane.add(panel_1, BorderLayout.CENTER);
+		add(btnSearch);
 		
 		setTextFields();
 	}
@@ -93,6 +62,9 @@ public class BIzSearchTest extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnOk) {
+			btnOkActionPerformed(arg0);
+		}
 		if (arg0.getSource() == btnSearch) {
 			btnSearchActionPerformed(arg0);
 		}
@@ -104,7 +76,7 @@ public class BIzSearchTest extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "검색범위가 불명확합니다.", "경고", JOptionPane.WARNING_MESSAGE);
 			return;
 		}		
-		((BiztList)((HairInfoPanel)panel_1).getTable()).setTableWithData(startDate, endDate);
+		((BiztList)resPanel.getTable()).setTableWithData(startDate, endDate);
 	}
 
 	private boolean isVailable(String startDate, String endDate) {
@@ -129,4 +101,7 @@ public class BIzSearchTest extends JFrame implements ActionListener {
 		}
 		return Integer.parseInt(convertDate);
 	}
+	protected void btnOkActionPerformed(ActionEvent arg0){
+		
+	};
 }

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
@@ -19,10 +20,19 @@ public class BiztList extends JTable {
 	
 	public void setTableWithData(Customer customer) {
 		setModel(new DefaultTableModel(getDatas(customer), getColumnNames()));
+		setTableWidthAlignment();		
 	}
 	
+	private void setTableWidthAlignment() {
+		AbstractList.setTable(this);
+		AbstractList.tableCellAlignment(SwingConstants.CENTER, 0,1,2,4);
+		AbstractList.tableCellAlignment(SwingConstants.RIGHT, 3,5);
+		AbstractList.tableSetWidth(100,300,200,400,200,400);		
+	}
+
 	public void setTableWithData(String startDate, String endDate) {
 		setModel(new DefaultTableModel(getDatas(startDate, endDate), getColumnNames()));
+		setTableWidthAlignment();	
 	}
 
 	private String[][] getDatas(String startDate, String endDate) {				
@@ -32,9 +42,10 @@ public class BiztList extends JTable {
 		for(int i=0; i<list.size(); i++){
 			Datas[i]=  list.get(i).toArray(false);
 		}
-		String[] tList = ReportTable.getcntSumIntValue(startDate, endDate);
-		Datas[list.size()] = new String[]{"","","","","총 금액  : ",tList[1]};
-	
+		if(!list.isEmpty()){
+			String[] tList = ReportTable.getcntSumIntValue(startDate, endDate);
+			Datas[list.size()] = new String[]{"","","","","총 금액  : ",tList[1]};
+		}
 		return Datas;		
 	}
 	private String[][] getDatas(Customer customer) {				
