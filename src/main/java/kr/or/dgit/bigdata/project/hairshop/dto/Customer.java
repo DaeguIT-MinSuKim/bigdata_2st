@@ -2,6 +2,8 @@ package kr.or.dgit.bigdata.project.hairshop.dto;
 
 import java.util.Date;
 
+import org.apache.log4j.lf5.util.DateFormatManager;
+
 public class Customer {
 	/* 변수 */
 	private int cNo;
@@ -111,8 +113,8 @@ public class Customer {
 	}
 
 	public String[] toArray() {
-		
-		return  new String[] {cNo+"", cName, cDob+"", cDoJoin+"", cPhone};
+		DateFormatManager dfm = new DateFormatManager("yyyy-MM-dd");
+		return  new String[] {cNo+"", cName, dfm.format(cDob), dfm.format(cDoJoin), cPhone};
 	}
 
 	@Override
