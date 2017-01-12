@@ -22,6 +22,8 @@ import kr.or.dgit.bigdata.project.hairshop.ui.CustomDialog;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
+import kr.or.dgit.bigdata.project.hairshop.ui.HairOrder;
+import kr.or.dgit.bigdata.project.hairshop.ui.HairOrderSearch;
 
 public class HairMain extends JFrame {
 
@@ -38,11 +40,11 @@ public class HairMain extends JFrame {
 	private JPanel pnCusSearchBtns;
 	private JButton btnAdd;
 	private JButton btnToMain1;
-	private JPanel pnHairOderMain;
+	private HairOrder pnHairOderMain;
 	private JPanel pnHairOderBtns;
 	private JButton btnOrder;
 	private JButton btnToMain2;
-	private JPanel pnOrderListMain;
+	private HairOrderSearch pnOrderListMain;
 	private JPanel pnOrderListBtns;
 	private JButton btnToMain3;
 	private JPanel pnBizListMain;
@@ -148,17 +150,18 @@ public class HairMain extends JFrame {
 					
 					break;
 				case 2:
-					
+					tabbedPane.setSelectedComponent(pnHairOder);
 					break;
 				case 3:
-					
+					tabbedPane.setEnabledAt(3, true);
+					tabbedPane.setSelectedComponent(pnOrderList);
 					break;
 				default:
 					break;
 				}
-				// 수정 패널에 setTxt
+				// 해당 패널에 setTxt
 				pnCusEdit.setTxtInCusEdit(cNo, cName, dob, doJoin, phone);
-				
+				pnOrderListMain.setTxtInHairIfo(cNo, cName, dob);
 				
 			}
 		
@@ -208,7 +211,7 @@ public class HairMain extends JFrame {
 		pnHairOder.setToolTipText("헤어주문");
 		pnHairOder.setLayout(new BorderLayout(0, 0));
 		
-		pnHairOderMain = new JPanel();
+		pnHairOderMain = new HairOrder();
 		pnHairOderMain.setBackground(new Color(255, 192, 203));
 		pnHairOder.add(pnHairOderMain, BorderLayout.CENTER);
 		
@@ -233,11 +236,11 @@ public class HairMain extends JFrame {
 		
 		pnOrderList = new JPanel();
 		tabbedPane.addTab("헤어주문검색", null, pnOrderList, null);
-		tabbedPane.setEnabledAt(3, false); // 고객 검색 후 true로 활성화
+		tabbedPane.setEnabledAt(3, false); // true로 바꾸면 활성화
 		pnOrderList.setToolTipText("고객의 헤어주문내역이 나타납니다.");
 		pnOrderList.setLayout(new BorderLayout(0, 0));
 		
-		pnOrderListMain = new JPanel();
+		pnOrderListMain = new HairOrderSearch();
 		pnOrderListMain.setBackground(new Color(255, 192, 203));
 		pnOrderList.add(pnOrderListMain, BorderLayout.CENTER);
 		
