@@ -17,3 +17,5 @@ AS select b.bNo, b.bDate,b.bTime,c.cNo,c.cName, c.cDel,
 		left outer join hairshop.hairinfo h on b.hNo = h.hNo 
 		left outer join hairshop.event e on b.eNo = e.eNo
 ;
+
+

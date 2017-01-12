@@ -63,7 +63,7 @@ public class CustomerServiceTest {
 	@Test
 	public void testSearchCustomerByName() { // 이름 검색이긴 하지만 map의 키값만 교체하면 번호나 휴대폰 등 다른 변수로도 검색 가능
 		Map<String, Object> map = new HashMap<>();
-		map.put("cName","노창균");
+		map.put("cName","고연정");
 		List<Customer> customer = customerService.searchCustomerByName(map);
 		Assert.assertNotNull(customer);
 	}

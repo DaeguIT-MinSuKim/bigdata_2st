@@ -2,6 +2,8 @@ package kr.or.dgit.bigdata.project.hairshop.ui;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.Time;
 import java.util.Date;
 import java.util.List;
@@ -17,9 +19,11 @@ import javax.swing.border.EmptyBorder;
 import org.apache.log4j.lf5.util.DateFormatManager;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
+import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.dto.HairEvent;
 import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
+import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.service.HairEventService;
 import kr.or.dgit.bigdata.project.hairshop.service.HairinfoService;
 
@@ -38,6 +42,10 @@ public class HairOrder extends JPanel {
 	String[] hairArr = {"커트", "드라이", "샴푸", "펌", "매직", "트리트먼트", "앰플", "기타"};
 	private JComboBox cmbHName;
 	private JComboBox cmbEName;
+	private int hPriceInOrder;
+	private Double dHe;
+	private Date nowDate;
+	private Time nowTime;
 
 	/**
 	 * Create the panel.
@@ -52,6 +60,7 @@ public class HairOrder extends JPanel {
 		add(lblBNo);
 		
 		tfBNo = new JTextField();
+		tfBNo.setEditable(false);
 		add(tfBNo);
 		tfBNo.setColumns(10);
 		
@@ -66,6 +75,7 @@ public class HairOrder extends JPanel {
 		add(lblBData);
 		
 		tfBDate = new JTextField();
+		tfBDate.setEditable(false);
 		add(tfBDate);
 		tfBDate.setColumns(10);
 		
@@ -74,6 +84,7 @@ public class HairOrder extends JPanel {
 		add(lblBTime);
 		
 		tfBTime = new JTextField();
+		tfBTime.setEditable(false);
 		add(tfBTime);
 		tfBTime.setColumns(10);
 		
@@ -100,6 +111,11 @@ public class HairOrder extends JPanel {
 		add(lblHName);
 		
 		cmbHName = new JComboBox();
+		cmbHName.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				cmbHNameItemStateChanged(arg0);
+			}
+		});
 		cmbHName.setModel(new DefaultComboBoxModel(hairArr));
 		add(cmbHName);
 		
@@ -130,6 +146,11 @@ public class HairOrder extends JPanel {
 		add(lblEName);
 		
 		cmbEName = new JComboBox();
+		cmbEName.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				cmbENameItemStateChanged(e);
+			}
+		});
 		cmbEName.setModel(new DefaultComboBoxModel(eventArr));
 		add(cmbEName);
 		
@@ -167,17 +188,19 @@ public class HairOrder extends JPanel {
 		int bNo = bList.size()+1;
 		tfBNo.setText(bNo+"");
 		DateFormatManager dfm = new DateFormatManager("yyyy-MM-dd");
-		Date nowDate = new Date(); 		
+		nowDate = new Date(); 		
 		tfBDate.setText(dfm.format(nowDate));
-		Time nowTime =new Time(nowDate.getTime());
+		nowTime = new Time(nowDate.getTime());
 		tfBTime.setText(nowTime.toString());
 		
+		/*
 		int hNo = cmbHName.getSelectedIndex()+1;
 		Hairinfo h =  new Hairinfo(hNo);
 		Hairinfo tempH = HairinfoService.getInstance().selectHairInfoByNo(h);
-		
+		//String.format("%,d 원", hPrice);
 		tfHNo.setText(hNo+"");
-		tfHPrice.setText(tempH.toString());
+		int hPrice = Integer.parseInt(tempH.toString());
+		tfHPrice.setText(String.format("%,d 원", hPrice));
 		
 		
 		int eNo = cmbEName.getSelectedIndex()+1;
@@ -187,11 +210,53 @@ public class HairOrder extends JPanel {
 		tfEDiscount.setText(tempHe.toString());
 		tfENo.setText(eNo+"");
 		
-		double totalPrice = Integer.parseInt(tempH.toString())*(1-Double.parseDouble(tempHe.toString()));
-		int tp = (int)totalPrice;
-		//h.hPrice*(1-e.eDiscount)
-		tfTotal.setText(tp+"");
+		Double dHe = Double.parseDouble(tempHe.toString());
 		
+		int totalPrice = (int)(hPrice *(1-dHe));
+		
+		tfTotal.setText(String.format("%,d 원", totalPrice));
+		*/
 	}
 	
+	protected void cmbHNameItemStateChanged(ItemEvent arg0) {
+		int hNo = cmbHName.getSelectedIndex()+1;
+		Hairinfo h =  new Hairinfo(hNo);
+		Hairinfo tempH = HairinfoService.getInstance().selectHairInfoByNo(h);
+		tfHNo.setText(hNo+"");
+		hPriceInOrder = Integer.parseInt(tempH.toString());
+		tfHPrice.setText(String.format("%,d 원", hPriceInOrder));
+	}
+	protected void cmbENameItemStateChanged(ItemEvent e) {
+		int eNo = cmbEName.getSelectedIndex()+1;
+		HairEvent he = new HairEvent(eNo);
+		HairEvent tempHe = HairEventService.getInstance().selectEventByNo(he);
+		
+		tfEDiscount.setText(tempHe.toString());
+		tfENo.setText(eNo+"");
+		
+		dHe = Double.parseDouble(tempHe.toString());
+		
+		int totalPrice = (int)(hPriceInOrder *(1-dHe));
+		
+		tfTotal.setText(String.format("%,d 원", totalPrice));
+	}
+	
+	public void insertBizByOrder(){
+		//Date bDate, Time bTime, int bcNo, int bhNo, int beNo
+		/*
+		Biz biz = new Biz();
+		biz.setbDate(nowDate);
+		biz.setbDate(nowTime);
+		
+		Customer bcNo = CustomerService.getInstance().searchCustomerByNo(Integer.parseInt(tfCNo.getText()));		
+		Hairinfo bhNo = HairinfoService.getInstance().selectHairInfoByNo(new Hairinfo(Integer.parseInt(tfHNo.getText())));
+		HairEvent beNo = HairEventService.getInstance().selectEventByNo(new HairEvent(Integer.parseInt(tfENo.getText())));
+		
+		biz.setBcNo(bcNo);
+		biz.setBhNo(bhNo);		
+		biz.setBeNo(beNo);
+		
+		BizService.getInstance().insertBiz(biz);*/
+		
+	}
 }

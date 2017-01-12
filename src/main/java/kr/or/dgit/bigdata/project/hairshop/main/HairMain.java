@@ -146,6 +146,7 @@ public class HairMain extends JFrame {
 					break;
 				case 2:
 					tabbedPane.setSelectedComponent(pnHairOder);
+					pnHairOderMain.setTxtInOrder(cNo, cName);
 					break;
 				case 3:
 					tabbedPane.setEnabledAt(3, true);
@@ -218,6 +219,11 @@ public class HairMain extends JFrame {
 		pnHairOderBtns.setLayout(new GridLayout(4, 0, 0, 20));
 		
 		btnOrder = new JButton("주문");
+		btnOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnOrderActionPerformed(arg0);
+			}
+		});
 		btnOrder.setBackground(new Color(248, 248, 255));
 		pnHairOderBtns.add(btnOrder);
 		
@@ -295,4 +301,8 @@ public class HairMain extends JFrame {
 	
 	
 	
+	protected void btnOrderActionPerformed(ActionEvent arg0) {
+		//pnHairOderMain.insertBizByOrder();
+		
+	}
 }

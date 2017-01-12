@@ -42,7 +42,7 @@ public class Hairinfo {
 	/* METHODS */
 	@Override
 	public String toString() {
-		return String.format("%s", gethPriceForm());
+		return String.format("%s", hPrice);
 	}
 	
 	@Override
