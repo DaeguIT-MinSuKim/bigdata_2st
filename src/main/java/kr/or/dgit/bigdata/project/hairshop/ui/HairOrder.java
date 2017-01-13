@@ -236,5 +236,65 @@ public class HairOrder extends JPanel {
 		BizService.getInstance().insertBiz(biz);
 		
 	}
+	public JTextField getTfBNo() {
+		return tfBNo;
+	}
+	public void setTfBNo(JTextField tfBNo) {
+		this.tfBNo = tfBNo;
+	}
+	public JTextField getTfBDate() {
+		return tfBDate;
+	}
+	public void setTfBDate(JTextField tfBDate) {
+		this.tfBDate = tfBDate;
+	}
+	public JTextField getTfBTime() {
+		return tfBTime;
+	}
+	public void setTfBTime(JTextField tfBTime) {
+		this.tfBTime = tfBTime;
+	}
+	public JTextField getTfCName() {
+		return tfCName;
+	}
+	public void setTfCName(JTextField tfCName) {
+		this.tfCName = tfCName;
+	}
+	public JTextField getTfCNo() {
+		return tfCNo;
+	}
+	public void setTfCNo(JTextField tfCNo) {
+		this.tfCNo = tfCNo;
+	}
+	public JTextField getTfHNo() {
+		return tfHNo;
+	}
+	public void setTfHNo(JTextField tfHNo) {
+		this.tfHNo = tfHNo;
+	}
+	public JTextField getTfHPrice() {
+		return tfHPrice;
+	}
+	public void setTfHPrice(JTextField tfHPrice) {
+		this.tfHPrice = tfHPrice;
+	}
+	public JTextField getTfEDiscount() {
+		return tfEDiscount;
+	}
+	public void setTfEDiscount(JTextField tfEDiscount) {
+		this.tfEDiscount = tfEDiscount;
+	}
+	public JTextField getTfENo() {
+		return tfENo;
+	}
+	public void setTfENo(JTextField tfENo) {
+		this.tfENo = tfENo;
+	}
+	public JTextField getTfTotal() {
+		return tfTotal;
+	}
+	public void setTfTotal(JTextField tfTotal) {
+		this.tfTotal = tfTotal;
+	}
 	
 }
