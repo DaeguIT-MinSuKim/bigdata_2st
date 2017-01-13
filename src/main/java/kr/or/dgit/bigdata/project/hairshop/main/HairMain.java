@@ -7,6 +7,7 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,6 +21,7 @@ import javax.swing.event.ListSelectionListener;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairInfoPanel;
+import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
@@ -64,6 +66,7 @@ public class HairMain extends JFrame {
 	private String phone;
 	private JTable tableInSearch;
 	private CustomerHairInfoPanel hip;
+	private int cardIndex; // 0은 검색, 1은 추가, 2는 수정
 
 	/**
 	 * Launch the application.
@@ -143,12 +146,25 @@ public class HairMain extends JFrame {
 					System.out.println("JOptionPane btn index: "+jopBtnIndex);
 					CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
 			        cl.show(pnCusSearchCards, "name_1666378783739869");
+			        btnSave.setEnabled(true);
+			        cardIndex =2;
+			        pnHairOderMain.setTxtInOrder(cNo, cName); // 수정된 내역이 있더라도 DB와 관련된것은 변동이 없는 cNo뿐이라 무관함. 
 					break;
 				case 1:
+					int jopi = JOptionPane.showConfirmDialog(null, cName+"회원을 정말 삭제하시겠습니까?");
+					if (jopi == 0) {
+						// 수정요망
+						Customer cForDel = new Customer();
+						cForDel.setcDel(true);
+						cForDel.setcNo(cNo);
+						CustomerService.getInstance().deleteCustomer(cForDel);
+					}
 					
 					break;
 				case 2:
 					tabbedPane.setSelectedComponent(pnHairOder);
+					pnHairOderMain.setTxtInOrder(cNo, cName);
+					tabbedPane.setEnabledAt(3, true);
 					break;
 				case 3:
 					tabbedPane.setEnabledAt(3, true);
@@ -161,6 +177,7 @@ public class HairMain extends JFrame {
 				// 각각 해당 패널에 setTxt 
 				pnCusEdit.setTxtInCusEdit(cNo, cName, dob, doJoin, phone);
 				pnOrderListMain.setTxtInHairIfo(cNo, cName, dob);
+				pnOrderListMain.reloadData();
 				
 			}
 		
@@ -198,16 +215,28 @@ public class HairMain extends JFrame {
 		pnCusSearchBtns.add(btnAdd);
 		
 		btnSave = new JButton("저장");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnSaveActionPerformed(arg0);
+			}
+		});
+		btnSave.setEnabled(false);
 		btnSave.setBackground(new Color(248, 248, 255));
 		pnCusSearchBtns.add(btnSave);
 		
 		btnToMain1 = new JButton("메인화면");
 		btnToMain1.setBackground(new Color(248, 248, 255));
+		btnToMain1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnToMainActionPerformed(e);
+			}
+		});
 		pnCusSearchBtns.add(btnToMain1);
 		
 		pnHairOder = new JPanel();
 		tabbedPane.addTab("헤어주문", null, pnHairOder, null);
 		pnHairOder.setToolTipText("헤어주문");
+		tabbedPane.setEnabledAt(2, false);
 		pnHairOder.setLayout(new BorderLayout(0, 0));
 		
 		pnHairOderMain = new HairOrder();
@@ -225,12 +254,22 @@ public class HairMain extends JFrame {
 		pnHairOderBtns.add(btnOrder);
 		
 		btnHairInfo = new JButton("헤어정보");
+		btnHairInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnHairInfoActionPerformed(e);
+			}
+		});
 		btnHairInfo.setToolTipText("해당 고객의 헤어 스타일 내역으로 이동합니다.");
 		btnHairInfo.setBackground(new Color(248, 248, 255));
 		pnHairOderBtns.add(btnHairInfo);
 		
 		btnToMain2 = new JButton("메인화면");
 		btnToMain2.setBackground(new Color(248, 248, 255));
+		btnToMain2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnToMainActionPerformed(e);
+			}
+		});
 		pnHairOderBtns.add(btnToMain2);
 		
 		pnOrderList = new JPanel();
@@ -253,13 +292,20 @@ public class HairMain extends JFrame {
 		pnOrderListBtns.setLayout(new GridLayout(4, 0, 0, 20));
 		
 		btnToMain3 = new JButton("메인화면");
+		btnToMain3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnToMainActionPerformed(e);
+			}
+		});
 		btnToMain3.setBackground(new Color(248, 248, 255));
 		pnOrderListBtns.add(btnToMain3);
 		
 		pnBizList = new JPanel();
 		tabbedPane.addTab("영업현황", null, pnBizList, null);
+
 		pnBizList.setToolTipText("날짜, 월별 ,연도별 영업현황이 나타납니다.");
 		pnBizList.setLayout(new BorderLayout(0, 0));
+
 		/* 영업현황 패널 ver.이유진*/
 		pnBizListMain = new BizReport();
 		pnBizListMain.setBackground(new Color(255, 192, 203));
@@ -272,10 +318,7 @@ public class HairMain extends JFrame {
 		
 		pnBizGraphMain = new JPanel();
 		pnBizGraphMain.setBackground(new Color(255, 192, 203));
-		pnBizGraph.add(pnBizGraphMain, BorderLayout.CENTER);
-		
-		
-		
+		pnBizGraph.add(pnBizGraphMain, BorderLayout.CENTER);		
 	}
 	
 
@@ -291,12 +334,59 @@ public class HairMain extends JFrame {
 	protected void btnAddActionPerformed(ActionEvent e) {
 		CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
         cl.show(pnCusSearchCards, "name_1666358524774753");
+        btnSave.setEnabled(true);
+        cardIndex =1;
+        
+        List<Customer> customerForSize = CustomerService.getInstance().selectByAll();// 카운트 할 sql문을 만드는 게 좋음. 현재 임시용.
+        int txtCno =customerForSize.size()+1;
+        pnCusAdd.getTxtCno().setText(txtCno+"");
+        
 	}
 	protected void btnSearchActionPerformed(ActionEvent e) {
+		pnSearchSub.revalidate();
+		
 		CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
         cl.show(pnCusSearchCards, "name_1666323161344197");
+        
+        btnSave.setEnabled(false);
+        cardIndex =0;
 	}
-	
-	
-	
+
+	protected void btnSaveActionPerformed(ActionEvent e) {
+		switch (cardIndex) {
+		case 1:
+			pnCusAdd.insertNewCostomer();
+			int directOderInAdd = JOptionPane.showConfirmDialog(null, "해당 고객 번호로 바로 주문 하시겠습니까?");
+			if(directOderInAdd==0){
+				pnHairOderMain.setTxtInOrder(Integer.parseInt(pnCusAdd.getTxtCno().getText()),pnCusAdd.getTxtCname().getText());
+				tabbedPane.setSelectedComponent(pnHairOder);
+				tabbedPane.setEnabledAt(2, true);
+			}
+			cardIndex =0;
+			
+			break;
+		case 2:
+			pnCusEdit.setTxtInCusEditForUpdate();
+			int directOderInEdit = JOptionPane.showConfirmDialog(null, "해당 고객 번호로 바로 주문 하시겠습니까?");
+			if(directOderInEdit==0){
+				pnOrderListMain.setTxtInHairIfo(Integer.parseInt(pnHairOderMain.getTfBNo().getText()), pnCusEdit.getTxtCno().getText(), pnCusEdit.getTxtCname().getText());
+				tabbedPane.setSelectedComponent(pnHairOder);
+				tabbedPane.setEnabledAt(2, true);
+			}
+			cardIndex =0;
+			break;
+		
+		default:
+			break;  
+		}  
+		
+	}
+	protected void btnHairInfoActionPerformed(ActionEvent e) {
+		tabbedPane.setEnabledAt(3, true);
+		tabbedPane.setSelectedComponent(pnOrderList);
+	}
+	protected void btnToMainActionPerformed(ActionEvent e) {
+		tabbedPane.setSelectedComponent(pnHome);
+	}
 }
+

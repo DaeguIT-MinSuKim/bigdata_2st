@@ -2,6 +2,11 @@ package kr.or.dgit.bigdata.project.hairshop.ui;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.sql.Time;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -10,6 +15,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import org.apache.log4j.lf5.util.DateFormatManager;
+
+import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
+import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
+import kr.or.dgit.bigdata.project.hairshop.dto.HairEvent;
+import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
+import kr.or.dgit.bigdata.project.hairshop.service.BizService;
+import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
+import kr.or.dgit.bigdata.project.hairshop.service.HairEventService;
+import kr.or.dgit.bigdata.project.hairshop.service.HairinfoService;
 
 public class HairOrder extends JPanel {
 	private JTextField tfBNo;
@@ -22,8 +38,14 @@ public class HairOrder extends JPanel {
 	private JTextField tfEDiscount;
 	private JTextField tfENo;
 	private JTextField tfTotal;
-	String[] eventArr = {"기획", "생일", "일반", "조조"};
+	 String[] eventArr = {"기획", "생일", "일반", "조조"};
 	String[] hairArr = {"커트", "드라이", "샴푸", "펌", "매직", "트리트먼트", "앰플", "기타"};
+	private JComboBox cmbHName;
+	private JComboBox cmbEName;
+	private int hPriceInOrder;
+	private Double dHe;
+	private Date nowDate;
+	private Time nowTime;
 
 	/**
 	 * Create the panel.
@@ -38,6 +60,7 @@ public class HairOrder extends JPanel {
 		add(lblBNo);
 		
 		tfBNo = new JTextField();
+		tfBNo.setEditable(false);
 		add(tfBNo);
 		tfBNo.setColumns(10);
 		
@@ -52,6 +75,7 @@ public class HairOrder extends JPanel {
 		add(lblBData);
 		
 		tfBDate = new JTextField();
+		tfBDate.setEditable(false);
 		add(tfBDate);
 		tfBDate.setColumns(10);
 		
@@ -60,6 +84,7 @@ public class HairOrder extends JPanel {
 		add(lblBTime);
 		
 		tfBTime = new JTextField();
+		tfBTime.setEditable(false);
 		add(tfBTime);
 		tfBTime.setColumns(10);
 		
@@ -68,6 +93,7 @@ public class HairOrder extends JPanel {
 		add(lblCName);
 		
 		tfCName = new JTextField();
+		tfCName.setEditable(false);
 		add(tfCName);
 		tfCName.setColumns(10);
 		
@@ -76,6 +102,7 @@ public class HairOrder extends JPanel {
 		add(lblCNO);
 		
 		tfCNo = new JTextField();
+		tfCNo.setEditable(false);
 		add(tfCNo);
 		tfCNo.setColumns(10);
 		
@@ -83,7 +110,12 @@ public class HairOrder extends JPanel {
 		lblHName.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblHName);
 		
-		JComboBox cmbHName = new JComboBox();
+		cmbHName = new JComboBox();
+		cmbHName.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				cmbHNameItemStateChanged(arg0);
+			}
+		});
 		cmbHName.setModel(new DefaultComboBoxModel(hairArr));
 		add(cmbHName);
 		
@@ -113,7 +145,12 @@ public class HairOrder extends JPanel {
 		lblEName.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblEName);
 		
-		JComboBox cmbEName = new JComboBox();
+		cmbEName = new JComboBox();
+		cmbEName.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				cmbENameItemStateChanged(e);
+			}
+		});
 		cmbEName.setModel(new DefaultComboBoxModel(eventArr));
 		add(cmbEName);
 		
@@ -140,7 +177,124 @@ public class HairOrder extends JPanel {
 		tfTotal = new JTextField();
 		add(tfTotal);
 		tfTotal.setColumns(10);
-
+		
+		
 	}
-
+	public void setTxtInOrder(int cNo, String cName){
+		tfCNo.setText(cNo+"");
+		tfCName.setText(cName);
+		
+		List<Biz> bList = BizService.getInstance().selectAllBiz();
+		int bNo = bList.size()+1;
+		tfBNo.setText(bNo+"");
+		DateFormatManager dfm = new DateFormatManager("yyyy-MM-dd");
+		nowDate = new Date(); 		
+		tfBDate.setText(dfm.format(nowDate));
+		nowTime = new Time(nowDate.getTime());
+		tfBTime.setText(nowTime.toString());
+		
+	}
+	
+	protected void cmbHNameItemStateChanged(ItemEvent arg0) {
+		int hNo = cmbHName.getSelectedIndex()+1;
+		Hairinfo h =  new Hairinfo(hNo);
+		Hairinfo tempH = HairinfoService.getInstance().selectHairInfoByNo(h);
+		tfHNo.setText(hNo+"");
+		hPriceInOrder = Integer.parseInt(tempH.toString());
+		tfHPrice.setText(String.format("%,d 원", hPriceInOrder));
+	}
+	protected void cmbENameItemStateChanged(ItemEvent e) {
+		int eNo = cmbEName.getSelectedIndex()+1;
+		HairEvent he = new HairEvent(eNo);
+		HairEvent tempHe = HairEventService.getInstance().selectEventByNo(he);
+		
+		tfEDiscount.setText(tempHe.toString());
+		tfENo.setText(eNo+"");
+		
+		dHe = Double.parseDouble(tempHe.toString());
+		
+		int totalPrice = (int)(hPriceInOrder *(1-dHe));
+		
+		tfTotal.setText(String.format("%,d 원", totalPrice));
+	}
+	
+	public void insertBizByOrder(){
+		
+		
+		Biz biz = new Biz();
+		biz.setbDate(nowDate);
+		biz.setbDate(nowTime);
+		
+		Customer bcNo = CustomerService.getInstance().searchCustomerByNo(Integer.parseInt(tfCNo.getText()));		
+		Hairinfo bhNo = HairinfoService.getInstance().selectHairInfoByNo(new Hairinfo(Integer.parseInt(tfHNo.getText())));
+		HairEvent beNo = HairEventService.getInstance().selectEventByNo(new HairEvent(Integer.parseInt(tfENo.getText())));
+		
+		biz.setBcNo(bcNo);
+		biz.setBhNo(bhNo);		
+		biz.setBeNo(beNo);
+		
+		BizService.getInstance().insertBiz(biz);
+		
+	}
+	public JTextField getTfBNo() {
+		return tfBNo;
+	}
+	public void setTfBNo(JTextField tfBNo) {
+		this.tfBNo = tfBNo;
+	}
+	public JTextField getTfBDate() {
+		return tfBDate;
+	}
+	public void setTfBDate(JTextField tfBDate) {
+		this.tfBDate = tfBDate;
+	}
+	public JTextField getTfBTime() {
+		return tfBTime;
+	}
+	public void setTfBTime(JTextField tfBTime) {
+		this.tfBTime = tfBTime;
+	}
+	public JTextField getTfCName() {
+		return tfCName;
+	}
+	public void setTfCName(JTextField tfCName) {
+		this.tfCName = tfCName;
+	}
+	public JTextField getTfCNo() {
+		return tfCNo;
+	}
+	public void setTfCNo(JTextField tfCNo) {
+		this.tfCNo = tfCNo;
+	}
+	public JTextField getTfHNo() {
+		return tfHNo;
+	}
+	public void setTfHNo(JTextField tfHNo) {
+		this.tfHNo = tfHNo;
+	}
+	public JTextField getTfHPrice() {
+		return tfHPrice;
+	}
+	public void setTfHPrice(JTextField tfHPrice) {
+		this.tfHPrice = tfHPrice;
+	}
+	public JTextField getTfEDiscount() {
+		return tfEDiscount;
+	}
+	public void setTfEDiscount(JTextField tfEDiscount) {
+		this.tfEDiscount = tfEDiscount;
+	}
+	public JTextField getTfENo() {
+		return tfENo;
+	}
+	public void setTfENo(JTextField tfENo) {
+		this.tfENo = tfENo;
+	}
+	public JTextField getTfTotal() {
+		return tfTotal;
+	}
+	public void setTfTotal(JTextField tfTotal) {
+		this.tfTotal = tfTotal;
+	}
+	
 }
