@@ -2,6 +2,7 @@ package org.jfree.chart;
 
 import org.jfree.chart.StandardChartTheme;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.io.UnsupportedEncodingException;
 
@@ -13,6 +14,9 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 
 public class ChartPanelP extends ChartPanel {
 
@@ -23,26 +27,27 @@ public class ChartPanelP extends ChartPanel {
 	public ChartPanelP(JFreeChart chart) {
 		super(chart);
 		String chartTitle = "hair";
-		chart = ChartFactory.createBarChart(chartTitle, "카테고리", "주문건수", createDataset(), PlotOrientation.VERTICAL, true, true, false);
+		chart = ChartFactory.createBarChart3D(chartTitle, "카테고리", "주문건수", createDataset(), PlotOrientation.VERTICAL, true, false, false);
 		this.chart = chart;
 				
-		//차트 제목
+		//차트 제목 폰트
 		labelFont = chart.getTitle().getFont();
 		chart.getTitle().setFont(new Font("굴림",labelFont.getStyle(),labelFont.getSize()));
-		//X축 제목
+		//X축 제목 폰트
 		labelFont = chart.getCategoryPlot().getDomainAxis().getLabelFont();
 		chart.getCategoryPlot().getDomainAxis().setLabelFont(new Font("돋움",labelFont.getStyle(),labelFont.getSize()));
-		//X축 값에 대한 레이블
+		//X축 값에 대한 레이블 폰트
 		labelFont = chart.getCategoryPlot().getDomainAxis().getTickLabelFont();
 		chart.getCategoryPlot().getDomainAxis().setTickLabelFont(new Font("돋움",labelFont.getStyle(),labelFont.getSize()));
-		//Y축 제목
+		//Y축 제목 폰트
 		labelFont = chart.getCategoryPlot().getDomainAxis().getLabelFont();
 		chart.getCategoryPlot().getRangeAxis().setLabelFont(new Font("돋움",labelFont.getStyle(),labelFont.getSize()));
-		//Y축  값에 대한 레이블
+		//Y축  값에 대한 레이블 폰트
 		labelFont = chart.getCategoryPlot().getRangeAxis().getTickLabelFont();
 		chart.getCategoryPlot().getRangeAxis().setTickLabelFont(new Font("돋움",labelFont.getStyle(),labelFont.getSize()));
-		//범례
+		//범례 폰트
 		chart.getLegend().setItemFont(new Font("돋움",Font.PLAIN,10));
+		
 		
 		cP = new ChartPanel(chart);
 		cP.setVisible(true);
