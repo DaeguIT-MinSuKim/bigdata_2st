@@ -1,6 +1,7 @@
 package kr.or.dgit.bigdata.project.hairshop;
 
-import java.util.HashMap;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -22,7 +23,7 @@ public class BizServiceTest {
 	public static void tearDownAfterClass() throws Exception {
 		bizService = null;
 	}
-/*
+
 	@Test
 	public void testSelectBizAndHairInfoEvent() {
 		List<Biz> bList = BizService.getInstance().selectBizAndHairInfoEvent();
@@ -59,6 +60,14 @@ public class BizServiceTest {
 		}
 	}
 
+/*	@Test
+	public void testSelectFromBizByCustomer() {
+		List<Biz> bList = BizService.getInstance().selectFromBizByCustomer(1);
+		Assert.assertNotNull(bList);
+		for(Biz b:bList){
+			System.out.println(b);
+		}
+	}
 	@Test
 	public void testSelectAllBiz() {
 		List<Biz> bList = BizService.getInstance().selectAllBiz();
@@ -67,7 +76,6 @@ public class BizServiceTest {
 			System.out.println(b);
 		}
 	}
-	
 	@Test
 	public void testSelectYearOrMonthFromBiz() {
 		
@@ -77,17 +85,17 @@ public class BizServiceTest {
 			System.out.println(b);
 		}
 	}
-		*/
-	/*@Test
+		
+	@Test
 	public void testSelectCountTotalFrombiz() {
 		List<Biz> bList = bizService.selectCountTotalFrombiz();
 		Assert.assertNotNull(bList);
 		
 		System.out.println(bList.toString());
 		
-	}*/
+	}
 	
-	/*
+	
 	@Test
 	public void testSelectYearOrMonthFromBizCalTotal() {		
 		HashMap<String, Integer> bList = BizService.getInstance().selectYearOrMonthFromBizCalTotal("2001-05-10","2001-05-16");
@@ -108,10 +116,10 @@ public class BizServiceTest {
 		List<Biz> bList = BizService.getInstance().selectCountStyleForGraph();
 		Assert.assertNotNull(bList);
 		
-	}
-	*/
+	}*/
+
 	
-/*	@Test
+	@Test
 	public void testSelectCountTotalCustomer() {
 		int tCus = BizService.getInstance().selectCountTotalCustomer();
 		Assert.assertNotNull(tCus);
@@ -133,7 +141,8 @@ public class BizServiceTest {
 		Assert.assertNotNull(tPrice);
 		System.out.println(tPrice);
 		
-	}*/
+	}
+	
 	
 	@Test
 	public void testSelectCountTotalEachHairBiz() {
@@ -143,6 +152,18 @@ public class BizServiceTest {
 		
 	}
 
-	
-	
-}
+/*	@Test
+	public void testInsertBiz(){
+		Biz biz = new Biz();
+		biz.setbDate(new Date());
+		biz.setbDate(new Date());
+		Customer bcNo = CustomerService.getInstance().searchCustomerByNo(1);
+		HairEvent beNo = HairEventService.getInstance().selectEventByNo(new HairEvent(2));
+		Hairinfo bhNo = HairinfoService.getInstance().selectHairInfoByNo(new Hairinfo(2));
+		biz.setBhNo(bhNo);
+		biz.setBcNo(bcNo);
+		biz.setBeNo(beNo);		
+		BizService.getInstance().insertBiz(biz);
+		
+	}
+*/}

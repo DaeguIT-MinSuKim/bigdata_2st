@@ -15,6 +15,9 @@ public interface HairinfoMapper {
 	@Select("select hNo, hName, hPrice from hairinfo")
 	public List<Hairinfo> selectHairInfoAll();
 	
+	@Select("select hNo, hName, hPrice from hairinfo where hNo=#{hNo}")
+	public Hairinfo selectHairInfoByNo(Hairinfo hairinfo);
+	
 	@Insert("insert into hairinfo(hName, hPrice) values(#{hName},#{hPrice}")
 	public void insertHairInfo(Hairinfo hinfo);
 	

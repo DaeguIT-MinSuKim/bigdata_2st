@@ -1,26 +1,24 @@
 package kr.or.dgit.bigdata.project.hairshop.main;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import java.awt.CardLayout;
-import javax.swing.JButton;
-import java.awt.GridLayout;
-import java.awt.Color;
-import javax.swing.JScrollPane;
+
+import org.jfree.chart.ChartPanelP;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import java.awt.Dimension;
-import kr.or.dgit.bigdata.project.hairshop.graph.ChartPanelP;
-import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import kr.or.dgit.bigdata.project.hairshop.ui.BizHairTotalReport;
+
 import kr.or.dgit.bigdata.project.hairshop.ui.BizHairTotalReport;
 
 public class TestHairMain extends JFrame {

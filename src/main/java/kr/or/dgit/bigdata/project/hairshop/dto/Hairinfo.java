@@ -42,8 +42,9 @@ public class Hairinfo {
 	/* METHODS */
 	@Override
 	public String toString() {
-		return String.format("%s", hName);
+		return String.format("%s", hPrice);
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -51,6 +52,7 @@ public class Hairinfo {
 		result = prime * result + hNo;
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

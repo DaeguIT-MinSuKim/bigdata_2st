@@ -10,16 +10,19 @@
 		<result property="cDel" column="cDel"/>
 	</resultMap>
 	<insert id="insertCustomer" parameterType="Customer" useGeneratedKeys="true" keyProperty="cNo">
-		 insert into customer(cName,cDob,cDoJoin, cPhone, cDel) values(#{cName},#{cDob},#{cDoJoin},#{cPhone},#{cDel});
+		insert into customer(cName,cDob,cDoJoin, cPhone, cDel) values(#{cName},#{cDob},#{cDoJoin},#{cPhone},#{cDel});
 	</insert>
 	<update id="updateCustomer" parameterType="Customer">
 		update customer set cName=#{cName}, cDob=#{cDob}, cDoJoin=#{cDoJoin}, cPhone=#{cPhone}, cDel=#{cDel} where cNo=#{cNo}
 	</update>
-	<delete id="deleteCustomer" parameterType="int">
-		delete from customer where cNo=#{cNo}
-	</delete>
+	<update id="deleteCustomer" parameterType="Customer">
+		pdate customer set cDel=#{cDel} where cNo=#{cNo}
+	</update>
 	<select id="searchCustomerByName" parameterType="hashmap" resultType="Customer">
-		select cNo, cName, cDob, cDoJoin, cPhone, cDel from customer where cName=#{cName}
+		select cNo, cName, cDob, cDoJoin, cPhone, cDel from customer where cName=#{cName} and cDel = false
+	</select>
+	<select id="searchCustomerByNo" parameterType="int" resultType="Customer">
+		select cNo, cName, cDob, cDoJoin, cPhone, cDel from customer where cNo=#{cNo}
 	</select>
 	<select id="searchCustomerByNoForJoin" parameterType="hashmap" resultType="Customer">
 		select cNo, cName, cDob, cDoJoin, cPhone from customer where cNo=#{cNo}

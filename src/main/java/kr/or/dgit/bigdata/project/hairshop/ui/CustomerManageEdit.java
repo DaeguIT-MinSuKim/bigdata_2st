@@ -43,6 +43,7 @@ public class CustomerManageEdit extends JPanel {
 		pnInsert.add(lblCno);
 		
 		txtCno = new JTextField();
+		txtCno.setEditable(false);
 		pnInsert.add(txtCno);
 		txtCno.setColumns(10);
 		
@@ -255,7 +256,28 @@ public class CustomerManageEdit extends JPanel {
 		this.table = table;
 	}
 	
-	
-	
+	public void setTxtInCusEdit(int cNo,String cName,String dob,String doJoin,String phone){
+		
+		String[] dobArr =  dob.split("-");
+		String[] doJoinArr =  doJoin.split("-");
+		String[] phoneArr = phone.split("-");
+		
+		
+		txtCno.setText(cNo+"");
+		txtCname.setText(cName);
+		txtP1.setText(phoneArr[0]);
+		txtP2.setText(phoneArr[1]);
+		txtP3.setText(phoneArr[2]);
+		txtD1.setText(dobArr[0]); 
+		txtD2.setText(dobArr[1]);
+		txtD3.setText(dobArr[2]);
+		txtDJ1.setText(doJoinArr[0]);
+		txtDJ2.setText(doJoinArr[1]);
+		txtDJ3.setText(doJoinArr[2]);
+	}
+
+	public void setTxtInCusEditToDB(){
+		
+	}
 
 }

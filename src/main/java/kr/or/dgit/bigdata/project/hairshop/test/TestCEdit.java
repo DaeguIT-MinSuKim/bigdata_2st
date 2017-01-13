@@ -1,4 +1,4 @@
-package kr.or.dgit.bigdata.project.hairshop.main;
+package kr.or.dgit.bigdata.project.hairshop.test;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -22,14 +22,14 @@ import javax.swing.table.TableColumnModel;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
-import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
+import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
 
-public class TestCInsert extends JFrame {
+public class TestCEdit extends JFrame {
 
 	private JPanel contentPane;
-	private CustomerManageInsert panel;
 	private JPanel panel_1;
 	private JTable table;
+	private CustomerManageEdit panel;
 	
 
 	/**
@@ -39,7 +39,7 @@ public class TestCInsert extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TestCInsert frame = new TestCInsert();
+					TestCEdit frame = new TestCEdit();
 					frame.setBounds(100, 100, 1100, 700);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -52,7 +52,7 @@ public class TestCInsert extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TestCInsert() {
+	public TestCEdit() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1097, 724);
@@ -60,18 +60,19 @@ public class TestCInsert extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+
+		panel = new CustomerManageEdit();
 		
-		panel = new CustomerManageInsert();
 		contentPane.add(panel, BorderLayout.CENTER);
 		table = panel.getTable();
 		panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.EAST);
 		
-		JButton btnInsert = new JButton("insert");
+		JButton btnInsert = new JButton("update");
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
+				int cNo = Integer.parseInt(panel.getTxtCno().getText()); 
 				int dobYear = Integer.parseInt(panel.getTxtD1().getText());
 				int dobMonth = Integer.parseInt(panel.getTxtD2().getText())-1;
 				int dobDate = Integer.parseInt(panel.getTxtD3().getText());
@@ -89,6 +90,7 @@ public class TestCInsert extends JFrame {
 				GregorianCalendar dobCal = new GregorianCalendar(dobYear, dobMonth, dobDate);
 				GregorianCalendar djCal = new GregorianCalendar(djYear, djMonth, djDate);
 				Customer insCtm = new Customer();
+				insCtm.setcNo(cNo);
 				insCtm.setcName(name);
 				insCtm.setcDob(dobCal.getTime());
 				insCtm.setcDoJoin(djCal.getTime());
@@ -96,7 +98,7 @@ public class TestCInsert extends JFrame {
 				insCtm.setcDel(false);
 				
 
-				CustomerService.getInstance().insertCustomer(insCtm);
+				CustomerService.getInstance().updateCustomer(insCtm);
 				
 				reloadData();
 			}
@@ -104,6 +106,7 @@ public class TestCInsert extends JFrame {
 			
 		});
 		panel_1.add(btnInsert);
+		
 	}
 	
 	private void reloadData() {

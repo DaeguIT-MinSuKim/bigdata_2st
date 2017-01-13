@@ -15,6 +15,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
+
 import org.jfree.chart.annotations.XYAnnotation;
 import org.jfree.chart.annotations.XYTextAnnotation;
 import org.jfree.chart.axis.CategoryAxis;
@@ -135,10 +136,10 @@ public class StandardChartTheme
         } else
         {
             this.name = name;
-            extraLargeFont = new Font("돋음", Font.BOLD, 20);
-            largeFont = new Font("돋음", Font.BOLD, 14);
-            regularFont = new Font("돋음", Font.BOLD, 12);
-            smallFont = new Font("sansserif", 0, 10);
+            extraLargeFont = new Font("SansSerif", Font.BOLD, 20);
+            largeFont = new Font("SansSerif", Font.BOLD, 14);
+            regularFont = new Font("SansSerif", Font.BOLD, 12);
+            smallFont = new Font("SansSerif", 0, 10);
             titlePaint = Color.black;
             subtitlePaint = Color.black;
             legendBackgroundPaint = Color.white;

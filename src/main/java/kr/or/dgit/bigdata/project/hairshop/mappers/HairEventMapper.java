@@ -14,6 +14,9 @@ public interface HairEventMapper {
 	@Select("select * from event")
 	public List<HairEvent> selectEventAll();
 	
+	@Select("select * from event where eNo=#{eNo}")
+	public HairEvent selectEventByNo(HairEvent hairEvent);
+	
 	@Insert("insert into event(eName, eDiscount) values(#{eName},#{eDiscount}")
 	public void insertEvent(HairEvent event);
 	
