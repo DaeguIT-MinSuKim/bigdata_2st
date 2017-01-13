@@ -26,3 +26,7 @@ select * from view_biz where year(bDate)=2001 and month(bDate) = 5;
 select * from view_biz where year(bDate)=2001;
 
 select count(bNo) as cnt, sum(hPrice*(1-eDiscount)) as sum from view_biz;
+
+
+insert into hairshop.biz values
+(8,'2001-12-10','15:00:00',1,5,3);

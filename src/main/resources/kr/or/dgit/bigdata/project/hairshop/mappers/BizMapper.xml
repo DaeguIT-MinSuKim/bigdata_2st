@@ -9,6 +9,7 @@
 		<association property="beNo" resultMap="kr.or.dgit.bigdata.project.hairshop.mappers.HairEventMapper.RSMverHairevent"/>
 		<association property="bhNo" resultMap="kr.or.dgit.bigdata.project.hairshop.mappers.HairinfoMapper.RSMverHairinfo"/>
 	</resultMap>
+
 	<select id="selectAllBiz" resultMap="BizWithCsEventInfo">
 		select b.bNo, b.bDate,b.bTime,c.cNo,c.cName, c.cDel, 
 		h.hNo, h.hName, h.hPrice, e.eNo, e.eName from hairshop.biz b 
@@ -56,7 +57,7 @@
 			</if>
 		</where>  
 	</select>
-	<insert id="insertBiz" parameterType="Biz">
-		insert 
+	<insert id="insertBiz" parameterType="Biz" useGeneratedKeys="true" keyColumn="bNo">
+		insert into hairshop.biz(bDate, bTime, cNo, hNo, eNo) values(#{bDate},#{bTime},#{cNo},#{hNo},#{eNo})
 	</insert>
 </mapper>

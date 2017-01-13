@@ -186,4 +186,18 @@ public class BizService {
 			sqlSession.close();
 		}	
 	}
+	
+	public void insertBiz(Biz biz){
+		if (logger.isDebugEnabled()) {
+			logger.debug("insertBiz(Biz) - start");
+		}
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
+			bizMapper.insertBiz(biz);
+			sqlSession.commit();
+		} finally {
+			sqlSession.close();
+		}	
+	}
 }

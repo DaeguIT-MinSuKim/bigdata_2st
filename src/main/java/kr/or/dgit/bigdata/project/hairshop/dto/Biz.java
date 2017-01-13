@@ -14,7 +14,28 @@ public class Biz {
 	private HairEvent beNo;
 	private Date bDateStart;
 	private Date bDateEnd;
+	private int cNo;
+	private int hNo;
+	private int eNo;
 	
+	public int getcNo() {
+		return cNo;
+	}
+	public void setcNo() {
+		this.cNo = bcNo.getcNo();
+	}
+	public int gethNo() {
+		return hNo;
+	}
+	public void sethNo() {
+		this.hNo = bhNo.gethNo();
+	}
+	public int geteNo() {
+		return eNo;
+	}
+	public void seteNo() {
+		this.eNo = beNo.geteNo();
+	}
 	public int getbNo() {
 		return bNo;
 	}
@@ -38,18 +59,21 @@ public class Biz {
 	}
 	public void setBcNo(Customer bcNo) {
 		this.bcNo = bcNo;
+		setcNo();
 	}
 	public Hairinfo getBhNo() {
 		return bhNo;
 	}
 	public void setBhNo(Hairinfo bhNo) {
 		this.bhNo = bhNo;
+		sethNo();
 	}
 	public HairEvent getBeNo() {
 		return beNo;
 	}
 	public void setBeNo(HairEvent beNo) {
 		this.beNo = beNo;
+		seteNo();
 	}
 	public Date getbDateStart() {
 		return bDateStart;

@@ -38,8 +38,6 @@ public interface BizMapper {
 	
 	public List<Biz> selectBizWithYearMonth(HashMap<String, Object> searchMap);
 	
-	/* test 중 */
-	
 	public void insertBiz(Biz biz);
 	
 	

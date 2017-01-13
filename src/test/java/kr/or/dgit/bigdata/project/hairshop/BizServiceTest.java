@@ -1,8 +1,9 @@
 package kr.or.dgit.bigdata.project.hairshop;
 
+import java.sql.Time;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -10,7 +11,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
+import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
+import kr.or.dgit.bigdata.project.hairshop.dto.HairEvent;
+import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
+import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
+import kr.or.dgit.bigdata.project.hairshop.service.HairEventService;
+import kr.or.dgit.bigdata.project.hairshop.service.HairinfoService;
 
 public class BizServiceTest {
 	private static BizService bizService;
@@ -59,7 +66,7 @@ public class BizServiceTest {
 			System.out.println(b);
 		}
 	}
-	*/
+	*//*
 	@Test
 	public void testSelectFromBizByCustomer() {
 		List<Biz> bList = BizService.getInstance().selectFromBizByCustomer(1);
@@ -75,7 +82,7 @@ public class BizServiceTest {
 		for(Biz b:bList){
 			System.out.println(b);
 		}
-	}
+	}*/
 	/* 죽은 메소드
 	@Test
 	public void testSelectYearOrMonthFromBiz() {
@@ -86,7 +93,7 @@ public class BizServiceTest {
 			System.out.println(b);
 		}
 	}
-	*/
+	
 	@Test
 	public void testSelectYearOrMonthFromBizCalTotal() {
 		HashMap<String, Object> searchMap = new HashMap<>();
@@ -96,7 +103,7 @@ public class BizServiceTest {
 		Assert.assertNotNull(bList);
 		System.out.println(bList.get("cnt"));
 		System.out.println(bList.get("sum"));
-	}
+	}*/
 	/*
 	@Test
 	public void testSelectCountTotalFrombiz() {
@@ -111,22 +118,25 @@ public class BizServiceTest {
 		Assert.assertNotNull(bList);
 		
 	}
-	*//*
+	*/
 	@Test
 	public void testInsertBiz(){
 		Biz biz = new Biz();
-		biz.setbDate(new Date());
-		biz.setbDate(new Date());
+		Date bDate = new Date();
+		biz.setbDate(bDate);
+		biz.setbTime(new Time(bDate.getTime()));
+		
 		Customer bcNo = CustomerService.getInstance().searchCustomerByNo(1);
 		HairEvent beNo = HairEventService.getInstance().selectEventByNo(new HairEvent(2));
 		Hairinfo bhNo = HairinfoService.getInstance().selectHairInfoByNo(new Hairinfo(2));
 		biz.setBhNo(bhNo);
 		biz.setBcNo(bcNo);
 		biz.setBeNo(beNo);		
+		
 		BizService.getInstance().insertBiz(biz);
 		
-	}*/
-	
+	}
+	/*
 	@Test
 	public void testSelectBDateYear() {
 		Set<Integer> yList = BizService.getInstance().selectBDateYear();
@@ -145,5 +155,5 @@ public class BizServiceTest {
 		for(Biz b : bList){
 			System.out.println(b);
 		}
-	}
+	}*/
 }
