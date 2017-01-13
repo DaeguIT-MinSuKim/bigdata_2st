@@ -276,7 +276,8 @@ public class CustomerManageEdit extends JPanel {
 		txtDJ3.setText(doJoinArr[2]);
 	}
 
-	
-	
+	public void setTxtInCusEditToDB(){
+		
+	}
 
 }

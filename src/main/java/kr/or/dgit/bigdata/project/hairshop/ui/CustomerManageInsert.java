@@ -1,17 +1,19 @@
 package kr.or.dgit.bigdata.project.hairshop.ui;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import java.awt.GridLayout;
+import java.util.GregorianCalendar;
+
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
+import javax.swing.table.DefaultTableModel;
+
+import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
+import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 
 public class CustomerManageInsert extends JPanel {
 	private JTextField txtCno;
@@ -256,7 +258,32 @@ public class CustomerManageInsert extends JPanel {
 		this.table = table;
 	}
 	
-	
+	public void insertNewCostomer(){
+		
+		int d1 = Integer.parseInt(txtD1.getText());
+		int d2 = Integer.parseInt(txtD2.getText());
+		int d3 = Integer.parseInt(txtD3.getText());
+		
+		int dj1 = Integer.parseInt(txtDJ1.getText());
+		int dj2 = Integer.parseInt(txtDJ2.getText());
+		int dj3 = Integer.parseInt(txtDJ3.getText());
+		
+		String phoneNumber =  txtP1.getText()+"-"+txtP2.getText()+"-"+txtP3.getText();
+		
+		GregorianCalendar cal1 = new GregorianCalendar(d1, d2, d3);
+		GregorianCalendar cal2 = new GregorianCalendar(dj1, dj2, dj3);
+		Customer insCtm = new Customer();
+		insCtm.setcName(txtCname.getText());
+		insCtm.setcDob(cal1.getTime());
+		insCtm.setcDoJoin(cal2.getTime());
+		insCtm.setcPhone(phoneNumber);
+		insCtm.setcDel(false);
+		
+
+		CustomerService.getInstance().insertCustomer(insCtm);
+		
+		
+	}
 	
 
 }

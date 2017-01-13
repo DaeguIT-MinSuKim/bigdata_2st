@@ -7,6 +7,7 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -63,7 +64,7 @@ public class HairMain extends JFrame {
 	private String dob;
 	private String doJoin;
 	private String phone;
-	private int cardIndex;
+	private int cardIndex; // 0은 검색, 1은 추가, 2는 수정
 
 	/**
 	 * Launch the application.
@@ -210,6 +211,11 @@ public class HairMain extends JFrame {
 		pnCusSearchBtns.add(btnAdd);
 		
 		btnSave = new JButton("저장");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnSaveActionPerformed(arg0);
+			}
+		});
 		btnSave.setEnabled(false);
 		btnSave.setBackground(new Color(248, 248, 255));
 		pnCusSearchBtns.add(btnSave);
@@ -303,16 +309,38 @@ public class HairMain extends JFrame {
 	protected void btnAddActionPerformed(ActionEvent e) {
 		CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
         cl.show(pnCusSearchCards, "name_1666358524774753");
-        btnSave.setEnabled(false);
-        cardIndex =0;
+        btnSave.setEnabled(true);
+        cardIndex =1;
+        
+        List<Customer> customerForSize = CustomerService.getInstance().selectByAll();
+        int txtCno =customerForSize.size()+1;
+        pnCusAdd.getTxtCno().setText(txtCno+"");
+        
 	}
 	protected void btnSearchActionPerformed(ActionEvent e) {
 		CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
         cl.show(pnCusSearchCards, "name_1666323161344197");
-        btnSave.setEnabled(true);
-        cardIndex =1;
+        
+        btnSave.setEnabled(false);
+        cardIndex =0;
 	}
 	
 	
 	
+	protected void btnSaveActionPerformed(ActionEvent e) {
+		switch (cardIndex) {
+		case 1:
+			pnCusAdd.insertNewCostomer();
+			cardIndex =0;
+			break;
+		case 2:
+			
+			cardIndex =0;
+			break;
+		
+		default:
+			break;
+		}
+		
+	}
 }
