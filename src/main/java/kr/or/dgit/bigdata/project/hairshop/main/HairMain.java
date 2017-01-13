@@ -381,7 +381,7 @@ public class HairMain extends JFrame {
 			cardIndex =0;
 			break;
 		
-		default:
+		default:  
 			break;  
 		}  
 		
