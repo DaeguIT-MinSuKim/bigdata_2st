@@ -250,6 +250,11 @@ public class HairMain extends JFrame {
 		pnHairOderBtns.setLayout(new GridLayout(4, 0, 0, 20));
 		
 		btnOrder = new JButton("주문");
+		btnOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnOrderActionPerformed(arg0);
+			}
+		});
 		btnOrder.setBackground(new Color(248, 248, 255));
 		pnHairOderBtns.add(btnOrder);
 		
@@ -387,6 +392,10 @@ public class HairMain extends JFrame {
 	}
 	protected void btnToMainActionPerformed(ActionEvent e) {
 		tabbedPane.setSelectedComponent(pnHome);
+	}
+	protected void btnOrderActionPerformed(ActionEvent e) {
+		pnHairOderMain.insertBizByOrder();
+		
 	}
 }
 
