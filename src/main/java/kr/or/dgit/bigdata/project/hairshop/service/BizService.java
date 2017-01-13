@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.mappers.BizMapper;
+import kr.or.dgit.bigdata.project.hairshop.mappers.CustomerMapper;
 import kr.or.dgit.bigdata.project.hairshop.util.MyBatisSqlSessionFactory;
 
 public class BizService {
@@ -159,20 +160,19 @@ public class BizService {
 		}	
 	}
 	
-	public void insertBiz(Biz biz){
+	public int insertBiz(Biz biz){
 		if (logger.isDebugEnabled()) {
-			logger.debug("insertBiz(Biz) - start");
+			logger.debug("insertCustomer(Customer) - start");
 		}
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+
 		try {
 			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
-			bizMapper.insertBiz(biz);
+			int res = bizMapper.insertBiz(biz);
 			sqlSession.commit();
+			return res;
 		} finally {
 			sqlSession.close();
-		}	
-		if (logger.isDebugEnabled()) {
-			logger.debug("insertBiz(Biz) - end");
 		}
 	}
 }
