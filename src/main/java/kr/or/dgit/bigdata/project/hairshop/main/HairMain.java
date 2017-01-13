@@ -377,7 +377,7 @@ public class HairMain extends JFrame {
 			break;
 		
 		default:
-			break;
+			break;  
 		}
 		
 	}
