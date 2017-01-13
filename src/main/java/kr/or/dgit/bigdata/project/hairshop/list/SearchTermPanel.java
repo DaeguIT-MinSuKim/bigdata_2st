@@ -2,26 +2,22 @@ package kr.or.dgit.bigdata.project.hairshop.list;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
-import org.apache.log4j.lf5.util.DateFormatManager;
 
 public class SearchTermPanel extends JPanel implements ActionListener {
 	/* FIELDS */
-	private JTextField tfStartDate;
-	private JTextField tfEndDate;
 	private JButton btnSearch;
 	private CustomerHairInfoPanel resPanel;
-	private JComboBox<Integer> comboBox;
-	private JButton btnOk;
+	private DatePanel startDatePicker;
+	private DatePanel endDatePicker;
+
+
 	/* GET/SET */
 	public void setResPanel(CustomerHairInfoPanel resPanel) {
 		this.resPanel = resPanel;
@@ -31,75 +27,65 @@ public class SearchTermPanel extends JPanel implements ActionListener {
 	public SearchTermPanel() {
 		JLabel lblTitle = new JLabel("기간 검색");
 		add(lblTitle);
-		
-		tfStartDate = new JTextField();
-		add(tfStartDate);
-		tfStartDate.setColumns(10);
-		
+
+		startDatePicker = new DatePanel();
+		add(startDatePicker);		
+
 		JLabel lbltemp = new JLabel("~");
 		lbltemp.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lbltemp);
 		
-		tfEndDate = new JTextField();
-		add(tfEndDate);
-		tfEndDate.setColumns(10);
-		
+		endDatePicker = new DatePanel();
+		add(endDatePicker);
+	
 		btnSearch = new JButton("검색");
 		btnSearch.addActionListener(this);
 		add(btnSearch);
-		
-		setTextFields();
 	}
-
-	private void setTextFields() {
-		Calendar cal = Calendar.getInstance();
-		DateFormatManager dfm = new DateFormatManager("yyyy-MM-dd");
-		String textToday = dfm.format(cal.getTime());
-		tfStartDate.setText(textToday);
-		tfEndDate.setText(textToday);		
-	}
-
+	/* EVENT */
 	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == btnOk) {
-			btnOkActionPerformed(arg0);
-		}
 		if (arg0.getSource() == btnSearch) {
 			btnSearchActionPerformed(arg0);
 		}
 	}
+	
 	protected void btnSearchActionPerformed(ActionEvent arg0) {
-		String startDate = tfStartDate.getText().trim();
-		String endDate = tfEndDate.getText().trim();
+		/* 검색 버튼 클릭 시 각 datePicker의 값을 추출해 온 후 검색 가능한 범위인지를 우선 확인하고 유효한 범위일 경우 날짜 범위에 맞춰 검색하도록 하는 멤소드 */
+		
+		String startDate = startDatePicker.getDatePicker().getJFormattedTextField().getText().trim();
+		String endDate = endDatePicker.getDatePicker().getJFormattedTextField().getText().trim();
+		
 		if(startDate==""||endDate==""||!isVailable(startDate,endDate)){
 			JOptionPane.showMessageDialog(null, "검색범위가 불명확합니다.", "경고", JOptionPane.WARNING_MESSAGE);
 			return;
-		}		
-		((CustomerHairTable)resPanel.getTable()).setTableWithData(startDate, endDate);
+		}	
+		
+		resPanel.getTable().setTableWithData(startDate, endDate);
 	}
 
-	private boolean isVailable(String startDate, String endDate) {
-		int iStartDate = convertToInteger(startDate);
-		int iEndDate = convertToInteger(endDate);
-		if(iStartDate>iEndDate){
+	private boolean isVailable(String startDate, String endDate) {		
+		/* 검색 범위를 각각 GregorianCalendar로 변환하여 두 날을 비교해 startDate의 값이 클 경우 false 반환 */
+		GregorianCalendar sCal = convertToCalendar(startDate);
+		GregorianCalendar eCal = convertToCalendar(endDate);
+		
+		if(sCal==null || eCal==null || (sCal.getTimeInMillis()>eCal.getTimeInMillis())){
 			return false;
 		}else{
 			return true;
 		}		
 	}
 
-	private int convertToInteger(String date) {
+	private GregorianCalendar convertToCalendar(String date) {
+		/* 주의 : GregorianCalendar 생성 시 Month 값은 내가 얻은 값보다 -1 인 값을 넣어줘야 함 */
 		if(date==""){
-			return -1;
+			return null;
 		}
 		
-		String[] list = date.split("-");
-		String convertDate = "";
-		for(int i=0;i<list.length;i++){
-			convertDate+= list[i];
+		String[] dlist = date.split("-");	//넘어온 String형태의 date를 -를 기준으로 분리
+		int[] iList = new int[dlist.length];
+		for(int i=0;i<dlist.length;i++){
+			iList[i] = Integer.parseInt(dlist[i]);
 		}
-		return Integer.parseInt(convertDate);
+		return new GregorianCalendar(iList[0], (iList[1]-1), iList[2]);
 	}
-	protected void btnOkActionPerformed(ActionEvent arg0){
-		
-	};
 }

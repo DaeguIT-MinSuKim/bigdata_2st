@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import kr.or.dgit.bigdata.project.hairshop.list.DatePanel;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
 
 public class TestCSearch extends JFrame {
@@ -42,8 +43,10 @@ public class TestCSearch extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		CustomerSearch panel = new CustomerSearch();
-		contentPane.add(panel, BorderLayout.CENTER);
+//		CustomerSearch panel = new CustomerSearch();
+//		contentPane.add(panel, BorderLayout.CENTER);
+		DatePanel dp = new DatePanel();
+		contentPane.add(dp, BorderLayout.CENTER);
 	}
 
 }
