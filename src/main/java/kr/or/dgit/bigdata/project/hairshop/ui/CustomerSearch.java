@@ -32,6 +32,7 @@ import javax.swing.ListSelectionModel;
 
 public class CustomerSearch extends JPanel {
 	private JTable table;
+	private JTable tableAll;
 	private JTextField txtSearch;
 	private String cName;
 	private int cNo;
@@ -83,7 +84,6 @@ public class CustomerSearch extends JPanel {
 			));
 		
 		scrollPane.setViewportView(table);
-		
 		
 
 	}
