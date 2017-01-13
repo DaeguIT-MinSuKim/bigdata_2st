@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomDialog;
@@ -149,8 +150,11 @@ public class HairMain extends JFrame {
 				case 1:
 					int jopi = JOptionPane.showConfirmDialog(null, cName+"회원을 정말 삭제하시겠습니까?");
 					if (jopi == 0) {
-						
-						CustomerService.getInstance().deleteCustomer(cNo);
+						// 수정요망
+						Customer cForDel = new Customer();
+						cForDel.setcDel(true);
+						cForDel.setcNo(cNo);
+						CustomerService.getInstance().deleteCustomer(cForDel);
 					}
 					
 					break;
