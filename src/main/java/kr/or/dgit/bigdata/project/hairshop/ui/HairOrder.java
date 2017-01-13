@@ -193,29 +193,6 @@ public class HairOrder extends JPanel {
 		nowTime = new Time(nowDate.getTime());
 		tfBTime.setText(nowTime.toString());
 		
-		/*
-		int hNo = cmbHName.getSelectedIndex()+1;
-		Hairinfo h =  new Hairinfo(hNo);
-		Hairinfo tempH = HairinfoService.getInstance().selectHairInfoByNo(h);
-		//String.format("%,d 원", hPrice);
-		tfHNo.setText(hNo+"");
-		int hPrice = Integer.parseInt(tempH.toString());
-		tfHPrice.setText(String.format("%,d 원", hPrice));
-		
-		
-		int eNo = cmbEName.getSelectedIndex()+1;
-		HairEvent he = new HairEvent(eNo);
-		HairEvent tempHe = HairEventService.getInstance().selectEventByNo(he);
-		
-		tfEDiscount.setText(tempHe.toString());
-		tfENo.setText(eNo+"");
-		
-		Double dHe = Double.parseDouble(tempHe.toString());
-		
-		int totalPrice = (int)(hPrice *(1-dHe));
-		
-		tfTotal.setText(String.format("%,d 원", totalPrice));
-		*/
 	}
 	
 	protected void cmbHNameItemStateChanged(ItemEvent arg0) {

@@ -147,6 +147,7 @@ public class HairMain extends JFrame {
 			        cl.show(pnCusSearchCards, "name_1666378783739869");
 			        btnSave.setEnabled(true);
 			        cardIndex =2;
+			        pnHairOderMain.setTxtInOrder(cNo, cName); // 수정된 내역이 있더라도 DB와 관련된것은 변동이 없는 cNo뿐이라 무관함. 
 					break;
 				case 1:
 					int jopi = JOptionPane.showConfirmDialog(null, cName+"회원을 정말 삭제하시겠습니까?");
@@ -162,6 +163,7 @@ public class HairMain extends JFrame {
 				case 2:
 					tabbedPane.setSelectedComponent(pnHairOder);
 					pnHairOderMain.setTxtInOrder(cNo, cName);
+					tabbedPane.setEnabledAt(3, true);
 					break;
 				case 3:
 					tabbedPane.setEnabledAt(3, true);
@@ -222,11 +224,17 @@ public class HairMain extends JFrame {
 		
 		btnToMain1 = new JButton("메인화면");
 		btnToMain1.setBackground(new Color(248, 248, 255));
+		btnToMain1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnToMainActionPerformed(e);
+			}
+		});
 		pnCusSearchBtns.add(btnToMain1);
 		
 		pnHairOder = new JPanel();
 		tabbedPane.addTab("헤어주문", null, pnHairOder, null);
 		pnHairOder.setToolTipText("헤어주문");
+		tabbedPane.setEnabledAt(2, false);
 		pnHairOder.setLayout(new BorderLayout(0, 0));
 		
 		pnHairOderMain = new HairOrder();
@@ -244,12 +252,22 @@ public class HairMain extends JFrame {
 		pnHairOderBtns.add(btnOrder);
 		
 		btnHairInfo = new JButton("헤어정보");
+		btnHairInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnHairInfoActionPerformed(e);
+			}
+		});
 		btnHairInfo.setToolTipText("해당 고객의 헤어 스타일 내역으로 이동합니다.");
 		btnHairInfo.setBackground(new Color(248, 248, 255));
 		pnHairOderBtns.add(btnHairInfo);
 		
 		btnToMain2 = new JButton("메인화면");
 		btnToMain2.setBackground(new Color(248, 248, 255));
+		btnToMain2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnToMainActionPerformed(e);
+			}
+		});
 		pnHairOderBtns.add(btnToMain2);
 		
 		pnOrderList = new JPanel();
@@ -269,6 +287,11 @@ public class HairMain extends JFrame {
 		pnOrderListBtns.setLayout(new GridLayout(4, 0, 0, 20));
 		
 		btnToMain3 = new JButton("메인화면");
+		btnToMain3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnToMainActionPerformed(e);
+			}
+		});
 		btnToMain3.setBackground(new Color(248, 248, 255));
 		pnOrderListBtns.add(btnToMain3);
 		
@@ -331,10 +354,19 @@ public class HairMain extends JFrame {
 		switch (cardIndex) {
 		case 1:
 			pnCusAdd.insertNewCostomer();
+			int directOderInAdd = JOptionPane.showConfirmDialog(null, "해당 고객 번호로 바로 주문 하시겠습니까?");
+			if(directOderInAdd==0){
+				tabbedPane.setSelectedComponent(pnHairOder);
+			}
 			cardIndex =0;
+			
 			break;
 		case 2:
-			
+			pnCusEdit.setTxtInCusEditForUpdate();
+			int directOderInEdit = JOptionPane.showConfirmDialog(null, "해당 고객 번호로 바로 주문 하시겠습니까?");
+			if(directOderInEdit==0){
+				tabbedPane.setSelectedComponent(pnHairOder);
+			}
 			cardIndex =0;
 			break;
 		
@@ -342,5 +374,12 @@ public class HairMain extends JFrame {
 			break;
 		}
 		
+	}
+	protected void btnHairInfoActionPerformed(ActionEvent e) {
+		tabbedPane.setEnabledAt(3, true);
+		tabbedPane.setSelectedComponent(pnOrderList);
+	}
+	protected void btnToMainActionPerformed(ActionEvent e) {
+		tabbedPane.setSelectedComponent(pnHome);
 	}
 }
