@@ -293,6 +293,7 @@ public class CustomerManageEdit extends JPanel {
 		GregorianCalendar cal2 = new GregorianCalendar(dj1, dj2, dj3);
 		
 		Customer upCtm = new Customer();
+		upCtm.setcNo(Integer.parseInt(txtCno.getText()));
 		upCtm.setcName(txtCname.getText());
 		upCtm.setcDob(cal1.getTime());
 		upCtm.setcDoJoin(cal2.getTime());

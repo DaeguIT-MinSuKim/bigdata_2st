@@ -341,6 +341,8 @@ public class HairMain extends JFrame {
         
 	}
 	protected void btnSearchActionPerformed(ActionEvent e) {
+		pnSearchSub.revalidate();
+		
 		CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
         cl.show(pnCusSearchCards, "name_1666323161344197");
         
@@ -358,6 +360,7 @@ public class HairMain extends JFrame {
 			if(directOderInAdd==0){
 				pnHairOderMain.setTxtInOrder(Integer.parseInt(pnCusAdd.getTxtCno().getText()),pnCusAdd.getTxtCname().getText());
 				tabbedPane.setSelectedComponent(pnHairOder);
+				tabbedPane.setEnabledAt(2, true);
 			}
 			cardIndex =0;
 			
@@ -366,7 +369,9 @@ public class HairMain extends JFrame {
 			pnCusEdit.setTxtInCusEditForUpdate();
 			int directOderInEdit = JOptionPane.showConfirmDialog(null, "해당 고객 번호로 바로 주문 하시겠습니까?");
 			if(directOderInEdit==0){
+				pnHairOderMain.setTxtInOrder(Integer.parseInt(pnCusEdit.getTxtCno().getText()), pnCusEdit.getTxtCname().getText());
 				tabbedPane.setSelectedComponent(pnHairOder);
+				tabbedPane.setEnabledAt(2, true);
 			}
 			cardIndex =0;
 			break;
