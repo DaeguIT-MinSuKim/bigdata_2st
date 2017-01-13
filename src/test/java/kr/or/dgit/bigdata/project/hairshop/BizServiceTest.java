@@ -120,4 +120,13 @@ public class BizServiceTest {
 		BizService.getInstance().insertBiz(biz);
 		
 	}*/
+	
+	@Test
+	public void testSelectBDateYear() {
+		List<Integer> yList = BizService.getInstance().selectBDateYear();
+		Assert.assertNotNull(yList);
+		for(int i : yList){
+			System.out.println(i);
+		}
+	}
 }

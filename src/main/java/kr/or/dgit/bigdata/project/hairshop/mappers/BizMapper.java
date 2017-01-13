@@ -33,6 +33,9 @@ public interface BizMapper {
 	
 	public List<Biz> selectFromBizByCustomer(int cNo);
 	
+	@Select("select distinct year(bDate) from view_biz order by bDate")
+	public List<Integer> selectBDateYear();
+	
 	/* test 중 */
 	
 	public void insertBiz(Biz biz);

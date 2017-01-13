@@ -157,20 +157,16 @@ public class BizService {
 		}	
 	}
 	
-	public void insertBiz(Biz biz){
+	public List<Integer> selectBDateYear(){
 		if (logger.isDebugEnabled()) {
-			logger.debug("insertBiz(Biz) - start");
+			logger.debug("selectBDateYear() - start");
 		}
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try {
 			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
-			bizMapper.insertBiz(biz);
-			sqlSession.commit();
+			return bizMapper.selectBDateYear();
 		} finally {
 			sqlSession.close();
 		}	
-		if (logger.isDebugEnabled()) {
-			logger.debug("insertBiz(Biz) - end");
-		}
 	}
 }

@@ -14,9 +14,6 @@ import kr.or.dgit.bigdata.project.hairshop.service.BizService;
 
 @SuppressWarnings("serial")
 public class BizReportTable extends JTable {
-	Calendar cal = Calendar.getInstance();
-	final int THISYEAR = cal.get(Calendar.YEAR);// 올해
-
 	public BizReportTable() {}
 
 	public void setTableWithData(String listBy) {
@@ -62,11 +59,11 @@ public class BizReportTable extends JTable {
 			
 		}else{
 			/* 년도별 조회를 선택할 시 년도별로 데이터 정렬하는 메소드 */
-			
+			List<Integer> yList = BizService.getInstance().selectBDateYear();
 			ArrayList<Object> list = new ArrayList<>();				
-			for(int i = THISYEAR ; i > 1945 ; i--){
-				String startDate = i+"-01-01";
-				String endDate = (i+1)+"-01-01";
+			for(int i = yList.size() ; i > 0 ; i--){
+				String startDate = yList.get(i-1)+"-01-01";
+				String endDate = (yList.get(i-1)+1)+"-01-01";
 				List<Biz> bList = BizService.getInstance().selectYearOrMonthFromBiz(startDate, endDate);
 				for(Biz b:bList){
 					list.add(b.toArray(true));
@@ -78,7 +75,7 @@ public class BizReportTable extends JTable {
 				}
 			}
 			if(!list.isEmpty()){
-				String[] tList = getcntSumIntValue("1945-01-01", (THISYEAR+1)+"01-01");
+				String[] tList = getcntSumIntValue(yList.get(0)+"-01-01", yList.get(yList.size()-1)+"01-01");
 				String[] sList = new String[]{"", "", "", "","총 계 : " , tList[1]};
 				list.add(sList);
 			}

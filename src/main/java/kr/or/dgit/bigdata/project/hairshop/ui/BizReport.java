@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import kr.or.dgit.bigdata.project.hairshop.list.BizReportPanel;
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairInfoPanel;
 import kr.or.dgit.bigdata.project.hairshop.list.SearchTermPanel;
+import kr.or.dgit.bigdata.project.hairshop.service.BizService;
 
 public class BizReport extends JPanel implements ActionListener {
 	/* main 화면 영업현황 tab 선택시 나타날 메인 화면 */
@@ -114,9 +116,15 @@ public class BizReport extends JPanel implements ActionListener {
 		
 	}
 	private void setcmbYear() {
-		cmbYear.addItem(2000);
-		cmbYear.addItem(2001);
-		cmbYear.addItem(2002);		
+		List<Integer> yList = BizService.getInstance().selectBDateYear();
+		try{
+			for(int year : yList){
+				cmbYear.addItem(year);
+			}
+		}catch(NullPointerException e){
+			cmbYear.setEnabled(false);
+			btnSearch.setEnabled(false);
+		}
 	}
 
 	protected void btnYearActionPerformed(ActionEvent e) {
