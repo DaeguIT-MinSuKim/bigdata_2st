@@ -335,7 +335,7 @@ public class HairMain extends JFrame {
         btnSave.setEnabled(true);
         cardIndex =1;
         
-        List<Customer> customerForSize = CustomerService.getInstance().selectByAll();
+        List<Customer> customerForSize = CustomerService.getInstance().selectByAll();// 카운트 할 sql문을 만드는 게 좋음. 현재 임시용.
         int txtCno =customerForSize.size()+1;
         pnCusAdd.getTxtCno().setText(txtCno+"");
         
@@ -356,6 +356,7 @@ public class HairMain extends JFrame {
 			pnCusAdd.insertNewCostomer();
 			int directOderInAdd = JOptionPane.showConfirmDialog(null, "해당 고객 번호로 바로 주문 하시겠습니까?");
 			if(directOderInAdd==0){
+				pnHairOderMain.setTxtInOrder(Integer.parseInt(pnCusAdd.getTxtCno().getText()),pnCusAdd.getTxtCname().getText());
 				tabbedPane.setSelectedComponent(pnHairOder);
 			}
 			cardIndex =0;
