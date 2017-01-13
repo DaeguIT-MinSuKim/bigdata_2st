@@ -149,6 +149,7 @@ public class HairMain extends JFrame {
 				case 1:
 					int jopi = JOptionPane.showConfirmDialog(null, cName+"회원을 정말 삭제하시겠습니까?");
 					if (jopi == 0) {
+						
 						CustomerService.getInstance().deleteCustomer(cNo);
 					}
 					

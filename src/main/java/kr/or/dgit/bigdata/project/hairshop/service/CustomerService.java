@@ -56,7 +56,7 @@ public class CustomerService{
 		
 	}
 	
-	public int deleteCustomer(int id) {
+	public int deleteCustomer(Customer customer) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("deleteCustomer(Customer) - start");
 		}
@@ -64,7 +64,7 @@ public class CustomerService{
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try {
 			CustomerMapper customerMapper = sqlSession.getMapper(CustomerMapper.class);
-			int res = customerMapper.deleteCustomer(id);
+			int res = customerMapper.deleteCustomer(customer);
 			sqlSession.commit();
 			return res;
 		} finally {
