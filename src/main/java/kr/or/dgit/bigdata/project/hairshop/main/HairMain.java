@@ -378,7 +378,7 @@ public class HairMain extends JFrame {
 		
 		default:
 			break;  
-		}
+		}  
 		
 	}
 	protected void btnHairInfoActionPerformed(ActionEvent e) {
