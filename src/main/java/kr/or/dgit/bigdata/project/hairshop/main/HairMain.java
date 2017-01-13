@@ -369,7 +369,7 @@ public class HairMain extends JFrame {
 			pnCusEdit.setTxtInCusEditForUpdate();
 			int directOderInEdit = JOptionPane.showConfirmDialog(null, "해당 고객 번호로 바로 주문 하시겠습니까?");
 			if(directOderInEdit==0){
-				pnOrderListMain.setTxtInHairIfo(Integer.parseInt(pnHairOderMain.getTfBNo().getText()), pnCusEdit.getTxtCno().getText(), pnCusEdit.getTxtCname().getText());
+				pnHairOderMain.setTxtInOrder(Integer.parseInt(pnCusEdit.getTxtCno().getText()),pnCusEdit.getTxtCname().getText());
 				tabbedPane.setSelectedComponent(pnHairOder);
 				tabbedPane.setEnabledAt(2, true);
 			}
