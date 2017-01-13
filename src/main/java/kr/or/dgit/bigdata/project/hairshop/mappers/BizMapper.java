@@ -2,6 +2,7 @@ package kr.or.dgit.bigdata.project.hairshop.mappers;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.ibatis.annotations.Select;
 
@@ -24,21 +25,23 @@ public interface BizMapper {
 	public List<Biz> selectCountStyleForGraph();
 	
 	/* ver. 이유진 */
-	public List<Biz> selectYearOrMonthFromBiz(String startDate, String endDate);
+//	public List<Biz> selectYearOrMonthFromBiz(String startDate, String endDate); 죽은 메소드 혹시라도 사용중이라면 말씀해 주세요 by 이유진
 	
-	@Select("select count(bNo) as cnt, sum(h.hPrice*(1-e.eDiscount)) as sum from hairshop.biz b left outer join hairshop.hairinfo h on b.hNo = h.hNo left outer join hairshop.event e  on e.eNo = b.eNo where b.bDate >= #{param1} and b.bDate < #{param2}")
-	public HashMap<String, Object> selectYearOrMonthFromBizCalTotal(String startDate, String endDate);
+	public HashMap<String, Object> selectYearOrMonthFromBizCalTotal(HashMap<String, Object> searchMap);
 	
 	public List<Biz> selectAllBiz();
 	
 	public List<Biz> selectFromBizByCustomer(int cNo);
 	
-	@Select("select distinct year(bDate) from view_biz order by bDate")
-	public List<Integer> selectBDateYear();
+	@Select("select year from view_biz")
+	public Set<Integer> selectBDateYear();
+	
+	public List<Biz> selectBizWithYearMonth(HashMap<String, Object> searchMap);
 	
 	/* test 중 */
 	
 	public void insertBiz(Biz biz);
-
+	
+	
 }
       

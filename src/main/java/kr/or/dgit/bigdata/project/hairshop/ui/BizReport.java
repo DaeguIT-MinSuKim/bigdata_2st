@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -116,7 +116,8 @@ public class BizReport extends JPanel implements ActionListener {
 		
 	}
 	private void setcmbYear() {
-		List<Integer> yList = BizService.getInstance().selectBDateYear();
+		Set<Integer> temp = BizService.getInstance().selectBDateYear();
+		Integer[] yList = temp.toArray(new Integer[temp.size()]);
 		try{
 			for(int year : yList){
 				cmbYear.addItem(year);

@@ -22,4 +22,41 @@
 	<select id="selectFromBizByCustomer" parameterType="int" resultMap="BizWithCsEventInfo">
 		select *from hairshop.view_biz where cNo=#{param1} order by bNo
 	</select>
+	<select id="selectBizWithYearMonth" parameterType="hashmap" resultMap="BizWithCsEventInfo">
+		select * from view_biz 
+		<where>
+			<if test="year != null">
+				year(bDate)=#{year}
+			</if>
+			<if test="month != null">
+				and month(bDate) = #{month}
+			</if>
+			<if test="startDate != null">
+				bDate &gt;= #{startDate}
+			</if>
+			<if test="endDate != null">
+				and bDate &lt; #{endDate}
+			</if>
+		</where>  
+	</select>
+	<select id="selectYearOrMonthFromBizCalTotal" parameterType="hashmap" resultType="hashmap">
+		select count(bNo) as cnt, sum(hPrice*(1-eDiscount)) as sum from view_biz
+		<where>
+			<if test="year != null">
+				year(bDate)=#{year}
+			</if>
+			<if test="month != null">
+				and month(bDate) = #{month}
+			</if>
+			<if test="startDate != null">
+				bDate &gt;= #{startDate}
+			</if>
+			<if test="endDate != null">
+				and bDate &lt; #{endDate}
+			</if>
+		</where>  
+	</select>
+	<insert id="insertBiz" parameterType="Biz">
+		insert 
+	</insert>
 </mapper>

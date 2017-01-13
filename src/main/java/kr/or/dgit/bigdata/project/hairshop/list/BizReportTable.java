@@ -1,9 +1,9 @@
 package kr.or.dgit.bigdata.project.hairshop.list;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -34,48 +34,52 @@ public class BizReportTable extends JTable {
 	private String[][] getDatas(String listBy, int year) {				
 		/* 월별 조회를 선택할 시  월별로 데이터 정렬하는 메소드  - 년도별과 깔끔하게 메소드 합칠 수 있는 방법 있으면 알려주세요! by. 이유진 */
 		if(listBy.equals("month")){				
+			HashMap<String, Object> searchMap = new HashMap<>();
+			searchMap.put("year", year);
 			ArrayList<Object> list = new ArrayList<>();//String[][]으로 변환하기 위한 전체 List를 저장할 ArrayList
 			for(int i=1;i<=12;i++){
-				String startDate = year+"-"+i+"-01";
-				String endDate = year+"-"+(i+1)+"-01";
-				
-				List<Biz> bList =BizService.getInstance().selectYearOrMonthFromBiz(startDate, endDate);
+				searchMap.put("month", i);
+				List<Biz> bList =BizService.getInstance().selectBizWithYearMonth(searchMap);
 				for(Biz b:bList){
 					list.add(b.toArray(true));
 					System.out.println(list.get(0).toString());
 				}					
 				if(!bList.isEmpty()){
-					String[] tList = getcntSumIntValue(startDate, endDate);					
+					String[] tList = getcntSumIntValue(searchMap);				
 					String[] sList = new String[]{"", i+"월 소계", "", "",tList[0] ,tList[1]};
 					list.add(sList);
 				}					
 			}
+			searchMap.remove("month");
 			if(!list.isEmpty()){
-				String[] tList = getcntSumIntValue(year+"-01-01", (year+1)+"01-01");	
+				String[] tList = getcntSumIntValue(searchMap);	
 				String[] sList = new String[]{"", "", "", "","총 계 : " , tList[1]};
 				list.add(sList);
 			}
 			return setDatas(list);
-			
 		}else{
 			/* 년도별 조회를 선택할 시 년도별로 데이터 정렬하는 메소드 */
-			List<Integer> yList = BizService.getInstance().selectBDateYear();
+			HashMap<String, Object> searchMap = new HashMap<>();
+			Set<Integer> temp = BizService.getInstance().selectBDateYear();
+			Integer[] yList = temp.toArray(new Integer[temp.size()]);
 			ArrayList<Object> list = new ArrayList<>();				
-			for(int i = yList.size() ; i > 0 ; i--){
-				String startDate = yList.get(i-1)+"-01-01";
-				String endDate = (yList.get(i-1)+1)+"-01-01";
-				List<Biz> bList = BizService.getInstance().selectYearOrMonthFromBiz(startDate, endDate);
+			for(int i = yList.length-1 ; i >= 0 ; i--){
+				searchMap.put("year", yList[i]);
+				List<Biz> bList = BizService.getInstance().selectBizWithYearMonth(searchMap);
 				for(Biz b:bList){
 					list.add(b.toArray(true));
 				}
 				if(!bList.isEmpty()){
-					String[] tList = getcntSumIntValue(startDate, endDate);
-					String[] sList = new String[]{"", i+"년 소계", "", "",tList[0] ,tList[1]};
+					String[] tList = getcntSumIntValue(searchMap);
+					String[] sList = new String[]{"", yList[i]+"년 소계", "", "",tList[0] ,tList[1]};
 					list.add(sList);
 				}
 			}
 			if(!list.isEmpty()){
-				String[] tList = getcntSumIntValue(yList.get(0)+"-01-01", yList.get(yList.size()-1)+"01-01");
+				searchMap.remove("year");
+				searchMap.put("startDate", yList[0]+"-01-01");
+				searchMap.put("endDate", (yList[yList.length-1]+1)+"01-01");
+				String[] tList = getcntSumIntValue(searchMap);
 				String[] sList = new String[]{"", "", "", "","총 계 : " , tList[1]};
 				list.add(sList);
 			}
@@ -83,9 +87,9 @@ public class BizReportTable extends JTable {
 		}
 	}
 
-	public static String[] getcntSumIntValue(String startDate, String endDate) {
+	public static String[] getcntSumIntValue(HashMap<String, Object> searchMap) {
 		// DB에서 계산하여 넘어온 더블형의 값을 int로 변환
-		HashMap<String,Object> calList = BizService.getInstance().selectYearOrMonthFromBizCalTotal(startDate,endDate);
+		HashMap<String,Object> calList = BizService.getInstance().selectYearOrMonthFromBizCalTotal(searchMap);
 		double dSum = (Double) calList.get("sum");
 		int iSum = (int)(dSum);
 		return new String[]{calList.get("cnt")+"건",String.format("%,d 원", iSum)};

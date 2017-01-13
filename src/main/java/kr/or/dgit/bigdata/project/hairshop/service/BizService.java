@@ -2,6 +2,7 @@ package kr.or.dgit.bigdata.project.hairshop.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
@@ -58,7 +59,7 @@ public class BizService {
 		}
 		
 	}
-	
+	/* 유진 사용? */
 	public List<Biz> selectAllBiz() {
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectAllBiz() - start");
@@ -72,6 +73,7 @@ public class BizService {
 			sqlSession.close();
 		}		
 	}
+	/* 유진 사용 */
 	public List<Biz> selectFromBizByCustomer(int cNo) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectFromBizByCustomer(int) - start");
@@ -85,11 +87,13 @@ public class BizService {
 			sqlSession.close();
 		}		
 	}
+	/* 유진 사용 - 죽은 메소드 */
+
+	/*
 	public List<Biz> selectYearOrMonthFromBiz(String startDate, String endDate) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectYearOrMonthFromBiz() - start");
 		}
-		
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try {
 			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
@@ -97,17 +101,17 @@ public class BizService {
 		} finally {
 			sqlSession.close();
 		}		
-	}	
-	
-	public HashMap<String, Object> selectYearOrMonthFromBizCalTotal(String startDate, String endDate) {
+	}
+	*/	
+	/* 유진 사용 */
+	public HashMap<String, Object> selectYearOrMonthFromBizCalTotal(HashMap<String, Object> searchMap) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("selectYearOrMonthFromBizCalTotal() - start");
+			logger.debug("selectYearOrMonthFromBizCalTotal(HashMap<String, Integer>) - start");
 		}
-		
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try {
 			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
-			return bizMapper.selectYearOrMonthFromBizCalTotal(startDate, endDate);
+			return bizMapper.selectYearOrMonthFromBizCalTotal(searchMap);
 		} finally {
 			sqlSession.close();
 		}		
@@ -156,8 +160,8 @@ public class BizService {
 			sqlSession.close();
 		}	
 	}
-	
-	public List<Integer> selectBDateYear(){
+	/* 유진 사용 */
+	public Set<Integer> selectBDateYear(){
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectBDateYear() - start");
 		}
@@ -165,6 +169,19 @@ public class BizService {
 		try {
 			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
 			return bizMapper.selectBDateYear();
+		} finally {
+			sqlSession.close();
+		}	
+	}
+	
+	public List<Biz> selectBizWithYearMonth(HashMap<String, Object>searchMap){
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectBizWithYearMonth(HashMap<String,Integer>) - start");
+		}	
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
+			return bizMapper.selectBizWithYearMonth(searchMap);
 		} finally {
 			sqlSession.close();
 		}	

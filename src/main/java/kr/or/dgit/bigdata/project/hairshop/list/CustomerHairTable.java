@@ -1,5 +1,6 @@
 package kr.or.dgit.bigdata.project.hairshop.list;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JTable;
@@ -34,13 +35,16 @@ public class CustomerHairTable extends JTable {
 
 	private String[][] getDatas(String startDate, String endDate) {				
 		/* 보고서 출력이 아닌 기존 프로그램에서 영업관련 테이블이 필요한 경우 (isReport==false) */
-		List<Biz> list = BizService.getInstance().selectYearOrMonthFromBiz(startDate, endDate);
+		HashMap<String, Object> searchMap = new HashMap<>();
+		searchMap.put("startDate", startDate);
+		searchMap.put("endDate", endDate);
+		List<Biz> list = BizService.getInstance().selectBizWithYearMonth(searchMap);
 		String[][] Datas = new String[list.size()+1][];
 		for(int i=0; i<list.size(); i++){
 			Datas[i]=  list.get(i).toArray(false);
 		}
 		if(!list.isEmpty()){
-			String[] tList = BizReportTable.getcntSumIntValue(startDate, endDate);
+			String[] tList = BizReportTable.getcntSumIntValue(searchMap);
 			Datas[list.size()] = new String[]{"","","","","총 금액  : ",tList[1]};
 		}
 		return Datas;		

@@ -1,6 +1,8 @@
 package kr.or.dgit.bigdata.project.hairshop;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -74,6 +76,7 @@ public class BizServiceTest {
 			System.out.println(b);
 		}
 	}
+	/* 죽은 메소드
 	@Test
 	public void testSelectYearOrMonthFromBiz() {
 		
@@ -83,15 +86,18 @@ public class BizServiceTest {
 			System.out.println(b);
 		}
 	}
-	/*
+	*/
 	@Test
-	public void testSelectYearOrMonthFromBizCalTotal() {		
-		HashMap<String, Integer> bList = BizService.getInstance().selectYearOrMonthFromBizCalTotal("2001-05-10","2001-05-16");
+	public void testSelectYearOrMonthFromBizCalTotal() {
+		HashMap<String, Object> searchMap = new HashMap<>();
+		searchMap.put("startDate", "2001-05-01");
+		searchMap.put("endDate", "2001-06-01");
+		HashMap<String, Object> bList = BizService.getInstance().selectYearOrMonthFromBizCalTotal(searchMap);
 		Assert.assertNotNull(bList);
 		System.out.println(bList.get("cnt"));
 		System.out.println(bList.get("sum"));
 	}
-	
+	/*
 	@Test
 	public void testSelectCountTotalFrombiz() {
 		List<Biz> bList = BizService.getInstance().selectCountTotalFrombiz();
@@ -123,10 +129,21 @@ public class BizServiceTest {
 	
 	@Test
 	public void testSelectBDateYear() {
-		List<Integer> yList = BizService.getInstance().selectBDateYear();
+		Set<Integer> yList = BizService.getInstance().selectBDateYear();
 		Assert.assertNotNull(yList);
 		for(int i : yList){
 			System.out.println(i);
+		}
+	}
+	@Test
+	public void testSelectBizWithYearMonth() {
+		HashMap<String, Object> searchMap = new HashMap<>();
+		searchMap.put("year", 2001);
+		searchMap.put("month", 5);
+		List<Biz> bList = BizService.getInstance().selectBizWithYearMonth(searchMap);
+		Assert.assertNotNull(bList);
+		for(Biz b : bList){
+			System.out.println(b);
 		}
 	}
 }
