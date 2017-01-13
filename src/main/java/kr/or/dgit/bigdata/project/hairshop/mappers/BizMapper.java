@@ -36,7 +36,7 @@ public interface BizMapper {
 	public List<Biz> selectFromBizByCustomer(int cNo);
 	
 	/* test 중 */
-	@Insert("insert into hairshop.biz(bDate, bTime, cNo, hNo, eNo) values(#{bDate},#{bTime},#{bcNo},#{bhNo},#{beNo})")
+	@Insert("insert into hairshop.biz(bDate, bTime, cNo, hNo, eNo) values(#{bDate},#{bTime},#{cNo},#{hNo},#{eNo})")
 	public int insertBiz(Biz biz);
 
 }

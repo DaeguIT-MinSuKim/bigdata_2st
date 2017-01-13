@@ -132,12 +132,10 @@ public class BizServiceTest {
 		Biz biz = new Biz();
 		biz.setbDate(d);
 		biz.setbTime(t);
-		Customer bcNo = CustomerService.getInstance().searchCustomerByNo(1);
-		HairEvent beNo = HairEventService.getInstance().selectEventByNo(new HairEvent(2));
-		Hairinfo bhNo = HairinfoService.getInstance().selectHairInfoByNo(new Hairinfo(2));
-		biz.setBhNo(bhNo);
-		biz.setBcNo(bcNo);
-		biz.setBeNo(beNo);	
+		
+		biz.setcNo(1);
+		biz.sethNo(2);
+		biz.seteNo(3);	
 
 		int res = BizService.getInstance().insertBiz(biz);
 		Assert.assertEquals(1, res);

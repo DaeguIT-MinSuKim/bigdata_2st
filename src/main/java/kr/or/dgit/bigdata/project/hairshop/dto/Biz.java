@@ -14,7 +14,30 @@ public class Biz {
 	private HairEvent beNo;
 	private Date bDateStart;
 	private Date bDateEnd;
+	private int cNo;
+	private int hNo;
+	private int eNo;
 	
+	
+	
+	public int getcNo() {
+		return cNo;
+	}
+	public void setcNo(int cNo) {
+		this.cNo = cNo;
+	}
+	public int gethNo() {
+		return hNo;
+	}
+	public void sethNo(int hNo) {
+		this.hNo = hNo;
+	}
+	public int geteNo() {
+		return eNo;
+	}
+	public void seteNo(int eNo) {
+		this.eNo = eNo;
+	}
 	public int getbNo() {
 		return bNo;
 	}
