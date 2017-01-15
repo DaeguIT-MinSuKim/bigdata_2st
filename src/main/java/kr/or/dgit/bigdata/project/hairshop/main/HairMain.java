@@ -137,8 +137,7 @@ public class HairMain extends JFrame {
 		
 		pnSearchSub = new CustomerSearch();		
 		
-		pnCusSearchCards.add(pnSearchSub, "name_1666323161344197");		
-		tableInSearch = pnSearchSub.getTable();
+		pnCusSearchCards.add(pnSearchSub, "name_1666323161344197");
 		tableInSearch.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
 			@Override

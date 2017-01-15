@@ -1,6 +1,7 @@
 package kr.or.dgit.bigdata.project.hairshop.ui;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -32,12 +33,34 @@ public class CustomerSearch extends JPanel {
 	private String dob;
 	private String doJoin;
 	private String phone;
+	private JTable tableForAll;
 	
 	/**
 	 * Create the panel.
 	 */
 	public CustomerSearch() {
 		setLayout(new BorderLayout(0, 0));
+		
+		JPanel pnTables = new JPanel();
+		add(pnTables, BorderLayout.CENTER);
+		pnTables.setLayout(new CardLayout(0, 0));
+		
+		JScrollPane scrollPaneForAll = new JScrollPane();
+		pnTables.add(scrollPaneForAll, "name_8511602081005");
+		
+		JScrollPane scrollPane = new JScrollPane();
+		pnTables.add(scrollPane, "name_8522747382262");
+		
+		tableForAll = new JTable();
+		tableForAll.setCellSelectionEnabled(true);
+		tableForAll.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		reloadDataForAll();
+		scrollPaneForAll.setViewportView(tableForAll);
+		
+		table = new JTable();
+		table.setCellSelectionEnabled(true);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(table);
 		
 		JPanel pnSearch = new JPanel();
 		pnSearch.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -62,21 +85,8 @@ public class CustomerSearch extends JPanel {
 		});
 		pnSearch.add(btnOk);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		add(scrollPane, BorderLayout.CENTER);
-		
-		table = new JTable();
-		table.setCellSelectionEnabled(true);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setModel(new DefaultTableModel(
-				new Object[][] {
-				},
-				new String[] {
-						"고객 번호", "고객명", "생년월일", "가입일자", "전화번호" 
-				}
-			));
-		
-		scrollPane.setViewportView(table);
+		JButton btnAll = new JButton("전체 회원");
+		pnSearch.add(btnAll);
 		
 
 	}
@@ -182,5 +192,37 @@ public class CustomerSearch extends JPanel {
 		this.txtSearch = txtSearch;
 	}
 	
+	protected void tableSetAlignWithForAll() {//
+		tableCellAlignmentForAll(SwingConstants.CENTER, 0, 1, 2, 3, 4);
+		tableSetWidthForAll(60, 100, 200, 200, 200);
+	}
 	
+	protected void tableCellAlignmentForAll(int align, int... idx) {//
+		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
+		dtcr.setHorizontalAlignment(align);
+		TableColumnModel model = tableAll.getColumnModel();
+		for (int i = 0; i < idx.length; i++) {
+			model.getColumn(idx[i]).setCellRenderer(dtcr);
+		}
+	}
+	protected void tableSetWidthForAll(int... width) {//
+		TableColumnModel model = tableAll.getColumnModel();
+		for (int i = 0; i < width.length; i++) {
+			model.getColumn(i).setPreferredWidth(width[i]);
+		}
+	}
+	String[][] getRowDataForAll() { // 전체 표 읽어오기
+		List<Customer> list = CustomerService.getInstance().selectByAll();
+		String[][] rowDatas = new String[list.size()][];
+		for (int i = 0; i < list.size(); i++) {
+			rowDatas[i] = list.get(i).toArray();
+		}
+
+		return rowDatas;
+	}
+	private void reloadDataForAll() {
+		DefaultTableModel model = new DefaultTableModel(getRowDataForAll(), getColumnData());
+		tableAll.setModel(model);
+		tableSetAlignWithForAll();		
+	}
 }
