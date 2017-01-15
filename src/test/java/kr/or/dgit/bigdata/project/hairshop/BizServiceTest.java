@@ -1,8 +1,7 @@
 package kr.or.dgit.bigdata.project.hairshop;
 
-import java.sql.Time;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -11,13 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
-import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
-import kr.or.dgit.bigdata.project.hairshop.dto.HairEvent;
-import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
-import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
-import kr.or.dgit.bigdata.project.hairshop.service.HairEventService;
-import kr.or.dgit.bigdata.project.hairshop.service.HairinfoService;
 
 public class BizServiceTest {
 	private static BizService bizService;
@@ -30,7 +23,7 @@ public class BizServiceTest {
 	public static void tearDownAfterClass() throws Exception {
 		bizService = null;
 	}
-/*
+
 	@Test
 	public void testSelectBizAndHairInfoEvent() {
 		List<Biz> bList = BizService.getInstance().selectBizAndHairInfoEvent();
@@ -66,8 +59,9 @@ public class BizServiceTest {
 			System.out.println(b);
 		}
 	}
-	*//*
-	@Test
+}
+/*	@Test
+>>>>>>> refs/remotes/origin/JCH3
 	public void testSelectFromBizByCustomer() {
 		List<Biz> bList = BizService.getInstance().selectFromBizByCustomer(1);
 		Assert.assertNotNull(bList);
@@ -93,6 +87,19 @@ public class BizServiceTest {
 			System.out.println(b);
 		}
 	}
+<<<<<<< HEAD
+=======
+		
+	@Test
+	public void testSelectCountTotalFrombiz() {
+		List<Biz> bList = bizService.selectCountTotalFrombiz();
+		Assert.assertNotNull(bList);
+		
+		System.out.println(bList.toString());
+		
+	}
+	
+>>>>>>> refs/remotes/origin/JCH3
 	
 	@Test
 	public void testSelectYearOrMonthFromBizCalTotal() {
@@ -117,8 +124,43 @@ public class BizServiceTest {
 		List<Biz> bList = BizService.getInstance().selectCountStyleForGraph();
 		Assert.assertNotNull(bList);
 		
+<<<<<<< HEAD
 	}
 	*/
+
+	/*@Test
+	public void testSelectCountTotalCustomer() {
+		int tCus = BizService.getInstance().selectCountTotalCustomer();
+		Assert.assertNotNull(tCus);
+		System.out.println(tCus);
+		
+	}
+	
+	@Test
+	public void testSelectCountTotalBiz() {
+		int tBiz = BizService.getInstance().selectCountTotalBiz();
+		Assert.assertNotNull(tBiz);
+		System.out.println(tBiz);
+		
+	}
+	
+	@Test
+	public void testSelectCountTotalPrice() {
+		int tPrice = BizService.getInstance().selectCountTotalPrice();
+		Assert.assertNotNull(tPrice);
+		System.out.println(tPrice);
+		
+	}
+	
+	
+	@Test
+	public void testSelectCountTotalEachHairBiz() {
+		int hairType = BizService.getInstance().selectCountTotalEachHairBiz(1);
+		Assert.assertNotNull(hairType);
+		System.out.println(hairType);
+		
+	}
+
 	@Test
 	public void testInsertBiz(){
 		Biz biz = new Biz();
@@ -136,6 +178,7 @@ public class BizServiceTest {
 		BizService.getInstance().insertBiz(biz);
 		
 	}
+<<<<<<< HEAD
 	/*
 	@Test
 	public void testSelectBDateYear() {
@@ -156,4 +199,4 @@ public class BizServiceTest {
 			System.out.println(b);
 		}
 	}*/
-}
+

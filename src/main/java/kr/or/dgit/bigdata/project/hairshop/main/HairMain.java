@@ -15,13 +15,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import org.jfree.chart.ChartPanelP;
+import org.jfree.chart.JFreeChart;
+
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairInfoPanel;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
+import kr.or.dgit.bigdata.project.hairshop.ui.BizHairTotalReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
@@ -67,6 +72,9 @@ public class HairMain extends JFrame {
 	private JTable tableInSearch;
 	private CustomerHairInfoPanel hip;
 	private int cardIndex; // 0은 검색, 1은 추가, 2는 수정
+	private BizHairTotalReport panel_1;
+	private ChartPanelP panel;
+	private JFreeChart chart;
 
 	/**
 	 * Launch the application.
@@ -75,23 +83,25 @@ public class HairMain extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
 					HairMain frame = new HairMain();
 					frame.setBounds(100, 100, 1100, 700);
 					frame.setVisible(true);
 				} catch (Exception e) {
+					HairMain f = new HairMain();
 					e.printStackTrace();
 				}
 			}
 		});
 		
 	}
-
+	
 	/**
 	 * Create the frame.
 	 */
 	public HairMain() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 1100, 700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -99,6 +109,8 @@ public class HairMain extends JFrame {
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
+		
+
 		
 		pnHome = new JPanel();
 		tabbedPane.addTab("홈", null, pnHome, null);
@@ -319,7 +331,15 @@ public class HairMain extends JFrame {
 		pnBizGraph = new JPanel();
 		tabbedPane.addTab("영업그래프", null, pnBizGraph, null);
 		pnBizGraph.setToolTipText("영업 현황 통계 그래프가 나타납니다.");
-		pnBizGraph.setLayout(new BorderLayout(0, 0));
+		pnBizGraph.setLayout(null);
+
+		panel_1 = new BizHairTotalReport();
+		panel_1.setBounds(195, 12, 690, 171);
+		pnBizGraph.add(panel_1);
+		
+		panel = new ChartPanelP(chart);
+		panel.setBounds(195, 195, 690, 430);
+		pnBizGraph.add(panel);
 		
 		pnBizGraphMain = new JPanel();
 		pnBizGraphMain.setBackground(new Color(255, 192, 203));
@@ -398,4 +418,3 @@ public class HairMain extends JFrame {
 		
 	}
 }
-

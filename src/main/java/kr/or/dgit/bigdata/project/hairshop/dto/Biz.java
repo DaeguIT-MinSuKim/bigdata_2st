@@ -17,7 +17,9 @@ public class Biz {
 	private int cNo;
 	private int hNo;
 	private int eNo;
-	
+	private int totalCustomer;
+	private int totalBiz;
+	private int totalMoney;
 	public int getcNo() {
 		return cNo;
 	}
@@ -35,6 +37,25 @@ public class Biz {
 	}
 	public void seteNo() {
 		this.eNo = beNo.geteNo();
+	}
+	
+	public int getTotalCustomer() {
+		return totalCustomer;
+	}
+	public void setTotalCustomer(int totalCustomer) {
+		this.totalCustomer = totalCustomer;
+	}
+	public int getTotalBiz() {
+		return totalBiz;
+	}
+	public void setTotalBiz(int totalBiz) {
+		this.totalBiz = totalBiz;
+	}
+	public int getTotalMoney() {
+		return totalMoney;
+	}
+	public void setTotalMoney(int totalMoney) {
+		this.totalMoney = totalMoney;
 	}
 	public int getbNo() {
 		return bNo;
@@ -97,6 +118,7 @@ public class Biz {
 		return String.format("Biz [bNo=%s, bDate=%s, bTime=%s, cNo=%s, hNO=%s, eNo=%s]", bNo, bDate, bTime, bcNo, bhNo,
 				beNo);
 	}
+	
 	public String[] toArray(Boolean isReport) {
 		DateFormatManager dfm = new DateFormatManager("yyyy-MM-dd");
 		if(isReport==true){			
@@ -105,5 +127,6 @@ public class Biz {
 			return new String[]{bNo+"", dfm.format(bDate), bhNo.gethName(), bhNo.gethPriceForm(), beNo.geteName(), getBizPrice()};
 		}
 		
-	}	
+	}
+	
 }
