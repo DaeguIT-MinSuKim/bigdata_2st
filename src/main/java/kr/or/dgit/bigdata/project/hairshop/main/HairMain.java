@@ -145,7 +145,7 @@ public class HairMain extends JFrame {
 				@Override
 				public void valueChanged(ListSelectionEvent e) {
 					
-					clickAndGetDataFromTable();
+					clickAndGetDataFromTable(tableInSearch);
 				}
 			});
 		
@@ -155,7 +155,7 @@ public class HairMain extends JFrame {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				
-				clickAndGetDataFromTable();
+				clickAndGetDataFromTable(tableInSearchForAll);
 			}
 		});
 		
@@ -381,13 +381,13 @@ public class HairMain extends JFrame {
 		
 	}
 	
-	private void clickAndGetDataFromTable() {
+	private void clickAndGetDataFromTable(JTable table) {
 		
-		cNo = Integer.parseInt(tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 0).toString()); // 선택한 열의 0번째 인덱스 행을 출력
-		cName = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 1).toString();
-		dob = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 2).toString();
-		doJoin = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 3).toString();
-		phone = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 4).toString();
+		cNo = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()); // 선택한 열의 0번째 인덱스 행을 출력
+		cName = table.getValueAt(table.getSelectedRow(), 1).toString();
+		dob = table.getValueAt(table.getSelectedRow(), 2).toString();
+		doJoin = table.getValueAt(table.getSelectedRow(), 3).toString();
+		phone = table.getValueAt(table.getSelectedRow(), 4).toString();
 		Object[] options ={"수정","삭제","주문","헤어정보"};
 		
 		int jopBtnIndex = JOptionPane.showOptionDialog(null, cName+"["+dob+", "+phone+"]", "회원 관리", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, null, options, options[3]);
