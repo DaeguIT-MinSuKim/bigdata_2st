@@ -1,7 +1,6 @@
 package kr.or.dgit.bigdata.project.hairshop.ui;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -26,7 +25,6 @@ import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 
 public class CustomerSearch extends JPanel {
 	private JTable table;
-	private JTable tableAll;
 	private JTextField txtSearch;
 	private String cName;
 	private int cNo;
@@ -40,27 +38,6 @@ public class CustomerSearch extends JPanel {
 	 */
 	public CustomerSearch() {
 		setLayout(new BorderLayout(0, 0));
-		
-		JPanel pnTables = new JPanel();
-		add(pnTables, BorderLayout.CENTER);
-		pnTables.setLayout(new CardLayout(0, 0));
-		
-		JScrollPane scrollPaneForAll = new JScrollPane();
-		pnTables.add(scrollPaneForAll, "name_8511602081005");
-		
-		JScrollPane scrollPane = new JScrollPane();
-		pnTables.add(scrollPane, "name_8522747382262");
-		
-		tableForAll = new JTable();
-		tableForAll.setCellSelectionEnabled(true);
-		tableForAll.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		reloadDataForAll();
-		scrollPaneForAll.setViewportView(tableForAll);
-		
-		table = new JTable();
-		table.setCellSelectionEnabled(true);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane.setViewportView(table);
 		
 		JPanel pnSearch = new JPanel();
 		pnSearch.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -85,8 +62,18 @@ public class CustomerSearch extends JPanel {
 		});
 		pnSearch.add(btnOk);
 		
-		JButton btnAll = new JButton("전체 회원");
-		pnSearch.add(btnAll);
+		JScrollPane scrollPane = new JScrollPane();
+		add(scrollPane, BorderLayout.CENTER);
+		
+		table = new JTable();
+		table.setCellSelectionEnabled(true);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		tableForAll = new JTable();
+		tableForAll.setCellSelectionEnabled(true);
+		tableForAll.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		reloadDataForAll();
+		scrollPane.setViewportView(tableForAll);
 		
 
 	}
@@ -190,8 +177,16 @@ public class CustomerSearch extends JPanel {
 
 	public void setTxtSearch(JTextField txtSearch) {
 		this.txtSearch = txtSearch;
-	}
+	}	
 	
+	public JTable getTableForAll() {
+		return tableForAll;
+	}
+
+	public void setTableForAll(JTable tableForAll) {
+		this.tableForAll = tableForAll;
+	}
+
 	protected void tableSetAlignWithForAll() {//
 		tableCellAlignmentForAll(SwingConstants.CENTER, 0, 1, 2, 3, 4);
 		tableSetWidthForAll(60, 100, 200, 200, 200);
@@ -200,13 +195,13 @@ public class CustomerSearch extends JPanel {
 	protected void tableCellAlignmentForAll(int align, int... idx) {//
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 		dtcr.setHorizontalAlignment(align);
-		TableColumnModel model = tableAll.getColumnModel();
+		TableColumnModel model = tableForAll.getColumnModel();
 		for (int i = 0; i < idx.length; i++) {
 			model.getColumn(idx[i]).setCellRenderer(dtcr);
 		}
 	}
 	protected void tableSetWidthForAll(int... width) {//
-		TableColumnModel model = tableAll.getColumnModel();
+		TableColumnModel model = tableForAll.getColumnModel();
 		for (int i = 0; i < width.length; i++) {
 			model.getColumn(i).setPreferredWidth(width[i]);
 		}
@@ -222,7 +217,9 @@ public class CustomerSearch extends JPanel {
 	}
 	private void reloadDataForAll() {
 		DefaultTableModel model = new DefaultTableModel(getRowDataForAll(), getColumnData());
-		tableAll.setModel(model);
+		tableForAll.setModel(model);
 		tableSetAlignWithForAll();		
 	}
+	
+	
 }
