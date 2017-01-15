@@ -32,6 +32,7 @@ public class CustomerSearch extends JPanel {
 	private String doJoin;
 	private String phone;
 	private JTable tableForAll;
+	private JScrollPane scrollPane;
 	
 	/**
 	 * Create the panel.
@@ -54,15 +55,24 @@ public class CustomerSearch extends JPanel {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				cName = txtSearch.getText();
-				reloadData();
-				
+				searchClick();				
 				
 			}
+
+			
 		});
 		pnSearch.add(btnOk);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		JButton btnForall = new JButton("전체 회원");
+		btnForall.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				searchAll();
+			}
+			
+		});
+		pnSearch.add(btnForall);
+		
+		scrollPane = new JScrollPane();
 		add(scrollPane, BorderLayout.CENTER);
 		
 		table = new JTable();
@@ -220,6 +230,14 @@ public class CustomerSearch extends JPanel {
 		tableForAll.setModel(model);
 		tableSetAlignWithForAll();		
 	}
-	
+	private void searchClick() {
+		cName = txtSearch.getText();
+		reloadData();
+		scrollPane.setViewportView(table);
+	}
+	private void searchAll() {
+		reloadDataForAll();
+		scrollPane.setViewportView(tableForAll);
+	}
 	
 }

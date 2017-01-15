@@ -70,6 +70,7 @@ public class HairMain extends JFrame {
 	private String doJoin;
 	private String phone;
 	private JTable tableInSearch;
+	private JTable tableInSearchForAll;
 	private CustomerHairInfoPanel hip;
 	private int cardIndex; // 0은 검색, 1은 추가, 2는 수정
 	private BizHairTotalReport panel_1;
@@ -138,61 +139,24 @@ public class HairMain extends JFrame {
 		pnSearchSub = new CustomerSearch();		
 		
 		pnCusSearchCards.add(pnSearchSub, "name_1666323161344197");
+		tableInSearch = pnSearchSub.getTable();
 		tableInSearch.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+				
+				@Override
+				public void valueChanged(ListSelectionEvent e) {
+					
+					clickAndGetDataFromTable();
+				}
+			});
+		
+		tableInSearchForAll = pnSearchSub.getTableForAll();
+		tableInSearchForAll.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				
-				cNo = Integer.parseInt(tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 0).toString()); // 선택한 열의 0번째 인덱스 행을 출력
-				cName = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 1).toString();
-				dob = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 2).toString();
-				doJoin = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 3).toString();
-				phone = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 4).toString();
-				Object[] options ={"수정","삭제","주문","헤어정보"};
-				
-				int jopBtnIndex = JOptionPane.showOptionDialog(null, cName+"["+dob+", "+phone+"]", "회원 관리", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, null, options, options[3]);
-				
-				switch (jopBtnIndex) {
-				case 0:		
-					System.out.println("JOptionPane btn index: "+jopBtnIndex);
-					CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
-			        cl.show(pnCusSearchCards, "name_1666378783739869");
-			        btnSave.setEnabled(true);
-			        cardIndex =2;
-			        pnHairOderMain.setTxtInOrder(cNo, cName); // 수정된 내역이 있더라도 DB와 관련된것은 변동이 없는 cNo뿐이라 무관함. 
-					break;
-				case 1:
-					int jopi = JOptionPane.showConfirmDialog(null, cName+"회원을 정말 삭제하시겠습니까?");
-					if (jopi == 0) {
-						// 수정요망
-						Customer cForDel = new Customer();
-						cForDel.setcDel(true);
-						cForDel.setcNo(cNo);
-						CustomerService.getInstance().deleteCustomer(cForDel);
-					}
-					
-					break;
-				case 2:
-					tabbedPane.setSelectedComponent(pnHairOder);
-					pnHairOderMain.setTxtInOrder(cNo, cName);
-					tabbedPane.setEnabledAt(3, true);
-					break;
-				case 3:
-					tabbedPane.setEnabledAt(3, true);
-					tabbedPane.setSelectedComponent(pnOrderList);
-					hip.getTable().setTableWithData(new Customer(cNo));	// 넘겨받은 고객번호로 검색한 데이터를 table에 넣는 메소드 ver.이유진
-					break;
-				default:
-					break;
-				}
-				// 각각 해당 패널에 setTxt 
-				pnCusEdit.setTxtInCusEdit(cNo, cName, dob, doJoin, phone);
-				pnOrderListMain.setTxtInHairIfo(cNo, cName, dob);
-				pnOrderListMain.reloadData();
-				
+				clickAndGetDataFromTable();
 			}
-		
-		
 		});
 		
 		pnCusAdd = new CustomerManageInsert();
@@ -414,6 +378,57 @@ public class HairMain extends JFrame {
 	}
 	protected void btnOrderActionPerformed(ActionEvent e) {
 		pnHairOderMain.insertBizByOrder();
+		
+	}
+	
+	private void clickAndGetDataFromTable() {
+		
+		cNo = Integer.parseInt(tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 0).toString()); // 선택한 열의 0번째 인덱스 행을 출력
+		cName = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 1).toString();
+		dob = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 2).toString();
+		doJoin = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 3).toString();
+		phone = tableInSearch.getValueAt(tableInSearch.getSelectedRow(), 4).toString();
+		Object[] options ={"수정","삭제","주문","헤어정보"};
+		
+		int jopBtnIndex = JOptionPane.showOptionDialog(null, cName+"["+dob+", "+phone+"]", "회원 관리", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, null, options, options[3]);
+		
+		switch (jopBtnIndex) {
+		case 0:		
+			System.out.println("JOptionPane btn index: "+jopBtnIndex);
+			CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
+	        cl.show(pnCusSearchCards, "name_1666378783739869");
+	        btnSave.setEnabled(true);
+	        cardIndex =2;
+	        pnHairOderMain.setTxtInOrder(cNo, cName); // 수정된 내역이 있더라도 DB와 관련된것은 변동이 없는 cNo뿐이라 무관함. 
+			break;
+		case 1:
+			int jopi = JOptionPane.showConfirmDialog(null, cName+"회원을 정말 삭제하시겠습니까?");
+			if (jopi == 0) {
+				// 수정요망
+				Customer cForDel = new Customer();
+				cForDel.setcDel(true);
+				cForDel.setcNo(cNo);
+				CustomerService.getInstance().deleteCustomer(cForDel);
+			}
+			
+			break;
+		case 2:
+			tabbedPane.setSelectedComponent(pnHairOder);
+			pnHairOderMain.setTxtInOrder(cNo, cName);
+			tabbedPane.setEnabledAt(3, true);
+			break;
+		case 3:
+			tabbedPane.setEnabledAt(3, true);
+			tabbedPane.setSelectedComponent(pnOrderList);
+			hip.getTable().setTableWithData(new Customer(cNo));	// 넘겨받은 고객번호로 검색한 데이터를 table에 넣는 메소드 ver.이유진
+			break;
+		default:
+			break;
+		}
+		// 각각 해당 패널에 setTxt 
+		pnCusEdit.setTxtInCusEdit(cNo, cName, dob, doJoin, phone);
+		pnOrderListMain.setTxtInHairIfo(cNo, cName, dob);
+		pnOrderListMain.reloadData();
 		
 	}
 }
