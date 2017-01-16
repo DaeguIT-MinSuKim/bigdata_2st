@@ -9,12 +9,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.MenuElement;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -33,6 +37,8 @@ import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrder;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrderSearch;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class HairMain extends JFrame {
 
@@ -76,6 +82,7 @@ public class HairMain extends JFrame {
 	private BizHairTotalReport panel_1;
 	private ChartPanelP panel;
 	private JFreeChart chart;
+	private JPopupMenu popup;
 
 	/**
 	 * Launch the application.
@@ -137,6 +144,18 @@ public class HairMain extends JFrame {
 		
 		
 		pnSearchSub = new CustomerSearch();		
+		pnSearchSub.getTableForAll().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				pnSearchSubTableForAllMouseReleased(arg0);
+			}
+		});
+		pnSearchSub.getTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				pnSearchSubTableForAllMouseReleased(arg0);
+			}
+		});
 		
 		pnCusSearchCards.add(pnSearchSub, "name_1666323161344197");
 		tableInSearch = pnSearchSub.getTable();
@@ -153,9 +172,9 @@ public class HairMain extends JFrame {
 		tableInSearchForAll.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				
+			public void valueChanged(ListSelectionEvent e) {				
 				clickAndGetDataFromTable(tableInSearchForAll);
+				
 			}
 		});
 		
@@ -306,7 +325,9 @@ public class HairMain extends JFrame {
 		
 		pnBizGraphMain = new JPanel();
 		pnBizGraphMain.setBackground(new Color(255, 192, 203));
-		pnBizGraph.add(pnBizGraphMain, BorderLayout.CENTER);		
+		pnBizGraph.add(pnBizGraphMain, BorderLayout.CENTER);	
+		
+		
 	}
 	
 
@@ -389,47 +410,64 @@ public class HairMain extends JFrame {
 		dob = table.getValueAt(table.getSelectedRow(), 2).toString();
 		doJoin = table.getValueAt(table.getSelectedRow(), 3).toString();
 		phone = table.getValueAt(table.getSelectedRow(), 4).toString();
-		Object[] options ={"수정","삭제","주문","헤어정보"};
 		
-		int jopBtnIndex = JOptionPane.showOptionDialog(null, cName+"["+dob+", "+phone+"]", "회원 관리", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, null, options, options[3]);
-		
-		switch (jopBtnIndex) {
-		case 0:		
-			System.out.println("JOptionPane btn index: "+jopBtnIndex);
-			CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
-	        cl.show(pnCusSearchCards, "name_1666378783739869");
-	        btnSave.setEnabled(true);
-	        cardIndex =2;
-	        pnHairOderMain.setTxtInOrder(cNo, cName); // 수정된 내역이 있더라도 DB와 관련된것은 변동이 없는 cNo뿐이라 무관함. 
-			break;
-		case 1:
-			int jopi = JOptionPane.showConfirmDialog(null, cName+"회원을 정말 삭제하시겠습니까?");
-			if (jopi == 0) {
-				// 수정요망
-				Customer cForDel = new Customer();
-				cForDel.setcDel(true);
-				cForDel.setcNo(cNo);
-				CustomerService.getInstance().deleteCustomer(cForDel);
-			}
-			
-			break;
-		case 2:
-			tabbedPane.setSelectedComponent(pnHairOder);
-			pnHairOderMain.setTxtInOrder(cNo, cName);
-			tabbedPane.setEnabledAt(3, true);
-			break;
-		case 3:
-			tabbedPane.setEnabledAt(3, true);
-			tabbedPane.setSelectedComponent(pnOrderList);
-			hip.getTable().setTableWithData(new Customer(cNo));	// 넘겨받은 고객번호로 검색한 데이터를 table에 넣는 메소드 ver.이유진
-			break;
-		default:
-			break;
-		}
-		// 각각 해당 패널에 setTxt 
 		pnCusEdit.setTxtInCusEdit(cNo, cName, dob, doJoin, phone);
 		pnOrderListMain.setTxtInHairIfo(cNo, cName, dob);
 		pnOrderListMain.reloadData();
 		
+		
+	}
+	protected void pnSearchSubTableForAllMouseReleased(MouseEvent e) {
+		clickAndGetDataFromTable(tableInSearchForAll);
+		
+		int r = tableInSearchForAll.rowAtPoint(e.getPoint());
+        if (r >= 0 && r < tableInSearchForAll.getRowCount()) {
+        	tableInSearchForAll.setRowSelectionInterval(r, r);
+        } else {
+        	tableInSearchForAll.clearSelection();
+        }
+
+        int rowindex = tableInSearchForAll.getSelectedRow();
+        if (rowindex < 0)
+            return;
+        if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
+        	JPopupMenu popup = new JPopupMenu(); //우클릭시 팝업 메뉴 등장
+    		popup.add(new JMenuItem(new AbstractAction("수정") {
+                public void actionPerformed(ActionEvent e) {
+                	CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
+        	        cl.show(pnCusSearchCards, "name_1666378783739869");
+        	        btnSave.setEnabled(true);
+        	        cardIndex =2;
+        	        pnHairOderMain.setTxtInOrder(cNo, cName); // 수정된 내역이 있더라도 DB와 관련된것은 변동이 없는 cNo뿐이라 무관함. 
+        			
+                }
+            }));
+    		popup.add(new JMenuItem(new AbstractAction("삭제") {
+    	            public void actionPerformed(ActionEvent e) {
+    	            	int jopi = JOptionPane.showConfirmDialog(null, cName+"회원을 정말 삭제하시겠습니까?");
+    	    			if (jopi == 0) {
+    	    				Customer cForDel = new Customer();
+    	    				cForDel.setcDel(true);
+    	    				cForDel.setcNo(cNo);
+    	    				CustomerService.getInstance().deleteCustomer(cForDel);
+    	    			}
+    	            }
+    	    }));
+    		popup.add(new JMenuItem(new AbstractAction("주문") {
+    	            public void actionPerformed(ActionEvent e) {
+    	            	tabbedPane.setSelectedComponent(pnHairOder);
+    	    			pnHairOderMain.setTxtInOrder(cNo, cName);
+    	    			tabbedPane.setEnabledAt(3, true);
+    	            }
+    	    }));
+    		popup.add(new JMenuItem(new AbstractAction("헤어정보") {
+    	            public void actionPerformed(ActionEvent e) {
+    	            	tabbedPane.setEnabledAt(3, true);
+    	    			tabbedPane.setSelectedComponent(pnOrderList);
+    	    			hip.getTable().setTableWithData(new Customer(cNo));
+    	            }
+    	    }));
+            popup.show(e.getComponent(), e.getX(), e.getY());
+        }
 	}
 }
