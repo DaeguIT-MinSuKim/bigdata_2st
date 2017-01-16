@@ -369,9 +369,10 @@ public class HairMain extends JFrame {
 		}  
 		
 	}
-	protected void btnHairInfoActionPerformed(ActionEvent e) {
+	protected void btnHairInfoActionPerformed(ActionEvent e) { // 테이블 보이기 추가
 		tabbedPane.setEnabledAt(3, true);
 		tabbedPane.setSelectedComponent(pnOrderList);
+		hip.getTable().setTableWithData(new Customer(cNo));
 	}
 	protected void btnToMainActionPerformed(ActionEvent e) {
 		tabbedPane.setSelectedComponent(pnHome);
