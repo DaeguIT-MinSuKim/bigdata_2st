@@ -39,6 +39,7 @@ import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrder;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrderSearch;
+import java.awt.SystemColor;
 
 public class HairMain extends JFrame {
 
@@ -223,7 +224,12 @@ public class HairMain extends JFrame {
 		pnHairOder.setLayout(new BorderLayout(0, 0));
 		
 		pnHairOderMain = new HairOrder();
-		pnHairOderMain.setBackground(new Color(255, 192, 203));
+		pnHairOderMain.getTfTotal().setEditable(false);
+		pnHairOderMain.getTfEDiscount().setEditable(false);
+		pnHairOderMain.getTfENo().setEditable(false);
+		pnHairOderMain.getTfHNo().setEditable(false);
+		pnHairOderMain.getTfHPrice().setEditable(false);
+		pnHairOderMain.setBackground(SystemColor.menu);
 		pnHairOder.add(pnHairOderMain, BorderLayout.CENTER);
 		
 		pnHairOderBtns = new JPanel();

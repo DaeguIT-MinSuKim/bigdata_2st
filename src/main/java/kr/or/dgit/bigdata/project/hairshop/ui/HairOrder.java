@@ -1,7 +1,9 @@
 package kr.or.dgit.bigdata.project.hairshop.ui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.Time;
@@ -9,9 +11,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -46,137 +50,150 @@ public class HairOrder extends JPanel {
 	private Double dHe;
 	private Date nowDate;
 	private Time nowTime;
-
+	private JTable table;
+	
 	/**
 	 * Create the panel.
 	 */
 	public HairOrder() {
 		setForeground(Color.BLUE);
-		setBorder(new EmptyBorder(15, 10, 10, 10));
-		setLayout(new GridLayout(0, 4, 10, 10));
+		setBorder(new EmptyBorder(0, 0, 10, 0));
+		setLayout(new BorderLayout(0, 0));
+		
+		JPanel pnForOrderMain = new JPanel();
+		add(pnForOrderMain);
+		pnForOrderMain.setLayout(new GridLayout(0, 4, 10, 10));
 		
 		JLabel lblBNo = new JLabel("영업번호");
+		pnForOrderMain.add(lblBNo);
 		lblBNo.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblBNo);
 		
 		tfBNo = new JTextField();
+		pnForOrderMain.add(tfBNo);
 		tfBNo.setEditable(false);
-		add(tfBNo);
 		tfBNo.setColumns(10);
 		
 		JLabel lblGap1 = new JLabel("");
-		add(lblGap1);
+		pnForOrderMain.add(lblGap1);
 		
 		JLabel lblGap2 = new JLabel("");
-		add(lblGap2);
+		pnForOrderMain.add(lblGap2);
 		
 		JLabel lblBData = new JLabel("영업일자");
+		pnForOrderMain.add(lblBData);
 		lblBData.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblBData);
 		
 		tfBDate = new JTextField();
+		pnForOrderMain.add(tfBDate);
 		tfBDate.setEditable(false);
-		add(tfBDate);
 		tfBDate.setColumns(10);
 		
 		JLabel lblBTime = new JLabel("방문시간");
+		pnForOrderMain.add(lblBTime);
 		lblBTime.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblBTime);
 		
 		tfBTime = new JTextField();
+		pnForOrderMain.add(tfBTime);
 		tfBTime.setEditable(false);
-		add(tfBTime);
 		tfBTime.setColumns(10);
 		
 		JLabel lblCName = new JLabel("고객명");
+		pnForOrderMain.add(lblCName);
 		lblCName.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblCName);
 		
 		tfCName = new JTextField();
+		pnForOrderMain.add(tfCName);
 		tfCName.setEditable(false);
-		add(tfCName);
 		tfCName.setColumns(10);
 		
 		JLabel lblCNO = new JLabel("고객번호");
+		pnForOrderMain.add(lblCNO);
 		lblCNO.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblCNO);
 		
 		tfCNo = new JTextField();
+		pnForOrderMain.add(tfCNo);
 		tfCNo.setEditable(false);
-		add(tfCNo);
 		tfCNo.setColumns(10);
 		
 		JLabel lblHName = new JLabel("헤어명");
+		pnForOrderMain.add(lblHName);
 		lblHName.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblHName);
 		
 		cmbHName = new JComboBox();
+		pnForOrderMain.add(cmbHName);
 		cmbHName.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				cmbHNameItemStateChanged(arg0);
 			}
 		});
 		cmbHName.setModel(new DefaultComboBoxModel(hairArr));
-		add(cmbHName);
 		
 		JLabel lblHNO = new JLabel("헤어번호");
+		pnForOrderMain.add(lblHNO);
 		lblHNO.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblHNO);
 		
 		tfHNo = new JTextField();
-		add(tfHNo);
+		pnForOrderMain.add(tfHNo);
 		tfHNo.setColumns(10);
 		
 		JLabel lblHPrice = new JLabel("단가");
+		pnForOrderMain.add(lblHPrice);
 		lblHPrice.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblHPrice);
 		
 		tfHPrice = new JTextField();
-		add(tfHPrice);
+		pnForOrderMain.add(tfHPrice);
 		tfHPrice.setColumns(10);
 		
 		JLabel lblGap3 = new JLabel("");
-		add(lblGap3);
+		pnForOrderMain.add(lblGap3);
 		
 		JLabel lblGap4 = new JLabel("");
-		add(lblGap4);
+		pnForOrderMain.add(lblGap4);
 		
 		JLabel lblEName = new JLabel("이벤트명");
+		pnForOrderMain.add(lblEName);
 		lblEName.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblEName);
 		
 		cmbEName = new JComboBox();
+		pnForOrderMain.add(cmbEName);
 		cmbEName.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				cmbENameItemStateChanged(e);
 			}
 		});
 		cmbEName.setModel(new DefaultComboBoxModel(eventArr));
-		add(cmbEName);
 		
 		JLabel lblEDiscount = new JLabel("할인율");
+		pnForOrderMain.add(lblEDiscount);
 		lblEDiscount.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblEDiscount);
 		
 		tfEDiscount = new JTextField();
-		add(tfEDiscount);
+		pnForOrderMain.add(tfEDiscount);
 		tfEDiscount.setColumns(10);
 		
 		JLabel lblENO = new JLabel("이벤트번호");
+		pnForOrderMain.add(lblENO);
 		lblENO.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblENO);
 		
 		tfENo = new JTextField();
-		add(tfENo);
+		pnForOrderMain.add(tfENo);
 		tfENo.setColumns(10);
 		
 		JLabel lblTotalPrice = new JLabel("금액");
+		pnForOrderMain.add(lblTotalPrice);
 		lblTotalPrice.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblTotalPrice);
 		
 		tfTotal = new JTextField();
-		add(tfTotal);
+		pnForOrderMain.add(tfTotal);
 		tfTotal.setColumns(10);
+		
+		JPanel pnForTableAndIcons = new JPanel();
+		add(pnForTableAndIcons, BorderLayout.SOUTH);
+		pnForTableAndIcons.setLayout(new BorderLayout(0, 0));
+		
+		table = new JTable();
+		pnForTableAndIcons.add(table);
+		
 		
 		
 	}
