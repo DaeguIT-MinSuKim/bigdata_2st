@@ -139,10 +139,7 @@ public class HairMain extends JFrame {
 		pnCusSearch.add(pnCusSearchCards, BorderLayout.CENTER);
 		pnCusSearchCards.setLayout(new CardLayout(0, 0));
 		
-		tableInSearch = pnSearchSub.getTable();
 		
-		
-		tableInSearchForAll = pnSearchSub.getTableForAll();
 		
 		
 		
@@ -162,7 +159,8 @@ public class HairMain extends JFrame {
 		
 		pnCusSearchCards.add(pnSearchSub, "name_1666323161344197");
 		
-		
+		tableInSearch = pnSearchSub.getTable();
+		tableInSearchForAll = pnSearchSub.getTableForAll();
 		
 		pnCusAdd = new CustomerManageInsert();
 		pnCusSearchCards.add(pnCusAdd, "name_1666358524774753");
