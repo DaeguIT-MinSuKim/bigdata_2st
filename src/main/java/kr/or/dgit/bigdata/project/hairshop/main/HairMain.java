@@ -42,7 +42,7 @@ public class HairMain extends JFrame {
 	private JPanel pnHairOder;
 	private JPanel pnOrderList;
 	private JPanel pnBizList;
-	private JPanel pnBizGraph;
+	private JPanel pnBizGraph;  
 	private JTabbedPane tabbedPane;
 	private JPanel pnHomeMain;
 	private JPanel pnCusSearchCards;
