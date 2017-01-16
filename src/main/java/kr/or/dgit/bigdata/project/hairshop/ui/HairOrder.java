@@ -241,6 +241,11 @@ public class HairOrder extends JPanel {
 		pnSubAdd.add(pnAddBtnSub, BorderLayout.SOUTH);
 		
 		JButton btnAdd = new JButton("회원 바로 등록");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnAddActionPerformed(arg0);
+			}
+		});
 		pnAddBtnSub.add(btnAdd);
 		
 		scrollPane = new JScrollPane();
@@ -393,6 +398,7 @@ public class HairOrder extends JPanel {
 			List<Customer> listByAll = CustomerService.getInstance().selectByAll();
 			int newCno =listByAll.size()+1;
 			pnAddInput.getTxtCno().setText(newCno+"");
+			pnAddInput.getTxtCname().setText(tfCName.getText());
 			CardLayout cl = (CardLayout)(pnCards.getLayout());
 	        cl.show(pnCards, "name_30981526616213");
 		}else{
@@ -433,5 +439,11 @@ public class HairOrder extends JPanel {
 	}
 	protected void btnSearchActionPerformed(ActionEvent arg0) {
 		reloadData();
+	}
+	protected void btnAddActionPerformed(ActionEvent arg0) {
+		int jop= JOptionPane.showConfirmDialog(null, pnAddInput.getTxtCname().getText()+" 신규회원 정보를 추가하겠습니까?");
+		if (jop == 0) {
+			pnAddInput.insertNewCostomer();
+		}
 	}
 }
