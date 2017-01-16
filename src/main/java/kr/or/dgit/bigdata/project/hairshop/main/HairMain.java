@@ -111,6 +111,7 @@ public class HairMain extends JFrame {
 	 * Create the frame.
 	 */
 	public HairMain() {
+		setTitle("DGIT HAIR");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1100, 700);
 		contentPane = new JPanel();
