@@ -418,7 +418,7 @@ public class HairMain extends JFrame {
 		
 	}
 	protected void pnSearchSubTableForAllMouseReleased(MouseEvent e) {
-		clickAndGetDataFromTable(tableInSearchForAll);
+		
 		
 		int r = tableInSearchForAll.rowAtPoint(e.getPoint());
         if (r >= 0 && r < tableInSearchForAll.getRowCount()) {
