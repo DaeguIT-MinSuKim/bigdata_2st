@@ -139,7 +139,10 @@ public class HairMain extends JFrame {
 		pnCusSearch.add(pnCusSearchCards, BorderLayout.CENTER);
 		pnCusSearchCards.setLayout(new CardLayout(0, 0));
 		
-
+		tableInSearch = pnSearchSub.getTable();
+		
+		
+		tableInSearchForAll = pnSearchSub.getTableForAll();
 		
 		
 		
@@ -147,36 +150,19 @@ public class HairMain extends JFrame {
 		pnSearchSub.getTableForAll().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				pnSearchSubTableForAllMouseReleased(arg0);
+				pnSearchSubTableForAllMouseReleased(arg0 ,tableInSearchForAll);
 			}
 		});
 		pnSearchSub.getTable().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				pnSearchSubTableForAllMouseReleased(arg0);
+				pnSearchSubTableForAllMouseReleased(arg0, tableInSearch);
 			}
 		});
 		
 		pnCusSearchCards.add(pnSearchSub, "name_1666323161344197");
-		tableInSearch = pnSearchSub.getTable();
-		tableInSearch.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-				
-				@Override
-				public void valueChanged(ListSelectionEvent e) {
-					
-					clickAndGetDataFromTable(tableInSearch);
-				}
-			});
 		
-		tableInSearchForAll = pnSearchSub.getTableForAll();
-		tableInSearchForAll.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			
-			@Override
-			public void valueChanged(ListSelectionEvent e) {				
-				clickAndGetDataFromTable(tableInSearchForAll);
-				
-			}
-		});
+		
 		
 		pnCusAdd = new CustomerManageInsert();
 		pnCusSearchCards.add(pnCusAdd, "name_1666358524774753");
@@ -417,20 +403,21 @@ public class HairMain extends JFrame {
 		
 		
 	}
-	protected void pnSearchSubTableForAllMouseReleased(MouseEvent e) {
+	protected void pnSearchSubTableForAllMouseReleased(MouseEvent e ,JTable jt) {
 		
 		
-		int r = tableInSearchForAll.rowAtPoint(e.getPoint());
-        if (r >= 0 && r < tableInSearchForAll.getRowCount()) {
-        	tableInSearchForAll.setRowSelectionInterval(r, r);
+		int r = jt.rowAtPoint(e.getPoint());
+        if (r >= 0 && r < jt.getRowCount()) {
+        	jt.setRowSelectionInterval(r, r);
         } else {
-        	tableInSearchForAll.clearSelection();
+        	jt.clearSelection();
         }
 
-        int rowindex = tableInSearchForAll.getSelectedRow();
+        int rowindex = jt.getSelectedRow();
         if (rowindex < 0)
             return;
         if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
+        	clickAndGetDataFromTable(jt);
         	JPopupMenu popup = new JPopupMenu(); //우클릭시 팝업 메뉴 등장
     		popup.add(new JMenuItem(new AbstractAction("수정") {
                 public void actionPerformed(ActionEvent e) {
