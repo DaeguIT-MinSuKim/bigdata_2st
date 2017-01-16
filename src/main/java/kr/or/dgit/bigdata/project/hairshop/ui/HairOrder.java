@@ -3,22 +3,32 @@ package kr.or.dgit.bigdata.project.hairshop.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.Time;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import org.apache.log4j.lf5.util.DateFormatManager;
 
@@ -30,6 +40,7 @@ import kr.or.dgit.bigdata.project.hairshop.service.BizService;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.service.HairEventService;
 import kr.or.dgit.bigdata.project.hairshop.service.HairinfoService;
+import java.awt.CardLayout;
 
 public class HairOrder extends JPanel {
 	private JTextField tfBNo;
@@ -42,7 +53,7 @@ public class HairOrder extends JPanel {
 	private JTextField tfEDiscount;
 	private JTextField tfENo;
 	private JTextField tfTotal;
-	 String[] eventArr = {"기획", "생일", "일반", "조조"};
+	String[] eventArr = {"기획", "생일", "일반", "조조"};
 	String[] hairArr = {"커트", "드라이", "샴푸", "펌", "매직", "트리트먼트", "앰플", "기타"};
 	private JComboBox cmbHName;
 	private JComboBox cmbEName;
@@ -51,6 +62,11 @@ public class HairOrder extends JPanel {
 	private Date nowDate;
 	private Time nowTime;
 	private JTable table;
+	private JPanel pnResult;
+	private JScrollPane scrollPane;
+	private JPanel pnCards;
+	private JPanel pnImg;
+	private CustomerManageInsert pnAddInput;
 	
 	/**
 	 * Create the panel.
@@ -58,7 +74,7 @@ public class HairOrder extends JPanel {
 	public HairOrder() {
 		setForeground(Color.BLUE);
 		setBorder(new EmptyBorder(0, 0, 10, 0));
-		setLayout(new BorderLayout(0, 0));
+		setLayout(new GridLayout(0, 1, 0, 10));
 		
 		JPanel pnForOrderMain = new JPanel();
 		add(pnForOrderMain);
@@ -101,10 +117,21 @@ public class HairOrder extends JPanel {
 		pnForOrderMain.add(lblCName);
 		lblCName.setHorizontalAlignment(SwingConstants.CENTER);
 		
+		JPanel pnForCName = new JPanel();
+		pnForOrderMain.add(pnForCName);
+		pnForCName.setLayout(new BorderLayout(0, 0));
+		
 		tfCName = new JTextField();
-		pnForOrderMain.add(tfCName);
-		tfCName.setEditable(false);
+		pnForCName.add(tfCName);
 		tfCName.setColumns(10);
+		
+		JButton btnSearch = new JButton("검색");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnSearchActionPerformed(arg0);
+			}
+		});
+		pnForCName.add(btnSearch, BorderLayout.EAST);
 		
 		JLabel lblCNO = new JLabel("고객번호");
 		pnForOrderMain.add(lblCNO);
@@ -187,14 +214,42 @@ public class HairOrder extends JPanel {
 		pnForOrderMain.add(tfTotal);
 		tfTotal.setColumns(10);
 		
-		JPanel pnForTableAndIcons = new JPanel();
-		add(pnForTableAndIcons, BorderLayout.SOUTH);
-		pnForTableAndIcons.setLayout(new BorderLayout(0, 0));
+		pnResult = new JPanel();
+		add(pnResult);
+		pnResult.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		pnCards = new JPanel();
+		pnResult.add(pnCards);
+		pnCards.setLayout(new CardLayout(0, 0));
+		
+		pnImg = new JPanel();
+		pnCards.add(pnImg, "name_31439583877535");
+		pnImg.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblImg = new JLabel("");
+		pnImg.add(lblImg);
+		lblImg.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\bigdata_2st\\img\\HairEtc.jpg"));
+		
+		JPanel pnSubAdd = new JPanel();
+		pnCards.add(pnSubAdd, "name_30981526616213");
+		pnSubAdd.setLayout(new BorderLayout(0, 0));
+		
+		pnAddInput = new CustomerManageInsert();
+		pnSubAdd.add(pnAddInput, BorderLayout.CENTER);
+		
+		JPanel pnAddBtnSub = new JPanel();
+		pnSubAdd.add(pnAddBtnSub, BorderLayout.SOUTH);
+		
+		JButton btnAdd = new JButton("회원 바로 등록");
+		pnAddBtnSub.add(btnAdd);
+		
+		scrollPane = new JScrollPane();
+		pnResult.add(scrollPane);
 		
 		table = new JTable();
-		pnForTableAndIcons.add(table);
-		
-		
+		table.setCellSelectionEnabled(true);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(table);
 		
 	}
 	public void setTxtInOrder(int cNo, String cName){
@@ -317,4 +372,66 @@ public class HairOrder extends JPanel {
 		this.tfTotal = tfTotal;
 	}
 	
+	
+	public JTable getTable() {
+		return table;
+	}
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+	private void reloadData() {
+		DefaultTableModel model = new DefaultTableModel(getRowData(tfCName.getText()), getColumnData());
+		table.setModel(model);
+		tableSetAlignWith();		
+	}
+
+	String[][] getRowData(String cName) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("cName", cName);
+		List<Customer> list = CustomerService.getInstance().searchCustomerByName(map);
+		if (list.size() == 0) {//리스트 읽어들인뒤 결과따라 좌측 패널 연동
+			List<Customer> listByAll = CustomerService.getInstance().selectByAll();
+			int newCno =listByAll.size()+1;
+			pnAddInput.getTxtCno().setText(newCno+"");
+			CardLayout cl = (CardLayout)(pnCards.getLayout());
+	        cl.show(pnCards, "name_30981526616213");
+		}else{
+			CardLayout cl = (CardLayout)(pnCards.getLayout());
+	        cl.show(pnCards, "name_30956037040404");
+		}
+		String[][] rowDatas = new String[list.size()][];
+		for (int i = 0; i < list.size(); i++) {
+			rowDatas[i] = list.get(i).toArray();
+		}
+		
+		return rowDatas;
+	}
+
+	String[] getColumnData() {
+
+		return new String[] { "고객 번호", "고객명", "생년월일", "가입일자", "전화번호" };
+	}
+	
+	protected void tableSetWidth(int... width) {//
+		TableColumnModel model = table.getColumnModel();
+		for (int i = 0; i < width.length; i++) {
+			model.getColumn(i).setPreferredWidth(width[i]);
+		}
+	}
+	protected void tableSetAlignWith() {//
+		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4);
+		tableSetWidth(60, 100, 200, 200, 200);
+	}
+	
+	protected void tableCellAlignment(int align, int... idx) {//
+		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
+		dtcr.setHorizontalAlignment(align);
+		TableColumnModel model = table.getColumnModel();
+		for (int i = 0; i < idx.length; i++) {
+			model.getColumn(idx[i]).setCellRenderer(dtcr);
+		}
+	}
+	protected void btnSearchActionPerformed(ActionEvent arg0) {
+		reloadData();
+	}
 }

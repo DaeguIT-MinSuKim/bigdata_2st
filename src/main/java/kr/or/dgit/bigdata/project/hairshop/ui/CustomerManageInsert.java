@@ -2,6 +2,8 @@ package kr.or.dgit.bigdata.project.hairshop.ui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.swing.JLabel;
@@ -122,10 +124,11 @@ public class CustomerManageInsert extends JPanel {
 		JPanel pnDJ = new JPanel();
 		pnDJ.setBorder(new EmptyBorder(0, 0, 0, 0));
 		pnInsert.add(pnDJ);
-		pnDJ.setLayout(new GridLayout(0, 5, 0, 0));
-		
+		pnDJ.setLayout(new GridLayout(0, 5, 0, 0));//
+		Calendar cal = Calendar.getInstance();
 		txtDJ1 = new JTextField();
 		txtDJ1.setColumns(10);
+		txtDJ1.setText(cal.get(cal.YEAR)+"");
 		pnDJ.add(txtDJ1);
 		
 		JLabel label_2 = new JLabel("-");
@@ -134,6 +137,7 @@ public class CustomerManageInsert extends JPanel {
 		
 		txtDJ2 = new JTextField();
 		txtDJ2.setColumns(10);
+		txtDJ2.setText((cal.get(cal.MONTH)+1)+"");
 		pnDJ.add(txtDJ2);
 		
 		JLabel label_3 = new JLabel("-");
@@ -142,6 +146,7 @@ public class CustomerManageInsert extends JPanel {
 		
 		txtDJ3 = new JTextField();
 		txtDJ3.setColumns(10);
+		txtDJ3.setText(cal.get(cal.DATE)+"");
 		pnDJ.add(txtDJ3);
 		
 		JPanel pnTable = new JPanel();
@@ -265,7 +270,7 @@ public class CustomerManageInsert extends JPanel {
 		int d3 = Integer.parseInt(txtD3.getText());
 		
 		int dj1 = Integer.parseInt(txtDJ1.getText());
-		int dj2 = Integer.parseInt(txtDJ2.getText());
+		int dj2 = Integer.parseInt(txtDJ2.getText())-1;
 		int dj3 = Integer.parseInt(txtDJ3.getText());
 		
 		String phoneNumber =  txtP1.getText()+"-"+txtP2.getText()+"-"+txtP3.getText();

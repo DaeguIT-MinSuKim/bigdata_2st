@@ -220,7 +220,7 @@ public class HairMain extends JFrame {
 		pnHairOder = new JPanel();
 		tabbedPane.addTab("헤어주문", null, pnHairOder, null);
 		pnHairOder.setToolTipText("헤어주문");
-		tabbedPane.setEnabledAt(2, false);
+		//tabbedPane.setEnabledAt(2, false);
 		pnHairOder.setLayout(new BorderLayout(0, 0));
 		
 		pnHairOderMain = new HairOrder();
@@ -364,7 +364,7 @@ public class HairMain extends JFrame {
 			if(directOderInAdd==0){
 				pnHairOderMain.setTxtInOrder(Integer.parseInt(pnCusAdd.getTxtCno().getText()),pnCusAdd.getTxtCname().getText());
 				tabbedPane.setSelectedComponent(pnHairOder);
-				tabbedPane.setEnabledAt(2, true);
+				//tabbedPane.setEnabledAt(2, true);
 			}
 			cardIndex =0;
 			
@@ -375,7 +375,7 @@ public class HairMain extends JFrame {
 			if(directOderInEdit==0){
 				pnHairOderMain.setTxtInOrder(Integer.parseInt(pnCusEdit.getTxtCno().getText()),pnCusEdit.getTxtCname().getText());
 				tabbedPane.setSelectedComponent(pnHairOder);
-				tabbedPane.setEnabledAt(2, true);
+				//tabbedPane.setEnabledAt(2, true);
 			}
 			cardIndex =0;
 			break;
