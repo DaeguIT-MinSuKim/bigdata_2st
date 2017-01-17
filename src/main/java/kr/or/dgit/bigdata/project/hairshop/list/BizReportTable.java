@@ -89,7 +89,7 @@ public class BizReportTable extends JTable {
 
 	public static String[] getcntSumIntValue(HashMap<String, Object> searchMap) {
 		// DB에서 계산하여 넘어온 더블형의 값을 int로 변환
-		HashMap<String,Object> calList = BizService.getInstance().selectYearOrMonthFromBizCalTotal(searchMap);
+		HashMap<String,Object> calList = BizService.getInstance().selectBizWithYearMonthCalTotal(searchMap);
 		double dSum = (Double) calList.get("sum");
 		int iSum = (int)(dSum);
 		return new String[]{calList.get("cnt")+"건",String.format("%,d 원", iSum)};

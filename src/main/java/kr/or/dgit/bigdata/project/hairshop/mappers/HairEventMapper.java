@@ -17,12 +17,16 @@ public interface HairEventMapper {
 	@Select("select * from event where eNo=#{eNo}")
 	public HairEvent selectEventByNo(HairEvent hairEvent);
 	
-	@Insert("insert into event(eName, eDiscount) values(#{eName},#{eDiscount}")
+	@Insert("insert into event(eName, eDiscount) values(#{eName},#{eDiscount})")
 	public void insertEvent(HairEvent event);
 	
-	@Update("update event set(eName=#{eName}, eDiscount=#{eDiscount}) where eNo=#{eNo}")
+	@Update("update event set eName=#{eName}, eDiscount=#{eDiscount} where eNo=#{eNo}")
 	public void updateEvent(HairEvent event);
 	
 	@Delete("delete from event where eNo=#{eNo}")
 	public void deleteEvent(HairEvent event);
+	
+	/* Test용 필요 - 임시 */
+	@Select("select * from event where eName=#{eName}")
+	public HairEvent selectEventByName(HairEvent hairEvent);
 }

@@ -3,9 +3,12 @@ package kr.or.dgit.bigdata.project.hairshop.test;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 import kr.or.dgit.bigdata.project.hairshop.list.DatePanel;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
@@ -46,6 +49,7 @@ public class TestCSearch extends JFrame {
 //		CustomerSearch panel = new CustomerSearch();
 //		contentPane.add(panel, BorderLayout.CENTER);
 		DatePanel dp = new DatePanel();
+		
 		contentPane.add(dp, BorderLayout.CENTER);
 	}
 

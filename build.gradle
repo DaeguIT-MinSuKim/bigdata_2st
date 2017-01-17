@@ -12,10 +12,10 @@ tasks.withType(JavaCompile) {
 } 
 
 jar {
-	mainClassName = 'kr.co.dgit.bigdate.mybatis_dev.TeatMain'
+	mainClassName = 'kr.or.dgit.bigdata.project.hairshop.main.HairMain'
 
     manifest {
-        attributes 'Implementation-Title': 'School',
+        attributes 'Implementation-Title': 'HairShop',
                    'Implementation-Version': version
     }
     //  archiveName 'StudentManagement.jar' //archiveName속성을 지정하면 baseName속성이나 appendix속성은 무시된다. 
