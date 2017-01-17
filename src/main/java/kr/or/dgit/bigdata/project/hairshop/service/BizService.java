@@ -30,8 +30,6 @@ public class BizService {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-	
 	public List<Biz> selectBizAndHairInfoEvent() {
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectBizAndHairInfoEvent() - start");
@@ -45,9 +43,7 @@ public class BizService {
 			sqlSession.close();
 		}
 		
-	}
-	
-	
+	}	
 	
 	public List<Biz> selectBizAndHairInfoEventByDate(Biz biz) {
 		if (logger.isDebugEnabled()) {
@@ -91,31 +87,42 @@ public class BizService {
 			sqlSession.close();
 		}		
 	}
-	/* 유진 사용 - 죽은 메소드 */
-
-	/*
-	public List<Biz> selectYearOrMonthFromBiz(String startDate, String endDate) {
+	/* 유진 사용 */
+	public List<Biz> selectBizWithDates(String startDate, String endDate) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("selectYearOrMonthFromBiz() - start");
+			logger.debug("selectBizWithDates() - start");
 		}
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try {
 			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
-			return bizMapper.selectYearOrMonthFromBiz(startDate, endDate);
+			return bizMapper.selectBizWithDates(startDate, endDate);
 		} finally {
 			sqlSession.close();
 		}		
 	}
-	*/	
+
 	/* 유진 사용 */
-	public HashMap<String, Object> selectYearOrMonthFromBizCalTotal(HashMap<String, Object> searchMap) {
+	public HashMap<String, Object> selectBizWithYearMonthCalTotal(HashMap<String, Object> searchMap) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("selectYearOrMonthFromBizCalTotal(HashMap<String, Integer>) - start");
+			logger.debug("selectBizWithYearMonthCalTotal(HashMap<String, Integer>) - start");
 		}
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try {
 			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
-			return bizMapper.selectYearOrMonthFromBizCalTotal(searchMap);
+			return bizMapper.selectBizWithYearMonthCalTotal(searchMap);
+		} finally {
+			sqlSession.close();
+		}		
+	}
+	/* 유진 사용 */
+	public HashMap<String, Object> selectBizWithDatesCalTotal(String startDate, String endDate) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectBizWithDatesCalTotal(String, String) - start");
+		}
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
+			return bizMapper.selectBizWithDatesCalTotal(startDate, endDate);
 		} finally {
 			sqlSession.close();
 		}		

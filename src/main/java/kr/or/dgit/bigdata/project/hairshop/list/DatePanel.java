@@ -26,6 +26,7 @@ public class DatePanel extends JPanel {
 	    
 	    JDatePanelImpl datePanel = new JDatePanelImpl(model, prop);
 	    datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+	    datePicker.setTextEditable(true);
 		add(datePicker);		
 	}
 

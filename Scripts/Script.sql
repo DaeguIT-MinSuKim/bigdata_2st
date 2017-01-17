@@ -12,6 +12,14 @@ select * from biz;
 
 -- viewTable 생성 구문 변경 되었습니다. 유진
 CREATE OR REPLACE VIEW hairshop.view_biz
+AS select bNo, bDate, bTime, cNo, cName, cDel, 
+		hNo, hName, hPrice, eNo, eName, eDiscount, year(bDate) as `year` from hairshop.biz b 
+		left outer join hairshop.customer c on b.cNo = c.cNo
+		left outer join hairshop.hairinfo h on b.hNo = h.hNo 
+		left outer join hairshop.event e on b.eNo = e.eNo
+;
+
+CREATE OR REPLACE VIEW hairshop.view_biz
 AS select b.bNo, b.bDate,b.bTime,c.cNo,c.cName, c.cDel, 
 		h.hNo, h.hName, h.hPrice, e.eNo, e.eName, e.eDiscount, year(bDate) as `year` from hairshop.biz b 
 		left outer join hairshop.customer c on b.cNo = c.cNo
