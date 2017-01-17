@@ -1,20 +1,34 @@
 package kr.or.dgit.bigdata.project.hairshop.ui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.Time;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import org.apache.log4j.lf5.util.DateFormatManager;
 
@@ -26,6 +40,7 @@ import kr.or.dgit.bigdata.project.hairshop.service.BizService;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.service.HairEventService;
 import kr.or.dgit.bigdata.project.hairshop.service.HairinfoService;
+import java.awt.CardLayout;
 
 public class HairOrder extends JPanel {
 	private JTextField tfBNo;
@@ -38,7 +53,7 @@ public class HairOrder extends JPanel {
 	private JTextField tfEDiscount;
 	private JTextField tfENo;
 	private JTextField tfTotal;
-	 String[] eventArr = {"기획", "생일", "일반", "조조"};
+	String[] eventArr = {"기획", "생일", "일반", "조조"};
 	String[] hairArr = {"커트", "드라이", "샴푸", "펌", "매직", "트리트먼트", "앰플", "기타"};
 	private JComboBox cmbHName;
 	private JComboBox cmbEName;
@@ -46,138 +61,200 @@ public class HairOrder extends JPanel {
 	private Double dHe;
 	private Date nowDate;
 	private Time nowTime;
-
+	private JTable table;
+	private JPanel pnResult;
+	private JScrollPane scrollPane;
+	private JPanel pnCards;
+	private JPanel pnImg;
+	private CustomerManageInsert pnAddInput;
+	
 	/**
 	 * Create the panel.
 	 */
 	public HairOrder() {
 		setForeground(Color.BLUE);
-		setBorder(new EmptyBorder(15, 10, 10, 10));
-		setLayout(new GridLayout(0, 4, 10, 10));
+		setBorder(new EmptyBorder(0, 0, 10, 0));
+		setLayout(new GridLayout(0, 1, 0, 10));
+		
+		JPanel pnForOrderMain = new JPanel();
+		add(pnForOrderMain);
+		pnForOrderMain.setLayout(new GridLayout(0, 4, 10, 10));
 		
 		JLabel lblBNo = new JLabel("영업번호");
+		pnForOrderMain.add(lblBNo);
 		lblBNo.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblBNo);
 		
 		tfBNo = new JTextField();
+		pnForOrderMain.add(tfBNo);
 		tfBNo.setEditable(false);
-		add(tfBNo);
 		tfBNo.setColumns(10);
 		
 		JLabel lblGap1 = new JLabel("");
-		add(lblGap1);
+		pnForOrderMain.add(lblGap1);
 		
 		JLabel lblGap2 = new JLabel("");
-		add(lblGap2);
+		pnForOrderMain.add(lblGap2);
 		
 		JLabel lblBData = new JLabel("영업일자");
+		pnForOrderMain.add(lblBData);
 		lblBData.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblBData);
 		
 		tfBDate = new JTextField();
+		pnForOrderMain.add(tfBDate);
 		tfBDate.setEditable(false);
-		add(tfBDate);
 		tfBDate.setColumns(10);
 		
 		JLabel lblBTime = new JLabel("방문시간");
+		pnForOrderMain.add(lblBTime);
 		lblBTime.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblBTime);
 		
 		tfBTime = new JTextField();
+		pnForOrderMain.add(tfBTime);
 		tfBTime.setEditable(false);
-		add(tfBTime);
 		tfBTime.setColumns(10);
 		
 		JLabel lblCName = new JLabel("고객명");
+		pnForOrderMain.add(lblCName);
 		lblCName.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblCName);
+		
+		JPanel pnForCName = new JPanel();
+		pnForOrderMain.add(pnForCName);
+		pnForCName.setLayout(new BorderLayout(0, 0));
 		
 		tfCName = new JTextField();
-		tfCName.setEditable(false);
-		add(tfCName);
+		pnForCName.add(tfCName);
 		tfCName.setColumns(10);
 		
+		JButton btnSearch = new JButton("검색");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnSearchActionPerformed(arg0);
+			}
+		});
+		pnForCName.add(btnSearch, BorderLayout.EAST);
+		
 		JLabel lblCNO = new JLabel("고객번호");
+		pnForOrderMain.add(lblCNO);
 		lblCNO.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblCNO);
 		
 		tfCNo = new JTextField();
+		pnForOrderMain.add(tfCNo);
 		tfCNo.setEditable(false);
-		add(tfCNo);
 		tfCNo.setColumns(10);
 		
 		JLabel lblHName = new JLabel("헤어명");
+		pnForOrderMain.add(lblHName);
 		lblHName.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblHName);
 		
 		cmbHName = new JComboBox();
+		pnForOrderMain.add(cmbHName);
 		cmbHName.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				cmbHNameItemStateChanged(arg0);
 			}
 		});
 		cmbHName.setModel(new DefaultComboBoxModel(hairArr));
-		add(cmbHName);
 		
 		JLabel lblHNO = new JLabel("헤어번호");
+		pnForOrderMain.add(lblHNO);
 		lblHNO.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblHNO);
 		
 		tfHNo = new JTextField();
-		add(tfHNo);
+		pnForOrderMain.add(tfHNo);
 		tfHNo.setColumns(10);
 		
 		JLabel lblHPrice = new JLabel("단가");
+		pnForOrderMain.add(lblHPrice);
 		lblHPrice.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblHPrice);
 		
 		tfHPrice = new JTextField();
-		add(tfHPrice);
+		pnForOrderMain.add(tfHPrice);
 		tfHPrice.setColumns(10);
 		
 		JLabel lblGap3 = new JLabel("");
-		add(lblGap3);
+		pnForOrderMain.add(lblGap3);
 		
 		JLabel lblGap4 = new JLabel("");
-		add(lblGap4);
+		pnForOrderMain.add(lblGap4);
 		
 		JLabel lblEName = new JLabel("이벤트명");
+		pnForOrderMain.add(lblEName);
 		lblEName.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblEName);
 		
 		cmbEName = new JComboBox();
+		pnForOrderMain.add(cmbEName);
 		cmbEName.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				cmbENameItemStateChanged(e);
 			}
 		});
 		cmbEName.setModel(new DefaultComboBoxModel(eventArr));
-		add(cmbEName);
 		
 		JLabel lblEDiscount = new JLabel("할인율");
+		pnForOrderMain.add(lblEDiscount);
 		lblEDiscount.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblEDiscount);
 		
 		tfEDiscount = new JTextField();
-		add(tfEDiscount);
+		pnForOrderMain.add(tfEDiscount);
 		tfEDiscount.setColumns(10);
 		
 		JLabel lblENO = new JLabel("이벤트번호");
+		pnForOrderMain.add(lblENO);
 		lblENO.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblENO);
 		
 		tfENo = new JTextField();
-		add(tfENo);
+		pnForOrderMain.add(tfENo);
 		tfENo.setColumns(10);
 		
 		JLabel lblTotalPrice = new JLabel("금액");
+		pnForOrderMain.add(lblTotalPrice);
 		lblTotalPrice.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblTotalPrice);
 		
 		tfTotal = new JTextField();
-		add(tfTotal);
+		pnForOrderMain.add(tfTotal);
 		tfTotal.setColumns(10);
 		
+		pnResult = new JPanel();
+		add(pnResult);
+		pnResult.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		pnCards = new JPanel();
+		pnResult.add(pnCards);
+		pnCards.setLayout(new CardLayout(0, 0));
+		
+		pnImg = new JPanel();
+		pnCards.add(pnImg, "name_31439583877535");
+		pnImg.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblImg = new JLabel("");
+		pnImg.add(lblImg);
+		lblImg.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\bigdata_2st\\img\\HairEtc.jpg"));
+		
+		JPanel pnSubAdd = new JPanel();
+		pnCards.add(pnSubAdd, "name_30981526616213");
+		pnSubAdd.setLayout(new BorderLayout(0, 0));
+		
+		pnAddInput = new CustomerManageInsert();
+		pnSubAdd.add(pnAddInput, BorderLayout.CENTER);
+		
+		JPanel pnAddBtnSub = new JPanel();
+		pnSubAdd.add(pnAddBtnSub, BorderLayout.SOUTH);
+		
+		JButton btnAdd = new JButton("회원 바로 등록");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnAddActionPerformed(arg0);
+			}
+		});
+		pnAddBtnSub.add(btnAdd);
+		
+		scrollPane = new JScrollPane();
+		pnResult.add(scrollPane);
+		
+		table = new JTable();
+		table.setCellSelectionEnabled(true);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(table);
 		
 	}
 	public void setTxtInOrder(int cNo, String cName){
@@ -300,4 +377,73 @@ public class HairOrder extends JPanel {
 		this.tfTotal = tfTotal;
 	}
 	
+	
+	public JTable getTable() {
+		return table;
+	}
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+	private void reloadData() {
+		DefaultTableModel model = new DefaultTableModel(getRowData(tfCName.getText()), getColumnData());
+		table.setModel(model);
+		tableSetAlignWith();		
+	}
+
+	String[][] getRowData(String cName) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("cName", cName);
+		List<Customer> list = CustomerService.getInstance().searchCustomerByName(map);
+		if (list.size() == 0) {//리스트 읽어들인뒤 결과따라 좌측 패널 연동
+			List<Customer> listByAll = CustomerService.getInstance().selectByAll();
+			int newCno =listByAll.size()+1;
+			pnAddInput.getTxtCno().setText(newCno+"");
+			pnAddInput.getTxtCname().setText(tfCName.getText());
+			CardLayout cl = (CardLayout)(pnCards.getLayout());
+	        cl.show(pnCards, "name_30981526616213");
+		}else{
+			CardLayout cl = (CardLayout)(pnCards.getLayout());
+	        cl.show(pnCards, "name_30956037040404");
+		}
+		String[][] rowDatas = new String[list.size()][];
+		for (int i = 0; i < list.size(); i++) {
+			rowDatas[i] = list.get(i).toArray();
+		}
+		
+		return rowDatas;
+	}
+
+	String[] getColumnData() {
+
+		return new String[] { "고객 번호", "고객명", "생년월일", "가입일자", "전화번호" };
+	}
+	
+	protected void tableSetWidth(int... width) {//
+		TableColumnModel model = table.getColumnModel();
+		for (int i = 0; i < width.length; i++) {
+			model.getColumn(i).setPreferredWidth(width[i]);
+		}
+	}
+	protected void tableSetAlignWith() {//
+		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4);
+		tableSetWidth(60, 100, 200, 200, 200);
+	}
+	
+	protected void tableCellAlignment(int align, int... idx) {//
+		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
+		dtcr.setHorizontalAlignment(align);
+		TableColumnModel model = table.getColumnModel();
+		for (int i = 0; i < idx.length; i++) {
+			model.getColumn(idx[i]).setCellRenderer(dtcr);
+		}
+	}
+	protected void btnSearchActionPerformed(ActionEvent arg0) {
+		reloadData();
+	}
+	protected void btnAddActionPerformed(ActionEvent arg0) {
+		int jop= JOptionPane.showConfirmDialog(null, pnAddInput.getTxtCname().getText()+" 신규회원 정보를 추가하겠습니까?");
+		if (jop == 0) {
+			pnAddInput.insertNewCostomer();
+		}
+	}
 }
