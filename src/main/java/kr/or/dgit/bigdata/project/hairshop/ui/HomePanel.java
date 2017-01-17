@@ -16,11 +16,11 @@ public class HomePanel extends JPanel {
 		JPanel panel = new JPanel();
 		add(panel);
 		
-		btnManager = new JButton("관리자 로그아웃");
+		btnManager = new JButton("관리자 로그인");
 		
 		panel.add(btnManager);
 		
-		btnLogout = new JButton("관리자 나가기");
+		btnLogout = new JButton("관리자 로그아웃");
 		btnLogout.setVisible(false);
 		panel.add(btnLogout);
 	}
