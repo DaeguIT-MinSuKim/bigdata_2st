@@ -299,9 +299,10 @@ public class HairOrder extends JPanel {
 		tfHNo.setText(hNo+"");
 		hPriceInOrder = Integer.parseInt(tempH.toString());
 		tfHPrice.setText(String.format("%,d 원", hPriceInOrder));
-		
-		int totalPrice = (int)(hPriceInOrder *(1-dHe));// 거꾸로 수행시 총금액이 0원이 되지않게 함.
-		tfTotal.setText(String.format("%,d 원", totalPrice));
+		if(dHe != null){
+			int totalPrice = (int)(hPriceInOrder *(1-dHe));// 거꾸로 수행시 총금액이 0원이 되지않게 함.		
+			tfTotal.setText(String.format("%,d 원", totalPrice));
+		}
 	}
 	protected void cmbENameItemStateChanged(ItemEvent e) {
 		int eNo = cmbEName.getSelectedIndex();
