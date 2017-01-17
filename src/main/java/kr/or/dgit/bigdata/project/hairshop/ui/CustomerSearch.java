@@ -22,6 +22,7 @@ import javax.swing.table.TableColumnModel;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
+import java.awt.Color;
 
 public class CustomerSearch extends JPanel {
 	private JTable table;
@@ -38,9 +39,11 @@ public class CustomerSearch extends JPanel {
 	 * Create the panel.
 	 */
 	public CustomerSearch() {
+		setBackground(new Color(0, 255, 255));
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel pnSearch = new JPanel();
+		pnSearch.setBackground(new Color(0, 255, 255));
 		pnSearch.setBorder(new EmptyBorder(10, 10, 10, 10));
 		add(pnSearch, BorderLayout.NORTH);
 		
@@ -73,6 +76,7 @@ public class CustomerSearch extends JPanel {
 		pnSearch.add(btnForall);
 		
 		scrollPane = new JScrollPane();
+		scrollPane.setBackground(new Color(0, 255, 255));
 		add(scrollPane, BorderLayout.CENTER);
 		
 		table = new JTable();
@@ -80,6 +84,7 @@ public class CustomerSearch extends JPanel {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		tableForAll = new JTable();
+		tableForAll.setBackground(Color.WHITE);
 		tableForAll.setCellSelectionEnabled(true);
 		tableForAll.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		reloadDataForAll();

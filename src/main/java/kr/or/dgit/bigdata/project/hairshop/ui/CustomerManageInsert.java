@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
+import java.awt.Color;
 
 public class CustomerManageInsert extends JPanel {
 	private JTextField txtCno;
@@ -35,6 +36,7 @@ public class CustomerManageInsert extends JPanel {
 	 * Create the panel.
 	 */
 	public CustomerManageInsert() {
+		setBackground(new Color(0, 255, 255));
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel pnInsert = new JPanel();

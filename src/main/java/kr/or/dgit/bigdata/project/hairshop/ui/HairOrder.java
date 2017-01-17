@@ -72,11 +72,14 @@ public class HairOrder extends JPanel {
 	 * Create the panel.
 	 */
 	public HairOrder() {
+		setBackground(new Color(0, 255, 255));
 		setForeground(Color.BLUE);
 		setBorder(new EmptyBorder(0, 0, 10, 0));
 		setLayout(new GridLayout(0, 1, 0, 10));
 		
 		JPanel pnForOrderMain = new JPanel();
+		pnForOrderMain.setBorder(new EmptyBorder(10, 0, 0, 0));
+		pnForOrderMain.setBackground(new Color(0, 255, 255));
 		add(pnForOrderMain);
 		pnForOrderMain.setLayout(new GridLayout(0, 4, 10, 10));
 		
@@ -215,20 +218,26 @@ public class HairOrder extends JPanel {
 		tfTotal.setColumns(10);
 		
 		pnResult = new JPanel();
+		pnResult.setBackground(new Color(0, 255, 255));
 		add(pnResult);
 		pnResult.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		pnCards = new JPanel();
+		pnCards.setBackground(new Color(0, 255, 255));
+		pnCards.setBorder(new EmptyBorder(0, 0, 0, 10));
 		pnResult.add(pnCards);
 		pnCards.setLayout(new CardLayout(0, 0));
 		
 		pnImg = new JPanel();
+		pnImg.setBorder(new EmptyBorder(0, 30, 0, 0));
+		pnImg.setBackground(new Color(0, 255, 255));
 		pnCards.add(pnImg, "name_31439583877535");
 		pnImg.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblImg = new JLabel("");
+		lblImg.setBackground(new Color(0, 255, 255));
 		pnImg.add(lblImg);
-		lblImg.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\bigdata_2st\\img\\HairEtc.jpg"));
+		lblImg.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\bigdata_2st\\img\\logo2.png"));
 		
 		JPanel pnSubAdd = new JPanel();
 		pnCards.add(pnSubAdd, "name_30981526616213");
@@ -249,6 +258,7 @@ public class HairOrder extends JPanel {
 		pnAddBtnSub.add(btnAdd);
 		
 		scrollPane = new JScrollPane();
+		scrollPane.setBackground(new Color(0, 255, 255));
 		pnResult.add(scrollPane);
 		
 		table = new JTable();
