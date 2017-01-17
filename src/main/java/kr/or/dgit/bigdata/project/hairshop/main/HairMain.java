@@ -7,21 +7,27 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
+import java.util.Properties;
 
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import org.jfree.chart.ChartPanelP;
 import org.jfree.chart.JFreeChart;
+
+import com.jtattoo.plaf.graphite.GraphiteLookAndFeel;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairInfoPanel;
@@ -76,6 +82,7 @@ public class HairMain extends JFrame {
 	private BizHairTotalReport panel_1;
 	private ChartPanelP panel;
 	private JFreeChart chart;
+	private JPopupMenu popup;
 
 	/**
 	 * Launch the application.
@@ -84,6 +91,9 @@ public class HairMain extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					Properties props = new Properties();
+					props.put("logoString", "DGIT HAIR");
+					GraphiteLookAndFeel.setCurrentTheme(props);//팝업 메뉴 등장하는 jtattoo 로고 변환
 					UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
 					HairMain frame = new HairMain();
 					frame.setBounds(100, 100, 1100, 700);
@@ -101,6 +111,7 @@ public class HairMain extends JFrame {
 	 * Create the frame.
 	 */
 	public HairMain() {
+		setTitle("DGIT HAIR");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1100, 700);
 		contentPane = new JPanel();
@@ -132,32 +143,28 @@ public class HairMain extends JFrame {
 		pnCusSearch.add(pnCusSearchCards, BorderLayout.CENTER);
 		pnCusSearchCards.setLayout(new CardLayout(0, 0));
 		
-
+		
 		
 		
 		
 		pnSearchSub = new CustomerSearch();		
-		
-		pnCusSearchCards.add(pnSearchSub, "name_1666323161344197");
-		tableInSearch = pnSearchSub.getTable();
-		tableInSearch.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-				
-				@Override
-				public void valueChanged(ListSelectionEvent e) {
-					
-					clickAndGetDataFromTable(tableInSearch);
-				}
-			});
-		
-		tableInSearchForAll = pnSearchSub.getTableForAll();
-		tableInSearchForAll.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			
+		pnSearchSub.getTableForAll().addMouseListener(new MouseAdapter() {
 			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				
-				clickAndGetDataFromTable(tableInSearchForAll);
+			public void mouseReleased(MouseEvent arg0) {
+				pnSearchSubTableForAllMouseReleased(arg0 ,tableInSearchForAll);
 			}
 		});
+		pnSearchSub.getTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				pnSearchSubTableForAllMouseReleased(arg0, tableInSearch);
+			}
+		});
+		
+		pnCusSearchCards.add(pnSearchSub, "name_1666323161344197");
+		
+		tableInSearch = pnSearchSub.getTable();
+		tableInSearchForAll = pnSearchSub.getTableForAll();
 		
 		pnCusAdd = new CustomerManageInsert();
 		pnCusSearchCards.add(pnCusAdd, "name_1666358524774753");
@@ -306,7 +313,9 @@ public class HairMain extends JFrame {
 		
 		pnBizGraphMain = new JPanel();
 		pnBizGraphMain.setBackground(new Color(255, 192, 203));
-		pnBizGraph.add(pnBizGraphMain, BorderLayout.CENTER);		
+		pnBizGraph.add(pnBizGraphMain, BorderLayout.CENTER);	
+		
+		
 	}
 	
 
@@ -369,9 +378,10 @@ public class HairMain extends JFrame {
 		}  
 		
 	}
-	protected void btnHairInfoActionPerformed(ActionEvent e) {
+	protected void btnHairInfoActionPerformed(ActionEvent e) { // 테이블 보이기 추가
 		tabbedPane.setEnabledAt(3, true);
 		tabbedPane.setSelectedComponent(pnOrderList);
+		hip.getTable().setTableWithData(new Customer(cNo));
 	}
 	protected void btnToMainActionPerformed(ActionEvent e) {
 		tabbedPane.setSelectedComponent(pnHome);
@@ -388,47 +398,65 @@ public class HairMain extends JFrame {
 		dob = table.getValueAt(table.getSelectedRow(), 2).toString();
 		doJoin = table.getValueAt(table.getSelectedRow(), 3).toString();
 		phone = table.getValueAt(table.getSelectedRow(), 4).toString();
-		Object[] options ={"수정","삭제","주문","헤어정보"};
 		
-		int jopBtnIndex = JOptionPane.showOptionDialog(null, cName+"["+dob+", "+phone+"]", "회원 관리", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, null, options, options[3]);
-		
-		switch (jopBtnIndex) {
-		case 0:		
-			System.out.println("JOptionPane btn index: "+jopBtnIndex);
-			CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
-	        cl.show(pnCusSearchCards, "name_1666378783739869");
-	        btnSave.setEnabled(true);
-	        cardIndex =2;
-	        pnHairOderMain.setTxtInOrder(cNo, cName); // 수정된 내역이 있더라도 DB와 관련된것은 변동이 없는 cNo뿐이라 무관함. 
-			break;
-		case 1:
-			int jopi = JOptionPane.showConfirmDialog(null, cName+"회원을 정말 삭제하시겠습니까?");
-			if (jopi == 0) {
-				// 수정요망
-				Customer cForDel = new Customer();
-				cForDel.setcDel(true);
-				cForDel.setcNo(cNo);
-				CustomerService.getInstance().deleteCustomer(cForDel);
-			}
-			
-			break;
-		case 2:
-			tabbedPane.setSelectedComponent(pnHairOder);
-			pnHairOderMain.setTxtInOrder(cNo, cName);
-			tabbedPane.setEnabledAt(3, true);
-			break;
-		case 3:
-			tabbedPane.setEnabledAt(3, true);
-			tabbedPane.setSelectedComponent(pnOrderList);
-			hip.getTable().setTableWithData(new Customer(cNo));	// 넘겨받은 고객번호로 검색한 데이터를 table에 넣는 메소드 ver.이유진
-			break;
-		default:
-			break;
-		}
-		// 각각 해당 패널에 setTxt 
 		pnCusEdit.setTxtInCusEdit(cNo, cName, dob, doJoin, phone);
 		pnOrderListMain.setTxtInHairIfo(cNo, cName, dob);
 		pnOrderListMain.reloadData();
 		
+		
+	}
+	protected void pnSearchSubTableForAllMouseReleased(MouseEvent e ,JTable jt) {
+		
+		
+		int r = jt.rowAtPoint(e.getPoint());
+        if (r >= 0 && r < jt.getRowCount()) {
+        	jt.setRowSelectionInterval(r, r);
+        } else {
+        	jt.clearSelection();
+        }
+
+        int rowindex = jt.getSelectedRow();
+        if (rowindex < 0)
+            return;
+        if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
+        	clickAndGetDataFromTable(jt);
+        	JPopupMenu popup = new JPopupMenu(); //우클릭시 팝업 메뉴 등장
+    		popup.add(new JMenuItem(new AbstractAction("수정") {
+                public void actionPerformed(ActionEvent e) {
+                	CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
+        	        cl.show(pnCusSearchCards, "name_1666378783739869");
+        	        btnSave.setEnabled(true);
+        	        cardIndex =2;
+        	        pnHairOderMain.setTxtInOrder(cNo, cName); // 수정된 내역이 있더라도 DB와 관련된것은 변동이 없는 cNo뿐이라 무관함. 
+        			
+                }
+            }));
+    		popup.add(new JMenuItem(new AbstractAction("삭제") {
+    	            public void actionPerformed(ActionEvent e) {
+    	            	int jopi = JOptionPane.showConfirmDialog(null, cName+"회원을 정말 삭제하시겠습니까?");
+    	    			if (jopi == 0) {
+    	    				Customer cForDel = new Customer();
+    	    				cForDel.setcDel(true);
+    	    				cForDel.setcNo(cNo);
+    	    				CustomerService.getInstance().deleteCustomer(cForDel);
+    	    			}
+    	            }
+    	    }));
+    		popup.add(new JMenuItem(new AbstractAction("주문") {
+    	            public void actionPerformed(ActionEvent e) {
+    	            	tabbedPane.setSelectedComponent(pnHairOder);
+    	    			pnHairOderMain.setTxtInOrder(cNo, cName);
+    	    			tabbedPane.setEnabledAt(3, true);
+    	            }
+    	    }));
+    		popup.add(new JMenuItem(new AbstractAction("헤어정보") {
+    	            public void actionPerformed(ActionEvent e) {
+    	            	tabbedPane.setEnabledAt(3, true);
+    	    			tabbedPane.setSelectedComponent(pnOrderList);
+    	    			hip.getTable().setTableWithData(new Customer(cNo));
+    	            }
+    	    }));
+            popup.show(e.getComponent(), e.getX(), e.getY());
+        }
 	}
 }
