@@ -25,9 +25,11 @@ public interface BizMapper {
 	public List<Biz> selectCountStyleForGraph();
 	
 	/* ver. 이유진 */
-//	public List<Biz> selectYearOrMonthFromBiz(String startDate, String endDate); 죽은 메소드 혹시라도 사용중이라면 말씀해 주세요 by 이유진
+	public List<Biz> selectBizWithDates(String startDate, String endDate);
 	
-	public HashMap<String, Object> selectYearOrMonthFromBizCalTotal(HashMap<String, Object> searchMap);
+	public HashMap<String, Object> selectBizWithDatesCalTotal(String startDate, String endDate);
+	
+	public HashMap<String, Object> selectBizWithYearMonthCalTotal(HashMap<String, Object> searchMap);
 	
 	public List<Biz> selectAllBiz();
 	

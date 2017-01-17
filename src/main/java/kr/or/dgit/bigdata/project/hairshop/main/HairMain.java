@@ -5,7 +5,6 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
-import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -31,10 +30,8 @@ import org.jfree.chart.JFreeChart;
 import com.jtattoo.plaf.graphite.GraphiteLookAndFeel;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
-import kr.or.dgit.bigdata.project.hairshop.dto.Manager;
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairInfoPanel;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
-import kr.or.dgit.bigdata.project.hairshop.service.ManagerService;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizHairTotalReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
@@ -42,8 +39,6 @@ import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrder;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrderSearch;
-import kr.or.dgit.bigdata.project.hairshop.ui.HomePanel;
-import kr.or.dgit.bigdata.project.hairshop.ui.login.ManagerLogin;
 
 public class HairMain extends JFrame {
 
@@ -55,7 +50,7 @@ public class HairMain extends JFrame {
 	private JPanel pnBizList;
 	private JPanel pnBizGraph;  
 	private JTabbedPane tabbedPane;
-	private HomePanel pnHomeMain;
+	private JPanel pnHomeMain;
 	private JPanel pnCusSearchCards;
 	private JPanel pnCusSearchBtns;
 	private JButton btnAdd;
@@ -134,7 +129,7 @@ public class HairMain extends JFrame {
 		pnHome.setToolTipText("홈 화면으로 돌아갑니다.");
 		pnHome.setLayout(new BorderLayout(0, 0));
 		
-		pnHomeMain = new HomePanel();
+		pnHomeMain = new JPanel();
 		pnHomeMain.setBackground(new Color(255, 192, 203));
 		pnHome.add(pnHomeMain, BorderLayout.CENTER);
 		
@@ -148,7 +143,7 @@ public class HairMain extends JFrame {
 		pnCusSearch.add(pnCusSearchCards, BorderLayout.CENTER);
 		pnCusSearchCards.setLayout(new CardLayout(0, 0));
 		
-
+		
 		
 		
 		
@@ -168,7 +163,6 @@ public class HairMain extends JFrame {
 		
 		pnCusSearchCards.add(pnSearchSub, "name_1666323161344197");
 		
-
 		tableInSearch = pnSearchSub.getTable();
 		tableInSearchForAll = pnSearchSub.getTableForAll();
 		
@@ -224,16 +218,11 @@ public class HairMain extends JFrame {
 		pnHairOder = new JPanel();
 		tabbedPane.addTab("헤어주문", null, pnHairOder, null);
 		pnHairOder.setToolTipText("헤어주문");
-		//tabbedPane.setEnabledAt(2, false);
+		tabbedPane.setEnabledAt(2, false);
 		pnHairOder.setLayout(new BorderLayout(0, 0));
 		
 		pnHairOderMain = new HairOrder();
-		pnHairOderMain.getTfTotal().setEditable(false);
-		pnHairOderMain.getTfEDiscount().setEditable(false);
-		pnHairOderMain.getTfENo().setEditable(false);
-		pnHairOderMain.getTfHNo().setEditable(false);
-		pnHairOderMain.getTfHPrice().setEditable(false);
-		pnHairOderMain.setBackground(SystemColor.menu);
+		pnHairOderMain.setBackground(new Color(255, 192, 203));
 		pnHairOder.add(pnHairOderMain, BorderLayout.CENTER);
 		
 		pnHairOderBtns = new JPanel();
@@ -299,7 +288,7 @@ public class HairMain extends JFrame {
 		pnOrderListBtns.add(btnToMain3);
 		
 		pnBizList = new JPanel();
-		//tabbedPane.addTab("영업현황", null, pnBizList, null);//
+		tabbedPane.addTab("영업현황", null, pnBizList, null);
 
 		pnBizList.setToolTipText("날짜, 월별 ,연도별 영업현황이 나타납니다.");
 		pnBizList.setLayout(new BorderLayout(0, 0));
@@ -310,7 +299,7 @@ public class HairMain extends JFrame {
 		pnBizList.add(pnBizListMain, BorderLayout.CENTER);
 		
 		pnBizGraph = new JPanel();
-		//tabbedPane.addTab("영업그래프", null, pnBizGraph, null);//
+		tabbedPane.addTab("영업그래프", null, pnBizGraph, null);
 		pnBizGraph.setToolTipText("영업 현황 통계 그래프가 나타납니다.");
 		pnBizGraph.setLayout(null);
 
@@ -324,22 +313,9 @@ public class HairMain extends JFrame {
 		
 		pnBizGraphMain = new JPanel();
 		pnBizGraphMain.setBackground(new Color(255, 192, 203));
-		pnBizGraph.add(pnBizGraphMain, BorderLayout.CENTER);
+		pnBizGraph.add(pnBizGraphMain, BorderLayout.CENTER);	
 		
-		pnHomeMain.getBtnManager().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				btnManagerActionPerformed(arg0);
-			}			
-		});
-		tabbedPane.remove(pnBizList);
-		tabbedPane.remove(pnBizGraph);
-		pnHomeMain.getBtnLogout().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				tabbedPane.remove(pnBizList);
-				tabbedPane.remove(pnBizGraph);
-				pnHomeMain.getBtnLogout().setVisible(false);
-			}			
-		});
+		
 	}
 	
 
@@ -381,7 +357,7 @@ public class HairMain extends JFrame {
 			if(directOderInAdd==0){
 				pnHairOderMain.setTxtInOrder(Integer.parseInt(pnCusAdd.getTxtCno().getText()),pnCusAdd.getTxtCname().getText());
 				tabbedPane.setSelectedComponent(pnHairOder);
-				//tabbedPane.setEnabledAt(2, true);
+				tabbedPane.setEnabledAt(2, true);
 			}
 			cardIndex =0;
 			
@@ -392,7 +368,7 @@ public class HairMain extends JFrame {
 			if(directOderInEdit==0){
 				pnHairOderMain.setTxtInOrder(Integer.parseInt(pnCusEdit.getTxtCno().getText()),pnCusEdit.getTxtCname().getText());
 				tabbedPane.setSelectedComponent(pnHairOder);
-				//tabbedPane.setEnabledAt(2, true);
+				tabbedPane.setEnabledAt(2, true);
 			}
 			cardIndex =0;
 			break;
@@ -482,36 +458,5 @@ public class HairMain extends JFrame {
     	    }));
             popup.show(e.getComponent(), e.getX(), e.getY());
         }
-	}
-	private void btnManagerActionPerformed(ActionEvent arg0) {//관리자 로그인 버튼 이벤트 리스너
-		ManagerLogin ml = new ManagerLogin();
-		ml.setVisible(true);
-		ml.getBtnLogin().addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Manager manager =  new Manager();
-				manager.setmName(ml.getTxtId().getText());
-				Manager temp = ManagerService.getInstance().selectmPasswordByName(manager);
-				char[] pass = ml.getPasswordField().getPassword();
-				String userPass ="";
-				for (char c : pass) {
-					userPass +=c;
-				}
-				if (temp.getmPassword().equals(userPass)) {
-					tabbedPane.addTab("영업현황", null, pnBizList, null);
-					tabbedPane.addTab("영업그래프", null, pnBizGraph, null);
-					pnHomeMain.getBtnLogout().setVisible(true);
-					ml.setVisible(false);
-				} else {
-					JOptionPane.showMessageDialog(null, "해당 아이디가 존재하지 않거나 비밀번호가 틀립니다.");
-					ml.getTxtId().requestFocus();
-					tabbedPane.remove(pnBizList);
-					tabbedPane.remove(pnBizGraph);
-				}
-				
-			}
-		});
-				
 	}
 }

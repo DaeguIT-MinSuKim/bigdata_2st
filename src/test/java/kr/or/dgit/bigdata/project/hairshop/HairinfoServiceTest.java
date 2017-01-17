@@ -37,4 +37,43 @@ public class HairinfoServiceTest {
 		Assert.assertNotNull(temp);
 		System.out.println(temp);
 	}
+	/*
+	@Test
+	public void testInsertHairInfo(){
+		Hairinfo hairinfo = new Hairinfo("물결펌", 15000);
+		hairinfoService.insertHairInfo(hairinfo);
+		Hairinfo res = hairinfoService.selectHairInfoByName(hairinfo);
+		Assert.assertNotNull(res);
+		System.out.println(res);
+	}*/
+	/*
+	@Test
+	public void testUpdateHairInfo(){
+		Hairinfo hairinfo = hairinfoService.selectHairInfoByNo(new Hairinfo(9));
+		hairinfo.sethName("단발");
+		hairinfoService.updateHairInfo(hairinfo);
+		Hairinfo res = hairinfoService.selectHairInfoByNo(new Hairinfo(9));
+		Assert.assertNotNull(res);
+		System.out.println(res);		
+	}
+	*//*
+	@Test
+	public void testDeleteHairInfo(){
+		Hairinfo hairinfo = hairinfoService.selectHairInfoByNo(new Hairinfo(9));
+		hairinfoService.deleteHairInfo(hairinfo);
+		Hairinfo res = hairinfoService.selectHairInfoByNo(new Hairinfo(9));
+		Assert.assertNull(res);
+	}
+	*/
+	
+	/* Test용 임시 메소드 */
+	@Test
+	public void testSelectHairInfoByName(){
+		Hairinfo temp = hairinfoService.selectHairInfoByNo(new Hairinfo(2));
+		Hairinfo res = hairinfoService.selectHairInfoByName(temp);
+		Assert.assertNotNull(res);
+		System.out.println(res);
+	}
+	
+	
 }

@@ -63,7 +63,6 @@ public class HairinfoService {
 		}		
 	}
 	
-	// 지금 단계에서는 필요하진 않지만 횩시 몰라서 추가했어요. 아직 테스트는 안해봤으니 이 기능들이 들어간다면 테스트 부터 하고 적용시켜야 할 것 같습니다. by 이유진
 	public void insertHairInfo(Hairinfo hairinfo){
 		if (logger.isDebugEnabled()) {
 			logger.debug("insertHairInfo(hairinfo) - start");
@@ -114,5 +113,25 @@ public class HairinfoService {
 		if (logger.isDebugEnabled()) {
 			logger.debug("deleteHairInfo(hairinfo) - end");
 		}
-	}	
+	}
+	
+	/* Test 용 임시 메소드 */
+	public Hairinfo selectHairInfoByName(Hairinfo hairinfo){
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectHairInfoByName(Hairinfo) - start");
+		}
+
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		HairinfoMapper hairinfoMapper = sqlSession.getMapper(HairinfoMapper.class);
+		try{
+			Hairinfo temp = hairinfoMapper.selectHairInfoByName(hairinfo);
+
+			if (logger.isDebugEnabled()) {
+				logger.debug("selectHairInfoByName(Hairinfo) - end");
+			}
+			return temp;
+		}finally{
+			sqlSession.close();
+		}		
+	}
 }

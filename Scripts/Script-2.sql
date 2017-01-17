@@ -164,3 +164,7 @@ ALTER TABLE hairshop.manager
 
 insert into hairshop.manager values 
 (1, 'bigdata' ,'rootroot');
+=======
+		left outer join hairshop.event e on b.eNo = e.eNo
+;
+
