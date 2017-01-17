@@ -53,8 +53,8 @@ public class HairOrder extends JPanel {
 	private JTextField tfEDiscount;
 	private JTextField tfENo;
 	private JTextField tfTotal;
-	String[] eventArr = {"기획", "생일", "일반", "조조"};
-	String[] hairArr = {"커트", "드라이", "샴푸", "펌", "매직", "트리트먼트", "앰플", "기타"};
+	private String[] eventArr; //= {"기획", "생일", "일반", "조조"};
+	private String[] hairArr; //= {"커트", "드라이", "샴푸", "펌", "매직", "트리트먼트", "앰플", "기타"};
 	private JComboBox cmbHName;
 	private JComboBox cmbEName;
 	private int hPriceInOrder;
@@ -145,7 +145,7 @@ public class HairOrder extends JPanel {
 		JLabel lblHName = new JLabel("헤어명");
 		pnForOrderMain.add(lblHName);
 		lblHName.setHorizontalAlignment(SwingConstants.CENTER);
-		
+		setArrOptionNames(); // 
 		cmbHName = new JComboBox();
 		pnForOrderMain.add(cmbHName);
 		cmbHName.addItemListener(new ItemListener() {
@@ -257,6 +257,26 @@ public class HairOrder extends JPanel {
 		scrollPane.setViewportView(table);
 		
 	}
+	private void setArrOptionNames() {//옵션명들 입력
+		List<Hairinfo> hList = HairinfoService.getInstance().selectHairInfoAll();
+		List<HairEvent> eList = HairEventService.getInstance().selectEventAll();
+		hairArr = new String[hList.size()+1];
+		eventArr = new String[eList.size()+1];
+		hairArr[0] = "--선택하세요--";
+		eventArr[0] = "--선택하세요--";
+		int j =0;
+		for(int i=1;i < hList.size()+1;i++){
+			
+			hairArr[i] =hList.get(j).gethName();
+			j++;
+		}
+		j=0;
+		for(int i=1;i < eList.size()+1;i++){
+			
+			eventArr[i] =eList.get(j).geteName();
+			j++;
+		}
+	}
 	public void setTxtInOrder(int cNo, String cName){
 		tfCNo.setText(cNo+"");
 		tfCName.setText(cName);
@@ -273,18 +293,19 @@ public class HairOrder extends JPanel {
 	}
 	
 	protected void cmbHNameItemStateChanged(ItemEvent arg0) {
-		int hNo = cmbHName.getSelectedIndex()+1;
+		int hNo = cmbHName.getSelectedIndex();
 		Hairinfo h =  new Hairinfo(hNo);
 		Hairinfo tempH = HairinfoService.getInstance().selectHairInfoByNo(h);
 		tfHNo.setText(hNo+"");
 		hPriceInOrder = Integer.parseInt(tempH.toString());
 		tfHPrice.setText(String.format("%,d 원", hPriceInOrder));
-		
-		int totalPrice = (int)(hPriceInOrder *(1-dHe));// 거꾸로 수행시 총금액이 0원이 되지않게 함.
-		tfTotal.setText(String.format("%,d 원", totalPrice));
+		if(dHe != null){
+			int totalPrice = (int)(hPriceInOrder *(1-dHe));// 거꾸로 수행시 총금액이 0원이 되지않게 함.		
+			tfTotal.setText(String.format("%,d 원", totalPrice));
+		}
 	}
 	protected void cmbENameItemStateChanged(ItemEvent e) {
-		int eNo = cmbEName.getSelectedIndex()+1;
+		int eNo = cmbEName.getSelectedIndex();
 		HairEvent he = new HairEvent(eNo);
 		HairEvent tempHe = HairEventService.getInstance().selectEventByNo(he);
 		
@@ -413,7 +434,7 @@ public class HairOrder extends JPanel {
 		return rowDatas;
 	}
 
-	String[] getColumnData() {
+	protected String[] getColumnData() {
 
 		return new String[] { "고객 번호", "고객명", "생년월일", "가입일자", "전화번호" };
 	}
