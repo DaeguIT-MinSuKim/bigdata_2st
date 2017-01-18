@@ -39,7 +39,7 @@ import kr.or.dgit.bigdata.project.hairshop.ui.BizHairTotalReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
-import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
+import kr.or.dgit.bigdata.project.hairshop.test.CustomerSearch;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrder;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrderSearch;
 import kr.or.dgit.bigdata.project.hairshop.ui.HomePanel;
@@ -308,6 +308,7 @@ public class HairMain extends JFrame {
 		pnBizListMain = new BizReport();
 		pnBizListMain.setBackground(new Color(255, 192, 203));
 		pnBizList.add(pnBizListMain, BorderLayout.CENTER);
+		pnBizListMain.setDefaultPnBizListMain();
 		
 		pnBizGraph = new JPanel();
 		//tabbedPane.addTab("영업그래프", null, pnBizGraph, null);//

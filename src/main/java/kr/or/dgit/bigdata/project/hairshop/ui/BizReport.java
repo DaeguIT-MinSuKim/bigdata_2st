@@ -32,6 +32,8 @@ public class BizReport extends JPanel implements ActionListener, ItemListener {
 	private JComboBox<Integer> cmbYear;
 	private JButton btnSearch;
 	private BizReportPanel pBizReport;
+	private SearchTermPanel pSearchDate;
+	private CustomerHairInfoPanel pHairInfo;
 
 	/**
 	 * Create the panel.
@@ -90,15 +92,22 @@ public class BizReport extends JPanel implements ActionListener, ItemListener {
 		}
 	}
 	protected void btnDateActionPerformed(ActionEvent e) {
-		pnBizListMain.removeAll();
-		SearchTermPanel pSearchDate = new SearchTermPanel();
-		CustomerHairInfoPanel pHairInfo = new CustomerHairInfoPanel();
+		setDefaultPnBizListMain();		
+	}
+	public void setDefaultPnBizListMain() {
+		/**/
+		pnBizListMain.removeAll();	
+		pSearchDate = new SearchTermPanel();
+		pHairInfo = new CustomerHairInfoPanel();
 		pSearchDate.setResPanel(pHairInfo);
+		pSearchDate.searchDate();
 		pnBizListMain.add(pSearchDate, BorderLayout.NORTH);
 		pnBizListMain.add(pHairInfo, BorderLayout.CENTER);
+		
 		revalidate();
-		repaint();
+		repaint();		
 	}
+
 	protected void btnMonthActionPerformed(ActionEvent e) {
 		/* 월별로 검색할 떄 띄울 패널 향후 combo박스에 영업DB내에 있는 영업일자 년도를 검색해서 넣을 메소드 만들 예정 -by.이유진 */
 		pnBizListMain.removeAll();
@@ -138,6 +147,7 @@ public class BizReport extends JPanel implements ActionListener, ItemListener {
 		revalidate();
 		repaint();
 		brp.getBtnChart().setEnabled(true);
+		brp.getBtnPrint().setEnabled(true);
 	}
 	protected void btnToMain4ActionPerformed(ActionEvent e) {
 		/* main 화면으로 돌아가는 메소드. 향후 추가 예정 */
@@ -147,6 +157,7 @@ public class BizReport extends JPanel implements ActionListener, ItemListener {
 		pBizReport.setResTable(year);
 		pBizReport.setYear(year);
 		pBizReport.getBtnChart().setEnabled(true);
+		pBizReport.getBtnPrint().setEnabled(true);
 		revalidate();
 	}
 
@@ -160,6 +171,7 @@ public class BizReport extends JPanel implements ActionListener, ItemListener {
 
 	private void cmbYearItemStateChanged(ItemEvent e) {
 		pBizReport.getBtnChart().setEnabled(false);		
+		pBizReport.getBtnPrint().setEnabled(false);
 	}
 }
 

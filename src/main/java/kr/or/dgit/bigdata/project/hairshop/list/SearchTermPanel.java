@@ -51,7 +51,10 @@ public class SearchTermPanel extends JPanel implements ActionListener {
 	
 	protected void btnSearchActionPerformed(ActionEvent arg0) {
 		/* 검색 버튼 클릭 시 각 datePicker의 값을 추출해 온 후 검색 가능한 범위인지를 우선 확인하고 유효한 범위일 경우 날짜 범위에 맞춰 검색하도록 하는 멤소드 */
-		
+		searchDate();		
+	}
+
+	public void searchDate() {
 		String startDate = startDatePicker.getDatePicker().getJFormattedTextField().getText().trim();
 		String endDate = endDatePicker.getDatePicker().getJFormattedTextField().getText().trim();
 		
@@ -60,7 +63,7 @@ public class SearchTermPanel extends JPanel implements ActionListener {
 			return;
 		}	
 		
-		resPanel.getTable().setTableWithData(startDate, endDate);
+		resPanel.getTable().setTableWithData(startDate, endDate);		
 	}
 
 	private boolean isVailable(String startDate, String endDate) {		

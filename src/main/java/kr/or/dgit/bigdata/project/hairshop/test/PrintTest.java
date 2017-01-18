@@ -44,12 +44,53 @@
 
 package kr.or.dgit.bigdata.project.hairshop.test;
 
-import java.awt.PrintJob;
-import java.awt.Toolkit;
+import java.awt.BorderLayout;
+import java.awt.HeadlessException;
+import java.awt.print.PageFormat;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+
+import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
+import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairTable;
 
 public class PrintTest extends JFrame {
-	PrintJob pjb = getToolkit().getPrintJob(this, "test", null);
+	private static CustomerHairTable table;
+	
+	
+	public PrintTest() throws HeadlessException {		
+		JScrollPane scrollPane = new JScrollPane();
+		getContentPane().add(scrollPane, BorderLayout.CENTER);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		table = new CustomerHairTable();
+		table.setTableWithData(new Customer(1));
+		scrollPane.setViewportView(table);
+		pack();
+		setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		new PrintTest();
+		PrinterJob pjob = PrinterJob.getPrinterJob();
+		PageFormat preformat = pjob.defaultPage();
+		preformat.setOrientation(PageFormat.PORTRAIT);
+		PageFormat postformat = pjob.pageDialog(preformat);
+
+		//If user does not hit cancel then print.
+		if (preformat != postformat) {
+		    //Set print component
+		    pjob.setPrintable(new Printer(table), postformat);
+		    if (pjob.printDialog()) {
+		        try {
+					pjob.print();
+				} catch (PrinterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    }
+		}		
+	}
 
 }

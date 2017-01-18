@@ -15,11 +15,18 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
+import kr.or.dgit.bigdata.project.hairshop.test.PrintFrame;
+
 public class BizReportPanel extends JPanel implements ActionListener {
 	private BizReportTable resTable;
 	private JButton btnChart;
 	private int year;
 	private String title;
+	private JButton btnPrint;
+
+	public JButton getBtnPrint() {
+		return btnPrint;
+	}
 
 	public JButton getBtnChart() {
 		return btnChart;
@@ -40,7 +47,7 @@ public class BizReportPanel extends JPanel implements ActionListener {
 		setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane();
-		add(scrollPane);
+		add(scrollPane, BorderLayout.CENTER);
 		
 		resTable = new BizReportTable();
 		scrollPane.setViewportView(resTable);
@@ -48,11 +55,19 @@ public class BizReportPanel extends JPanel implements ActionListener {
 		if(!title.equals("월별")){
 			resTable.setTableWithData("year");
 		}
+		JPanel btnPanel = new JPanel();
 		
 		btnChart = new JButton("차트로 보기");
 		btnChart.addActionListener(this);
-		add(btnChart, BorderLayout.SOUTH);
+		btnPanel.add(btnChart);
 		btnChart.setEnabled(false);
+		
+		btnPrint = new JButton("영업실적 출력");
+		btnPrint.addActionListener(this);
+		btnPrint.setEnabled(false);
+		btnPanel.add(btnPrint);
+		
+		add(btnPanel, BorderLayout.SOUTH);
 	}
 	
 	public void setResTable(int year){
@@ -60,6 +75,9 @@ public class BizReportPanel extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnPrint) {
+			btnPrintActionPerformed(e);
+		}
 		if (e.getSource() == btnChart) {
 			btnChartActionPerformed(e);
 		}
@@ -78,5 +96,13 @@ public class BizReportPanel extends JPanel implements ActionListener {
 			e1.printStackTrace();
 		}
 		
+	}
+	protected void btnPrintActionPerformed(ActionEvent e) {
+		JFrame print = null;
+		if(title.equals("월별")){
+			print = new PrintFrame(resTable, "월별 실적 조회");
+		}else{
+			print = new PrintFrame(resTable, "년도별 실적 조회");
+		}
 	}
 }
