@@ -8,7 +8,7 @@ public class Config {
 	
 	public static final String DB_NAME = "hairshop";
 
-	public static final String[] TABLE_NAME = {"biz","customer", "event", "hairinfo"};
+	public static final String[] TABLE_NAME = {"biz","customer", "event", "hairinfo", "manager"};
 	
 	public static String Export_path = "";
 	public static String Import_path = "";

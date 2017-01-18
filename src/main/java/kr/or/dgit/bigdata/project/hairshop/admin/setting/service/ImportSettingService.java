@@ -26,9 +26,8 @@ public class ImportSettingService extends ServiceSetting{
 		jfc.setMultiSelectionEnabled(false);
 		jfc.setFileFilter(new FileNameExtensionFilter("txt Files", "txt"));
 		jfc.setDialogTitle("파일이 저장된 폴더를 선택해 주세요.");
-		
-		int i = jfc.showOpenDialog(null);
-		if(i==JFileChooser.APPROVE_OPTION){
+
+		if(jfc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION){
 			Config.Import_path = jfc.getSelectedFile().getPath();
 			dao.setForeignKeyCheck(0);
 			for(String tableName : Config.TABLE_NAME){	

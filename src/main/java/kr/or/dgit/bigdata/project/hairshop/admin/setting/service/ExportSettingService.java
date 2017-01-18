@@ -8,6 +8,7 @@ import java.sql.Statement;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import javafx.scene.shape.CircleBuilder;
 import kr.or.dgit.bigdata.project.hairshop.admin.setting.Config;
 import kr.or.dgit.bigdata.project.hairshop.admin.setting.dao.DataBaseDao;
 import kr.or.dgit.bigdata.project.hairshop.admin.setting.jdbc.DBCon;
@@ -28,9 +29,8 @@ public class ExportSettingService extends ServiceSetting{
 		jfc.setFileFilter(new FileNameExtensionFilter("txt Files", "txt"));
 		jfc.setCurrentDirectory(new File("C:/Users/LYJ/Desktop"));
 		jfc.setDialogTitle("파일을 저장할 폴더를 선택해 주세요.");
-		int i = jfc.showSaveDialog(null);
 		//저장할 폴더를 선택했을  때 수행할 메소드들
-		if(i == JFileChooser.APPROVE_OPTION){
+		if(jfc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
 			Config.Export_path = jfc.getSelectedFile().getPath();			
 			for(String tableName : Config.TABLE_NAME){	
 				checkBackupDir(tableName);
@@ -44,8 +44,11 @@ public class ExportSettingService extends ServiceSetting{
 		File srcDir = new File(Config.MYSQL_EXPORT_PATH);
 		File destDir = null;		
 		for(File file : srcDir.listFiles()){
-			destDir = new File(Config.Export_path+"/"+file.getName());			
+			System.out.println(file.getName());
+			destDir = new File(Config.Export_path+"/"+file.getName());
+			System.out.println(destDir.getPath());
 			boolean isSave = file.renameTo(destDir);
+			System.out.println(isSave);
 			if(isSave){
 				file.delete();
 			}
@@ -55,13 +58,19 @@ public class ExportSettingService extends ServiceSetting{
 	private void checkBackupDir(String tableName) {
 		//저장하려는 폴더에 이전에 백업된 파일이 존재하는 경우 그것을 지우게 만드는 메소드
 		File backupDir = new File(Config.Export_path+"/"+tableName+".txt");
+		File dfBackupDir = new File(Config.MYSQL_EXPORT_PATH+"/"+tableName+".txt");
+		if(dfBackupDir.exists()&&dfBackupDir.isFile()){
+			dfBackupDir.delete();
+		}
 		if (backupDir.exists()&&backupDir.isFile()){
 			backupDir.delete();
 			System.out.printf("%s Delete Success! %n",backupDir.getName());					
-		}else{
+		}
+		/* 백업시 mysql폴더에서 지정한 폴더로 파일이 이동하지 않는 문제가 발생해 주석처리 했습니다. */
+		/*else{
 			backupDir.mkdir();
 			System.out.printf("%s make dir Success! %n",Config.Export_path);
-		}				
+		}*/				
 	}
 
 	public void executeExportData(String tablePath, String tableName) {
