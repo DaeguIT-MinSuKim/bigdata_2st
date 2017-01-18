@@ -278,7 +278,10 @@ public class HairOrder extends JPanel {
 		}
 	}
 	public void setTxtInOrder(int cNo, String cName){
-		tfCNo.setText(cNo+"");
+		
+		if (cNo != 0) {
+			tfCNo.setText(cNo+"");
+		}		
 		tfCName.setText(cName);
 		
 		List<Biz> bList = BizService.getInstance().selectAllBiz();
@@ -422,9 +425,13 @@ public class HairOrder extends JPanel {
 			pnAddInput.getTxtCname().setText(tfCName.getText());
 			CardLayout cl = (CardLayout)(pnCards.getLayout());
 	        cl.show(pnCards, "name_30981526616213");
+	        
 		}else{
 			CardLayout cl = (CardLayout)(pnCards.getLayout());
 	        cl.show(pnCards, "name_30956037040404");
+	        if (list.size() == 1) {
+				tfCNo.setText(list.get(0).getcNo()+"");	
+			}
 		}
 		String[][] rowDatas = new String[list.size()][];
 		for (int i = 0; i < list.size(); i++) {

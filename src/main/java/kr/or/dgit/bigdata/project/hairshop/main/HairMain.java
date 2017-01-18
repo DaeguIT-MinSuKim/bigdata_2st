@@ -25,6 +25,7 @@ import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.log4j.lf5.util.DateFormatManager;
 import org.jfree.chart.ChartPanelP;
 import org.jfree.chart.JFreeChart;
 
@@ -44,6 +45,8 @@ import kr.or.dgit.bigdata.project.hairshop.ui.HairOrder;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrderSearch;
 import kr.or.dgit.bigdata.project.hairshop.ui.HomePanel;
 import kr.or.dgit.bigdata.project.hairshop.ui.login.ManagerLogin;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class HairMain extends JFrame {
 
@@ -222,9 +225,15 @@ public class HairMain extends JFrame {
 		pnCusSearchBtns.add(btnToMain1);
 		
 		pnHairOder = new JPanel();
+		pnHairOder.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				pnHairOderComponentShown(arg0);
+			}
+		});
 		tabbedPane.addTab("헤어주문", null, pnHairOder, null);
 		pnHairOder.setToolTipText("헤어주문");
-		//tabbedPane.setEnabledAt(2, false);
+		
 		pnHairOder.setLayout(new BorderLayout(0, 0));
 		
 		pnHairOderMain = new HairOrder();
@@ -299,7 +308,7 @@ public class HairMain extends JFrame {
 		pnOrderListBtns.add(btnToMain3);
 		
 		pnBizList = new JPanel();
-		//tabbedPane.addTab("영업현황", null, pnBizList, null);//
+		
 
 		pnBizList.setToolTipText("날짜, 월별 ,연도별 영업현황이 나타납니다.");
 		pnBizList.setLayout(new BorderLayout(0, 0));
@@ -310,7 +319,7 @@ public class HairMain extends JFrame {
 		pnBizList.add(pnBizListMain, BorderLayout.CENTER);
 		
 		pnBizGraph = new JPanel();
-		//tabbedPane.addTab("영업그래프", null, pnBizGraph, null);//
+		
 		pnBizGraph.setToolTipText("영업 현황 통계 그래프가 나타납니다.");
 		pnBizGraph.setLayout(null);
 
@@ -381,7 +390,7 @@ public class HairMain extends JFrame {
 			if(directOderInAdd==0){
 				pnHairOderMain.setTxtInOrder(Integer.parseInt(pnCusAdd.getTxtCno().getText()),pnCusAdd.getTxtCname().getText());
 				tabbedPane.setSelectedComponent(pnHairOder);
-				//tabbedPane.setEnabledAt(2, true);
+				
 			}
 			cardIndex =0;
 			
@@ -392,7 +401,7 @@ public class HairMain extends JFrame {
 			if(directOderInEdit==0){
 				pnHairOderMain.setTxtInOrder(Integer.parseInt(pnCusEdit.getTxtCno().getText()),pnCusEdit.getTxtCname().getText());
 				tabbedPane.setSelectedComponent(pnHairOder);
-				//tabbedPane.setEnabledAt(2, true);
+				
 			}
 			cardIndex =0;
 			break;
@@ -405,7 +414,10 @@ public class HairMain extends JFrame {
 	protected void btnHairInfoActionPerformed(ActionEvent e) { // 테이블 보이기 추가
 		tabbedPane.setEnabledAt(3, true);
 		tabbedPane.setSelectedComponent(pnOrderList);
-		hip.getTable().setTableWithData(new Customer(cNo));
+		Customer c = CustomerService.getInstance().searchCustomerByNo(Integer.parseInt(pnHairOderMain.getTfCNo().getText()));
+		hip.getTable().setTableWithData(c);		
+		DateFormatManager dfm = new DateFormatManager("yyyy-MM-dd");
+		pnOrderListMain.setTxtInHairIfo(c.getcNo(), c.getcName(), dfm.format(c.getcDob()));
 	}
 	protected void btnToMainActionPerformed(ActionEvent e) {
 		tabbedPane.setSelectedComponent(pnHome);
@@ -513,5 +525,8 @@ public class HairMain extends JFrame {
 			}
 		});
 				
+	}
+	protected void pnHairOderComponentShown(ComponentEvent arg0) {
+		pnHairOderMain.setTxtInOrder(cNo, cName);		
 	}
 }
