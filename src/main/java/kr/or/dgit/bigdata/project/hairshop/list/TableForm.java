@@ -6,6 +6,8 @@ import javax.swing.table.TableColumnModel;
 
 @SuppressWarnings("serial")
 public class TableForm extends JTable {
+	public TableForm() {
+	}
 	private static JTable table;
 	
 	public static void setTable(JTable table) {

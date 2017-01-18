@@ -4,11 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
@@ -39,6 +44,8 @@ import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrder;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrderSearch;
+import javax.swing.JLabel;
+import java.awt.SystemColor;
 
 public class HairMain extends JFrame {
 
@@ -83,6 +90,7 @@ public class HairMain extends JFrame {
 	private ChartPanelP panel;
 	private JFreeChart chart;
 	private JPopupMenu popup;
+	private JLabel lblTextTest;
 
 	/**
 	 * Launch the application.
@@ -91,17 +99,24 @@ public class HairMain extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					Properties props = new Properties();
 					props.put("logoString", "DGIT HAIR");
 					GraphiteLookAndFeel.setCurrentTheme(props);//팝업 메뉴 등장하는 jtattoo 로고 변환
-					UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
+					UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 					HairMain frame = new HairMain();
 					frame.setBounds(100, 100, 1100, 700);
 					frame.setVisible(true);
+					System.out.println(frame.pnHomeMain.getHeight());
+					System.out.println(frame.pnHomeMain.getWidth());					
 				} catch (Exception e) {
 					HairMain f = new HairMain();
+					
+					
 					e.printStackTrace();
 				}
+				
+
 			}
 		});
 		
@@ -109,8 +124,11 @@ public class HairMain extends JFrame {
 	
 	/**
 	 * Create the frame.
+	 * @throws IOException 
+	 * @throws FontFormatException 
+	 * @throws FileNotFoundException 
 	 */
-	public HairMain() {
+	public HairMain()  {
 		setTitle("DGIT HAIR");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1100, 700);
@@ -122,17 +140,17 @@ public class HairMain extends JFrame {
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		
-
-		
 		pnHome = new JPanel();
 		tabbedPane.addTab("홈", null, pnHome, null);
 		pnHome.setToolTipText("홈 화면으로 돌아갑니다.");
 		pnHome.setLayout(new BorderLayout(0, 0));
 		
 		pnHomeMain = new JPanel();
-		pnHomeMain.setBackground(new Color(255, 192, 203));
+		pnHomeMain.setBackground(SystemColor.control);
 		pnHome.add(pnHomeMain, BorderLayout.CENTER);
+
 		
+	
 		pnCusSearch = new JPanel();
 		tabbedPane.addTab("고객검색", null, pnCusSearch, null);
 		pnCusSearch.setToolTipText("고객검색 및 회원 추가, 삭제");
