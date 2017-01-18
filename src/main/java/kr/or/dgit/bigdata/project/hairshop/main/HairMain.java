@@ -495,7 +495,7 @@ public class HairMain extends JFrame {
 				Manager temp = ManagerService.getInstance().selectmPasswordByName(manager);
 				char[] pass = ml.getPasswordField().getPassword();
 				String userPass ="";
-				for (char c : pass) {
+				for (char c : pass) { 
 					userPass +=c;
 				}
 				if (temp.getmPassword().equals(userPass)) {
