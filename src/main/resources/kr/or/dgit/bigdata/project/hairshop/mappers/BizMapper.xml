@@ -51,4 +51,18 @@
 	<insert id="insertBiz" parameterType="Biz" useGeneratedKeys="true" keyColumn="bNo">
 		insert into hairshop.biz(bDate, bTime, cNo, hNo, eNo) values(#{bDate},#{bTime},#{cNo},#{hNo},#{eNo})
 	</insert>
+	<select id="selectBizWithHairInfo" parameterType="hashmap" resultType="hashmap">
+		select sum(hPrice*(1-eDiscount)) as sum from view_biz 
+		<where>
+			<if test="year != null">
+				year(bDate)=#{year}
+			</if>
+			<if test="month != null">
+				and month(bDate) = #{month}
+			</if>
+			<if test="hNo != Null">
+				and hNo = #{hNo}
+			</if>
+		</where>  
+	</select>
 </mapper>

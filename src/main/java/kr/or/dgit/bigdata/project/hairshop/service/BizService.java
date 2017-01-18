@@ -289,5 +289,18 @@ public class BizService {
 		
 	}
 	
-	
+	/* 유진 사용 예정 */
+	public HashMap<String, Object> selectBizWithHairInfo(HashMap<String, Object> searchMap){
+		if (logger.isDebugEnabled()) {
+			logger.debug("selectBizWithHairInfo(HashMap<String,Object>) - start");
+		}
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			BizMapper bizMapper = sqlSession.getMapper(BizMapper.class);
+			HashMap<String, Object> res = bizMapper.selectBizWithHairInfo(searchMap);
+			return res;
+		} finally {
+			sqlSession.close();
+		}
+	}
 }

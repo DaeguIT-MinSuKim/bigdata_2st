@@ -59,6 +59,6 @@ public interface BizMapper {
 	
 	public void insertBiz(Biz biz);
 	
-	
+	public HashMap<String, Object> selectBizWithHairInfo(HashMap<String, Object> searchMap);
 }
       

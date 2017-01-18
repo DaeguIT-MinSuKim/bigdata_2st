@@ -30,6 +30,7 @@ import org.jfree.chart.JFreeChart;
 import com.jtattoo.plaf.graphite.GraphiteLookAndFeel;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
+import kr.or.dgit.bigdata.project.hairshop.list.BizReportChartByMonth;
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairInfoPanel;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizHairTotalReport;
@@ -87,7 +88,7 @@ public class HairMain extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
