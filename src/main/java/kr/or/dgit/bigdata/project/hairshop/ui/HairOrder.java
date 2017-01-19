@@ -41,6 +41,8 @@ import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.service.HairEventService;
 import kr.or.dgit.bigdata.project.hairshop.service.HairinfoService;
 import java.awt.CardLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class HairOrder extends JPanel {
 	private JTextField tfBNo;
@@ -252,6 +254,12 @@ public class HairOrder extends JPanel {
 		pnResult.add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				tableMouseClicked(arg0);
+			}
+		});
 		table.setCellSelectionEnabled(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
@@ -297,29 +305,36 @@ public class HairOrder extends JPanel {
 	
 	protected void cmbHNameItemStateChanged(ItemEvent arg0) {
 		int hNo = cmbHName.getSelectedIndex();
-		Hairinfo h =  new Hairinfo(hNo);
-		Hairinfo tempH = HairinfoService.getInstance().selectHairInfoByNo(h);
-		tfHNo.setText(hNo+"");
-		hPriceInOrder = Integer.parseInt(tempH.toString());
-		tfHPrice.setText(String.format("%,d 원", hPriceInOrder));
-		if(dHe != null){
-			int totalPrice = (int)(hPriceInOrder *(1-dHe));// 거꾸로 수행시 총금액이 0원이 되지않게 함.		
-			tfTotal.setText(String.format("%,d 원", totalPrice));
+		if (hNo !=0) {
+			Hairinfo h =  new Hairinfo(hNo);
+			Hairinfo tempH = HairinfoService.getInstance().selectHairInfoByNo(h);
+			tfHNo.setText(hNo+"");
+			hPriceInOrder = Integer.parseInt(tempH.toString());
+			tfHPrice.setText(String.format("%,d 원", hPriceInOrder));
+			if(dHe != null){
+				int totalPrice = (int)(hPriceInOrder *(1-dHe));// 거꾸로 수행시 총금액이 0원이 되지않게 함.		
+				tfTotal.setText(String.format("%,d 원", totalPrice));
+			}
 		}
+		
 	}
 	protected void cmbENameItemStateChanged(ItemEvent e) {
 		int eNo = cmbEName.getSelectedIndex();
-		HairEvent he = new HairEvent(eNo);
-		HairEvent tempHe = HairEventService.getInstance().selectEventByNo(he);
+		if (eNo != 0) {
+			HairEvent he = new HairEvent(eNo);
+			HairEvent tempHe = HairEventService.getInstance().selectEventByNo(he);
+			
+			tfEDiscount.setText(tempHe.toString());
+			tfENo.setText(eNo+"");
+			
+			dHe = Double.parseDouble(tempHe.toString());
+			
+			int totalPrice = (int)(hPriceInOrder *(1-dHe));
+			
+			tfTotal.setText(String.format("%,d 원", totalPrice));
+		}
 		
-		tfEDiscount.setText(tempHe.toString());
-		tfENo.setText(eNo+"");
 		
-		dHe = Double.parseDouble(tempHe.toString());
-		
-		int totalPrice = (int)(hPriceInOrder *(1-dHe));
-		
-		tfTotal.setText(String.format("%,d 원", totalPrice));
 	}
 	
 	public void insertBizByOrder(){
@@ -418,6 +433,7 @@ public class HairOrder extends JPanel {
 		Map<String, Object> map = new HashMap<>();
 		map.put("cName", cName);
 		List<Customer> list = CustomerService.getInstance().searchCustomerByName(map);
+		
 		if (list.size() == 0) {//리스트 읽어들인뒤 결과따라 좌측 패널 연동
 			List<Customer> listByAll = CustomerService.getInstance().selectByAll();
 			int newCno =listByAll.size()+1;
@@ -426,9 +442,8 @@ public class HairOrder extends JPanel {
 			CardLayout cl = (CardLayout)(pnCards.getLayout());
 	        cl.show(pnCards, "name_30981526616213");
 	        
-		}else{
-			CardLayout cl = (CardLayout)(pnCards.getLayout());
-	        cl.show(pnCards, "name_30956037040404");
+		}else if (list.size() > 0){
+	      
 	        if (list.size() == 1) {
 				tfCNo.setText(list.get(0).getcNo()+"");	
 			}
@@ -466,6 +481,8 @@ public class HairOrder extends JPanel {
 		}
 	}
 	protected void btnSearchActionPerformed(ActionEvent arg0) {
+		CardLayout cl = (CardLayout)(pnCards.getLayout());
+		cl.show(pnCards, "name_31439583877535");
 		reloadData();
 	}
 	protected void btnAddActionPerformed(ActionEvent arg0) {
@@ -473,5 +490,11 @@ public class HairOrder extends JPanel {
 		if (jop == 0) {
 			pnAddInput.insertNewCostomer();
 		}
+	}
+	protected void tableMouseClicked(MouseEvent arg0) {
+		String cNo = table.getValueAt(table.getSelectedRow(), 0).toString();
+		String cName = table.getValueAt(table.getSelectedRow(), 1).toString();
+		tfCNo.setText(cNo);
+		tfCName.setText(cName);		
 	}
 }
