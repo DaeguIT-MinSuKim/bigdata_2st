@@ -2,7 +2,6 @@ package kr.or.dgit.bigdata.project.hairshop.ui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,12 +11,9 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 
-import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
-import kr.or.dgit.bigdata.project.hairshop.service.BizService;
+import kr.or.dgit.bigdata.project.hairshop.list.HairOrderInfoList;
 
 
 public class HairOrderSearch extends JPanel {
@@ -26,7 +22,7 @@ public class HairOrderSearch extends JPanel {
 	private JTextField txtD1;
 	private JTextField txtD2;
 	private JTextField txtD3;
-	private JTable table;
+	private HairOrderInfoList table;
 	private String[] chi = { "영업번호", "영업일자", "헤어명", "단가", "이벤트명","금액" };
 	/**
 	 * Create the panel.
@@ -89,7 +85,7 @@ public class HairOrderSearch extends JPanel {
 		add(scrollPane, BorderLayout.CENTER);
 		
 		
-		table = new JTable();
+		table = new HairOrderInfoList();
 		table.setCellSelectionEnabled(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(new DefaultTableModel(
@@ -101,7 +97,8 @@ public class HairOrderSearch extends JPanel {
 		scrollPane.setViewportView(table);
 
 	}
-	public void reloadData() {
+	///////////////////////////
+	/*public void reloadData() {
 		DefaultTableModel model = new DefaultTableModel(getRowData(Integer.parseInt(txtNo.getText())), getColumnData());
 		table.setModel(model);
 		tableSetAlignWith();		
@@ -139,7 +136,7 @@ public class HairOrderSearch extends JPanel {
 		for (int i = 0; i < idx.length; i++) {
 			model.getColumn(idx[i]).setCellRenderer(dtcr);
 		}
-	}
+	}*/
 	
 	public void setTxtInHairIfo(int cNo, String cName, String dob){
 		String[] dobArr =  dob.split("-");
@@ -152,6 +149,9 @@ public class HairOrderSearch extends JPanel {
 		
 	}
 	
+	public void reloadData() {
+		table.reloadData(txtNo.getText(), chi);	
+	}
 	
 
 }
