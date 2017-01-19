@@ -8,6 +8,8 @@ import java.awt.GridLayout;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -34,6 +36,8 @@ import com.jtattoo.plaf.graphite.GraphiteLookAndFeel;
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.dto.Manager;
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairInfoPanel;
+import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForAll;
+import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForOne;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.service.ManagerService;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizHairTotalReport;
@@ -45,8 +49,6 @@ import kr.or.dgit.bigdata.project.hairshop.ui.HairOrder;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrderSearch;
 import kr.or.dgit.bigdata.project.hairshop.ui.HomePanel;
 import kr.or.dgit.bigdata.project.hairshop.ui.login.ManagerLogin;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 public class HairMain extends JFrame {
 
@@ -83,8 +85,8 @@ public class HairMain extends JFrame {
 	private String dob;
 	private String doJoin;
 	private String phone;
-	private JTable tableInSearch;
-	private JTable tableInSearchForAll;
+	private CustomerSearchListForOne tableInSearch;
+	private CustomerSearchListForAll tableInSearchForAll;
 	private CustomerHairInfoPanel hip;
 	private int cardIndex; // 0은 검색, 1은 추가, 2는 수정
 	private BizHairTotalReport panel_1;
