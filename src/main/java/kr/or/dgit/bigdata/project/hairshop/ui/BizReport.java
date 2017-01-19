@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Set;
 
 import javax.swing.JButton;
@@ -12,12 +14,13 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import kr.or.dgit.bigdata.project.hairshop.list.BizReportChartByMonth;
 import kr.or.dgit.bigdata.project.hairshop.list.BizReportPanel;
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairInfoPanel;
 import kr.or.dgit.bigdata.project.hairshop.list.SearchTermPanel;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
 
-public class BizReport extends JPanel implements ActionListener {
+public class BizReport extends JPanel implements ActionListener, ItemListener {
 	/* main 화면 영업현황 tab 선택시 나타날 메인 화면 */
 	private JPanel pnBizListMain;
 	private JPanel pnBizListBtns;
@@ -104,7 +107,7 @@ public class BizReport extends JPanel implements ActionListener {
 		
 		cmbYear = new JComboBox<>();
 		panel.add(cmbYear);
-		setcmbYear();
+		setcmbYear();		
 		
 		btnSearch = new JButton("검색");
 		btnSearch.addActionListener(this);
@@ -113,7 +116,7 @@ public class BizReport extends JPanel implements ActionListener {
 		pnBizListMain.add(pBizReport, BorderLayout.CENTER);
 		revalidate();
 		repaint();
-		
+		cmbYear.addItemListener(this);
 	}
 	private void setcmbYear() {
 		Set<Integer> temp = BizService.getInstance().selectBDateYear();
@@ -134,6 +137,7 @@ public class BizReport extends JPanel implements ActionListener {
 		pnBizListMain.add(brp, BorderLayout.CENTER);
 		revalidate();
 		repaint();
+		brp.getBtnChart().setEnabled(true);
 	}
 	protected void btnToMain4ActionPerformed(ActionEvent e) {
 		/* main 화면으로 돌아가는 메소드. 향후 추가 예정 */
@@ -141,8 +145,21 @@ public class BizReport extends JPanel implements ActionListener {
 	protected void btnSearchActionPerformed(ActionEvent e) {
 		int year = (int) cmbYear.getSelectedItem();
 		pBizReport.setResTable(year);
+		pBizReport.setYear(year);
+		pBizReport.getBtnChart().setEnabled(true);
 		revalidate();
 	}
 
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == cmbYear) {
+			cmbYearItemStateChanged(e);
+		}
+		
+	}
+
+	private void cmbYearItemStateChanged(ItemEvent e) {
+		pBizReport.getBtnChart().setEnabled(false);		
+	}
 }
 

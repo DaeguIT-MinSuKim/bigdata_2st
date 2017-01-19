@@ -17,8 +17,11 @@
 		left outer join hairshop.hairinfo h on b.hNo = h.hNo 
 		left outer join hairshop.event e on b.eNo = e.eNo 
 	</select>
-	<select id="selectYearOrMonthFromBiz" resultMap="BizWithCsEventInfo">
+	<select id="selectBizWithDates" resultMap="BizWithCsEventInfo">
 		select *from hairshop.view_biz where bDate &gt;= #{param1} and bDate &lt;#{param2} order by bDate
+	</select>
+	<select id="selectBizWithDatesCalTotal" parameterType="hashmap" resultType="hashmap">
+		select count(bNo) as cnt, sum(hPrice*(1-eDiscount)) as sum from view_biz where bDate &gt;= #{param1} and bDate &lt;#{param2}
 	</select>
 	<select id="selectFromBizByCustomer" parameterType="int" resultMap="BizWithCsEventInfo">
 		select *from hairshop.view_biz where cNo=#{param1} order by bNo
@@ -32,15 +35,9 @@
 			<if test="month != null">
 				and month(bDate) = #{month}
 			</if>
-			<if test="startDate != null">
-				bDate &gt;= #{startDate}
-			</if>
-			<if test="endDate != null">
-				and bDate &lt; #{endDate}
-			</if>
 		</where>  
 	</select>
-	<select id="selectYearOrMonthFromBizCalTotal" parameterType="hashmap" resultType="hashmap">
+	<select id="selectBizWithYearMonthCalTotal" parameterType="hashmap" resultType="hashmap">
 		select count(bNo) as cnt, sum(hPrice*(1-eDiscount)) as sum from view_biz
 		<where>
 			<if test="year != null">
@@ -49,15 +46,23 @@
 			<if test="month != null">
 				and month(bDate) = #{month}
 			</if>
-			<if test="startDate != null">
-				bDate &gt;= #{startDate}
-			</if>
-			<if test="endDate != null">
-				and bDate &lt; #{endDate}
-			</if>
 		</where>  
 	</select>
 	<insert id="insertBiz" parameterType="Biz" useGeneratedKeys="true" keyColumn="bNo">
 		insert into hairshop.biz(bDate, bTime, cNo, hNo, eNo) values(#{bDate},#{bTime},#{cNo},#{hNo},#{eNo})
 	</insert>
+	<select id="selectBizWithHairInfo" parameterType="hashmap" resultType="hashmap">
+		select sum(hPrice*(1-eDiscount)) as sum from view_biz 
+		<where>
+			<if test="year != null">
+				year(bDate)=#{year}
+			</if>
+			<if test="month != null">
+				and month(bDate) = #{month}
+			</if>
+			<if test="hNo != Null">
+				and hNo = #{hNo}
+			</if>
+		</where>  
+	</select>
 </mapper>

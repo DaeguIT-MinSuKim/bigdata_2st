@@ -51,9 +51,9 @@ public class BizServiceTest {
 	}
 	
 	@Test
-	public void testSelectYearOrMonthAllFromBiz() {
+	public void testSelectBizWithDates() {
 		
-		List<Biz> bList = BizService.getInstance().selectYearOrMonthAllFromBiz("2000-05-10","2000-05-11");
+		List<Biz> bList = BizService.getInstance().selectBizWithDates("2000-05-10","2000-05-11");
 		Assert.assertNotNull(bList);
 		for(Biz b:bList){
 			System.out.println(b);
