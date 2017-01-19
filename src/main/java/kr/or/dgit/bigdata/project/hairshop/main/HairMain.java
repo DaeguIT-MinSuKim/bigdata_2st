@@ -505,7 +505,7 @@ public class HairMain extends JFrame {
 	}
 	private void btnManagerActionPerformed(ActionEvent arg0) {//관리자 로그인 버튼 이벤트 리스너
 		ManagerLogin ml = new ManagerLogin();
-		ml.setVisible(true);
+		ml.setVisible(true); 
 		ml.getBtnLogin().addActionListener(new ActionListener() {
 			
 			@Override
