@@ -21,7 +21,9 @@ public class TableModelSetting extends JTable {
 			
 			ColumDataIndex =0;
 		}else if (ColumDataIndex == 2) {
-			
+			TableForm.tableCellAlignment(SwingConstants.CENTER, 0,1,2,3,4);
+			TableForm.tableCellAlignment(SwingConstants.RIGHT, 5);
+			TableForm.tableSetWidth(100,300,200,200,200,400);
 			
 			ColumDataIndex =0;
 		}else if (ColumDataIndex == 3) {
@@ -42,12 +44,22 @@ public class TableModelSetting extends JTable {
 		}
 	}
 	private String[] getColumnData() {
+		String[] strArr = null;
+		if (ColumDataIndex == 1) {
+			strArr = new String[]{ "고객 번호", "고객명", "생년월일", "가입일자", "전화번호" };
+			ColumDataIndex =0;
+		}else if (ColumDataIndex == 2) {
+			strArr = new String[]{"영업번호","영업일자","고객명","헤어명","이벤트명","금액"};
+			
+			ColumDataIndex =0;
+		}else if (ColumDataIndex == 3) {
+			strArr =new String[]{"영업번호","영업일자","헤어명","단가","이벤트명","금액"};		
+			ColumDataIndex =0;
+		}		
 		
-		
-		
-		return new String[] { "고객 번호", "고객명", "생년월일", "가입일자", "전화번호" };
+		return strArr;
 	}
-	
+	// get set
 	public int getColumDataIndex() {
 		return ColumDataIndex;
 	}
