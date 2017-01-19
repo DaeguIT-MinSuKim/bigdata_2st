@@ -42,4 +42,22 @@ public class ManagerService {
 			sqlSession.close();
 		}		
 	}
+	
+	public void updateManager(String mName, String mPassword){
+		if (logger.isDebugEnabled()) {
+			logger.debug("updateManager(String, String) - start");
+		}
+
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		ManagerMapper managerMapper = sqlSession.getMapper(ManagerMapper.class);
+		try{
+			managerMapper.updateManager(mName, mPassword);
+			sqlSession.commit();
+			if (logger.isDebugEnabled()) {
+				logger.debug("updateManager(String, String) - end");
+			}
+		}finally{
+			sqlSession.close();
+		}		
+	}
 }
