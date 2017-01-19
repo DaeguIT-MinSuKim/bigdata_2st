@@ -10,60 +10,106 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class SearchTermPanel extends JPanel implements ActionListener {
+import kr.or.dgit.bigdata.project.hairshop.test.PrintFrame;
+
+import java.awt.BorderLayout;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+public class BizReportPanelBySearch extends JPanel implements ActionListener {
 	/* FIELDS */
 	private JButton btnSearch;
-	private CustomerHairInfoPanel resPanel;
 	private DatePanel startDatePicker;
 	private DatePanel endDatePicker;
-
-
-	/* GET/SET */
-	public void setResPanel(CustomerHairInfoPanel resPanel) {
-		this.resPanel = resPanel;
-	}
+	private JPanel srcPanel;
+	private JScrollPane scrollPane;
+	private JPanel btnPanel;
+	private JButton btnPrint;
+	private CustomerHairTable resTable;
+	private String startDate;
+	private String endDate;
 
 	/* CONSTURUCTOR */
-	public SearchTermPanel() {
+	public BizReportPanelBySearch() {
+		setLayout(new BorderLayout(0, 0));
+		
+		srcPanel = new JPanel();
+		add(srcPanel, BorderLayout.NORTH);
 		JLabel lblTitle = new JLabel("기간 검색");
-		add(lblTitle);
-
+		srcPanel.add(lblTitle);
+		
 		startDatePicker = new DatePanel();
-		add(startDatePicker);		
-
+		startDatePicker.getDatePicker().addActionListener(this);
+		srcPanel.add(startDatePicker);
+		
 		JLabel lbltemp = new JLabel("~");
+		srcPanel.add(lbltemp);
 		lbltemp.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lbltemp);
 		
 		endDatePicker = new DatePanel();
-		add(endDatePicker);
-	
+		endDatePicker.getDatePicker().addActionListener(this);
+		srcPanel.add(endDatePicker);
+		
 		btnSearch = new JButton("검색");
+		srcPanel.add(btnSearch);
 		btnSearch.addActionListener(this);
-		add(btnSearch);
+		
+		scrollPane = new JScrollPane();
+		add(scrollPane, BorderLayout.CENTER);
+		
+		resTable = new CustomerHairTable();
+		scrollPane.setViewportView(resTable);
+		
+		btnPanel = new JPanel();
+		add(btnPanel, BorderLayout.SOUTH);
+		
+		btnPrint = new JButton("인쇄하기");
+		btnPrint.addActionListener(this);
+		btnPanel.add(btnPrint);
 	}
 	/* EVENT */
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == endDatePicker.getDatePicker()) {
+			endDatePickerDatePickerActionPerformed(arg0);
+		}
+		if (arg0.getSource() == startDatePicker.getDatePicker()) {
+			startDatePickerDatePickerActionPerformed(arg0);
+		}
+		if (arg0.getSource() == btnPrint) {
+			btnPrintActionPerformed(arg0);
+		}
 		if (arg0.getSource() == btnSearch) {
 			btnSearchActionPerformed(arg0);
 		}
-	}
-	
+	}	
 	protected void btnSearchActionPerformed(ActionEvent arg0) {
 		/* 검색 버튼 클릭 시 각 datePicker의 값을 추출해 온 후 검색 가능한 범위인지를 우선 확인하고 유효한 범위일 경우 날짜 범위에 맞춰 검색하도록 하는 멤소드 */
-		searchDate();		
+		searchDate();	
+		btnPrint.setEnabled(true);
+	}	
+	protected void btnPrintActionPerformed(ActionEvent arg0) {
+		CustomerHairTable prnTable = new CustomerHairTable();
+		prnTable.setTableWithData(startDate, endDate);
+		new PrintFrame(prnTable, startDate+"~"+endDate+" 영업 실적");
 	}
-
+	protected void startDatePickerDatePickerActionPerformed(ActionEvent arg0) {
+		btnPrint.setEnabled(false);
+		startDate = "";
+	}
+	protected void endDatePickerDatePickerActionPerformed(ActionEvent arg0) {
+		btnPrint.setEnabled(false);
+		endDate="";
+	}
+	
 	public void searchDate() {
-		String startDate = startDatePicker.getDatePicker().getJFormattedTextField().getText().trim();
-		String endDate = endDatePicker.getDatePicker().getJFormattedTextField().getText().trim();
+		startDate = startDatePicker.getDatePicker().getJFormattedTextField().getText().trim();
+		endDate = endDatePicker.getDatePicker().getJFormattedTextField().getText().trim();
 		
 		if(startDate==""||endDate==""||!isVailable(startDate,endDate)){
 			JOptionPane.showMessageDialog(null, "검색범위가 불명확합니다.", "경고", JOptionPane.WARNING_MESSAGE);
 			return;
 		}	
-		
-		resPanel.getTable().setTableWithData(startDate, endDate);		
+		resTable.setTableWithData(startDate, endDate);		
 	}
 
 	private boolean isVailable(String startDate, String endDate) {		
@@ -77,7 +123,7 @@ public class SearchTermPanel extends JPanel implements ActionListener {
 			return true;
 		}		
 	}
-
+	
 	private GregorianCalendar convertToCalendar(String date) {
 		/* 주의 : GregorianCalendar 생성 시 Month 값은 내가 얻은 값보다 -1 인 값을 넣어줘야 함 */
 		if(date==""){

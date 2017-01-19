@@ -259,6 +259,5 @@ public class CustomerSearch extends JPanel implements ActionListener {
 	protected void btnPrintActionPerformed(ActionEvent e) {
 		/* 실행시 패널에 있는 목록이 없어지는 문제 발생 */
 		PrintFrame tpd1 = new PrintFrame((JTable) scrollPane.getViewport().getComponent(0), "고객 목록");
-		tpd1.setVisible(true);
 	}
 }

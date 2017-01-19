@@ -20,6 +20,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
@@ -32,20 +33,20 @@ import com.jtattoo.plaf.graphite.GraphiteLookAndFeel;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.dto.Manager;
-import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairInfoPanel;
+import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairTable;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.service.ManagerService;
+import kr.or.dgit.bigdata.project.hairshop.test.CustomerSearch;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizHairTotalReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
-import kr.or.dgit.bigdata.project.hairshop.test.CustomerSearch;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrder;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrderSearch;
 import kr.or.dgit.bigdata.project.hairshop.ui.HomePanel;
 import kr.or.dgit.bigdata.project.hairshop.ui.login.ManagerLogin;
 
-public class HairMain extends JFrame {
+public class HairMain<hip> extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel pnHome;
@@ -82,7 +83,7 @@ public class HairMain extends JFrame {
 	private String phone;
 	private JTable tableInSearch;
 	private JTable tableInSearchForAll;
-	private CustomerHairInfoPanel hip;
+	private CustomerHairTable hip;
 	private int cardIndex; // 0은 검색, 1은 추가, 2는 수정
 	private BizHairTotalReport panel_1;
 	private ChartPanelP panel;
@@ -280,8 +281,10 @@ public class HairMain extends JFrame {
 		pnOrderListMain.setBackground(new Color(255, 192, 203));
 		pnOrderList.add(pnOrderListMain, BorderLayout.CENTER);
 		/* 고객 헤어 정보를  보여줄 table을 담고있는 패널 ver.이유진*/
-		hip = new CustomerHairInfoPanel();
-		pnOrderListMain.add(hip, BorderLayout.CENTER);
+		JScrollPane scrollPane = new JScrollPane();			
+		hip = new CustomerHairTable();
+		scrollPane.setViewportView(hip);
+		pnOrderListMain.add(scrollPane, BorderLayout.CENTER);
 		
 		pnOrderListBtns = new JPanel();
 		pnOrderListBtns.setBorder(new EmptyBorder(10, 30, 10, 10));
@@ -406,7 +409,7 @@ public class HairMain extends JFrame {
 	protected void btnHairInfoActionPerformed(ActionEvent e) { // 테이블 보이기 추가
 		tabbedPane.setEnabledAt(3, true);
 		tabbedPane.setSelectedComponent(pnOrderList);
-		hip.getTable().setTableWithData(new Customer(cNo));
+		hip.setTableWithData(new Customer(cNo));
 	}
 	protected void btnToMainActionPerformed(ActionEvent e) {
 		tabbedPane.setSelectedComponent(pnHome);
@@ -478,7 +481,7 @@ public class HairMain extends JFrame {
     	            public void actionPerformed(ActionEvent e) {
     	            	tabbedPane.setEnabledAt(3, true);
     	    			tabbedPane.setSelectedComponent(pnOrderList);
-    	    			hip.getTable().setTableWithData(new Customer(cNo));
+    	    			hip.setTableWithData(new Customer(cNo));
     	            }
     	    }));
             popup.show(e.getComponent(), e.getX(), e.getY());

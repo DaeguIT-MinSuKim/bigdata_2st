@@ -119,6 +119,17 @@ public class Biz {
 				beNo);
 	}
 	
+	public String[] toCSArray() {
+		DateFormatManager dfm = new DateFormatManager("yyyy-MM-dd");
+		return new String[]{bNo+"", dfm.format(bDate), bhNo.gethName(), bhNo.gethPriceForm(), beNo.geteName(), getBizPrice()};		
+	}
+	
+	public String[] toBizArray() {
+		DateFormatManager dfm = new DateFormatManager("yyyy-MM-dd");	
+		return new String[]{bNo+"", dfm.format(bDate), bcNo.getcName(), bhNo.gethName(), beNo.geteName(), getBizPrice()};
+	}
+	
+	/*코드 정리 중 삭제할 코드 */
 	public String[] toArray(Boolean isReport) {
 		DateFormatManager dfm = new DateFormatManager("yyyy-MM-dd");
 		if(isReport==true){			
@@ -128,5 +139,4 @@ public class Biz {
 		}
 		
 	}
-	
 }
