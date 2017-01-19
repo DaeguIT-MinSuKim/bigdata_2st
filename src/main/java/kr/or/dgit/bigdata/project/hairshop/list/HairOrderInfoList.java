@@ -29,6 +29,7 @@ public class HairOrderInfoList extends JTable {
 
 		return rowDatas;
 	}
+	///////////////////////
 	protected void tableSetWidth(int... width) {//
 		TableColumnModel model = getColumnModel();
 		for (int i = 0; i < width.length; i++) {
