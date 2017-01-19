@@ -1,12 +1,15 @@
 package kr.or.dgit.bigdata.project.hairshop.ui;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Time;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,9 +29,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 
 import org.apache.log4j.lf5.util.DateFormatManager;
 
@@ -36,13 +37,11 @@ import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.dto.HairEvent;
 import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
+import kr.or.dgit.bigdata.project.hairshop.list.HairOrderSubList;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.service.HairEventService;
 import kr.or.dgit.bigdata.project.hairshop.service.HairinfoService;
-import java.awt.CardLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class HairOrder extends JPanel {
 	private JTextField tfBNo;
@@ -63,7 +62,7 @@ public class HairOrder extends JPanel {
 	private Double dHe;
 	private Date nowDate;
 	private Time nowTime;
-	private JTable table;
+	private HairOrderSubList table;
 	private JPanel pnResult;
 	private JScrollPane scrollPane;
 	private JPanel pnCards;
@@ -253,7 +252,7 @@ public class HairOrder extends JPanel {
 		scrollPane = new JScrollPane();
 		pnResult.add(scrollPane);
 		
-		table = new JTable();
+		table = new HairOrderSubList();
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -420,13 +419,13 @@ public class HairOrder extends JPanel {
 	public JTable getTable() {
 		return table;
 	}
-	public void setTable(JTable table) {
+	public void setTable(HairOrderSubList table) {
 		this.table = table;
 	}
 	private void reloadData() {
-		DefaultTableModel model = new DefaultTableModel(getRowData(tfCName.getText()), getColumnData());
+		DefaultTableModel model = new DefaultTableModel(getRowData(tfCName.getText()), table.getColumnData());
 		table.setModel(model);
-		tableSetAlignWith();		
+		table.tableSetAlignWith();		
 	}
 
 	String[][] getRowData(String cName) {
@@ -456,30 +455,6 @@ public class HairOrder extends JPanel {
 		return rowDatas;
 	}
 
-	protected String[] getColumnData() {
-
-		return new String[] { "고객 번호", "고객명", "생년월일", "가입일자", "전화번호" };
-	}
-	
-	protected void tableSetWidth(int... width) {//
-		TableColumnModel model = table.getColumnModel();
-		for (int i = 0; i < width.length; i++) {
-			model.getColumn(i).setPreferredWidth(width[i]);
-		}
-	}
-	protected void tableSetAlignWith() {//
-		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4);
-		tableSetWidth(60, 100, 200, 200, 200);
-	}
-	
-	protected void tableCellAlignment(int align, int... idx) {//
-		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
-		dtcr.setHorizontalAlignment(align);
-		TableColumnModel model = table.getColumnModel();
-		for (int i = 0; i < idx.length; i++) {
-			model.getColumn(idx[i]).setCellRenderer(dtcr);
-		}
-	}
 	protected void btnSearchActionPerformed(ActionEvent arg0) {
 		CardLayout cl = (CardLayout)(pnCards.getLayout());
 		cl.show(pnCards, "name_31439583877535");

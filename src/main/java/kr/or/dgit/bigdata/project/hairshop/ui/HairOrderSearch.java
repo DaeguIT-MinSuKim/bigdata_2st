@@ -97,47 +97,6 @@ public class HairOrderSearch extends JPanel {
 		scrollPane.setViewportView(table);
 
 	}
-	///////////////////////////
-	/*public void reloadData() {
-		DefaultTableModel model = new DefaultTableModel(getRowData(Integer.parseInt(txtNo.getText())), getColumnData());
-		table.setModel(model);
-		tableSetAlignWith();		
-	}
-	String[][] getRowData(int cNo) {
-		
-		List<Biz> list = BizService.getInstance().selectFromBizByCustomer(1);
-
-		String[][] rowDatas = new String[list.size()][];
-		for (int i = 0; i < list.size(); i++) {
-			rowDatas[i] = list.get(i).toArray(false);
-		}
-
-		return rowDatas;
-	}
-	String[] getColumnData() {
-
-		return chi;
-	}
-	protected void tableSetWidth(int... width) {//
-		TableColumnModel model = table.getColumnModel();
-		for (int i = 0; i < width.length; i++) {
-			model.getColumn(i).setPreferredWidth(width[i]);
-		}
-	}
-	protected void tableSetAlignWith() {//
-		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4);
-		tableSetWidth(60, 100, 200, 200, 200);
-	}
-	
-	protected void tableCellAlignment(int align, int... idx) {//
-		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
-		dtcr.setHorizontalAlignment(align);
-		TableColumnModel model = table.getColumnModel();
-		for (int i = 0; i < idx.length; i++) {
-			model.getColumn(idx[i]).setCellRenderer(dtcr);
-		}
-	}*/
-	
 	public void setTxtInHairIfo(int cNo, String cName, String dob){
 		String[] dobArr =  dob.split("-");
 		
