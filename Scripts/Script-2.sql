@@ -165,3 +165,6 @@ ALTER TABLE hairshop.manager
 insert into hairshop.manager values 
 (1, 'bigdata' ,'rootroot');
 
+
+select *
+from hairshop.event;

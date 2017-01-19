@@ -38,35 +38,55 @@ public class BizReport extends JPanel implements ActionListener, ItemListener {
 	 */
 	public BizReport() {
 		setToolTipText("날짜, 월별 ,연도별 영업현황이 나타납니다.");
-		setLayout(new BorderLayout(0, 0));
+		setLayout(null);
+		setBounds(0, 0, 1080, 629);
+		
 		
 		pnBizListMain = new JPanel();
-		pnBizListMain.setBackground(new Color(255, 192, 203));
-		add(pnBizListMain, BorderLayout.CENTER);
+		pnBizListMain.setBounds(0, 0, 936, 622);
+		pnBizListMain.setBackground(new Color(240, 240, 240));
+		add(pnBizListMain);
 		pnBizListMain.setLayout(new BorderLayout(0, 0));
 		
 		pnBizListBtns = new JPanel();
+		pnBizListBtns.setBounds(938, 0, 144, 622);
 		pnBizListBtns.setBorder(new EmptyBorder(10, 30, 10, 10));
-		pnBizListBtns.setBackground(Color.PINK);
-		add(pnBizListBtns, BorderLayout.EAST);
-		pnBizListBtns.setLayout(new GridLayout(4, 0, 0, 20));
+		pnBizListBtns.setBackground(new Color(230,230,250));
+		add(pnBizListBtns);
 		
 		btnDate = new JButton("기간별");
+		btnDate.setBounds(2, 0, 140, 156);
+		btnDate.setBorderPainted(false);
+		btnDate.setFocusPainted(false);
+		btnDate.setContentAreaFilled(true);
 		btnDate.addActionListener(this);
+		pnBizListBtns.setLayout(null);
 		btnDate.setBackground(new Color(248, 248, 255));
 		pnBizListBtns.add(btnDate);
 		
 		btnMonth = new JButton("월별");
+		btnMonth.setBounds(2, 156, 140, 156);
+		btnMonth.setBorderPainted(false);
+		btnMonth.setFocusPainted(false);
+		btnMonth.setContentAreaFilled(true);
 		btnMonth.addActionListener(this);
 		btnMonth.setBackground(new Color(248, 248, 255));
 		pnBizListBtns.add(btnMonth);
 		
 		btnYear = new JButton("연도별");
+		btnYear.setBounds(2, 312, 140, 156);
+		btnYear.setBorderPainted(false);
+		btnYear.setFocusPainted(false);
+		btnYear.setContentAreaFilled(true);
 		btnYear.addActionListener(this);
 		btnYear.setBackground(new Color(248, 248, 255));
 		pnBizListBtns.add(btnYear);
 		
 		btnToMain4 = new JButton("메인화면");
+		btnToMain4.setBounds(2, 468, 140, 156);
+		btnToMain4.setBorderPainted(false);
+		btnToMain4.setFocusPainted(false);
+		btnToMain4.setContentAreaFilled(true);
 		btnToMain4.addActionListener(this);
 		btnToMain4.setBackground(new Color(248, 248, 255));
 		pnBizListBtns.add(btnToMain4);
