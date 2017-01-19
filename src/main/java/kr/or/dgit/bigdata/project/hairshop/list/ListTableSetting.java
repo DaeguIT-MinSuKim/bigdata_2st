@@ -5,7 +5,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
-public class TableModelSetting extends JTable {
+public class ListTableSetting extends JTable {
 	int ColumDataIndex;
 	
 	protected void tableSetWidth(int... width) {//
