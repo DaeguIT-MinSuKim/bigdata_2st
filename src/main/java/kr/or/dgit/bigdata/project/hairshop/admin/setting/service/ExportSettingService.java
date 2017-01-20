@@ -23,7 +23,7 @@ public class ExportSettingService extends ServiceSetting{
 		dao.selectUseDatabase();
 		
 		/* file chooser 이용해 백업할 경로 설정 */
-		FileChooser jfc = new FileChooser();
+		JFileChooser jfc = new JFileChooser();
 		jfc.setDialogTitle("파일을 저장할 폴더를 선택해 주세요.");
 		//저장할 폴더를 선택했을  때 수행할 메소드들
 		if(jfc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
