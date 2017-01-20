@@ -64,5 +64,7 @@ public class HairEvent {
 			return false;
 		return true;
 	}
-	
+	public String[] toArray(){
+		return new String[]{eNo+"", eName, geteDiscountForm()};
+	}
 }

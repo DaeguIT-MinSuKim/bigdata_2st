@@ -1,4 +1,4 @@
-package kr.or.dgit.bigdata.project.hairshop.test;
+package kr.or.dgit.bigdata.project.hairshop.admin;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -14,13 +15,14 @@ import kr.or.dgit.bigdata.project.hairshop.admin.setting.dao.ResetDB;
 import kr.or.dgit.bigdata.project.hairshop.admin.setting.service.ExportSettingService;
 import kr.or.dgit.bigdata.project.hairshop.admin.setting.service.ImportSettingService;
 import kr.or.dgit.bigdata.project.hairshop.admin.setting.service.ServiceSetting;
+import java.awt.FlowLayout;
 
-public class adminTest extends JFrame implements ActionListener {
+public class ProgramSetting extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
-	private JButton btnNewButton_2;
+	private JButton btnInit;
+	private JButton btnBackUp;
+	private JButton btnImport;
 
 	/**
 	 * Launch the application.
@@ -29,7 +31,7 @@ public class adminTest extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					adminTest frame = new adminTest();
+					ProgramSetting frame = new ProgramSetting();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,49 +43,52 @@ public class adminTest extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public adminTest() {
+	public ProgramSetting() {
+		setTitle("프로그램 세팅");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 300, 100);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		btnNewButton = new JButton("초기화");
-		btnNewButton.addActionListener(this);
-		contentPane.add(btnNewButton, BorderLayout.WEST);
+		btnInit = new JButton("초기화");
+		btnInit.addActionListener(this);
+		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		contentPane.add(btnInit);
 		
-		btnNewButton_1 = new JButton("백업");
-		btnNewButton_1.addActionListener(this);
-		contentPane.add(btnNewButton_1, BorderLayout.CENTER);
+		btnBackUp = new JButton("백업");
+		btnBackUp.addActionListener(this);
+		contentPane.add(btnBackUp);
 		
-		btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.addActionListener(this);
-		contentPane.add(btnNewButton_2, BorderLayout.EAST);
+		btnImport = new JButton("복원");
+		btnImport.addActionListener(this);
+		contentPane.add(btnImport);
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnNewButton_2) {
+		if (e.getSource() == btnImport) {
 			btnNewButton_2ActionPerformed(e);
 		}
-		if (e.getSource() == btnNewButton_1) {
+		if (e.getSource() == btnBackUp) {
 			btnNewButton_1ActionPerformed(e);
 		}
-		if (e.getSource() == btnNewButton) {
+		if (e.getSource() == btnInit) {
 			btnNewButtonActionPerformed(e);
 		}
 	}
 	protected void btnNewButtonActionPerformed(ActionEvent e) {
 		new ResetDB().createDB();
-//		ServiceSetting create = new InitSettingService();
-//		create.initSetting();
+		JOptionPane.showMessageDialog(null, "초기화에 성공하였습니다.");
 	}
 	protected void btnNewButton_1ActionPerformed(ActionEvent e) {
 		ServiceSetting create = new ExportSettingService();
 		create.initSetting();
+		JOptionPane.showMessageDialog(null, "백업에 성공하였습니다.");
 	}
 	protected void btnNewButton_2ActionPerformed(ActionEvent e) {
 		ServiceSetting create = new ImportSettingService();
 		create.initSetting();
+		JOptionPane.showMessageDialog(null, "복원에 성공하였습니다.");
 	}
 }

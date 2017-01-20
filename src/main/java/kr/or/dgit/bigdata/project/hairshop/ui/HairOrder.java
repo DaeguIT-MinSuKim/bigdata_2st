@@ -37,7 +37,7 @@ import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.dto.HairEvent;
 import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
-import kr.or.dgit.bigdata.project.hairshop.list.HairOrderSubList;
+import kr.or.dgit.bigdata.project.hairshop.list.ListTableSetting;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.service.HairEventService;
@@ -62,7 +62,7 @@ public class HairOrder extends JPanel {
 	private Double dHe;
 	private Date nowDate;
 	private Time nowTime;
-	private HairOrderSubList table;
+	private ListTableSetting table;
 	private JPanel pnResult;
 	private JScrollPane scrollPane;
 	private JPanel pnCards;
@@ -252,14 +252,13 @@ public class HairOrder extends JPanel {
 		scrollPane = new JScrollPane();
 		pnResult.add(scrollPane);
 		
-		table = new HairOrderSubList();
+		table = new ListTableSetting();
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				tableMouseClicked(arg0);
 			}
 		});
-		table.setCellSelectionEnabled(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 		
@@ -419,13 +418,18 @@ public class HairOrder extends JPanel {
 	public JTable getTable() {
 		return table;
 	}
-	public void setTable(HairOrderSubList table) {
+	public void setTable(ListTableSetting table) {
 		this.table = table;
 	}
 	private void reloadData() {
-		DefaultTableModel model = new DefaultTableModel(getRowData(tfCName.getText()), table.getColumnData());
+		table.setColumDataIndex(1);
+		DefaultTableModel model = new DefaultTableModel(getRowData(tfCName.getText()), table.getColumnData()){
+		    public boolean isCellEditable(int row, int column){
+		      return false;//This causes all cells to be not editable
+		    }
+		  };
 		table.setModel(model);
-		table.tableSetAlignWith();		
+		table.tableSetAlignWidth();		
 	}
 
 	String[][] getRowData(String cName) {
@@ -464,12 +468,18 @@ public class HairOrder extends JPanel {
 		int jop= JOptionPane.showConfirmDialog(null, pnAddInput.getTxtCname().getText()+" 신규회원 정보를 추가하겠습니까?");
 		if (jop == 0) {
 			pnAddInput.insertNewCostomer();
+			tfCName.setText(pnAddInput.getTxtCname().getText());
+			tfCNo.setText(pnAddInput.getTxtCno().getText());
 		}
 	}
 	protected void tableMouseClicked(MouseEvent arg0) {
-		String cNo = table.getValueAt(table.getSelectedRow(), 0).toString();
-		String cName = table.getValueAt(table.getSelectedRow(), 1).toString();
-		tfCNo.setText(cNo);
-		tfCName.setText(cName);		
+		try{
+			String cNo = table.getValueAt(table.getSelectedRow(), 0).toString();
+			String cName = table.getValueAt(table.getSelectedRow(), 1).toString();
+			tfCNo.setText(cNo);
+			tfCName.setText(cName);
+		}catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("우클릭 이벤트는 일어나지 않습니다.");
+		}
 	}
 }
