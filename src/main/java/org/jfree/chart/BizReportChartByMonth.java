@@ -1,10 +1,9 @@
-package kr.or.dgit.bigdata.project.hairshop.list;
+package org.jfree.chart;
 
 import java.awt.Font;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.JFrame;
 
@@ -20,23 +19,23 @@ import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
 import kr.or.dgit.bigdata.project.hairshop.service.HairinfoService;
 
-public class BizReportChartByYear extends JFrame  {
+public class BizReportChartByMonth extends JFrame  {
 		
-	  public BizReportChartByYear(String title) throws IOException {
+	  public BizReportChartByMonth(String title, int year) throws IOException {
 		super(title);
-		CategoryDataset dataset = createDateset();
-		JFreeChart chart = createChart(dataset);	  
+		CategoryDataset dataset = createDateset(year);
+		JFreeChart chart = createChart(dataset, year);	  
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		ChartPanel chartPanel = new ChartPanel(chart);
-		chartPanel.setPreferredSize(new java.awt.Dimension(700,500));
+		chartPanel.setPreferredSize(new java.awt.Dimension(700, 500));
 		setContentPane(chartPanel);
 		pack();  
 	  }
 
-	private JFreeChart createChart(CategoryDataset dataset) {
+	private JFreeChart createChart(CategoryDataset dataset, int year) {
 		// TODO Auto-generated method stub
 		JFreeChart chart = ChartFactory.createStackedBarChart(
-			      "년도별 매출 실적"
+			      year+"년도 월별 매출 실적"
 			      , ""
 			      , "실적"
 			      , dataset
@@ -68,25 +67,24 @@ public class BizReportChartByYear extends JFrame  {
 		return chart;
 	}
 
-	private CategoryDataset createDateset() {
+	private CategoryDataset createDateset(int year) {
 		/* Create Dateset and insert Datas */
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		
 		List<Hairinfo> hList = HairinfoService.getInstance().selectHairInfoAll();
-		Set<Integer> tempList = BizService.getInstance().selectBDateYear();
-		Integer[] yList = tempList.toArray(new Integer[tempList.size()]);
 		HashMap<String, Object> searchMap = new HashMap<>();
+		searchMap.put("year", year);
 		
-		for (int i=0; i < yList.length; i++) {
-			searchMap.put("year", yList[i]);
+		for (int i=0; i < 12; i++) {
+			searchMap.put("month", i+1);
 		    for (int j=0; j < hList.size(); j++) {
 		    	searchMap.put("hNo", hList.get(j).gethNo());
 		    	HashMap<String, Object> res = BizService.getInstance().selectBizWithHairInfo(searchMap);
 		    	if(res != null){
 		    		double dres = (double) res.get("sum");
-		    		dataset.addValue(dres, hList.get(j).gethName(), yList[i]+"년");
+		    		dataset.addValue(dres, hList.get(j).gethName(), (i+1)+"월");
 		    	}else if(res==null){
-		    		dataset.addValue(0.0, hList.get(j).gethName(), yList[i]+"년");
+		    		dataset.addValue(0.0, hList.get(j).gethName(), (i+1)+"월");
 		    	}
 		    }
 		  }

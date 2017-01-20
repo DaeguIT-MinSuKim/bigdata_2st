@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 
+import org.jfree.chart.BizReportChartByMonth;
 import org.jfree.ui.RefineryUtilities;
 
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
