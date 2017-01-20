@@ -468,12 +468,18 @@ public class HairOrder extends JPanel {
 		int jop= JOptionPane.showConfirmDialog(null, pnAddInput.getTxtCname().getText()+" 신규회원 정보를 추가하겠습니까?");
 		if (jop == 0) {
 			pnAddInput.insertNewCostomer();
+			tfCName.setText(pnAddInput.getTxtCname().getText());
+			tfCNo.setText(pnAddInput.getTxtCno().getText());
 		}
 	}
 	protected void tableMouseClicked(MouseEvent arg0) {
-		String cNo = table.getValueAt(table.getSelectedRow(), 0).toString();
-		String cName = table.getValueAt(table.getSelectedRow(), 1).toString();
-		tfCNo.setText(cNo);
-		tfCName.setText(cName);		
+		try{
+			String cNo = table.getValueAt(table.getSelectedRow(), 0).toString();
+			String cName = table.getValueAt(table.getSelectedRow(), 1).toString();
+			tfCNo.setText(cNo);
+			tfCName.setText(cName);
+		}catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("우클릭 이벤트는 일어나지 않습니다.");
+		}
 	}
 }
