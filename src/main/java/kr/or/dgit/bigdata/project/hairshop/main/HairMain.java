@@ -12,6 +12,8 @@ import java.awt.Insets;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
@@ -27,6 +29,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -34,6 +37,7 @@ import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.log4j.lf5.util.DateFormatManager;
 import org.jfree.chart.ChartPanelP;
 import org.jfree.chart.JFreeChart;
 
@@ -41,21 +45,23 @@ import com.jtattoo.plaf.mcwin.McWinLookAndFeel;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.dto.Manager;
-import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairInfoPanel;
+import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairTable;
+import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForAll;
+import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForOne;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.service.ManagerService;
+import kr.or.dgit.bigdata.project.hairshop.test.CustomerSearch;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizHairTotalReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
-import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrder;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrderSearch;
 import kr.or.dgit.bigdata.project.hairshop.ui.HomePanel;
 import kr.or.dgit.bigdata.project.hairshop.ui.login.ManagerLogin;
 import java.awt.Font;
 
-public class HairMain extends JFrame {
+public class HairMain<hip> extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel pnHome;
@@ -90,9 +96,9 @@ public class HairMain extends JFrame {
 	private String dob;
 	private String doJoin;
 	private String phone;
-	private JTable tableInSearch;
-	private JTable tableInSearchForAll;
-	private CustomerHairInfoPanel hip;
+	private CustomerSearchListForOne tableInSearch;
+	private CustomerSearchListForAll tableInSearchForAll;	
+	private CustomerHairTable hip;
 	private int cardIndex; // 0은 검색, 1은 추가, 2는 수정
 	private BizHairTotalReport panel_1;
 	private ChartPanelP panel;
@@ -309,9 +315,17 @@ public class HairMain extends JFrame {
 		pnCusSearchBtns.add(btnToMain1);
 		
 		pnHairOder = new JPanel();
+		pnHairOder.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				pnHairOderComponentShown(arg0);
+			}
+		});
 		tabbedPane.addTab("헤어주문", null, pnHairOder, null);
 		pnHairOder.setToolTipText("헤어주문");
+
 		pnHairOder.setLayout(null);
+
 		
 		pnHairOderMain = new HairOrder();
 		pnHairOderMain.setBounds(0, 0, 936, 622);
@@ -379,9 +393,13 @@ public class HairMain extends JFrame {
 		pnOrderListMain = new HairOrderSearch();
 		pnOrderListMain.setBounds(0, 0, 936, 622);
 		pnOrderListMain.setBackground(new Color(255, 192, 203));
-		pnOrderList.add(pnOrderListMain);
-		hip = new CustomerHairInfoPanel();
-		pnOrderListMain.add(hip, BorderLayout.CENTER);
+
+		pnOrderList.add(pnOrderListMain, BorderLayout.CENTER);
+		/* 고객 헤어 정보를  보여줄 table을 담고있는 패널 ver.이유진*/
+		JScrollPane scrollPane = new JScrollPane();			
+		hip = new CustomerHairTable();
+		scrollPane.setViewportView(hip);
+		pnOrderListMain.add(scrollPane, BorderLayout.CENTER);
 		
 		pnOrderListBtns = new JPanel();
 		pnOrderListBtns.setBounds(938, 0, 144, 622);
@@ -420,18 +438,20 @@ public class HairMain extends JFrame {
 		});
 		
 		pnBizList = new JPanel();
-		//tabbedPane.addTab("영업현황", null, pnBizList, null);//
+		
 
 		pnBizList.setToolTipText("날짜, 월별 ,연도별 영업현황이 나타납니다.");
 		pnBizList.setLayout(new BorderLayout(0, 0));
 
 		/* 영업현황 패널 ver.이유진* 0119 정창희 수정*/
 		pnBizListMain = new BizReport();
+		
 		pnBizListMain.setBackground(new Color(240, 240, 240));
 		pnBizList.add(pnBizListMain, null);
+		pnBizListMain.setDefaultPnBizListMain();
 		
 		pnBizGraph = new JPanel();
-		//tabbedPane.addTab("영업그래프", null, pnBizGraph, null);//
+		
 		pnBizGraph.setToolTipText("영업 현황 통계 그래프가 나타납니다.");
 		pnBizGraph.setLayout(null);
 
@@ -492,7 +512,7 @@ public class HairMain extends JFrame {
 			if(directOderInAdd==0){
 				pnHairOderMain.setTxtInOrder(Integer.parseInt(pnCusAdd.getTxtCno().getText()),pnCusAdd.getTxtCname().getText());
 				tabbedPane.setSelectedComponent(pnHairOder);
-				//tabbedPane.setEnabledAt(2, true);
+				
 			}
 			cardIndex =0;
 			
@@ -503,7 +523,7 @@ public class HairMain extends JFrame {
 			if(directOderInEdit==0){
 				pnHairOderMain.setTxtInOrder(Integer.parseInt(pnCusEdit.getTxtCno().getText()),pnCusEdit.getTxtCname().getText());
 				tabbedPane.setSelectedComponent(pnHairOder);
-				//tabbedPane.setEnabledAt(2, true);
+				
 			}
 			cardIndex =0;
 			break;
@@ -516,7 +536,11 @@ public class HairMain extends JFrame {
 	protected void btnHairInfoActionPerformed(ActionEvent e) { // 테이블 보이기 추가
 		tabbedPane.setEnabledAt(3, true);
 		tabbedPane.setSelectedComponent(pnOrderList);
-		hip.getTable().setTableWithData(new Customer(cNo));
+		Customer c = CustomerService.getInstance().searchCustomerByNo(Integer.parseInt(pnHairOderMain.getTfCNo().getText()));	
+		DateFormatManager dfm = new DateFormatManager("yyyy-MM-dd");
+		pnOrderListMain.setTxtInHairIfo(c.getcNo(), c.getcName(), dfm.format(c.getcDob()));
+		hip.setTableWithData(c);
+
 	}
 	protected void btnToMainActionPerformed(ActionEvent e) {
 		tabbedPane.setSelectedComponent(pnHome);
@@ -588,7 +612,7 @@ public class HairMain extends JFrame {
     	            public void actionPerformed(ActionEvent e) {
     	            	tabbedPane.setEnabledAt(3, true);
     	    			tabbedPane.setSelectedComponent(pnOrderList);
-    	    			hip.getTable().setTableWithData(new Customer(cNo));
+    	    			hip.setTableWithData(new Customer(cNo));
     	            }
     	    }));
             popup.show(e.getComponent(), e.getX(), e.getY());
@@ -606,7 +630,7 @@ public class HairMain extends JFrame {
 				Manager temp = ManagerService.getInstance().selectmPasswordByName(manager);
 				char[] pass = ml.getPasswordField().getPassword();
 				String userPass ="";
-				for (char c : pass) {
+				for (char c : pass) { 
 					userPass +=c;
 				}
 				if (temp.getmPassword().equals(userPass)) {
@@ -632,4 +656,7 @@ public class HairMain extends JFrame {
 
 	
 	
+	protected void pnHairOderComponentShown(ComponentEvent arg0) {
+		pnHairOderMain.setTxtInOrder(cNo, cName);		
+	}
 }

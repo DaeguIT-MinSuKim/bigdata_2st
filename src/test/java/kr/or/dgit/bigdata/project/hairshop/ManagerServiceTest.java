@@ -19,7 +19,7 @@ public class ManagerServiceTest {
 	public static void tearDownAfterClass() throws Exception {
 		managerService = null;
 	}
-
+/*
 	@Test
 	public void testselectHairInfoByNo() {
 		Manager manager =  new Manager();
@@ -27,5 +27,14 @@ public class ManagerServiceTest {
 		Manager temp = managerService.selectmPasswordByName(manager);
 		Assert.assertNotNull(temp);
 		System.out.println(temp);
+	}
+	*/
+	@Test
+	public void testUpdateManager() {		
+		managerService.updateManager("bigdata","rootroot");
+		Manager manager = new Manager();
+		manager.setmName("bigdata");
+		Assert.assertNotNull(managerService.selectmPasswordByName(manager));
+		
 	}
 }

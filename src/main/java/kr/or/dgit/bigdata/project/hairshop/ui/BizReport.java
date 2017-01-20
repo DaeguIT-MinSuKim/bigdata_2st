@@ -5,22 +5,16 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.Set;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import kr.or.dgit.bigdata.project.hairshop.list.BizReportChartByMonth;
-import kr.or.dgit.bigdata.project.hairshop.list.BizReportPanel;
-import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairInfoPanel;
-import kr.or.dgit.bigdata.project.hairshop.list.SearchTermPanel;
-import kr.or.dgit.bigdata.project.hairshop.service.BizService;
+import kr.or.dgit.bigdata.project.hairshop.list.BizReportPanelByMonth;
+import kr.or.dgit.bigdata.project.hairshop.list.BizReportPanelBySearch;
+import kr.or.dgit.bigdata.project.hairshop.list.BizReportPanelByYear;
 
-public class BizReport extends JPanel implements ActionListener, ItemListener {
+public class BizReport extends JPanel implements ActionListener {
 	/* main 화면 영업현황 tab 선택시 나타날 메인 화면 */
 	private JPanel pnBizListMain;
 	private JPanel pnBizListBtns;
@@ -28,10 +22,7 @@ public class BizReport extends JPanel implements ActionListener, ItemListener {
 	private JButton btnMonth;
 	private JButton btnYear;
 	private JButton btnToMain4;
-	private JPanel panel;
-	private JComboBox<Integer> cmbYear;
-	private JButton btnSearch;
-	private BizReportPanel pBizReport;
+	private BizReportPanelBySearch pSearchDate;
 
 	/**
 	 * Create the panel.
@@ -93,9 +84,6 @@ public class BizReport extends JPanel implements ActionListener, ItemListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnSearch) {
-			btnSearchActionPerformed(e);
-		}
 		if (e.getSource() == btnToMain4) {
 			btnToMain4ActionPerformed(e);
 		}
@@ -110,76 +98,36 @@ public class BizReport extends JPanel implements ActionListener, ItemListener {
 		}
 	}
 	protected void btnDateActionPerformed(ActionEvent e) {
-		pnBizListMain.removeAll();
-		SearchTermPanel pSearchDate = new SearchTermPanel();
-		CustomerHairInfoPanel pHairInfo = new CustomerHairInfoPanel();
-		pSearchDate.setResPanel(pHairInfo);
-		pnBizListMain.add(pSearchDate, BorderLayout.NORTH);
-		pnBizListMain.add(pHairInfo, BorderLayout.CENTER);
-		revalidate();
-		repaint();
+		setDefaultPnBizListMain();		
 	}
+	
+	public void setDefaultPnBizListMain() {
+		pnBizListMain.removeAll();	
+		pSearchDate = new BizReportPanelBySearch();
+		pSearchDate.searchDate();
+		pnBizListMain.add(pSearchDate, BorderLayout.CENTER);		
+		revalidate();
+		repaint();		
+	}
+
 	protected void btnMonthActionPerformed(ActionEvent e) {
 		/* 월별로 검색할 떄 띄울 패널 향후 combo박스에 영업DB내에 있는 영업일자 년도를 검색해서 넣을 메소드 만들 예정 -by.이유진 */
 		pnBizListMain.removeAll();
-		panel = new JPanel();
-		pnBizListMain.add(panel, BorderLayout.NORTH);
-		
-		cmbYear = new JComboBox<>();
-		panel.add(cmbYear);
-		setcmbYear();		
-		
-		btnSearch = new JButton("검색");
-		btnSearch.addActionListener(this);
-		panel.add(btnSearch);
-		pBizReport = new BizReportPanel("월별");
-		pnBizListMain.add(pBizReport, BorderLayout.CENTER);
+		BizReportPanelByMonth monthlyPanel = new BizReportPanelByMonth(); 
+		pnBizListMain.add(monthlyPanel, BorderLayout.CENTER);
 		revalidate();
 		repaint();
-		cmbYear.addItemListener(this);
-	}
-	private void setcmbYear() {
-		Set<Integer> temp = BizService.getInstance().selectBDateYear();
-		Integer[] yList = temp.toArray(new Integer[temp.size()]);
-		try{
-			for(int year : yList){
-				cmbYear.addItem(year);
-			}
-		}catch(NullPointerException e){
-			cmbYear.setEnabled(false);
-			btnSearch.setEnabled(false);
-		}
 	}
 
 	protected void btnYearActionPerformed(ActionEvent e) {
 		pnBizListMain.removeAll();
-		BizReportPanel brp = new BizReportPanel("연도별");
+		BizReportPanelByYear brp = new BizReportPanelByYear();
 		pnBizListMain.add(brp, BorderLayout.CENTER);
 		revalidate();
 		repaint();
-		brp.getBtnChart().setEnabled(true);
 	}
 	protected void btnToMain4ActionPerformed(ActionEvent e) {
 		/* main 화면으로 돌아가는 메소드. 향후 추가 예정 */
-	}
-	protected void btnSearchActionPerformed(ActionEvent e) {
-		int year = (int) cmbYear.getSelectedItem();
-		pBizReport.setResTable(year);
-		pBizReport.setYear(year);
-		pBizReport.getBtnChart().setEnabled(true);
-		revalidate();
-	}
-
-	@Override
-	public void itemStateChanged(ItemEvent e) {
-		if (e.getSource() == cmbYear) {
-			cmbYearItemStateChanged(e);
-		}
-		
-	}
-
-	private void cmbYearItemStateChanged(ItemEvent e) {
-		pBizReport.getBtnChart().setEnabled(false);		
 	}
 }
 

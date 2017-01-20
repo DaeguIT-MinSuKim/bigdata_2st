@@ -3,9 +3,6 @@ package kr.or.dgit.bigdata.project.hairshop.ui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,24 +11,20 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 
-import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
-import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
+import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForAll;
+import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForOne;
 
 public class CustomerSearch extends JPanel {
-	private JTable table;
+	private CustomerSearchListForOne table;
 	private JTextField txtSearch;
 	private String cName;
 	private int cNo;
 	private String dob;
 	private String doJoin;
 	private String phone;
-	private JTable tableForAll;
+	private CustomerSearchListForAll tableForAll;
 	private JScrollPane scrollPane;
 	
 	/**
@@ -75,62 +68,17 @@ public class CustomerSearch extends JPanel {
 		scrollPane = new JScrollPane();
 		add(scrollPane, BorderLayout.CENTER);
 		
-		table = new JTable();
+		table = new CustomerSearchListForOne();
 		table.setCellSelectionEnabled(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		tableForAll = new JTable();
+		tableForAll = new CustomerSearchListForAll();
 		tableForAll.setCellSelectionEnabled(true);
 		tableForAll.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		reloadDataForAll();
+		tableForAll.reloadDataForAll();
 		scrollPane.setViewportView(tableForAll);
 		
 
-	}
-
-	private void reloadData() {
-		DefaultTableModel model = new DefaultTableModel(getRowData(cName), getColumnData());
-		table.setModel(model);
-		tableSetAlignWith();		
-	}
-
-	String[][] getRowData(String cName) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("cName", cName);
-		List<Customer> list = CustomerService.getInstance().searchCustomerByName(map);
-		System.out.println("[getRowData]size:" + list.size());
-
-		String[][] rowDatas = new String[list.size()][];
-		for (int i = 0; i < list.size(); i++) {
-			rowDatas[i] = list.get(i).toArray();
-		}
-
-		return rowDatas;
-	}
-
-	String[] getColumnData() {
-
-		return new String[] { "고객 번호", "고객명", "생년월일", "가입일자", "전화번호" };
-	}
-	
-	protected void tableSetWidth(int... width) {//
-		TableColumnModel model = table.getColumnModel();
-		for (int i = 0; i < width.length; i++) {
-			model.getColumn(i).setPreferredWidth(width[i]);
-		}
-	}
-	protected void tableSetAlignWith() {//
-		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4);
-		tableSetWidth(60, 100, 200, 200, 200);
-	}
-	
-	protected void tableCellAlignment(int align, int... idx) {//
-		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
-		dtcr.setHorizontalAlignment(align);
-		TableColumnModel model = table.getColumnModel();
-		for (int i = 0; i < idx.length; i++) {
-			model.getColumn(idx[i]).setCellRenderer(dtcr);
-		}
 	}
 
 	public String getcName() {
@@ -173,11 +121,11 @@ public class CustomerSearch extends JPanel {
 		this.phone = phone;
 	}		
 
-	public JTable getTable() {
+	public CustomerSearchListForOne getTable() {
 		return table;
 	}
 
-	public void setTable(JTable table) {
+	public void setTable(CustomerSearchListForOne table) {
 		this.table = table;
 	}
 
@@ -189,54 +137,21 @@ public class CustomerSearch extends JPanel {
 		this.txtSearch = txtSearch;
 	}	
 	
-	public JTable getTableForAll() {
+	public CustomerSearchListForAll getTableForAll() {
 		return tableForAll;
 	}
 
-	public void setTableForAll(JTable tableForAll) {
+	public void setTableForAll(CustomerSearchListForAll tableForAll) {
 		this.tableForAll = tableForAll;
 	}
-
-	protected void tableSetAlignWithForAll() {//
-		tableCellAlignmentForAll(SwingConstants.CENTER, 0, 1, 2, 3, 4);
-		tableSetWidthForAll(60, 100, 200, 200, 200);
-	}
 	
-	protected void tableCellAlignmentForAll(int align, int... idx) {//
-		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
-		dtcr.setHorizontalAlignment(align);
-		TableColumnModel model = tableForAll.getColumnModel();
-		for (int i = 0; i < idx.length; i++) {
-			model.getColumn(idx[i]).setCellRenderer(dtcr);
-		}
-	}
-	protected void tableSetWidthForAll(int... width) {//
-		TableColumnModel model = tableForAll.getColumnModel();
-		for (int i = 0; i < width.length; i++) {
-			model.getColumn(i).setPreferredWidth(width[i]);
-		}
-	}
-	String[][] getRowDataForAll() { // 전체 표 읽어오기
-		List<Customer> list = CustomerService.getInstance().selectByAll();
-		String[][] rowDatas = new String[list.size()][];
-		for (int i = 0; i < list.size(); i++) {
-			rowDatas[i] = list.get(i).toArray();
-		}
-
-		return rowDatas;
-	}
-	private void reloadDataForAll() {
-		DefaultTableModel model = new DefaultTableModel(getRowDataForAll(), getColumnData());
-		tableForAll.setModel(model);
-		tableSetAlignWithForAll();		
-	}
 	private void searchClick() {
 		cName = txtSearch.getText();
-		reloadData();
+		table.reloadData(cName);
 		scrollPane.setViewportView(table);
 	}
 	private void searchAll() {
-		reloadDataForAll();
+		tableForAll.reloadDataForAll();
 		scrollPane.setViewportView(tableForAll);
 	}
 	
