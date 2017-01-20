@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import kr.or.dgit.bigdata.project.hairshop.fonts.Fonts;
 import kr.or.dgit.bigdata.project.hairshop.ui.login.ManagerLogin;
 
 public class HomePanel extends JLayeredPane {
@@ -65,143 +66,142 @@ public class HomePanel extends JLayeredPane {
 			btnMngLoginlb[y].setForeground(new Color(255, 105, 180));
 		}
 				
-		
-		
-
+		// 커스텀 폰트 생성
+		Font sizedNanumBrush32p;
+		Font sizedNanumBrush36p;
+		Font sizedNanumBrush36b;
+		Font sizedNanumBrush40b;
 		try {
-			// 커스텀 폰트 생성
-			InputStream isNanumBrush = HomePanel.class.getResourceAsStream("NanumBrush.ttf");
-			Font nanumBrush = Font.createFont(Font.TRUETYPE_FONT, isNanumBrush);
-			Font sizedNanumBrush32p = nanumBrush.deriveFont(0, 32f);
-			Font sizedNanumBrush36p = nanumBrush.deriveFont(0, 36f);
-			Font sizedNanumBrush36b = nanumBrush.deriveFont(1, 36f);
-			Font sizedNanumBrush40b = nanumBrush.deriveFont(1, 40f);
+			Fonts f = new Fonts();
+			sizedNanumBrush32p = f.getNanumBrush().deriveFont(0, 32f);
+			sizedNanumBrush36p = f.getNanumBrush().deriveFont(0, 36f);
+			sizedNanumBrush36b = f.getNanumBrush().deriveFont(1, 36f);
+			sizedNanumBrush40b = f.getNanumBrush().deriveFont(1, 40f);
 			
 			
-			// 폰트 설정
-			for(int i=0;i<4;i++){
-				cSearchlb[i].setFont(sizedNanumBrush36p);
-				btns[0].add(cSearchlb[i]);
-				cAddlb[i].setFont(sizedNanumBrush36p);
-				btns[1].add(cAddlb[i]);
-				hOrderlb[i].setFont(sizedNanumBrush36p);
-				btns[2].add(hOrderlb[i]);
-			}
-			for(int y=0;y<5;y++){
-				btnMngLoginlb[y].setFont(sizedNanumBrush32p);
-				btns[3].add(btnMngLoginlb[y]);
-			}
-
-			// 버튼 투명처리
-			for(int i=0;i<btns.length;i++){
-				btns[i].setBorderPainted(false);
-				btns[i].setFocusPainted(false);
-				btns[i].setContentAreaFilled(false);
-				if(i<=2){
-					btns[i].setBounds(i*110+30, 30, 70, 120);
-				}else{
-					btns[i].setBounds(i*110+30, 30, 90, 120);
-				}
-				add(btns[i]);
-			}
-
-
 			
-			
-			// 버튼 이벤트 리스너
-			btns[0].addMouseListener(new MouseAdapter() { // 고객검색
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					for(int i = 0; i<4 ; i++){
-						cSearchlb[i].setForeground(Color.MAGENTA);
-						cSearchlb[i].setFont(sizedNanumBrush40b);
-					}
-				}
-				@Override
-				public void mouseExited(MouseEvent e) {
-					for(int i = 0; i<4 ; i++){
-						cSearchlb[i].setForeground(new Color(255, 105, 180));
-						cSearchlb[i].setFont(sizedNanumBrush36p);
-					}
-				}
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					
-				}
-			});
-			
-			btns[1].addMouseListener(new MouseAdapter() { // 고객추가
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					for(int i = 0; i<4 ; i++){
-						cAddlb[i].setForeground(Color.MAGENTA);
-						cAddlb[i].setFont(sizedNanumBrush40b);
-					}
-				}
-				@Override
-				public void mouseExited(MouseEvent e) {
-					for(int i = 0; i<4; i++){
-						cAddlb[i].setForeground(new Color(255, 105, 180));
-						cAddlb[i].setFont(sizedNanumBrush36p);
-					}
-				}
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					
-				}
-			});
-			
-			btns[2].addMouseListener(new MouseAdapter() { //헤어주문
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					for(int i = 0; i<4 ; i++){
-						hOrderlb[i].setForeground(Color.MAGENTA);
-						hOrderlb[i].setFont(sizedNanumBrush40b);
-					}
-				}
-				@Override
-				public void mouseExited(MouseEvent e) {
-					for(int i = 0; i<4 ; i++){
-						hOrderlb[i].setForeground(new Color(255, 105, 180));
-						hOrderlb[i].setFont(sizedNanumBrush36p);
-					}
-				}
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					
-				}
-			});
-			
-			btns[3].addMouseListener(new MouseAdapter() { //관리자모드
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					for(int i = 0; i<5; i++){
-						btnMngLoginlb[i].setForeground(Color.MAGENTA);
-						btnMngLoginlb[i].setFont(sizedNanumBrush36b);
-					}
-				}
-				@Override
-				public void mouseExited(MouseEvent e) {
-					for(int i = 0; i<5; i++){
-						btnMngLoginlb[i].setForeground(new Color(255, 105, 180));
-						btnMngLoginlb[i].setFont(sizedNanumBrush32p);
-					}
-				}
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					try {
-						ManagerLogin frame = new ManagerLogin();
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
-				}
-			});
-			
-		} catch (FontFormatException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		// 폰트 설정
+		for(int i=0;i<4;i++){
+			cSearchlb[i].setFont(sizedNanumBrush36p);
+			btns[0].add(cSearchlb[i]);
+			cAddlb[i].setFont(sizedNanumBrush36p);
+			btns[1].add(cAddlb[i]);
+			hOrderlb[i].setFont(sizedNanumBrush36p);
+			btns[2].add(hOrderlb[i]);
 		}
+		
+		for(int y=0;y<5;y++){
+			btnMngLoginlb[y].setFont(sizedNanumBrush32p);
+			btns[3].add(btnMngLoginlb[y]);
+		}
+
+		// 버튼 투명처리
+		for(int i=0;i<btns.length;i++){
+			btns[i].setBorderPainted(false);
+			btns[i].setFocusPainted(false);
+			btns[i].setContentAreaFilled(false);
+			if(i<=2){
+				btns[i].setBounds(i*110+30, 30, 70, 120);
+			}else{
+				btns[i].setBounds(i*110+30, 30, 90, 120);
+			}
+			add(btns[i]);
+		}
+
+
+			
+			
+		// 버튼 이벤트 리스너
+		btns[0].addMouseListener(new MouseAdapter() { // 고객검색
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				for(int i = 0; i<4 ; i++){
+					cSearchlb[i].setForeground(Color.MAGENTA);
+					cSearchlb[i].setFont(sizedNanumBrush40b);
+				}
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				for(int i = 0; i<4 ; i++){
+					cSearchlb[i].setForeground(new Color(255, 105, 180));
+					cSearchlb[i].setFont(sizedNanumBrush36p);
+				}
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+			
+		btns[1].addMouseListener(new MouseAdapter() { // 고객추가
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				for(int i = 0; i<4 ; i++){
+					cAddlb[i].setForeground(Color.MAGENTA);
+					cAddlb[i].setFont(sizedNanumBrush40b);
+				}
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				for(int i = 0; i<4; i++){
+					cAddlb[i].setForeground(new Color(255, 105, 180));
+					cAddlb[i].setFont(sizedNanumBrush36p);
+				}
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		
+		btns[2].addMouseListener(new MouseAdapter() { //헤어주문
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				for(int i = 0; i<4 ; i++){
+					hOrderlb[i].setForeground(Color.MAGENTA);
+					hOrderlb[i].setFont(sizedNanumBrush40b);
+				}
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				for(int i = 0; i<4 ; i++){
+					hOrderlb[i].setForeground(new Color(255, 105, 180));
+					hOrderlb[i].setFont(sizedNanumBrush36p);
+				}
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		
+		btns[3].addMouseListener(new MouseAdapter() { //관리자모드
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				for(int i = 0; i<5; i++){
+					btnMngLoginlb[i].setForeground(Color.MAGENTA);
+					btnMngLoginlb[i].setFont(sizedNanumBrush36b);
+				}
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				for(int i = 0; i<5; i++){
+					btnMngLoginlb[i].setForeground(new Color(255, 105, 180));
+					btnMngLoginlb[i].setFont(sizedNanumBrush32p);
+				}
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					ManagerLogin frame = new ManagerLogin();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+
 				
 		btnLogout = new JButton("관리자 로그아웃");
 		btnLogout.setVisible(false);

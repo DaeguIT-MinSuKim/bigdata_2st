@@ -13,6 +13,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,6 +43,7 @@ import com.jtattoo.plaf.mcwin.McWinLookAndFeel;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.dto.Manager;
+import kr.or.dgit.bigdata.project.hairshop.fonts.Fonts;
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairTable;
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForAll;
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForOne;
@@ -119,7 +121,7 @@ public class HairMain<hip> extends JFrame {
 					frame.setVisible(true);
 					System.out.println(frame.pnHomeMain.getHeight());
 					System.out.println(frame.pnHomeMain.getWidth());
-		
+
 				} catch (Exception e) {
 					HairMain f = new HairMain();
 					
