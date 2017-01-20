@@ -3,9 +3,7 @@ package kr.or.dgit.bigdata.project.hairshop.main;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.FontFormatException;
-import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -24,7 +22,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
@@ -40,6 +37,9 @@ import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForAll;
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForOne;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.service.ManagerService;
+import kr.or.dgit.bigdata.project.hairshop.taps.PnCusSearch;
+import kr.or.dgit.bigdata.project.hairshop.taps.PnHome;
+import kr.or.dgit.bigdata.project.hairshop.taps.PnOrderList;
 import kr.or.dgit.bigdata.project.hairshop.test.CustomerSearch;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizHairTotalReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizReport;
@@ -53,17 +53,17 @@ import kr.or.dgit.bigdata.project.hairshop.ui.login.ManagerLogin;
 public class HairMain<hip> extends JFrame {
 
 	private JPanel contentPane;
-	private JPanel pnHome;
+	private PnHome pnHome;
 	private JPanel pnCusSearch;
 	private JPanel pnHairOder;
 	private JPanel pnOrderList;
 	private JPanel pnBizList;
 	private JPanel pnBizGraph;  
-	private JTabbedPane tabbedPane;
+	private JTabbedPane tabbedPane; //static으로 전환 
 	private HomePanel pnHomeMain;
-	private JPanel pnCusSearchCards;
+	private JPanel pnCusSearchCards;//static으로 전환 
 	private JPanel pnCusSearchBtns;
-	private static JButton btnAdd;
+	private JButton btnAdd;
 	private JButton btnToMain1;
 	private HairOrder pnHairOderMain;
 	private JPanel pnHairOderBtns;
@@ -110,328 +110,75 @@ public class HairMain<hip> extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		/* 고객 헤어 정보를  보여줄 table을 담고있는 패널 ver.이유진*/
-		
+		/* 고객 헤어 정보를  보여줄 table을 담고있는 패널 ver.이유진*/		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		contentPane.add(tabbedPane, BorderLayout.CENTER);
-		
-		pnHome = new JPanel();
-		tabbedPane.addTab("홈", null, pnHome, null);
-		pnHome.setToolTipText("홈 화면으로 돌아갑니다.");
-		pnHome.setLayout(new BorderLayout(0, 0));
-		
-		
-		pnHomeMain = new HomePanel();
-		pnHomeMain.setBackground(new Color(255, 192, 203));
-		pnHome.add(pnHomeMain, BorderLayout.CENTER);
-		
-		
-		
-		
-		// 0119 정창희 메인화면 전환		
-		pnHomeMain.getcSearch().addMouseListener(new MouseAdapter(){
+		contentPane.add(tabbedPane, BorderLayout.CENTER);		
+		pnHome = new PnHome(); // 부모 = 자식 관계 
+		pnHome.getPnHomeMain().getcSearch().addMouseListener(new MouseAdapter(){
 			@Override
 			public void mousePressed(MouseEvent e) {
 				switchTab(1);
 			}
 		});
-		
-		pnHomeMain.getcAdd().addMouseListener(new MouseAdapter(){
-		@Override
-		public void mousePressed(MouseEvent e) {
-			switchTab(1);
-			showThisCard("name_1666358524774753");
-		
-		        btnSave.setEnabled(true);
-		        cardIndex =1;
-		        
-		        List<Customer> customerForSize = CustomerService.getInstance().selectByAll();// 카운트 할 sql문을 만드는 게 좋음. 현재 임시용.
-		        int txtCno =customerForSize.size()+1;
-		        pnCusAdd.getTxtCno().setText(txtCno+"");
-		}
-
-		
+		pnHome.getPnHomeMain().getcAdd().addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				switchTab(1);
+				showThisCard("name_1666358524774753");	
+				btnSaveTrueAction();			   
+			}			
 		});
-		pnHomeMain.gethOrder().addMouseListener(new MouseAdapter(){
+		pnHome.getPnHomeMain().gethOrder().addMouseListener(new MouseAdapter(){
 			@Override
 			public void mousePressed(MouseEvent e) {
 				switchTab(2);
 			}
 		});
-		// 0119 정창희 메인화면 전환 - end
-	
-		pnCusSearch = new JPanel();
-		tabbedPane.addTab("고객검색", null, pnCusSearch, null);
-		pnCusSearch.setToolTipText("고객검색 및 회원 추가, 삭제");
-		pnCusSearch.setLayout(null);
-		
-		pnCusSearchCards = new JPanel();
-		pnCusSearchCards.setBounds(0, 0, 936, 622);
-		pnCusSearchCards.setBackground(new Color(255, 192, 203));
-		pnCusSearch.add(pnCusSearchCards);
-		pnCusSearchCards.setLayout(new CardLayout(0, 0));
-		
-
-		
-		
-		
-		pnSearchSub = new CustomerSearch();		
-		pnSearchSub.getTableForAll().addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				pnSearchSubTableForAllMouseReleased(arg0 ,tableInSearchForAll);
-			}
-		});
-		pnSearchSub.getTable().addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				pnSearchSubTableForAllMouseReleased(arg0, tableInSearch);
-			}
-		});
-		
-		pnCusSearchCards.add(pnSearchSub, "name_1666323161344197");
-		
-
-		tableInSearch = pnSearchSub.getTable();
-		tableInSearchForAll = pnSearchSub.getTableForAll();
-		
-		pnCusAdd = new CustomerManageInsert();
-		pnCusSearchCards.add(pnCusAdd, "name_1666358524774753");
-		
-		pnCusEdit = new CustomerManageEdit();
-		pnCusSearchCards.add(pnCusEdit, "name_1666378783739869");
-		
-		pnCusSearchBtns = new JPanel();
-		pnCusSearchBtns.setBounds(938, 0, 144, 622);
-		pnCusSearchBtns.setBorder(new EmptyBorder(10, 30, 10, 10));
-		pnCusSearchBtns.setBackground(new Color(230, 230, 250));
-		pnCusSearch.add(pnCusSearchBtns);
-		
-		btnSearch = new JButton("회원검색");
-		btnSearch.setForeground(Color.DARK_GRAY);
-		btnSearch.setBounds(2, 0, 140, 156);
-		
-		btnSearch.setBorderPainted(false);
-		btnSearch.setFocusPainted(false);
-		btnSearch.setContentAreaFilled(true);
-		btnSearch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnSearchActionPerformed(e);
-			}
-		});
-		pnCusSearchBtns.setLayout(null);
-		btnSearch.setBackground(new Color(248, 248, 255));
-		pnCusSearchBtns.add(btnSearch);
-		
-		setBtnAdd(new JButton("회원추가"));
-		getBtnAdd().setForeground(Color.DARK_GRAY);
-		getBtnAdd().setBounds(2, 156, 140, 156);
-		
-		getBtnAdd().setBorderPainted(false);
-		getBtnAdd().setFocusPainted(false);
-		getBtnAdd().setContentAreaFilled(true);
-
-		getBtnAdd().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnAddActionPerformed(e);
-			}
-		});
-		getBtnAdd().setBackground(new Color(248, 248, 255));
-		pnCusSearchBtns.add(getBtnAdd());
-		
-		btnSave = new JButton("저장");
-		btnSave.setForeground(Color.DARK_GRAY);
-		btnSave.setBounds(2, 312, 140, 156);
-
-		btnSave.setBorderPainted(false);
-		btnSave.setFocusPainted(false);
-		btnSave.setContentAreaFilled(true);
-		
-		btnSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				btnSaveActionPerformed(arg0);
-			}
-		});
-		btnSave.setEnabled(false);
-		btnSave.setBackground(new Color(248, 248, 255));
-		pnCusSearchBtns.add(btnSave);
-		
-		btnToMain1 = new JButton("메인화면");
-		btnToMain1.setForeground(Color.DARK_GRAY);
-		btnToMain1.setBounds(2, 468, 140, 156);
-		
-		btnToMain1.setBorderPainted(false);
-		btnToMain1.setFocusPainted(false);
-		btnToMain1.setContentAreaFilled(true);		
-		
-		btnToMain1.setBackground(new Color(248, 248, 255));
-		btnToMain1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnToMainActionPerformed(e);
-			}
-		});
-		pnCusSearchBtns.add(btnToMain1);
-		
-		pnHairOder = new JPanel();
-		pnHairOder.addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentShown(ComponentEvent arg0) {
-				pnHairOderComponentShown(arg0);
-			}
-		});
-		tabbedPane.addTab("헤어주문", null, pnHairOder, null);
-		pnHairOder.setToolTipText("헤어주문");
-
-		pnHairOder.setLayout(null);
-
-		
-		pnHairOderMain = new HairOrder();
-		pnHairOderMain.setBounds(0, 0, 936, 622);
-		pnHairOderMain.getTfTotal().setEditable(false);
-		pnHairOderMain.getTfEDiscount().setEditable(false);
-		pnHairOderMain.getTfENo().setEditable(false);
-		pnHairOderMain.getTfHNo().setEditable(false);
-		pnHairOderMain.getTfHPrice().setEditable(false);
-		pnHairOderMain.setBackground(SystemColor.menu);
-		pnHairOder.add(pnHairOderMain);
-		
-		pnHairOderBtns = new JPanel();
-		pnHairOderBtns.setBounds(938, 0, 144, 622);
-		pnHairOderBtns.setBorder(new EmptyBorder(10, 30, 10, 10));
-		pnHairOderBtns.setBackground(new Color(230, 230, 250));
-		pnHairOder.add(pnHairOderBtns);
-		
-		btnOrder = new JButton("주문");
-		btnOrder.setBounds(2, 0, 140, 156);
-		btnOrder.setBorderPainted(false);
-		btnOrder.setFocusPainted(false);
-		btnOrder.setContentAreaFilled(true);
-		btnOrder.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				btnOrderActionPerformed(arg0);
-			}
-		});
-		pnHairOderBtns.setLayout(null);
-		btnOrder.setBackground(new Color(248, 248, 255));
-		pnHairOderBtns.add(btnOrder);
-		
-		btnHairInfo = new JButton("헤어정보");
-		btnHairInfo.setBounds(2, 156, 140, 156);
-		btnHairInfo.setBorderPainted(false);
-		btnHairInfo.setFocusPainted(false);
-		btnHairInfo.setContentAreaFilled(true);
-		btnHairInfo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnHairInfoActionPerformed(e);
-			}
-		});
-		btnHairInfo.setToolTipText("해당 고객의 헤어 스타일 내역으로 이동합니다.");
-		btnHairInfo.setBackground(new Color(248, 248, 255));
-		pnHairOderBtns.add(btnHairInfo);
-		
-		btnToMain2 = new JButton("메인화면");
-		btnToMain2.setBounds(2, 312, 140, 156);
-		btnToMain2.setBorderPainted(false);
-		btnToMain2.setFocusPainted(false);
-		btnToMain2.setContentAreaFilled(true);
-		btnToMain2.setBackground(new Color(248, 248, 255));
-		btnToMain2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnToMainActionPerformed(e);
-			}
-		});
-		pnHairOderBtns.add(btnToMain2);
-		
-		pnOrderList = new JPanel();
-		tabbedPane.addTab("헤어주문검색", null, pnOrderList, null);
-		tabbedPane.setEnabledAt(3, false); // true로 바꾸면 활성화
-		pnOrderList.setToolTipText("고객의 헤어주문내역이 나타납니다.");
-		pnOrderList.setLayout(null);
-		
-		pnOrderListMain = new HairOrderSearch();
-		pnOrderListMain.setBounds(0, 0, 936, 622);
-		pnOrderListMain.setBackground(new Color(255, 192, 203));
-
-		pnOrderList.add(pnOrderListMain, BorderLayout.CENTER);
-		/* 고객 헤어 정보를  보여줄 table을 담고있는 패널 ver.이유진*/
-		JScrollPane scrollPane = new JScrollPane();			
-		hip = new CustomerHairTable();
-		scrollPane.setViewportView(hip);
-		pnOrderListMain.add(scrollPane, BorderLayout.CENTER);
-		
-		pnOrderListBtns = new JPanel();
-		pnOrderListBtns.setBounds(938, 0, 144, 622);
-		pnOrderListBtns.setBorder(new EmptyBorder(10, 30, 10, 10));
-		pnOrderListBtns.setBackground(new Color(230, 230, 250));
-		pnOrderList.add(pnOrderListBtns);
-		
-		btnToMain3 = new JButton("메인화면");
-		btnToMain3.setFont(new Font("나눔고딕", Font.PLAIN, 16));
-		btnToMain3.setBorderPainted(false);
-		btnToMain3.setFocusPainted(false);
-		btnToMain3.setContentAreaFilled(true);
-		btnToMain3.setBounds(2, 0, 140, 156);
-		btnToMain3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnToMainActionPerformed(e);
-			}
-		});
-		pnOrderListBtns.setLayout(null);
-		btnToMain3.setBackground(new Color(248, 248, 255));
-		pnOrderListBtns.add(btnToMain3);
-		
-		pnHomeMain.getBtnManager().addActionListener(new ActionListener() {
+		pnHome.getPnHomeMain().getBtnManager().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				btnManagerActionPerformed(arg0);
 			}			
 		});
 		tabbedPane.remove(pnBizList);
 		tabbedPane.remove(pnBizGraph);
-		pnHomeMain.getBtnLogout().addActionListener(new ActionListener() {
+		pnHome.getPnHomeMain().getBtnLogout().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				tabbedPane.remove(pnBizList);
 				tabbedPane.remove(pnBizGraph);
 				pnHomeMain.getBtnLogout().setVisible(false);
 			}			
 		});
+		tabbedPane.addTab("홈", null, pnHome, null);
 		
-		pnBizList = new JPanel();
-		
-
-		pnBizList.setToolTipText("날짜, 월별 ,연도별 영업현황이 나타납니다.");
-		pnBizList.setLayout(new BorderLayout(0, 0));
-
-		/* 영업현황 패널 ver.이유진* 0119 정창희 수정*/
-		pnBizListMain = new BizReport();
-		
-		pnBizListMain.setBackground(new Color(240, 240, 240));
-		pnBizList.add(pnBizListMain, null);
-		pnBizListMain.setDefaultPnBizListMain();
-		
-		pnBizGraph = new JPanel();
-		
-		pnBizGraph.setToolTipText("영업 현황 통계 그래프가 나타납니다.");
-		pnBizGraph.setLayout(null);
-
-		panel_1 = new BizHairTotalReport();
-		panel_1.setBounds(195, 12, 690, 171);
-		pnBizGraph.add(panel_1);
-		
-		panel = new ChartPanelP(chart);
-		panel.setBounds(195, 195, 690, 430);
-		pnBizGraph.add(panel);
-		
-		pnBizGraphMain = new JPanel();
-		pnBizGraphMain.setBackground(new Color(255, 192, 203));
-		pnBizGraph.add(pnBizGraphMain, BorderLayout.CENTER);
-		
-		
-		
-		
+		pnCusSearch = new PnCusSearch();
+		tabbedPane.addTab("고객검색", null, pnCusSearch, null);
+		setBtnAdd(new JButton("회원추가"));
+		getBtnAdd().setForeground(Color.DARK_GRAY);
+		getBtnAdd().setBounds(2, 156, 140, 156);		
+		getBtnAdd().setBorderPainted(false);
+		getBtnAdd().setFocusPainted(false);
+		getBtnAdd().setContentAreaFilled(true);
+		getBtnAdd().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnAddActionPerformed(e);
+			}
+		});
+		getBtnAdd().setBackground(new Color(248, 248, 255));
+		pnHairOder = new JPanel();
+		tabbedPane.addTab("헤어주문", null, pnHairOder, null);
+		pnHairOder.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				pnHairOderComponentShown(arg0);
+			}
+		});
+		pnOrderList = new PnOrderList();
+		tabbedPane.addTab("헤어주문검색", null, pnOrderList, null);
+		tabbedPane.setEnabledAt(3, false); // true로 바꾸면 활성화
+		pnBizList = new JPanel();		
 		
 	}
-
-
+//액션 리스너 메소드//////////////////////////////////////////////////////////
 	public JPanel getPnCusSearchCards() {
 		return pnCusSearchCards;
 	}
@@ -609,7 +356,7 @@ public class HairMain<hip> extends JFrame {
 	protected void pnHairOderComponentShown(ComponentEvent arg0) {
 		pnHairOderMain.setTxtInOrder(cNo, cName);		
 	}
-	private void showThisCard(String string) {
+	public void showThisCard(String string) {
 		CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
         cl.show(pnCusSearchCards, string);
 	}
@@ -621,4 +368,21 @@ public class HairMain<hip> extends JFrame {
 	public static void setBtnAdd(JButton btnAdd) {
 		HairMain.btnAdd = btnAdd;
 	}
+
+
+	public static JTabbedPane getTabbedPane() {
+		return tabbedPane;
+	}
+
+
+	public static void setTabbedPane(JTabbedPane tabbedPane) {
+		HairMain.tabbedPane = tabbedPane;
+	}
+	private void btnSaveTrueAction() {
+		 btnSave.setEnabled(true);
+		 cardIndex =1;			        
+		 List<Customer> customerForSize = CustomerService.getInstance().selectByAll();// 카운트 할 sql문을 만드는 게 좋음. 현재 임시용.
+		 int txtCno =customerForSize.size()+1;
+		 pnCusAdd.getTxtCno().setText(txtCno+"");
+	}	
 }
