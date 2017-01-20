@@ -66,5 +66,7 @@ public class Hairinfo {
 			return false;
 		return true;
 	}
-	
+	public String[] toArray() {
+		return new String[]{hNo+"", hName, gethPriceForm()};
+	}
 }

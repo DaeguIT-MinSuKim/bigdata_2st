@@ -29,6 +29,15 @@ public class ListTableSetting extends JTable {
 			tableCellAlignment(SwingConstants.RIGHT, 3,5);
 			tableSetWidth(100,300,200,400,200,400);			
 			
+		}else if (ColumDataIndex == 4) {
+			tableCellAlignment(SwingConstants.CENTER, 0,1);
+			tableCellAlignment(SwingConstants.RIGHT, 2);
+			tableSetWidth(100,300,400);			
+			
+		}else if (ColumDataIndex == 5) {
+			tableCellAlignment(SwingConstants.CENTER, 0,1,2);
+			tableSetWidth(100,100,100);			
+			
 		}
 		
 	}
@@ -52,7 +61,11 @@ public class ListTableSetting extends JTable {
 		}else if (ColumDataIndex == 3) {
 			strArr =new String[]{"영업번호","영업일자","헤어명","단가","이벤트명","금액"};		
 			
-		}		
+		}else if (ColumDataIndex == 4){
+			strArr =new String[]{"헤어번호","헤어명","단가"};
+		}else if (ColumDataIndex == 5){
+			strArr =new String[]{"이벤트번호","이벤트명","할인율"};
+		}
 		
 		return strArr;
 	}
