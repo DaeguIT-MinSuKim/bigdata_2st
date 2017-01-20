@@ -3,12 +3,9 @@ package kr.or.dgit.bigdata.project.hairshop.main;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.FontFormatException;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
 
@@ -34,7 +32,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import org.apache.log4j.lf5.util.DateFormatManager;
@@ -59,7 +56,6 @@ import kr.or.dgit.bigdata.project.hairshop.ui.HairOrder;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrderSearch;
 import kr.or.dgit.bigdata.project.hairshop.ui.HomePanel;
 import kr.or.dgit.bigdata.project.hairshop.ui.login.ManagerLogin;
-import java.awt.Font;
 
 public class HairMain<hip> extends JFrame {
 
@@ -408,7 +404,6 @@ public class HairMain<hip> extends JFrame {
 		pnOrderList.add(pnOrderListBtns);
 		
 		btnToMain3 = new JButton("메인화면");
-		btnToMain3.setFont(new Font("나눔고딕", Font.PLAIN, 16));
 		btnToMain3.setBorderPainted(false);
 		btnToMain3.setFocusPainted(false);
 		btnToMain3.setContentAreaFilled(true);
