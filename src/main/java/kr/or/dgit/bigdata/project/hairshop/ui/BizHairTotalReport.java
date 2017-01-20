@@ -91,19 +91,28 @@ public class BizHairTotalReport extends JPanel {
 		tfTotalBizPrice.setBounds(199, 124, 116, 21);
 		add(tfTotalBizPrice);
 		
-		JButton btnNewButton = new JButton("갱신(임시)");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				int tBiz = BizService.getInstance().selectCountTotalBiz();
-				int tPrice = BizService.getInstance().selectCountTotalPrice();
-				int tCus = BizService.getInstance().selectCountTotalCustomer();
-				tfTotalCusCnt.setText(String.valueOf(tCus));
-				tfTotalBizCnt.setText(String.valueOf(tBiz));
-				tfTotalBizPrice.setText(String.valueOf(tPrice));
-			}
-		});
-		btnNewButton.setBounds(459, 86, 97, 23);
-		add(btnNewButton);
+		int tBiz = BizService.getInstance().selectCountTotalBiz();
+		int tPrice = BizService.getInstance().selectCountTotalPrice();
+		int tCus = BizService.getInstance().selectCountTotalCustomer();
+		tfTotalCusCnt.setText(String.valueOf(tCus));
+		tfTotalBizCnt.setText(String.valueOf(tBiz));
+		tfTotalBizPrice.setText(String.valueOf(tPrice));
+		
+		
+//		임시 버튼 (삭제)
+//		JButton btnNewButton = new JButton("갱신(임시)");
+//		btnNewButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				int tBiz = BizService.getInstance().selectCountTotalBiz();
+//				int tPrice = BizService.getInstance().selectCountTotalPrice();
+//				int tCus = BizService.getInstance().selectCountTotalCustomer();
+//				tfTotalCusCnt.setText(String.valueOf(tCus));
+//				tfTotalBizCnt.setText(String.valueOf(tBiz));
+//				tfTotalBizPrice.setText(String.valueOf(tPrice));
+//			}
+//		});
+//		btnNewButton.setBounds(459, 86, 97, 23);
+//		add(btnNewButton);
 				
 	}
 }

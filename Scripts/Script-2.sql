@@ -165,5 +165,6 @@ ALTER TABLE hairshop.manager
 insert into hairshop.manager values 
 (1, 'bigdata' ,'rootroot');
 
+
 select * from view_biz where year(bDate) = 2000 and month(bDate)=5; -- 영업일자가 2000년, 5월인 실적 조회
 select * from view_biz where year(bDate) = 2000 and month(bDate)=6; -- 영업일자가 2000년, 6월인 실적 조회(실제 데이터 없음)
