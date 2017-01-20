@@ -153,6 +153,16 @@ public class HairMain<hip> extends JFrame {
 		/* 고객 헤어 정보를  보여줄 table을 담고있는 패널 ver.이유진*/
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		
+		try {
+			InputStream isNG = HairMain.class.getResourceAsStream("NANUMGOTHIC.TTF");
+			Font nanumG = Font.createFont(Font.TRUETYPE_FONT, isNG);
+			Font nanumGothic = nanumG.deriveFont(0, 20f);
+			tabbedPane.setFont(nanumGothic);
+		} catch (FontFormatException | IOException e1) {
+
+		}
+		
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		
 		pnHome = new JPanel();
@@ -162,6 +172,9 @@ public class HairMain<hip> extends JFrame {
 		
 		
 		pnHomeMain = new HomePanel();
+		pnHomeMain.gethOrder().setLocation(250, 30);
+		pnHomeMain.getBtnLogout().setLocation(500, 300);
+		pnHomeMain.getBtnLogout().setSize(100, 50);
 		pnHomeMain.setBackground(new Color(255, 192, 203));
 		pnHome.add(pnHomeMain, BorderLayout.CENTER);
 		
