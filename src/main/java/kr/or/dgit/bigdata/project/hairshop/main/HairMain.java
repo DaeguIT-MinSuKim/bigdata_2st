@@ -423,7 +423,7 @@ public class HairMain<hip> extends JFrame {
 		Customer c = CustomerService.getInstance().searchCustomerByNo(Integer.parseInt(pnHairOderMain.getTfCNo().getText()));	
 		DateFormatManager dfm = new DateFormatManager("yyyy-MM-dd");
 		pnOrderListMain.setTxtInHairIfo(c.getcNo(), c.getcName(), dfm.format(c.getcDob()));
-		hip.setTableWithData(new Customer(cNo));
+		hip.setTableWithData(c);
 
 	}
 	protected void btnToMainActionPerformed(ActionEvent e) {
