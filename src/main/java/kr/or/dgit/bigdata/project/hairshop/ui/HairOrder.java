@@ -259,7 +259,6 @@ public class HairOrder extends JPanel {
 				tableMouseClicked(arg0);
 			}
 		});
-		table.setCellSelectionEnabled(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 		
@@ -424,7 +423,11 @@ public class HairOrder extends JPanel {
 	}
 	private void reloadData() {
 		table.setColumDataIndex(1);
-		DefaultTableModel model = new DefaultTableModel(getRowData(tfCName.getText()), table.getColumnData());
+		DefaultTableModel model = new DefaultTableModel(getRowData(tfCName.getText()), table.getColumnData()){
+		    public boolean isCellEditable(int row, int column){
+		      return false;//This causes all cells to be not editable
+		    }
+		  };
 		table.setModel(model);
 		table.tableSetAlignWidth();		
 	}
