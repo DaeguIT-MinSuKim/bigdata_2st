@@ -12,26 +12,21 @@ import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
 
 @SuppressWarnings("serial")
-public class CustomerHairTable extends JTable {	
+public class CustomerHairTable extends ListTableSetting {	
 	/* 헤어 검색이나 고객헤어정보 panel에서 table 사용 할 때 */
 	public CustomerHairTable() {}
 	
 	public void setTableWithData(Customer customer) {
-		setModel(new DefaultTableModel(getDatas(customer), getColumnNames()));
-		setTableWidthAlignment();		
+		setColumDataIndex(3);
+		setModel(new DefaultTableModel(getDatas(customer), getColumnData()));
+		tableSetAlignWidth();		
 	}
 	
 	public void setTableWithData(String startDate, String endDate) {
-		setModel(new DefaultTableModel(getDatas(startDate, endDate), getColumnNames()));
-		setTableWidthAlignment();	
+		setColumDataIndex(3);
+		setModel(new DefaultTableModel(getDatas(startDate, endDate), getColumnData()));
+		tableSetAlignWidth();
 	}
-	
-	private void setTableWidthAlignment() {
-		TableForm.setTable(this);
-		TableForm.tableCellAlignment(SwingConstants.CENTER, 0,1,2,4);
-		TableForm.tableCellAlignment(SwingConstants.RIGHT, 3,5);
-		TableForm.tableSetWidth(100,300,200,400,200,400);		
-	}	
 
 	private String[][] getDatas(String startDate, String endDate) {				
 		List<Biz> list = BizService.getInstance().selectBizWithDates(startDate,endDate);
@@ -58,10 +53,6 @@ public class CustomerHairTable extends JTable {
 		}
 		
 		return Datas;		
-	}
-	
-	private String[] getColumnNames() {
-		return new String[]{"영업번호","영업일자","헤어명","단가","이벤트명","금액"};
 	}
 	
 	public static String[] getcntSumIntValue(String startDate, String endDate) {

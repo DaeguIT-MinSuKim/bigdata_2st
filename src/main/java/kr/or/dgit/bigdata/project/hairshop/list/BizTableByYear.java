@@ -13,18 +13,13 @@ import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
 
 @SuppressWarnings("serial")
-public class BizTableByYear extends JTable {
+public class BizTableByYear extends ListTableSetting {
 	public BizTableByYear() {}
 
 	public void setTableWithData() {
-		setModel(new DefaultTableModel(getDatas(), getColumnNames()));		
-		setTableWidthAlignment();
-	}
-	private void setTableWidthAlignment() {
-		TableForm.setTable(this);
-		TableForm.tableCellAlignment(SwingConstants.CENTER, 0,1,2,3,4);
-		TableForm.tableCellAlignment(SwingConstants.RIGHT, 5);
-		TableForm.tableSetWidth(100,300,200,200,200,400);		
+		setColumDataIndex(2);
+		setModel(new DefaultTableModel(getDatas(), getColumnData()));		
+		tableSetAlignWidth();
 	}
 	private String[][] getDatas() {					
 		HashMap<String, Object> searchMap = new HashMap<>();
@@ -55,7 +50,4 @@ public class BizTableByYear extends JTable {
 		return BizTableByMonth.setDatas(list);	
 	}
 	
-	private String[] getColumnNames() {	
-		return new String[]{"영업번호","영업일자","고객명","헤어명","이벤트명","금액"};
-	}
 }

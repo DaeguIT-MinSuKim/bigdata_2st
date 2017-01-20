@@ -37,7 +37,7 @@ import kr.or.dgit.bigdata.project.hairshop.dto.Biz;
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.dto.HairEvent;
 import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
-import kr.or.dgit.bigdata.project.hairshop.list.HairOrderSubList;
+import kr.or.dgit.bigdata.project.hairshop.list.ListTableSetting;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.service.HairEventService;
@@ -62,7 +62,7 @@ public class HairOrder extends JPanel {
 	private Double dHe;
 	private Date nowDate;
 	private Time nowTime;
-	private HairOrderSubList table;
+	private ListTableSetting table;
 	private JPanel pnResult;
 	private JScrollPane scrollPane;
 	private JPanel pnCards;
@@ -252,7 +252,7 @@ public class HairOrder extends JPanel {
 		scrollPane = new JScrollPane();
 		pnResult.add(scrollPane);
 		
-		table = new HairOrderSubList();
+		table = new ListTableSetting();
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -419,13 +419,14 @@ public class HairOrder extends JPanel {
 	public JTable getTable() {
 		return table;
 	}
-	public void setTable(HairOrderSubList table) {
+	public void setTable(ListTableSetting table) {
 		this.table = table;
 	}
 	private void reloadData() {
+		table.setColumDataIndex(1);
 		DefaultTableModel model = new DefaultTableModel(getRowData(tfCName.getText()), table.getColumnData());
 		table.setModel(model);
-		table.tableSetAlignWith();		
+		table.tableSetAlignWidth();		
 	}
 
 	String[][] getRowData(String cName) {
