@@ -11,6 +11,10 @@ import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 
 
 public class CustomerSearchListForOne extends ListTableSetting {
+	public CustomerSearchListForOne() {
+		setToolTipText("원하는 회원 정보에 커서를 두고 우클릭을 하면 기능이 나타납니다.");
+		setEnabled(false);
+	}
 	
 	public void reloadData(String cName) {
 		setColumDataIndex(1);

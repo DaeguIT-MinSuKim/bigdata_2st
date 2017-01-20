@@ -110,6 +110,8 @@ public class BizReportPanelBySearch extends JPanel implements ActionListener {
 			JOptionPane.showMessageDialog(null, "검색범위가 불명확합니다.", "경고", JOptionPane.WARNING_MESSAGE);
 			return;
 		}	
+		startDate = startDatePicker.getDatePicker().getJFormattedTextField().getText().trim();
+		endDate = endDatePicker.getDatePicker().getJFormattedTextField().getText().trim();
 		
 		resTable.setTableWithData(startDate, endDate);		
 	}
