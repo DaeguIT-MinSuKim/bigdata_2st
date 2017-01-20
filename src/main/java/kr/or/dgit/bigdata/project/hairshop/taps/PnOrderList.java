@@ -49,11 +49,6 @@ public class PnOrderList extends JPanel {
 		btnToMain3.setFocusPainted(false);
 		btnToMain3.setContentAreaFilled(true);
 		btnToMain3.setBounds(2, 0, 140, 156);
-		btnToMain3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnToMainActionPerformed(e);//
-			}
-		});
 		pnOrderListBtns.setLayout(null);
 		btnToMain3.setBackground(new Color(248, 248, 255));
 		pnOrderListBtns.add(btnToMain3);	

@@ -19,9 +19,6 @@ public class PnHome extends JPanel {
 
 	private HomePanel pnHomeMain;
 
-	/**
-	 * Create the panel.
-	 */
 	public PnHome() {
 		setLayout(new BorderLayout(0, 0));
 		pnHomeMain = new HomePanel();

@@ -45,11 +45,6 @@ public class PnHairOder extends JPanel {
 		btnOrder.setBorderPainted(false);
 		btnOrder.setFocusPainted(false);
 		btnOrder.setContentAreaFilled(true);
-		btnOrder.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				btnOrderActionPerformed(arg0);//
-			}
-		});
 		pnHairOderBtns.setLayout(null);
 		btnOrder.setBackground(new Color(248, 248, 255));
 		pnHairOderBtns.add(btnOrder);
@@ -59,11 +54,6 @@ public class PnHairOder extends JPanel {
 		btnHairInfo.setBorderPainted(false);
 		btnHairInfo.setFocusPainted(false);
 		btnHairInfo.setContentAreaFilled(true);
-		btnHairInfo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnHairInfoActionPerformed(e);//
-			}
-		});
 		btnHairInfo.setToolTipText("해당 고객의 헤어 스타일 내역으로 이동합니다.");
 		btnHairInfo.setBackground(new Color(248, 248, 255));
 		pnHairOderBtns.add(btnHairInfo);
@@ -74,11 +64,6 @@ public class PnHairOder extends JPanel {
 		btnToMain2.setFocusPainted(false);
 		btnToMain2.setContentAreaFilled(true);
 		btnToMain2.setBackground(new Color(248, 248, 255));
-		btnToMain2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnToMainActionPerformed(e);//
-			}
-		});
 		pnHairOderBtns.add(btnToMain2);
 	}
 

@@ -22,7 +22,6 @@ public class StartProgram{
 					McWinLookAndFeel.setCurrentTheme(props);//팝업 메뉴 등장하는 jtattoo 로고 변환
 					UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
 					HairMain frame = new HairMain();
-					SwingUtilities.updateComponentTreeUI(frame.getBtnAdd());
 					frame.setBounds(100, 100, 1100, 700);
 					frame.setVisible(true);
 		

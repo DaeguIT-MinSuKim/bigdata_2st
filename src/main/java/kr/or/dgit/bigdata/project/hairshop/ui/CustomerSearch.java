@@ -65,8 +65,8 @@ public class CustomerSearch extends JPanel {
 		});
 		pnSearch.add(btnForall);
 		
-		scrollPane = new JScrollPane();
-		add(scrollPane, BorderLayout.CENTER);
+		setScrollPane(new JScrollPane());
+		add(getScrollPane(), BorderLayout.CENTER);
 		
 		table = new CustomerSearchListForOne();
 		table.setCellSelectionEnabled(true);
@@ -76,7 +76,7 @@ public class CustomerSearch extends JPanel {
 		tableForAll.setCellSelectionEnabled(true);
 		tableForAll.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableForAll.reloadDataForAll();
-		scrollPane.setViewportView(tableForAll);
+		getScrollPane().setViewportView(tableForAll);
 		
 
 	}
@@ -148,11 +148,19 @@ public class CustomerSearch extends JPanel {
 	private void searchClick() {
 		cName = txtSearch.getText();
 		table.reloadData(cName);
-		scrollPane.setViewportView(table);
+		getScrollPane().setViewportView(table);
 	}
 	private void searchAll() {
 		tableForAll.reloadDataForAll();
-		scrollPane.setViewportView(tableForAll);
+		getScrollPane().setViewportView(tableForAll);
+	}
+
+	public JScrollPane getScrollPane() {
+		return scrollPane;
+	}
+
+	public void setScrollPane(JScrollPane scrollPane) {
+		this.scrollPane = scrollPane;
 	}
 	
 }

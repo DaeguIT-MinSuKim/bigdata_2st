@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForAll;
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForOne;
+import kr.or.dgit.bigdata.project.hairshop.main.HairMain;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
@@ -27,12 +28,10 @@ public class PnCusSearch extends JPanel {
 	private CustomerManageEdit pnCusEdit;
 	private JPanel pnCusSearchBtns;
 	private JButton btnSearch;
+	private JButton btnAdd;
 	private JButton btnSave;
 	private JButton btnToMain1;
 
-	/**
-	 * Create the panel.
-	 */
 	public PnCusSearch() {
 		setLayout(null);
 		
@@ -42,23 +41,11 @@ public class PnCusSearch extends JPanel {
 		add(pnCusSearchCards);
 		pnCusSearchCards.setLayout(new CardLayout(0, 0));
 		pnSearchSub = new CustomerSearch();		
-		pnSearchSub.getTableForAll().addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				pnSearchSubTableForAllMouseReleased(arg0 ,tableInSearchForAll);//
-			}
-		});
-		pnSearchSub.getTable().addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				pnSearchSubTableForAllMouseReleased(arg0, tableInSearch);//
-			}
-		});
+		
 		pnCusSearchCards.add(pnSearchSub, "name_1666323161344197");
 		tableInSearch = pnSearchSub.getTable();
 		tableInSearchForAll = pnSearchSub.getTableForAll();
 		
-
 		pnCusAdd = new CustomerManageInsert();
 		pnCusSearchCards.add(pnCusAdd, "name_1666358524774753");
 		
@@ -78,49 +65,36 @@ public class PnCusSearch extends JPanel {
 		btnSearch.setBorderPainted(false);
 		btnSearch.setFocusPainted(false);
 		btnSearch.setContentAreaFilled(true);
-		btnSearch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnSearchActionPerformed(e);//
-			}
-		});
 		pnCusSearchBtns.setLayout(null);
 		btnSearch.setBackground(new Color(248, 248, 255));
-		pnCusSearchBtns.add(btnSearch);
+		pnCusSearchBtns.add(btnSearch);	
 		
-		
-		pnCusSearchBtns.add(getBtnAdd());
+		btnAdd = new JButton("회원추가");
+		btnAdd.setForeground(Color.DARK_GRAY);
+		btnAdd.setBounds(2, 156, 140, 156);		
+		btnAdd.setBorderPainted(false);
+		btnAdd.setFocusPainted(false);
+		btnAdd.setContentAreaFilled(true);
+		btnAdd.setBackground(new Color(248, 248, 255));
+		pnCusSearchBtns.add(btnAdd);
 		
 		btnSave = new JButton("저장");
 		btnSave.setForeground(Color.DARK_GRAY);
 		btnSave.setBounds(2, 312, 140, 156);
-
 		btnSave.setBorderPainted(false);
 		btnSave.setFocusPainted(false);
 		btnSave.setContentAreaFilled(true);
-		
-		btnSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				btnSaveActionPerformed(arg0);//
-			}
-		});
 		btnSave.setEnabled(false);
 		btnSave.setBackground(new Color(248, 248, 255));
 		pnCusSearchBtns.add(btnSave);
 		
 		btnToMain1 = new JButton("메인화면");
 		btnToMain1.setForeground(Color.DARK_GRAY);
-		btnToMain1.setBounds(2, 468, 140, 156);
-		
+		btnToMain1.setBounds(2, 468, 140, 156);		
 		btnToMain1.setBorderPainted(false);
 		btnToMain1.setFocusPainted(false);
-		btnToMain1.setContentAreaFilled(true);		
-		
+		btnToMain1.setContentAreaFilled(true);			
 		btnToMain1.setBackground(new Color(248, 248, 255));
-		btnToMain1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnToMainActionPerformed(e);//
-			}
-		});
 		pnCusSearchBtns.add(btnToMain1);
 		
 	}
@@ -203,6 +177,14 @@ public class PnCusSearch extends JPanel {
 
 	public void setBtnToMain1(JButton btnToMain1) {
 		this.btnToMain1 = btnToMain1;
+	}
+
+	public JButton getBtnAdd() {
+		return btnAdd;
+	}
+
+	public void setBtnAdd(JButton btnAdd) {
+		this.btnAdd = btnAdd;
 	}
 	
 }

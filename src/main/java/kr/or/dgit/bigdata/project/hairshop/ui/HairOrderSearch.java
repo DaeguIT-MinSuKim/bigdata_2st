@@ -24,6 +24,7 @@ public class HairOrderSearch extends JPanel {
 	private JTextField txtD3;
 	private HairOrderInfoList table;
 	private String[] chi = { "영업번호", "영업일자", "헤어명", "단가", "이벤트명","금액" };
+	private JScrollPane scrollPaneInOrderLsit;
 	/**
 	 * Create the panel.
 	 */
@@ -80,9 +81,8 @@ public class HairOrderSearch extends JPanel {
 		txtD3.setEditable(false);
 		txtD3.setColumns(10);
 		panel.add(txtD3);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		add(scrollPane, BorderLayout.CENTER);
+		scrollPaneInOrderLsit = new JScrollPane();
+		add(scrollPaneInOrderLsit, BorderLayout.CENTER);
 		
 		
 		table = new HairOrderInfoList();
@@ -94,7 +94,7 @@ public class HairOrderSearch extends JPanel {
 				chi
 			));
 		
-		scrollPane.setViewportView(table);
+		scrollPaneInOrderLsit.setViewportView(table);
 
 	}
 	public void setTxtInHairIfo(int cNo, String cName, String dob){
@@ -111,6 +111,13 @@ public class HairOrderSearch extends JPanel {
 	public void reloadData() {
 		table.reloadData(txtNo.getText(), chi);	
 	}
+	public JScrollPane getScrollPaneInOrderLsit() {
+		return scrollPaneInOrderLsit;
+	}
+	public void setScrollPaneInOrderLsit(JScrollPane scrollPaneInOrderLsit) {
+		this.scrollPaneInOrderLsit = scrollPaneInOrderLsit;
+	}
+	
 	
 
 }
