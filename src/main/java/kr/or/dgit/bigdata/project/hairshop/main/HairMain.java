@@ -168,11 +168,18 @@ public class HairMain<hip> extends JFrame {
 		
 		
 		
-		// 0119 정창희 메인화면 전환		
+		// 0119 정창희 메인화면 전환 // 0120 고객검색 누를 시 바로 검색 창 뜨게 수정		
 		pnHomeMain.getcSearch().addMouseListener(new MouseAdapter(){
 			@Override
 			public void mousePressed(MouseEvent e) {
 				switchTab(1);
+				pnSearchSub.revalidate();
+				
+				CardLayout cl = (CardLayout)(pnCusSearchCards.getLayout());
+		        cl.show(pnCusSearchCards, "name_1666323161344197");
+		        
+		        btnSave.setEnabled(false);
+		        cardIndex =0;
 			}
 		});
 		
