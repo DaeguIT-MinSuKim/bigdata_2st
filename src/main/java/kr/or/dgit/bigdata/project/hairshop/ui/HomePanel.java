@@ -18,7 +18,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import kr.or.dgit.bigdata.project.hairshop.main.StartMain;
+import kr.or.dgit.bigdata.project.hairshop.main.StartProgram;
 import kr.or.dgit.bigdata.project.hairshop.ui.login.ManagerLogin;
 
 import java.awt.Color;

@@ -8,7 +8,7 @@ import javax.swing.UIManager;
 
 import com.jtattoo.plaf.mcwin.McWinLookAndFeel;
 
-public class StartMain{
+public class StartProgram{
 
 	/**
 	 * Launch the application.
@@ -27,7 +27,7 @@ public class StartMain{
 					frame.setVisible(true);
 		
 				} catch (Exception e) {
-					StartMain f = new StartMain();
+					StartProgram f = new StartProgram();
 					
 					
 					e.printStackTrace();
