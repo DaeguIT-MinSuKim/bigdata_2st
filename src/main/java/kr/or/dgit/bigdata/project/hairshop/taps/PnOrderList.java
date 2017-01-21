@@ -17,7 +17,6 @@ import kr.or.dgit.bigdata.project.hairshop.ui.HairOrderSearch;
 public class PnOrderList extends JPanel {
 
 	private HairOrderSearch pnOrderListMain;
-	private CustomerHairTable hip;
 	private JPanel pnOrderListBtns;
 	private JButton btnToMain3;
 
@@ -31,11 +30,6 @@ public class PnOrderList extends JPanel {
 		pnOrderListMain.setBounds(0, 0, 936, 622);
 		pnOrderListMain.setBackground(new Color(255, 192, 203));
 		add(pnOrderListMain, BorderLayout.CENTER);
-		// 고객 헤어 정보를  보여줄 table을 담고있는 패널 ver.이유진
-		JScrollPane scrollPane = new JScrollPane();			
-		hip = new CustomerHairTable();
-		scrollPane.setViewportView(hip);
-		pnOrderListMain.add(scrollPane, BorderLayout.CENTER);
 		
 		pnOrderListBtns = new JPanel();
 		pnOrderListBtns.setBounds(938, 0, 144, 622);
@@ -60,14 +54,6 @@ public class PnOrderList extends JPanel {
 
 	public void setPnOrderListMain(HairOrderSearch pnOrderListMain) {
 		this.pnOrderListMain = pnOrderListMain;
-	}
-
-	public CustomerHairTable getHip() {
-		return hip;
-	}
-
-	public void setHip(CustomerHairTable hip) {
-		this.hip = hip;
 	}
 
 	public JPanel getPnOrderListBtns() {
