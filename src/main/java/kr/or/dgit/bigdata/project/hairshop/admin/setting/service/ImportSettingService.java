@@ -21,10 +21,7 @@ public class ImportSettingService extends ServiceSetting{
 		DataBaseDao dao = DataBaseDao.getInstance();
 		dao.selectUseDatabase();
 		/* Create jFileChooser with directories_only */	
-		JFileChooser jfc = new JFileChooser(new File("C:/Users/LYJ/Desktop"));
-		jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		jfc.setMultiSelectionEnabled(false);
-		jfc.setFileFilter(new FileNameExtensionFilter("txt Files", "txt"));
+		JFileChooser jfc = new JFileChooser();		
 		jfc.setDialogTitle("파일이 저장된 폴더를 선택해 주세요.");
 
 		if(jfc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION){

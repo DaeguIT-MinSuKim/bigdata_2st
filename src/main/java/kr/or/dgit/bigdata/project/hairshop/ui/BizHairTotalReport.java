@@ -91,12 +91,18 @@ public class BizHairTotalReport extends JPanel {
 		tfTotalBizPrice.setBounds(199, 124, 116, 21);
 		add(tfTotalBizPrice);
 		
-		int tBiz = BizService.getInstance().selectCountTotalBiz();
-		int tPrice = BizService.getInstance().selectCountTotalPrice();
-		int tCus = BizService.getInstance().selectCountTotalCustomer();
-		tfTotalCusCnt.setText(String.valueOf(tCus));
-		tfTotalBizCnt.setText(String.valueOf(tBiz));
-		tfTotalBizPrice.setText(String.valueOf(tPrice));
+		try {
+			int tBiz = BizService.getInstance().selectCountTotalBiz();
+			int tPrice = BizService.getInstance().selectCountTotalPrice();
+			int tCus = BizService.getInstance().selectCountTotalCustomer();
+			tfTotalCusCnt.setText(String.valueOf(tCus));
+			tfTotalBizCnt.setText(String.valueOf(tBiz));
+			tfTotalBizPrice.setText(String.valueOf(tPrice));
+		} catch (Exception e) {
+			tfTotalCusCnt.setText("null");
+			tfTotalBizCnt.setText("null");
+			tfTotalBizPrice.setText("null");
+		}
 		
 		
 //		임시 버튼 (삭제)

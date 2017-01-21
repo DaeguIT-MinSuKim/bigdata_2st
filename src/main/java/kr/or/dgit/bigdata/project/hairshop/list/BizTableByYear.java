@@ -21,6 +21,7 @@ public class BizTableByYear extends ListTableSetting {
 		setModel(new DefaultTableModel(getDatas(), getColumnData()));		
 		tableSetAlignWidth();
 	}
+	
 	private String[][] getDatas() {					
 		HashMap<String, Object> searchMap = new HashMap<>();
 		Set<Integer> temp = BizService.getInstance().selectBDateYear();

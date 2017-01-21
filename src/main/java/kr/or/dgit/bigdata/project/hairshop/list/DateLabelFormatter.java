@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.swing.JFormattedTextField.AbstractFormatter;
-import javax.swing.text.MaskFormatter;
 
 public class DateLabelFormatter extends AbstractFormatter { 
     private String datePattern = "yyyy-MM-dd";

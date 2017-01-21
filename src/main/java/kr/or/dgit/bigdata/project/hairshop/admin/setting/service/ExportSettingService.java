@@ -24,10 +24,6 @@ public class ExportSettingService extends ServiceSetting{
 		
 		/* file chooser 이용해 백업할 경로 설정 */
 		JFileChooser jfc = new JFileChooser();
-		jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		jfc.setMultiSelectionEnabled(false);
-		jfc.setFileFilter(new FileNameExtensionFilter("txt Files", "txt"));
-		jfc.setCurrentDirectory(new File("C:/Users/LYJ/Desktop"));
 		jfc.setDialogTitle("파일을 저장할 폴더를 선택해 주세요.");
 		//저장할 폴더를 선택했을  때 수행할 메소드들
 		if(jfc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){

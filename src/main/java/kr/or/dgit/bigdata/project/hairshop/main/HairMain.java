@@ -2,16 +2,21 @@ package kr.or.dgit.bigdata.project.hairshop.main;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -53,6 +58,7 @@ public class HairMain extends JFrame {
 	private String phone;
 	private int cardIndex; // 0은 검색, 1은 추가, 2는 수정
 	private JPopupMenu popup;
+	private JLabel lblTextTest;
 	
 	public HairMain()  {
 		setTitle("DGIT HAIR");
@@ -64,14 +70,27 @@ public class HairMain extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		/* 고객 헤어 정보를  보여줄 table을 담고있는 패널 ver.이유진*/		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		contentPane.add(tabbedPane, BorderLayout.CENTER);
+		try {
+			InputStream isNG = HairMain.class.getResourceAsStream("NANUMGOTHIC.TTF");
+			Font nanumG = Font.createFont(Font.TRUETYPE_FONT, isNG);
+			Font nanumGothic = nanumG.deriveFont(0, 20f);
+			tabbedPane.setFont(nanumGothic);
+		} catch (FontFormatException | IOException e1) {
+
+		}
 		contentPane.add(tabbedPane, BorderLayout.CENTER);		
 		pnHome = new PnHome();//pnHome
 		pnHome.getPnHomeMain().getcSearch().addMouseListener(new MouseAdapter(){
 			@Override
 			public void mousePressed(MouseEvent e) {
 				switchTab(1);
+				pnCusSearch.getPnSearchSub().revalidate();
+				showThisCard("name_1666323161344197");
+				pnCusSearch.getBtnSave().setEnabled(false);
+				cardIndex =0;
 			}
-		});
+		});			
 		pnHome.getPnHomeMain().getcAdd().addMouseListener(new MouseAdapter(){
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -93,14 +112,7 @@ public class HairMain extends JFrame {
 		});
 		tabbedPane.remove(pnBizList);
 		tabbedPane.remove(pnBizGraph);
-		pnHome.getPnHomeMain().getBtnLogout().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				tabbedPane.remove(pnBizList);
-				tabbedPane.remove(pnBizGraph);
-				pnHomeMain.getBtnLogout().setVisible(false);
-			}			
-		});
-		tabbedPane.addTab("홈", null, pnHome, null);		
+		tabbedPane.addTab("홈", null, pnHome, null);	//pnHome 탭 끝. 로그아웃 연동 추가 요망	
 		pnCusSearch = new PnCusSearch();//pnCusSearch
 		pnCusSearch.getPnSearchSub().getTableForAll().addMouseListener(new MouseAdapter() {
 			@Override
@@ -134,8 +146,8 @@ public class HairMain extends JFrame {
 				btnToMainActionPerformed(e);
 			}
 		});
-		tabbedPane.addTab("고객검색", null, pnCusSearch, null);		
-		pnHairOder = new PnHairOder();	
+		tabbedPane.addTab("고객검색", null, pnCusSearch, null);			
+		pnHairOder = new PnHairOder();//pnHairOder
 		pnHairOder.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentShown(ComponentEvent arg0) {
@@ -157,7 +169,7 @@ public class HairMain extends JFrame {
 				btnToMainActionPerformed(e);
 			}
 		});
-		tabbedPane.addTab("헤어주문", null, pnHairOder, null);
+		tabbedPane.addTab("헤어주문", null, pnHairOder, null);//pnHairOrder 끝			
 		pnOrderList = new PnOrderList();//pnOrderList
 		pnOrderList.getBtnToMain3().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
