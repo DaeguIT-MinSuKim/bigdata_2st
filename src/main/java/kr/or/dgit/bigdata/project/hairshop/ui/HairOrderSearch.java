@@ -85,6 +85,7 @@ public class HairOrderSearch extends JPanel {
 		scrollPaneInOrderLsit = new JScrollPane();
 		add(scrollPaneInOrderLsit, BorderLayout.CENTER);
 		table = new HairOrderInfoList();
+		table.setEnabled(false);
 		table.setCellSelectionEnabled(false);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(new DefaultTableModel(new Object[][] {}, chi));

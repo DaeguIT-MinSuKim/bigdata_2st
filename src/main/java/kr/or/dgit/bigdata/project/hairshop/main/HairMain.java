@@ -26,6 +26,7 @@ import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.dto.Manager;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.service.ManagerService;
+import kr.or.dgit.bigdata.project.hairshop.taps.PnBizGraph;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnBizList;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnCusSearch;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnHairOder;
@@ -42,7 +43,7 @@ public class HairMain extends JFrame {
 	private PnHairOder pnHairOder;
 	private PnOrderList pnOrderList;
 	private PnBizList pnBizList;//
-	private JPanel pnBizGraph;  
+	private PnBizGraph pnBizGraph;
 	private JTabbedPane tabbedPane;  
 	private HomePanel pnHomeMain;	
 	private int cNo;
@@ -165,7 +166,8 @@ public class HairMain extends JFrame {
 		});
 		tabbedPane.addTab("헤어주문검색", null, pnOrderList, null);
 		tabbedPane.setEnabledAt(3, false); // true로 바꾸면 활성화
-		pnBizList = new PnBizList();		
+		pnBizList = new PnBizList();
+		pnBizGraph = new PnBizGraph();
 	}
 //액션 리스너 메소드//////////////////////////////////////////////////////////
 	protected void btnAddActionPerformed(ActionEvent e) {
@@ -296,7 +298,7 @@ public class HairMain extends JFrame {
 				if (temp.getmPassword().equals(userPass)) {
 					tabbedPane.addTab("영업현황", null, pnBizList, null);
 					tabbedPane.addTab("영업그래프", null, pnBizGraph, null);
-					pnHomeMain.getBtnLogout().setVisible(true);
+					//pnHomeMain.getBtnLogout().setVisible(true); // 패널 변경때문에 버튼 사라짐. 독립된 프레임에 따로 추가 예정 
 					ml.setVisible(false);
 				} else {
 					JOptionPane.showMessageDialog(null, "해당 아이디가 존재하지 않거나 비밀번호가 틀립니다.");
