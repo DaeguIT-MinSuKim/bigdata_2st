@@ -2,10 +2,6 @@ package kr.or.dgit.bigdata.project.hairshop.taps;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -13,7 +9,6 @@ import javax.swing.border.EmptyBorder;
 
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForAll;
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForOne;
-import kr.or.dgit.bigdata.project.hairshop.main.HairMain;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
