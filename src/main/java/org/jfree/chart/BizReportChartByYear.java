@@ -17,6 +17,7 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
+import kr.or.dgit.bigdata.project.hairshop.fonts.Fonts;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
 import kr.or.dgit.bigdata.project.hairshop.service.HairinfoService;
 
@@ -47,24 +48,34 @@ public class BizReportChartByYear extends JFrame  {
 			  
 		  chart.setBackgroundPaint(java.awt.Color.white);
 		  /* 한글이 깨져보이는 경우 해결책 */
-		  // 제목
-		  chart.getTitle().setFont(new Font("돋움", Font.BOLD, 15));
-		  // 범례
-		  chart.getLegend().setItemFont(new Font("돋움", Font.PLAIN, 10));
 		  
-		  CategoryPlot plot = chart.getCategoryPlot();
+		  Fonts f = new Fonts();
 		  
-		  Font font = plot.getDomainAxis().getLabelFont();
-		  // X축 라벨
-		  plot.getDomainAxis().setLabelFont(new Font("돋움", font.getStyle(), font.getSize()));
-		  // X축 도메인
-		  plot.getDomainAxis().setTickLabelFont(new Font("돋움", font.getStyle(), 10));
 		  
-		  font = plot.getRangeAxis().getLabelFont();
-		  // Y축 라벨
-		  plot.getRangeAxis().setLabelFont(new Font("돋움", font.getStyle(), font.getSize()));
-		  // Y축 범위
-		  plot.getRangeAxis().setTickLabelFont(new Font("돋움", font.getStyle(), 10));
+		  
+		  try {
+			  // 제목
+			  chart.getTitle().setFont(f.getDoHyeon().deriveFont(14f));
+			  // 범례
+			  chart.getLegend().setItemFont(f.getDoHyeon().deriveFont(14f));
+			  
+			  CategoryPlot plot = chart.getCategoryPlot();
+			  
+			  Font font = plot.getDomainAxis().getLabelFont();
+			  // X축 라벨
+			  plot.getDomainAxis().setLabelFont(f.getDoHyeon().deriveFont(12f));
+			  // X축 도메인
+			  plot.getDomainAxis().setTickLabelFont(f.getDoHyeon().deriveFont(12f));
+			  
+			  font = plot.getRangeAxis().getLabelFont();
+			  // Y축 라벨
+			  plot.getRangeAxis().setLabelFont(f.getDoHyeon().deriveFont(12f));
+			  // Y축 범위
+			  plot.getRangeAxis().setTickLabelFont(f.getDoHyeon().deriveFont(12f));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return chart;
 	}
 
