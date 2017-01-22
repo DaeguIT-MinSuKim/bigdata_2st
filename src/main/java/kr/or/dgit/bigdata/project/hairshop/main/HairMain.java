@@ -670,8 +670,6 @@ public class HairMain<hip> extends JFrame {
 	public void switchTab(int index){
 		tabbedPane.setSelectedIndex(index);
 	}
-
-	
 	
 	protected void pnHairOderComponentShown(ComponentEvent arg0) {
 		pnHairOderMain.setTxtInOrder(cNo, cName);		
