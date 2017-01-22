@@ -421,7 +421,7 @@ public class HairOrder extends JPanel {
 	public void setTable(ListTableSetting table) {
 		this.table = table;
 	}
-	private void reloadData() {
+	public void reloadData() {
 		table.setColumDataIndex(1);
 		DefaultTableModel model = new DefaultTableModel(getRowData(tfCName.getText()), table.getColumnData()){
 		    public boolean isCellEditable(int row, int column){

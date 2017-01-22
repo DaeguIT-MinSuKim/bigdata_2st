@@ -153,12 +153,6 @@ public class HairMain extends JFrame implements ChangeListener {
 		});
 		tabbedPane.addTab("고객검색", null, pnCusSearch, null);			
 		pnHairOder = new PnHairOder();//pnHairOder
-		pnHairOder.addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentShown(ComponentEvent arg0) {
-				pnHairOderComponentShown(arg0);
-			}
-		});
 		pnHairOder.getBtnOrder().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				btnOrderActionPerformed(arg0);
@@ -252,6 +246,8 @@ public class HairMain extends JFrame implements ChangeListener {
 		pnCusSearch.getPnCusEdit().setTxtInCusEdit(cNo, cName, dob, doJoin, phone);
 		pnOrderList.getPnOrderListMain().setTxtInHairIfo(cNo, cName, dob);
 		pnOrderList.getPnOrderListMain().reloadData();		
+		pnHairOder.getPnHairOderMain().setTxtInOrder(cNo, cName);//고객검색 후 헤어주문 서브 테이블도 내용을 자동 반영되게 함.
+		pnHairOder.getPnHairOderMain().reloadData();
 	}
 	protected void pnSearchSubTableForAllMouseReleased(MouseEvent e ,JTable jt) {		
 		int r = jt.rowAtPoint(e.getPoint());
@@ -289,6 +285,7 @@ public class HairMain extends JFrame implements ChangeListener {
     	            public void actionPerformed(ActionEvent e) {
     	            	tabbedPane.setSelectedComponent(pnHairOder);
     	            	pnHairOder.getPnHairOderMain().setTxtInOrder(cNo, cName);
+    	            	pnHairOder.getPnHairOderMain().reloadData();//고객검색에서 헤어주문 이동시 서브테이블 검색한 고객으로 리셋
     	    			tabbedPane.setEnabledAt(3, true);
     	            }
     	    }));
@@ -319,7 +316,6 @@ public class HairMain extends JFrame implements ChangeListener {
 					tabbedPane.addTab("영업현황", null, pnBizList, null);
 					tabbedPane.addTab("영업그래프", null, pnBizGraph, null);
 					tabbedPane.addTab("프로그램관리", null, pnAdmin, null);
-					//pnHomeMain.getBtnLogout().setVisible(true); // 패널 변경때문에 버튼 사라짐. 독립된 프레임에 따로 추가 예정 
 					ml.setVisible(false);
 				} else {
 					JOptionPane.showMessageDialog(null, "해당 아이디가 존재하지 않거나 비밀번호가 틀립니다.");
@@ -334,9 +330,6 @@ public class HairMain extends JFrame implements ChangeListener {
 	public void switchTab(int index){
 		tabbedPane.setSelectedIndex(index);
 	}	
-	protected void pnHairOderComponentShown(ComponentEvent arg0) {
-		pnHairOder.getPnHairOderMain().setTxtInOrder(cNo, cName);		
-	}
 	public void showThisCard(String string) {
 		CardLayout cl = (CardLayout)(pnCusSearch.getPnCusSearchCards().getLayout());
         cl.show(pnCusSearch.getPnCusSearchCards(), string);
