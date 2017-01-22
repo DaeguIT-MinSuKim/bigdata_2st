@@ -238,6 +238,8 @@ public class AdminSet extends JPanel implements ActionListener, KeyListener {
 			lblconfirm.setText("비밀번호가 일치합니다.");
 			btnOk.setEnabled(true);
 		}else{
+			lblconfirm.setForeground(Color.red);
+			lblconfirm.setText("비밀번호가 일치하지 않습니다.");
 			btnOk.setEnabled(false);
 		}
 		
