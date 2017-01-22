@@ -1,20 +1,20 @@
-package kr.or.dgit.bigdata.project.hairshop.ui;
+package kr.or.dgit.bigdata.project.hairshop.taps;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
-import kr.or.dgit.bigdata.project.hairshop.list.BizReportPanelByMonth;
-import kr.or.dgit.bigdata.project.hairshop.list.BizReportPanelBySearch;
-import kr.or.dgit.bigdata.project.hairshop.list.BizReportPanelByYear;
+import kr.or.dgit.bigdata.project.hairshop.ui.BizReportPanelByMonth;
+import kr.or.dgit.bigdata.project.hairshop.ui.BizReportPanelBySearch;
+import kr.or.dgit.bigdata.project.hairshop.ui.BizReportPanelByYear;
 
-public class BizReport extends JPanel implements ActionListener {
+public class PnBizList extends JPanel implements ActionListener {
 	/* main 화면 영업현황 tab 선택시 나타날 메인 화면 */
 	private JPanel pnBizListMain;
 	private JPanel pnBizListBtns;
@@ -23,11 +23,16 @@ public class BizReport extends JPanel implements ActionListener {
 	private JButton btnYear;
 	private JButton btnToMain4;
 	private BizReportPanelBySearch pSearchDate;
+	private JTabbedPane tabbedPane;
+
+	public void setTabbedPane(JTabbedPane tabbedPane) {
+		this.tabbedPane = tabbedPane;
+	}
 
 	/**
 	 * Create the panel.
 	 */
-	public BizReport() {
+	public PnBizList() {
 		setToolTipText("날짜, 월별 ,연도별 영업현황이 나타납니다.");
 		setLayout(null);
 		setBounds(0, 0, 1080, 629);
@@ -128,6 +133,8 @@ public class BizReport extends JPanel implements ActionListener {
 	}
 	protected void btnToMain4ActionPerformed(ActionEvent e) {
 		/* main 화면으로 돌아가는 메소드. 향후 추가 예정 */
+		tabbedPane.setSelectedIndex(0);
 	}
+
 }
 

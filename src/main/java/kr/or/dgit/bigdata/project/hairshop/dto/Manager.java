@@ -41,5 +41,7 @@ public class Manager {
 		return String.format("%s", mName);
 	}
 	
-	
+	public String[] toArray(){
+		return new String[]{mNo+"", mName};
+	}
 }

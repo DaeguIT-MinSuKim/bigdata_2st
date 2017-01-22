@@ -1,4 +1,4 @@
-package kr.or.dgit.bigdata.project.hairshop.list;
+package kr.or.dgit.bigdata.project.hairshop.ui;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -17,7 +17,8 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
-import kr.or.dgit.bigdata.project.hairshop.test.PrintFrame;
+import kr.or.dgit.bigdata.project.hairshop.list.BizTableByYear;
+import kr.or.dgit.bigdata.project.hairshop.util.PrintFrame;
 
 public class BizReportPanelByYear extends JPanel implements ActionListener {
 	private BizTableByYear resTable;

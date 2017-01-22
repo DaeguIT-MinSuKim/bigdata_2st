@@ -1,4 +1,4 @@
-package kr.or.dgit.bigdata.project.hairshop.list;
+package kr.or.dgit.bigdata.project.hairshop.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,8 +20,10 @@ import javax.swing.border.TitledBorder;
 import org.jfree.chart.BizReportChartByMonth;
 import org.jfree.ui.RefineryUtilities;
 
+import kr.or.dgit.bigdata.project.hairshop.list.BizTableByMonth;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
-import kr.or.dgit.bigdata.project.hairshop.test.PrintFrame;
+import kr.or.dgit.bigdata.project.hairshop.util.PrintFrame;
+
 import javax.swing.JLabel;
 
 public class BizReportPanelByMonth extends JPanel implements ActionListener, ItemListener {

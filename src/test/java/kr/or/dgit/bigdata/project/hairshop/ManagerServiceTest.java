@@ -1,5 +1,7 @@
 package kr.or.dgit.bigdata.project.hairshop;
 
+import java.util.List;
+
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -28,13 +30,46 @@ public class ManagerServiceTest {
 		Assert.assertNotNull(temp);
 		System.out.println(temp);
 	}
-	*/
+	*//*
 	@Test
-	public void testUpdateManager() {		
-		managerService.updateManager("bigdata","rootroot");
-		Manager manager = new Manager();
-		manager.setmName("bigdata");
-		Assert.assertNotNull(managerService.selectmPasswordByName(manager));
+	public void testinsertManager(){
+		Manager m = new Manager();
+		m.setmName("hairshop");
+		m.setmPassword("1234");
+		managerService.insertManager(m);
+		Manager temp = managerService.selectmPasswordByName(m);
+		Assert.assertNotNull(temp);
+		System.out.println(temp);
 		
 	}
+	*/
+	@Test
+	public void testselectAllManager(){
+		
+		List<Manager> mList = managerService.selectAllManager();
+		Assert.assertNotNull(mList);
+		for(Manager m:mList){
+			System.out.println(m);
+		}		
+	}
+	@Test
+	public void testupdateManager(){
+		Manager m = new Manager();
+		m.setmNo(2);
+		m.setmName("hairshop");
+		m.setmPassword("1234");
+		managerService.updateManager(m);
+		Manager temp = managerService.selectmPasswordByName(m);
+		Assert.assertNotNull(temp);
+		System.out.println(temp);
+		
+	}
+	/*
+	@Test
+	public void testdeleteManager(){
+		Manager m = new Manager();
+		m.setmNo(3);
+		managerService.deleteManager(m);		
+	}
+	*/
 }

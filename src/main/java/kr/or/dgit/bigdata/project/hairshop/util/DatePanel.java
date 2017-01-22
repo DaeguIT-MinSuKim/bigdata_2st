@@ -1,4 +1,4 @@
-package kr.or.dgit.bigdata.project.hairshop.list;
+package kr.or.dgit.bigdata.project.hairshop.util;
 
 import java.awt.FlowLayout;
 import java.util.Date;

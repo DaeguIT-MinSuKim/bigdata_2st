@@ -31,6 +31,7 @@ import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.dto.Manager;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.service.ManagerService;
+import kr.or.dgit.bigdata.project.hairshop.taps.PnAdmin;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnBizGraph;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnBizList;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnCusSearch;
@@ -39,8 +40,10 @@ import kr.or.dgit.bigdata.project.hairshop.taps.PnHome;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnOrderList;
 import kr.or.dgit.bigdata.project.hairshop.ui.HomePanel;
 import kr.or.dgit.bigdata.project.hairshop.ui.login.ManagerLogin;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
-public class HairMain extends JFrame {
+public class HairMain extends JFrame implements ChangeListener {
 
 	private JPanel contentPane;
 	private PnHome pnHome;
@@ -59,6 +62,7 @@ public class HairMain extends JFrame {
 	private int cardIndex; // 0은 검색, 1은 추가, 2는 수정
 	private JPopupMenu popup;
 	private JLabel lblTextTest;
+	private PnAdmin pnAdmin;
 	
 	public HairMain()  {
 		setTitle("DGIT HAIR");
@@ -70,6 +74,7 @@ public class HairMain extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		/* 고객 헤어 정보를  보여줄 table을 담고있는 패널 ver.이유진*/		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addChangeListener(this);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		try {
 			InputStream isNG = HairMain.class.getResourceAsStream("NANUMGOTHIC.TTF");
@@ -179,7 +184,10 @@ public class HairMain extends JFrame {
 		tabbedPane.addTab("헤어주문검색", null, pnOrderList, null);
 		tabbedPane.setEnabledAt(3, false); // true로 바꾸면 활성화
 		pnBizList = new PnBizList();
+		pnBizList.setTabbedPane(tabbedPane);
 		pnBizGraph = new PnBizGraph();
+		pnAdmin = new PnAdmin();
+		pnAdmin.setTabbedPane(tabbedPane);
 	}
 //액션 리스너 메소드//////////////////////////////////////////////////////////
 	protected void btnAddActionPerformed(ActionEvent e) {
@@ -310,6 +318,7 @@ public class HairMain extends JFrame {
 				if (temp.getmPassword().equals(userPass)) {
 					tabbedPane.addTab("영업현황", null, pnBizList, null);
 					tabbedPane.addTab("영업그래프", null, pnBizGraph, null);
+					tabbedPane.addTab("프로그램관리", null, pnAdmin, null);
 					//pnHomeMain.getBtnLogout().setVisible(true); // 패널 변경때문에 버튼 사라짐. 독립된 프레임에 따로 추가 예정 
 					ml.setVisible(false);
 				} else {
@@ -317,6 +326,7 @@ public class HairMain extends JFrame {
 					ml.getTxtId().requestFocus();
 					tabbedPane.remove(pnBizList);
 					tabbedPane.remove(pnBizGraph);
+					tabbedPane.remove(pnAdmin);
 				}				
 			}
 		});				
@@ -338,4 +348,14 @@ public class HairMain extends JFrame {
 		 int txtCno =customerForSize.size()+1;
 		 pnCusSearch.getPnCusAdd().getTxtCno().setText(txtCno+"");
 	}	
+	public void stateChanged(ChangeEvent e) {
+		if (e.getSource() == tabbedPane) {
+			tabbedPaneStateChanged(e);
+		}
+	}
+	protected void tabbedPaneStateChanged(ChangeEvent e) {
+		if(((JTabbedPane)e.getSource()).getSelectedIndex()==4){
+			pnBizList.setDefaultPnBizListMain();
+		}
+	}
 }

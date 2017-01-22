@@ -12,7 +12,7 @@ tasks.withType(JavaCompile) {
 } 
 
 jar {
-	mainClassName = 'kr.or.dgit.bigdata.project.hairshop.main.HairMain'
+	mainClassName = 'kr.or.dgit.bigdata.project.hairshop.main.StartProgram'
 
     manifest {
         attributes 'Implementation-Title': 'HairShop',

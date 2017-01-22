@@ -1,19 +1,13 @@
-package kr.or.dgit.bigdata.project.hairshop.test;
+package kr.or.dgit.bigdata.project.hairshop.ui.admin;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.MaskFormatter;
 
-import kr.or.dgit.bigdata.project.hairshop.ui.CustomerSearch;
-import kr.or.dgit.bigdata.project.hairshop.util.DatePanel;
-
-public class TestCSearch extends JFrame {
+public class test extends JFrame {
 
 	private JPanel contentPane;
 
@@ -24,8 +18,7 @@ public class TestCSearch extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TestCSearch frame = new TestCSearch();
-					frame.setBounds(100, 100, 1100, 700);
+					test frame = new test();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,20 +30,14 @@ public class TestCSearch extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TestCSearch() {
-		setResizable(false);
+	public test() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1097, 724);
+		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
-//		CustomerSearch panel = new CustomerSearch();
-//		contentPane.add(panel, BorderLayout.CENTER);
-		DatePanel dp = new DatePanel();
-		
-		contentPane.add(dp, BorderLayout.CENTER);
+		contentPane.add(new AdminSet("로그인"));
 	}
 
 }

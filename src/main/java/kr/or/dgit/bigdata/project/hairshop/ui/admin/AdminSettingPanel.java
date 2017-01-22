@@ -8,9 +8,12 @@ import javax.swing.border.TitledBorder;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.HairEvent;
 import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
+import kr.or.dgit.bigdata.project.hairshop.dto.Manager;
 import kr.or.dgit.bigdata.project.hairshop.list.HairEventTable;
 import kr.or.dgit.bigdata.project.hairshop.list.HairinfoTable;
+import kr.or.dgit.bigdata.project.hairshop.list.ManagerTable;
 import kr.or.dgit.bigdata.project.hairshop.service.HairinfoService;
+import kr.or.dgit.bigdata.project.hairshop.service.ManagerService;
 
 import javax.swing.border.LineBorder;
 import java.awt.Color;
@@ -23,19 +26,21 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import javax.swing.border.EmptyBorder;
 
-public class HairEvnetAdminPanel extends JPanel implements ActionListener, MouseListener {
-	private HairEventTable table;
+public class AdminSettingPanel extends JPanel implements ActionListener, MouseListener {
+	private ManagerTable table;
 	private JButton btnAdd;
 	private JButton btnUpdate;
-	private JPanel inputPanel;
+	private JPanel confirmPanel;
+	private JButton btnDel;
 
 	/**
 	 * Create the panel.
 	 */
-	public HairEvnetAdminPanel() {
-		setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "헤어 이벤트 관리", TitledBorder.CENTER, TitledBorder.TOP, null, null));
-		setLayout(new GridLayout(0, 2, 10, 0));
+	public AdminSettingPanel() {
+		setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "\uAD00\uB9AC\uC790 \uACC4\uC815 \uAD00\uB9AC", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		setLayout(new GridLayout(0, 2, 5, 0));
 		
 		JPanel tbPanel = new JPanel();
 		add(tbPanel);
@@ -44,7 +49,7 @@ public class HairEvnetAdminPanel extends JPanel implements ActionListener, Mouse
 		JScrollPane scrollPane = new JScrollPane();
 		tbPanel.add(scrollPane);
 		
-		table = new HairEventTable();
+		table = new ManagerTable();
 		table.addMouseListener(this);
 		table.setTableWithData();
 		table.setRowSelectionAllowed(true);
@@ -52,7 +57,7 @@ public class HairEvnetAdminPanel extends JPanel implements ActionListener, Mouse
 		
 		JPanel btnPanel = new JPanel();
 		tbPanel.add(btnPanel, BorderLayout.SOUTH);
-		btnPanel.setLayout(new GridLayout(0, 2, 0, 0));
+		btnPanel.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		btnAdd = new JButton("추가");
 		btnAdd.addActionListener(this);
@@ -63,14 +68,21 @@ public class HairEvnetAdminPanel extends JPanel implements ActionListener, Mouse
 		btnUpdate.addActionListener(this);
 		btnPanel.add(btnUpdate);
 		
-		inputPanel = new JPanel();
-		inputPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		inputPanel.setLayout(new BorderLayout());
-		add(inputPanel);
-
+		btnDel = new JButton("삭제");
+		btnDel.setEnabled(false);
+		btnDel.addActionListener(this);
+		btnPanel.add(btnDel);
+		
+		confirmPanel = new JPanel();
+		confirmPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		confirmPanel.setLayout(new BorderLayout());
+		add(confirmPanel);
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnDel) {
+			btnDelActionPerformed(e);
+		}
 		if (e.getSource() == btnUpdate) {
 			btnUpdatePerformed(e);
 		}
@@ -79,23 +91,35 @@ public class HairEvnetAdminPanel extends JPanel implements ActionListener, Mouse
 		}
 	}
 	protected void btnAddPerformed(ActionEvent e) {		
-		HairEventSet addPanel = new HairEventSet("추가");
-		addPanel.sethNo();
-		setInputPanel(addPanel);		
-	}
-	protected void btnUpdatePerformed(ActionEvent e) {
-		HairEvent selected = table.getSelectedItemWithIndex(table.getSelectedRow());
-		HairEventSet updPanel = new HairEventSet("수정");
-		updPanel.setTextFields(selected);
-		setInputPanel(updPanel);
-	}
-	private void setInputPanel(HairEventSet panel) {
-		inputPanel.removeAll();
-		panel.setInputPanel(inputPanel);
-		panel.setHairEventTable(table);
-		inputPanel.add(panel, BorderLayout.CENTER);
+		confirmPanel.removeAll();
+		AdminSet addPanel = new AdminSet("추가");
+		addPanel.setmTable(table);
+		addPanel.setConfirmPanel(confirmPanel);
+		confirmPanel.add(new AdminSet("추가"));
 		revalidate();
 		repaint();
+	}
+	protected void btnUpdatePerformed(ActionEvent e) {
+		confirmPanel.removeAll();
+		LoginSet loginUi = new LoginSet();
+		Manager manager = table.getSelectedItemWithIndex(table.getSelectedRow());
+		loginUi.setTextFields(manager);
+		loginUi.setConfirmPanel(confirmPanel);
+		loginUi.setmTable(table);
+		confirmPanel.add(loginUi);		
+		revalidate();
+		repaint();
+	}
+
+	protected void btnDelActionPerformed(ActionEvent e) {
+		if(JOptionPane.showConfirmDialog(null, "정말 삭제 하시겠습니까?", "삭제", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){
+			Manager manager = table.getSelectedItemWithIndex(table.getSelectedRow());
+			if(manager!=null){
+				ManagerService.getInstance().deleteManager(manager);
+				JOptionPane.showMessageDialog(null, manager.getmName()+"을 성공적으로 삭제하였습니다.");
+				table.setTableWithData();
+			}
+		}
 	}
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == table) {
@@ -109,9 +133,12 @@ public class HairEvnetAdminPanel extends JPanel implements ActionListener, Mouse
 	
 	protected void tableMouseClicked(MouseEvent e) {
 		btnUpdate.setEnabled(true);
+		btnDel.setEnabled(true);
 	}
-	
-	public void setInitPanel(){
-		inputPanel.removeAll();
+	public void setinitPanel(){
+		confirmPanel.removeAll();
+		table.setTableWithData();
+		confirmPanel.repaint();
+		confirmPanel.revalidate();
 	}
 }

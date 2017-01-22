@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import javafx.scene.shape.CircleBuilder;
@@ -33,7 +34,8 @@ public class ExportSettingService extends ServiceSetting{
 				executeExportData(getFilePath(tableName, false), tableName);
 			}			
 			copyFile();
-		}				
+			JOptionPane.showMessageDialog(null, "백업에 성공하였습니다.");
+		}			
 	}
 	
 	private void copyFile() {

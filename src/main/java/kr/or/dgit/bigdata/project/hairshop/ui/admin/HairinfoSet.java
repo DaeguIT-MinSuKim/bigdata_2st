@@ -1,4 +1,4 @@
-package kr.or.dgit.bigdata.project.hairshop.admin;
+package kr.or.dgit.bigdata.project.hairshop.ui.admin;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;

@@ -1,4 +1,4 @@
-package kr.or.dgit.bigdata.project.hairshop.admin;
+package kr.or.dgit.bigdata.project.hairshop.ui.admin;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
@@ -107,5 +107,9 @@ public class HairinfoAdminPanel extends JPanel implements ActionListener, MouseL
 	
 	protected void tableMouseClicked(MouseEvent e) {
 		btnUpdate.setEnabled(true);
+	}
+	
+	public void setInitPanel(){
+		inputPanel.removeAll();
 	}
 }

@@ -1,4 +1,4 @@
-package kr.or.dgit.bigdata.project.hairshop.admin;
+package kr.or.dgit.bigdata.project.hairshop.ui.admin;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -25,27 +25,11 @@ public class ProgramSetting extends JFrame implements ActionListener {
 	private JButton btnImport;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ProgramSetting frame = new ProgramSetting();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public ProgramSetting() {
 		setTitle("프로그램 세팅");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 300, 100);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -64,6 +48,8 @@ public class ProgramSetting extends JFrame implements ActionListener {
 		btnImport.addActionListener(this);
 		contentPane.add(btnImport);
 		
+		setVisible(true);
+		setLocationRelativeTo(null);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -84,11 +70,11 @@ public class ProgramSetting extends JFrame implements ActionListener {
 	protected void btnNewButton_1ActionPerformed(ActionEvent e) {
 		ServiceSetting create = new ExportSettingService();
 		create.initSetting();
-		JOptionPane.showMessageDialog(null, "백업에 성공하였습니다.");
+		
 	}
 	protected void btnNewButton_2ActionPerformed(ActionEvent e) {
 		ServiceSetting create = new ImportSettingService();
 		create.initSetting();
-		JOptionPane.showMessageDialog(null, "복원에 성공하였습니다.");
 	}
+	
 }

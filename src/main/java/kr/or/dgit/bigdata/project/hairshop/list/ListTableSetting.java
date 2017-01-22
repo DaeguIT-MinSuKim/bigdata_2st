@@ -38,6 +38,10 @@ public class ListTableSetting extends JTable {
 			tableCellAlignment(SwingConstants.CENTER, 0,1,2);
 			tableSetWidth(100,100,100);			
 			
+		}else if (ColumDataIndex == 6) {
+			tableCellAlignment(SwingConstants.CENTER, 0,1);
+			tableSetWidth(100,300);			
+			
 		}
 		
 	}
@@ -65,6 +69,8 @@ public class ListTableSetting extends JTable {
 			strArr =new String[]{"헤어번호","헤어명","단가"};
 		}else if (ColumDataIndex == 5){
 			strArr =new String[]{"이벤트번호","이벤트명","할인율"};
+		}else if (ColumDataIndex == 6){
+			strArr =new String[]{"No","ID"};
 		}
 		
 		return strArr;

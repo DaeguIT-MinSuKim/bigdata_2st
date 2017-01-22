@@ -141,3 +141,15 @@ ALTER TABLE hairshop.manager
 grant select, insert, update, delete on hairshop.* to 'user_hairshop' identified by 'rootroot';
 
 insert into hairshop.manager values (1, 'bigdata' ,'rootroot');
+
+insert into hairshop.event values 
+(1, '기획' ,0.5),(2, '생일' ,0.3),(3, '일반' ,0.0),(4, '조조' ,0.2);
+
+insert into hairshop.hairinfo values (1,'커트',15000),
+(2,'드라이',12000),
+(3,'샴푸',5000),
+(4,'펌',38500),
+(5,'매직',95000),
+(6,'트리트먼트',35000),
+(7,'앰플',18000),
+(8,'기타',16000);

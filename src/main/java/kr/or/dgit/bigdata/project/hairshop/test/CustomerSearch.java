@@ -24,6 +24,7 @@ import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForAll;
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForOne;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
+import kr.or.dgit.bigdata.project.hairshop.util.PrintFrame;
 
 public class CustomerSearch extends JPanel implements ActionListener {
 	private CustomerSearchListForOne table;

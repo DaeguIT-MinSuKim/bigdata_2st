@@ -1,4 +1,4 @@
-package kr.or.dgit.bigdata.project.hairshop.test;
+package kr.or.dgit.bigdata.project.hairshop.util;
  
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -18,12 +18,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.table.TableModel;
-
-import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
-import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairTable;
 
 public class PrintFrame extends JFrame { 
     /* UI Components */

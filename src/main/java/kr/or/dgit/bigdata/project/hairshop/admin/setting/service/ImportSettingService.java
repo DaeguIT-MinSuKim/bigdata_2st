@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import kr.or.dgit.bigdata.project.hairshop.admin.setting.Config;
@@ -32,6 +33,8 @@ public class ImportSettingService extends ServiceSetting{
 				executeImportDate(getFilePath(tableName, true), tableName);
 			}
 			dao.setForeignKeyCheck(1);		
+
+			JOptionPane.showMessageDialog(null, "복원에 성공하였습니다.");
 		}
 	}
 	

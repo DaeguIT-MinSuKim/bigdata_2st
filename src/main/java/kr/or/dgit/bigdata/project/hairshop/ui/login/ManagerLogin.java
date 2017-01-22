@@ -66,6 +66,7 @@ public class ManagerLogin extends JFrame {
 		
 		btnLogin = new JButton("Login");
 		contentPane.add(btnLogin);
+		setLocationRelativeTo(null);
 	}
 
 	public JTextField getTxtId() {

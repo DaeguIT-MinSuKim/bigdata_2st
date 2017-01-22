@@ -1,4 +1,4 @@
-package kr.or.dgit.bigdata.project.hairshop.list;
+package kr.or.dgit.bigdata.project.hairshop.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +11,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import kr.or.dgit.bigdata.project.hairshop.test.PrintFrame;
+import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairTable;
+import kr.or.dgit.bigdata.project.hairshop.util.DatePanel;
+import kr.or.dgit.bigdata.project.hairshop.util.PrintFrame;
 
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;

@@ -47,9 +47,9 @@ import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForAll;
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerSearchListForOne;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.service.ManagerService;
+import kr.or.dgit.bigdata.project.hairshop.taps.PnBizList;
 import kr.or.dgit.bigdata.project.hairshop.test.CustomerSearch;
 import kr.or.dgit.bigdata.project.hairshop.ui.BizHairTotalReport;
-import kr.or.dgit.bigdata.project.hairshop.ui.BizReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageEdit;
 import kr.or.dgit.bigdata.project.hairshop.ui.CustomerManageInsert;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrder;
@@ -79,7 +79,7 @@ public class HairMain_backup<hip> extends JFrame {
 	private HairOrderSearch pnOrderListMain;
 	private JPanel pnOrderListBtns;
 	private JButton btnToMain3;
-	private BizReport pnBizListMain;
+	private PnBizList pnBizListMain;
 	private JPanel pnBizGraphMain;
 	private JButton btnSave;
 	private JButton btnHairInfo;
@@ -448,7 +448,7 @@ public class HairMain_backup<hip> extends JFrame {
 		pnBizList.setLayout(new BorderLayout(0, 0));
 
 		/* 영업현황 패널 ver.이유진* 0119 정창희 수정*/
-		pnBizListMain = new BizReport();
+		pnBizListMain = new PnBizList();
 		
 		pnBizListMain.setBackground(new Color(240, 240, 240));
 		pnBizList.add(pnBizListMain, null);
