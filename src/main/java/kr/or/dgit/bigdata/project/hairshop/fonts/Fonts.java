@@ -30,38 +30,38 @@ public class Fonts {
 	public Font getNanumBrush() throws FontFormatException, IOException {
 		InputStream isNB = Fonts.class.getResourceAsStream("NanumBrush.ttf");
 		Font nanumBrush = Font.createFont(Font.TRUETYPE_FONT, isNB); 		// 나눔브러쉬 nanumBrush
-		return nanumBrush;
+		return nanumBrush.deriveFont(0, 10f);
 	}
 
 	public Font getDoHyeon() throws FontFormatException, IOException {
 		InputStream isDH = Fonts.class.getResourceAsStream("BMDOHYEON_ttf.ttf");
 		Font doHyeon = Font.createFont(Font.TRUETYPE_FONT, isDH); 		// 나눔브러쉬 nanumBrush
-		return doHyeon;
+		return doHyeon.deriveFont(0, 10f);
 	}
 
 	public Font getHanNa() throws FontFormatException, IOException {
 		InputStream isHN = Fonts.class.getResourceAsStream("BMHANNA_11yrs_ttf.ttf");
 		Font hanNa = Font.createFont(Font.TRUETYPE_FONT, isHN);					// 한나체 hanNa
-		return hanNa;
+		return hanNa.deriveFont(0, 10f);
 	}
 
 	public Font getYeonSung() throws FontFormatException, IOException {
 		InputStream isYS = Fonts.class.getResourceAsStream("BMYEONSUNG_ttf.ttf");
 		Font yeonSung = Font.createFont(Font.TRUETYPE_FONT, isYS);			// 연성체 yeonSung
-		return yeonSung;
+		return yeonSung.deriveFont(0, 10f);
 	}
 
 
 	public Font getJua() throws FontFormatException, IOException {
 		InputStream isJua = Fonts.class.getResourceAsStream("BMJUA_ttf.ttf");
 		Font jua = Font.createFont(Font.TRUETYPE_FONT, isJua);						// 주아체 jua
-		return jua;
+		return jua.deriveFont(0, 10f);
 	}
 
 	public Font getNanumGothic() throws FontFormatException, IOException {
 		InputStream isNG = Fonts.class.getResourceAsStream("NANUMGOTHIC.TTF");
 		Font nanumGothic = Font.createFont(Font.TRUETYPE_FONT, isNG);	// 나눔고딕체 nanumGothic
-		return nanumGothic;
+		return nanumGothic.deriveFont(0, 10f);
 	}
 	
 }

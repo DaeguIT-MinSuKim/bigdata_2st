@@ -62,31 +62,31 @@ public class HomePanel extends JLayeredPane {
 		}
 				
 		// 커스텀 폰트 생성
-		Font sizedNanumBrush32p;
-		Font sizedNanumBrush36p;
-		Font sizedNanumBrush36b;
-		Font sizedNanumBrush40b;
+		Font sizedJua32p;
+		Font sizedJua36p;
+		Font sizedJua36b;
+		Font sizedJua40b;
 		try {
 			Fonts f = new Fonts();
-			sizedNanumBrush32p = f.getNanumBrush().deriveFont(0, 32f);
-			sizedNanumBrush36p = f.getNanumBrush().deriveFont(0, 36f);
-			sizedNanumBrush36b = f.getNanumBrush().deriveFont(1, 36f);
-			sizedNanumBrush40b = f.getNanumBrush().deriveFont(1, 40f);
+			sizedJua32p = f.getJua().deriveFont(0, 24f);
+			sizedJua36p = f.getJua().deriveFont(0, 28f);
+			sizedJua36b = f.getJua().deriveFont(1, 28f);
+			sizedJua40b = f.getJua().deriveFont(1, 32f);
 			
 			
 			
 		// 폰트 설정
 		for(int i=0;i<4;i++){
-			cSearchlb[i].setFont(sizedNanumBrush36p);
+			cSearchlb[i].setFont(sizedJua36p);
 			btns[0].add(cSearchlb[i]);
-			cAddlb[i].setFont(sizedNanumBrush36p);
+			cAddlb[i].setFont(sizedJua36p);
 			btns[1].add(cAddlb[i]);
-			hOrderlb[i].setFont(sizedNanumBrush36p);
+			hOrderlb[i].setFont(sizedJua36p);
 			btns[2].add(hOrderlb[i]);
 		}
 		
 		for(int y=0;y<5;y++){
-			btnMngLoginlb[y].setFont(sizedNanumBrush32p);
+			btnMngLoginlb[y].setFont(sizedJua32p);
 			btns[3].add(btnMngLoginlb[y]);
 		}
 
@@ -112,14 +112,14 @@ public class HomePanel extends JLayeredPane {
 			public void mouseEntered(MouseEvent e) {
 				for(int i = 0; i<4 ; i++){
 					cSearchlb[i].setForeground(Color.MAGENTA);
-					cSearchlb[i].setFont(sizedNanumBrush40b);
+					cSearchlb[i].setFont(sizedJua40b);
 				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				for(int i = 0; i<4 ; i++){
 					cSearchlb[i].setForeground(new Color(255, 105, 180));
-					cSearchlb[i].setFont(sizedNanumBrush36p);
+					cSearchlb[i].setFont(sizedJua36p);
 				}
 			}
 			@Override
@@ -132,14 +132,14 @@ public class HomePanel extends JLayeredPane {
 			public void mouseEntered(MouseEvent e) {
 				for(int i = 0; i<4 ; i++){
 					cAddlb[i].setForeground(Color.MAGENTA);
-					cAddlb[i].setFont(sizedNanumBrush40b);
+					cAddlb[i].setFont(sizedJua40b);
 				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				for(int i = 0; i<4; i++){
 					cAddlb[i].setForeground(new Color(255, 105, 180));
-					cAddlb[i].setFont(sizedNanumBrush36p);
+					cAddlb[i].setFont(sizedJua36p);
 				}
 			}
 			@Override
@@ -153,14 +153,14 @@ public class HomePanel extends JLayeredPane {
 			public void mouseEntered(MouseEvent e) {
 				for(int i = 0; i<4 ; i++){
 					hOrderlb[i].setForeground(Color.MAGENTA);
-					hOrderlb[i].setFont(sizedNanumBrush40b);
+					hOrderlb[i].setFont(sizedJua40b);
 				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				for(int i = 0; i<4 ; i++){
 					hOrderlb[i].setForeground(new Color(255, 105, 180));
-					hOrderlb[i].setFont(sizedNanumBrush36p);
+					hOrderlb[i].setFont(sizedJua36p);
 				}
 			}
 			@Override
@@ -174,14 +174,14 @@ public class HomePanel extends JLayeredPane {
 			public void mouseEntered(MouseEvent e) {
 				for(int i = 0; i<5; i++){
 					btnMngLoginlb[i].setForeground(Color.MAGENTA);
-					btnMngLoginlb[i].setFont(sizedNanumBrush36b);
+					btnMngLoginlb[i].setFont(sizedJua36b);
 				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				for(int i = 0; i<5; i++){
 					btnMngLoginlb[i].setForeground(new Color(255, 105, 180));
-					btnMngLoginlb[i].setFont(sizedNanumBrush32p);
+					btnMngLoginlb[i].setFont(sizedJua32p);
 				}
 			}
 			@Override
