@@ -199,6 +199,7 @@ public class HairMain extends JFrame implements ChangeListener {
 		pnCusSearch.getBtnSave().setEnabled(false);
         cardIndex =0;
         pnCusSearch.getBtnAdd().setEnabled(true);
+        pnCusSearch.getPnSearchSub().reloadDataForAll();//고객검색 내에서 회원검색 패널 이동버튼 클릭시 테이블 재검색 
 	}
 	protected void btnSaveActionPerformed(ActionEvent e) {
 		switch (cardIndex) {
@@ -280,6 +281,7 @@ public class HairMain extends JFrame implements ChangeListener {
     	    				cForDel.setcDel(true);
     	    				cForDel.setcNo(cNo);
     	    				CustomerService.getInstance().deleteCustomer(cForDel);
+    	    				pnCusSearch.getPnSearchSub().reloadDataForAll();//고객검색 테이블에서 삭제 팝업 실행 후 테이블 재검색 
     	    			}
     	            }
     	    }));

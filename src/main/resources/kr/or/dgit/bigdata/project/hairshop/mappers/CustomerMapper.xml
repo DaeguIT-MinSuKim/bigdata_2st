@@ -16,18 +16,18 @@
 		update customer set cName=#{cName}, cDob=#{cDob}, cDoJoin=#{cDoJoin}, cPhone=#{cPhone}, cDel=#{cDel} where cNo=#{cNo}
 	</update>
 	<update id="deleteCustomer" parameterType="Customer">
-		pdate customer set cDel=#{cDel} where cNo=#{cNo}
+		update customer set cDel=#{cDel} where cNo=#{cNo}
 	</update>
 	<select id="searchCustomerByName" parameterType="hashmap" resultType="Customer">
-		select cNo, cName, cDob, cDoJoin, cPhone, cDel from customer where cName=#{cName} and cDel = false
+		select cNo, cName, cDob, cDoJoin, cPhone, cDel from customer where cName=#{cName} and cDel = 0
 	</select>
 	<select id="searchCustomerByNo" parameterType="int" resultType="Customer">
-		select cNo, cName, cDob, cDoJoin, cPhone, cDel from customer where cNo=#{cNo}
+		select cNo, cName, cDob, cDoJoin, cPhone, cDel from customer where cNo=#{cNo} and cDel = 0
 	</select>
 	<select id="searchCustomerByNoForJoin" parameterType="hashmap" resultType="Customer">
-		select cNo, cName, cDob, cDoJoin, cPhone from customer where cNo=#{cNo}
+		select cNo, cName, cDob, cDoJoin, cPhone from customer where cNo=#{cNo} and cDel = 0
 	</select>
 	<select id="selectByAll" resultType="customer">
-		select cNo, cName, cDob, cDoJoin, cPhone from customer;
+		select cNo, cName, cDob, cDoJoin, cPhone from customer where cDel = 0
 	</select>
 </mapper>

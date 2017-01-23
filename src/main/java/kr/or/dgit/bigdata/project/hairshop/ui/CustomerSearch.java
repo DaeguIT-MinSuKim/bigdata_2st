@@ -237,7 +237,7 @@ public class CustomerSearch extends JPanel implements ActionListener {
 
 		return rowDatas;
 	}
-	private void reloadDataForAll() {
+	public void reloadDataForAll() {
 		DefaultTableModel model = new DefaultTableModel(getRowDataForAll(), getColumnData());
 		tableForAll.setModel(model);
 		tableSetAlignWithForAll();	

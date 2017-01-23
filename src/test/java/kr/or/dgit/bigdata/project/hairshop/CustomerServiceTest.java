@@ -79,5 +79,4 @@ public class CustomerServiceTest {
 		Assert.assertNotNull(customer);
 	}
 	
-	
 }
