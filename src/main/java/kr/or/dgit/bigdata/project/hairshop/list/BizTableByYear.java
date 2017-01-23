@@ -42,7 +42,7 @@ public class BizTableByYear extends ListTableSetting {
 		}
 		if(!list.isEmpty()){
 			String startDate = yList[0]+"-01-01";
-			String endDate = (yList[yList.length-1]+1)+"01-01";
+			String endDate = (yList[yList.length-1])+"12-31";
 			HashMap<String, Object> res = BizService.getInstance().selectBizWithDatesCalTotal(startDate, endDate);
 			String[] tList = BizTableByMonth.getcntSumIntValue(res);
 			String[] sList = new String[]{"", "", "", "","총 계 : " , tList[1]};
