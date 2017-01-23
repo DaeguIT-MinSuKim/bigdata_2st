@@ -310,6 +310,19 @@ public class HairOrder extends JPanel {
 
 	}
 
+	public void setTxtInOrder() {
+
+		List<Biz> bList = BizService.getInstance().selectAllBiz();
+		int bNo = bList.size() + 1;
+		tfBNo.setText(bNo + "");
+		DateFormatManager dfm = new DateFormatManager("yyyy-MM-dd");
+		nowDate = new Date();
+		tfBDate.setText(dfm.format(nowDate));
+		nowTime = new Time(nowDate.getTime());
+		tfBTime.setText(nowTime.toString());
+
+	}
+
 	protected void cmbHNameItemStateChanged(ItemEvent arg0) {
 		int hNo = cmbHName.getSelectedIndex();
 		if (hNo != 0) {
@@ -534,6 +547,7 @@ public class HairOrder extends JPanel {
 		table.setModel(model);
 		table.tableSetAlignWidth();
 	}
+
 	String[][] getRowDataForAll() {
 		List<Customer> list = CustomerService.getInstance().selectByAll();
 		String[][] rowDatas = new String[list.size()][];
@@ -541,5 +555,18 @@ public class HairOrder extends JPanel {
 			rowDatas[i] = list.get(i).toArray();
 		}
 		return rowDatas;
+	}
+
+	public void setClearTxt(){//주문버튼 누를 시에 텍스트필드 등 리셋
+		  tfCName.setText("");
+		  tfCNo.setText("");
+		  tfHNo.setText("");
+		  tfHPrice.setText("");
+		  tfEDiscount.setText("");
+		  tfENo.setText("");
+		  tfTotal.setText("");
+		  cmbHName.setSelectedIndex(0);
+		  cmbEName.setSelectedIndex(0);
+		
 	}
 }

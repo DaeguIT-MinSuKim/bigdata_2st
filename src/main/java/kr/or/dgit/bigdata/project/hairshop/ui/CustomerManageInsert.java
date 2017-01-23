@@ -35,91 +35,91 @@ public class CustomerManageInsert extends JPanel {
 	 */
 	public CustomerManageInsert() {
 		setLayout(new GridLayout(0, 1, 0, 0));
-		
+
 		pnInsert = new JPanel();
 		pnInsert.setBorder(new EmptyBorder(20, 10, 20, 10));
 		add(pnInsert);
 		pnInsert.setLayout(new GridLayout(5, 2, 5, 10));
-		
+
 		JLabel lblCno = new JLabel("고객번호");
 		lblCno.setHorizontalAlignment(SwingConstants.CENTER);
 		pnInsert.add(lblCno);
-		
+
 		txtCno = new JTextField();
 		txtCno.setEditable(false);
 		pnInsert.add(txtCno);
 		txtCno.setColumns(10);
-		
+
 		JLabel lblCname = new JLabel("성명");
 		lblCname.setHorizontalAlignment(SwingConstants.CENTER);
 		pnInsert.add(lblCname);
-		
+
 		txtCname = new JTextField();
 		pnInsert.add(txtCname);
 		txtCname.setColumns(10);
-		
+
 		JLabel lblPhone = new JLabel("전화번호");
 		lblPhone.setHorizontalAlignment(SwingConstants.CENTER);
 		pnInsert.add(lblPhone);
-		
+
 		JPanel pnPhone = new JPanel();
 		pnPhone.setBorder(new EmptyBorder(0, 0, 0, 0));
 		pnInsert.add(pnPhone);
 		pnPhone.setLayout(new GridLayout(0, 5, 0, 0));
-		
+
 		txtP1 = new JTextField();
 		pnPhone.add(txtP1);
 		txtP1.setColumns(10);
-		
+
 		JLabel lblNewLabel = new JLabel("-");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		pnPhone.add(lblNewLabel);
-		
+
 		txtP2 = new JTextField();
 		txtP2.setColumns(10);
 		pnPhone.add(txtP2);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("-");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		pnPhone.add(lblNewLabel_1);
-		
+
 		txtP3 = new JTextField();
 		pnPhone.add(txtP3);
 		txtP3.setColumns(10);
-		
+
 		JLabel lblDob = new JLabel("생년월일");
 		lblDob.setHorizontalAlignment(SwingConstants.CENTER);
 		pnInsert.add(lblDob);
-		
+
 		JPanel pnDob = new JPanel();
 		pnDob.setBorder(new EmptyBorder(0, 0, 0, 0));
 		pnInsert.add(pnDob);
 		pnDob.setLayout(new GridLayout(0, 5, 0, 0));
-		
+
 		txtD1 = new JTextField();
 		txtD1.setColumns(10);
 		pnDob.add(txtD1);
-		
+
 		JLabel label = new JLabel("-");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		pnDob.add(label);
-		
+
 		txtD2 = new JTextField();
 		txtD2.setColumns(10);
 		pnDob.add(txtD2);
-		
+
 		JLabel label_1 = new JLabel("-");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		pnDob.add(label_1);
-		
+
 		txtD3 = new JTextField();
 		txtD3.setColumns(10);
 		pnDob.add(txtD3);
-		
+
 		JLabel lblDojoin = new JLabel("가입일자");
 		lblDojoin.setHorizontalAlignment(SwingConstants.CENTER);
 		pnInsert.add(lblDojoin);
-		
+
 		JPanel pnDJ = new JPanel();
 		pnDJ.setBorder(new EmptyBorder(0, 0, 0, 0));
 		pnInsert.add(pnDJ);
@@ -127,38 +127,37 @@ public class CustomerManageInsert extends JPanel {
 		Calendar cal = Calendar.getInstance();
 		txtDJ1 = new JTextField();
 		txtDJ1.setColumns(10);
-		txtDJ1.setText(cal.get(cal.YEAR)+"");
+		txtDJ1.setText(cal.get(cal.YEAR) + "");
 		pnDJ.add(txtDJ1);
-		
+
 		JLabel label_2 = new JLabel("-");
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
 		pnDJ.add(label_2);
-		
+
 		txtDJ2 = new JTextField();
 		txtDJ2.setColumns(10);
-		txtDJ2.setText((cal.get(cal.MONTH)+1)+"");
+		txtDJ2.setText((cal.get(cal.MONTH) + 1) + "");
 		pnDJ.add(txtDJ2);
-		
+
 		JLabel label_3 = new JLabel("-");
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
 		pnDJ.add(label_3);
-		
+
 		txtDJ3 = new JTextField();
 		txtDJ3.setColumns(10);
-		txtDJ3.setText(cal.get(cal.DATE)+"");
+		txtDJ3.setText(cal.get(cal.DATE) + "");
 		pnDJ.add(txtDJ3);
-		
+
 		JPanel pnImg = new JPanel();
 		add(pnImg);
 		pnImg.setLayout(new BorderLayout(0, 0));
 		ImageIcon iic = new ImageIcon(CustomerManageEdit.class.getResource("/img/subImg.png"));
 		JLabel label_4 = new JLabel("");
 		Image img = iic.getImage();
-		Image newimg = img.getScaledInstance( 940, 320, java.awt.Image.SCALE_SMOOTH );  
-		iic = new ImageIcon( newimg );
+		Image newimg = img.getScaledInstance(940, 320, java.awt.Image.SCALE_SMOOTH);
+		iic = new ImageIcon(newimg);
 		label_4.setIcon(iic);
 		pnImg.add(label_4, BorderLayout.CENTER);
-		
 
 	}
 
@@ -177,8 +176,6 @@ public class CustomerManageInsert extends JPanel {
 	public void setTxtCname(JTextField txtCname) {
 		this.txtCname = txtCname;
 	}
-
-	
 
 	public JTextField getTxtD1() {
 		return txtD1;
@@ -251,19 +248,19 @@ public class CustomerManageInsert extends JPanel {
 	public void setTxtP3(JTextField txtP3) {
 		this.txtP3 = txtP3;
 	}
-	
-	public void insertNewCostomer(){
-		
+
+	public void insertNewCostomer() {
+
 		int d1 = Integer.parseInt(txtD1.getText());
 		int d2 = Integer.parseInt(txtD2.getText());
 		int d3 = Integer.parseInt(txtD3.getText());
-		
+
 		int dj1 = Integer.parseInt(txtDJ1.getText());
-		int dj2 = Integer.parseInt(txtDJ2.getText())-1;
+		int dj2 = Integer.parseInt(txtDJ2.getText()) - 1;
 		int dj3 = Integer.parseInt(txtDJ3.getText());
-		
-		String phoneNumber =  txtP1.getText()+"-"+txtP2.getText()+"-"+txtP3.getText();
-		
+
+		String phoneNumber = txtP1.getText() + "-" + txtP2.getText() + "-" + txtP3.getText();
+
 		GregorianCalendar cal1 = new GregorianCalendar(d1, d2, d3);
 		GregorianCalendar cal2 = new GregorianCalendar(dj1, dj2, dj3);
 		Customer insCtm = new Customer();
@@ -272,11 +269,9 @@ public class CustomerManageInsert extends JPanel {
 		insCtm.setcDoJoin(cal2.getTime());
 		insCtm.setcPhone(phoneNumber);
 		insCtm.setcDel(false);
-		
 
 		CustomerService.getInstance().insertCustomer(insCtm);
-		
-		
+
 	}
 
 	public JPanel getPnInsert() {
@@ -286,6 +281,15 @@ public class CustomerManageInsert extends JPanel {
 	public void setPnInsert(JPanel pnInsert) {
 		this.pnInsert = pnInsert;
 	}
-	
+
+	public void setClearTxt() {
+		txtCname.setText("");
+		txtP1.setText("");
+		txtP2.setText("");
+		txtP3.setText("");
+		txtD1.setText("");
+		txtD2.setText("");
+		txtD3.setText("");
+	}
 
 }

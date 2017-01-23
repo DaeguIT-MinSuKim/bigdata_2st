@@ -170,6 +170,12 @@ public class HairMain extends JFrame implements ChangeListener {
 				btnToMainActionPerformed(e);
 			}
 		});
+		pnCusSearch.addComponentListener(new ComponentAdapter() {//////////
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				showThisCard("name_1666323161344197");
+			}
+		});
 		tabbedPane.addTab("고객검색", null, pnCusSearch, null);			
 		pnHairOder = new PnHairOder();//pnHairOder
 		pnHairOder.getBtnOrder().addActionListener(new ActionListener() {
@@ -247,7 +253,8 @@ public class HairMain extends JFrame implements ChangeListener {
 				pnHairOder.getPnHairOderMain().setTxtInOrder(Integer.parseInt(pnCusSearch.getPnCusAdd().getTxtCno().getText()),pnCusSearch.getPnCusAdd().getTxtCname().getText());
 				tabbedPane.setSelectedComponent(pnHairOder);				
 			}
-			cardIndex =0;			
+			cardIndex =0;
+			pnCusSearch.getPnCusAdd().setClearTxt();
 			break;
 		case 2:
 			pnCusSearch.getPnCusEdit().setTxtInCusEditForUpdate();
@@ -273,8 +280,9 @@ public class HairMain extends JFrame implements ChangeListener {
 	protected void btnToMainActionPerformed(ActionEvent e) {
 		tabbedPane.setSelectedComponent(pnHome);
 	}
-	protected void btnOrderActionPerformed(ActionEvent e) {
-		pnHairOder.getPnHairOderMain().insertBizByOrder();		
+	protected void btnOrderActionPerformed(ActionEvent e) {//////////////
+		pnHairOder.getPnHairOderMain().insertBizByOrder();
+		pnHairOder.getPnHairOderMain().setClearTxt();
 	}	
 	private void clickAndGetDataFromTable(JTable table) {		
 		cNo = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()); // 선택한 열의 0번째 인덱스 행을 출력
@@ -377,8 +385,8 @@ public class HairMain extends JFrame implements ChangeListener {
 	public void switchTab(int index){
 		tabbedPane.setSelectedIndex(index);
 	}
-	protected void pnHairOderComponentShown(ComponentEvent arg0) {
-		pnHairOder.getPnHairOderMain().setTxtInOrder(cNo, cName);		
+	protected void pnHairOderComponentShown(ComponentEvent arg0) {////////////
+		pnHairOder.getPnHairOderMain().setTxtInOrder();		
 	}
 	public void showThisCard(String string) {
 		CardLayout cl = (CardLayout)(pnCusSearch.getPnCusSearchCards().getLayout());
