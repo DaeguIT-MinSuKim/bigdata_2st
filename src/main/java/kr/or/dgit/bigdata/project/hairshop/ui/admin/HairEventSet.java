@@ -170,15 +170,15 @@ public class HairEventSet extends JPanel implements ActionListener, KeyListener 
 			tfhPriceKeyTyped(e);
 		}
 	}
-	protected void tfhPriceKeyTyped(KeyEvent e) {
-		if(tfeDiscount.getText().trim().length()>=2){
+	protected void tfhPriceKeyTyped(KeyEvent e) {		
+		char c = e.getKeyChar();
+		if(!Character.isDigit(c)){
 			e.consume();
 			return;
 		}
 		
-		char c = e.getKeyChar();
-		if(!Character.isDigit(c)){
-			e.consume();
+		if(tfeDiscount.getText().trim().length()>=2){
+			tfeDiscount.setText(tfeDiscount.getText().substring(1));
 			return;
 		}
 	}

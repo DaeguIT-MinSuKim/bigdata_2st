@@ -359,8 +359,15 @@ public class HairMain extends JFrame implements ChangeListener {
 		}
 	}
 	protected void tabbedPaneStateChanged(ChangeEvent e) {
-		if(((JTabbedPane)e.getSource()).getSelectedIndex()==4){
+		switch(((JTabbedPane)e.getSource()).getSelectedIndex()){
+		case 4:
 			pnBizList.setDefaultPnBizListMain();
+			break;
+		case 6:
+			pnAdmin.setDefaultPanel();
+			break;
+		default:
+				break;
 		}
 	}
 }

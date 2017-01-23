@@ -178,9 +178,16 @@ public class PnAdmin extends JPanel implements ActionListener {
 		}		
 	}
 	protected void btnAdminSettingActionPerformed(ActionEvent e) {
+		adminSettingPanel.setinitPanel();
 		hairEventPanel.setVisible(false);
 		hairinfoPanel.setVisible(false);
 		adminSettingPanel.setVisible(true);
+	}
+	
+	public void setDefaultPanel(){
+		hairEventPanel.setVisible(false);
+		hairinfoPanel.setVisible(false);
+		adminSettingPanel.setVisible(false);
 	}
 }
 

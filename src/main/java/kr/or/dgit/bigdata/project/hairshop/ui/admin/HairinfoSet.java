@@ -166,14 +166,13 @@ public class HairinfoSet extends JPanel implements ActionListener, KeyListener {
 		}
 	}
 	protected void tfhPriceKeyTyped(KeyEvent e) {
-		/* 아직 이 이벤트를 발생시킨 e 값은 textfield에 입력되지 않았으므로 길이를 제한할 때 이를 고려하여 수정해야 함.*/
-		if(tfhPrice.getText().trim().length()>=11){
+		/* 아직 이 이벤트를 발생시킨 e 값은 textfield에 입력되지 않았으므로 길이를 제한할 때 이를 고려하여 수정해야 함.*/		
+		char c = e.getKeyChar();
+		if(!Character.isDigit(c)){
 			e.consume();
 			return;
 		}
-		
-		char c = e.getKeyChar();
-		if(!Character.isDigit(c)){
+		if(tfhPrice.getText().trim().length()>=11){
 			e.consume();
 			return;
 		}
