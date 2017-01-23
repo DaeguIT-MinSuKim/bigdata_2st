@@ -1,4 +1,4 @@
-package kr.or.dgit.bigdata.project.hairshop.ui.login;
+package kr.or.dgit.bigdata.project.hairshop.ui.admin;
 
 import java.awt.EventQueue;
 import java.awt.GridLayout;

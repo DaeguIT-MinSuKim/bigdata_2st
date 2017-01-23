@@ -35,12 +35,12 @@ public class CustomerManageEdit extends JPanel {
 	 * Create the panel.
 	 */
 	public CustomerManageEdit() {
-		setLayout(new BorderLayout(0, 0));
+		setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JPanel pnInsert = new JPanel();
-		pnInsert.setBorder(new EmptyBorder(10, 10, 10, 10));
-		add(pnInsert, BorderLayout.NORTH);
-		pnInsert.setLayout(new GridLayout(5, 2, 5, 5));
+		pnInsert.setBorder(new EmptyBorder(20, 10, 20, 10));
+		add(pnInsert);
+		pnInsert.setLayout(new GridLayout(5, 2, 5, 10));
 		
 		JLabel lblCno = new JLabel("고객번호");
 		lblCno.setHorizontalAlignment(SwingConstants.CENTER);
@@ -147,12 +147,12 @@ public class CustomerManageEdit extends JPanel {
 		pnDJ.add(txtDJ3);
 		
 		JPanel pnImg = new JPanel();
-		add(pnImg, BorderLayout.CENTER);
+		add(pnImg);
 		pnImg.setLayout(new BorderLayout(0, 0));
 		ImageIcon iic = new ImageIcon(CustomerManageEdit.class.getResource("/img/subImg2.png"));
 		JLabel label_4 = new JLabel("");
 		Image img = iic.getImage();
-		Image newimg = img.getScaledInstance( 940, 480, java.awt.Image.SCALE_SMOOTH );  
+		Image newimg = img.getScaledInstance( 940, 320, java.awt.Image.SCALE_SMOOTH );  
 		iic = new ImageIcon( newimg );
 		label_4.setIcon(iic);
 		pnImg.add(label_4, BorderLayout.CENTER);

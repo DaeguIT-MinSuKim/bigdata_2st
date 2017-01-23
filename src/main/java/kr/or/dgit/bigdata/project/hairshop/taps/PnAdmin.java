@@ -182,5 +182,14 @@ public class PnAdmin extends JPanel implements ActionListener {
 		hairinfoPanel.setVisible(false);
 		adminSettingPanel.setVisible(true);
 	}
+
+	public JButton getBtnToLogout() {
+		return btnToLogout;
+	}
+
+	public void setBtnToLogout(JButton btnToLogout) {
+		this.btnToLogout = btnToLogout;
+	}
+	
 }
 

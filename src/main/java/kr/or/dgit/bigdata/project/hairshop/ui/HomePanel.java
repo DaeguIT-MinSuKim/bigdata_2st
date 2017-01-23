@@ -16,7 +16,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import kr.or.dgit.bigdata.project.hairshop.fonts.Fonts;
-import kr.or.dgit.bigdata.project.hairshop.ui.login.ManagerLogin;
+import kr.or.dgit.bigdata.project.hairshop.ui.admin.ManagerLogin;
 
 public class HomePanel extends JLayeredPane {
 	private JButton[] btns = {new JButton(), new JButton(), new JButton(), new JButton()};
@@ -193,11 +193,11 @@ public class HomePanel extends JLayeredPane {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
+				/*try {
 					ManagerLogin frame = new ManagerLogin();
 				} catch (Exception e1) {
 					e1.printStackTrace();
-				}
+				}*/ //모드 접속시 프레임 나오지 않게 하기 위해 HairMain에서 받게함
 			}
 		});
 		} catch (Exception e2) {
@@ -228,4 +228,12 @@ public class HomePanel extends JLayeredPane {
 	public JButton getBtnManager() {return btns[3];}
 	public void setBtnManager(JButton btnManager) {this.btns[3] = btnManager;}
 
+	public JButton[] getBtns() {
+		return btns;
+	}
+
+	public void setBtns(JButton[] btns) {
+		this.btns = btns;
+	}
+	
 }

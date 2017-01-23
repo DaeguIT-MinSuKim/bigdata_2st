@@ -39,7 +39,8 @@ import kr.or.dgit.bigdata.project.hairshop.taps.PnHairOder;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnHome;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnOrderList;
 import kr.or.dgit.bigdata.project.hairshop.ui.HomePanel;
-import kr.or.dgit.bigdata.project.hairshop.ui.login.ManagerLogin;
+import kr.or.dgit.bigdata.project.hairshop.ui.admin.ManagerLogin;
+
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
@@ -63,7 +64,7 @@ public class HairMain extends JFrame implements ChangeListener {
 	private JPopupMenu popup;
 	private JLabel lblTextTest;
 	private PnAdmin pnAdmin;
-	
+	private boolean mlTf; //false면 관리자 모드 비접속, true면 관리자 모드 접속 중
 	public HairMain()  {
 		setTitle("DGIT HAIR");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -110,7 +111,7 @@ public class HairMain extends JFrame implements ChangeListener {
 				switchTab(2);
 			}
 		});
-		pnHome.getPnHomeMain().getBtnManager().addActionListener(new ActionListener() {
+		pnHome.getPnHomeMain().getBtns()[3].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				btnManagerActionPerformed(arg0);
 			}			
@@ -188,6 +189,12 @@ public class HairMain extends JFrame implements ChangeListener {
 		pnBizGraph = new PnBizGraph();
 		pnAdmin = new PnAdmin();
 		pnAdmin.setTabbedPane(tabbedPane);
+		pnAdmin.getBtnToLogout().addActionListener(new ActionListener() {					
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				isLogout();						
+			}			
+		});
 	}
 //액션 리스너 메소드//////////////////////////////////////////////////////////
 	protected void btnAddActionPerformed(ActionEvent e) {
@@ -309,34 +316,40 @@ public class HairMain extends JFrame implements ChangeListener {
         }
 	}
 	private void btnManagerActionPerformed(ActionEvent arg0) {//관리자 로그인 버튼 이벤트 리스너
-		ManagerLogin ml = new ManagerLogin();
-		ml.setVisible(true); 
-		ml.getBtnLogin().addActionListener(new ActionListener() {			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Manager manager =  new Manager();
-				manager.setmName(ml.getTxtId().getText());
-				Manager temp = ManagerService.getInstance().selectmPasswordByName(manager);
-				char[] pass = ml.getPasswordField().getPassword();
-				String userPass ="";
-				for (char c : pass) { 
-					userPass +=c;
-				}
-				if (temp.getmPassword().equals(userPass)) {
-					tabbedPane.addTab("영업현황", null, pnBizList, null);
-					tabbedPane.addTab("영업그래프", null, pnBizGraph, null);
-					tabbedPane.addTab("프로그램관리", null, pnAdmin, null);
-					ml.setVisible(false);
-				} else {
-					JOptionPane.showMessageDialog(null, "해당 아이디가 존재하지 않거나 비밀번호가 틀립니다.");
-					ml.getTxtId().requestFocus();
-					tabbedPane.remove(pnBizList);
-					tabbedPane.remove(pnBizGraph);
-					tabbedPane.remove(pnAdmin);
-				}				
-			}
-		});				
-	}	
+		if (mlTf) {
+			JOptionPane.showMessageDialog(null, "이미 관리자 모드로 접속 중 입니다.");
+		} else{
+			ManagerLogin ml = new ManagerLogin();
+			ml.setVisible(true); 
+			ml.getBtnLogin().addActionListener(new ActionListener() {			
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Manager manager =  new Manager();
+					
+						manager.setmName(ml.getTxtId().getText());
+						Manager temp = ManagerService.getInstance().selectmPasswordByName(manager);
+						char[] pass = ml.getPasswordField().getPassword();
+						String userPass ="";
+						for (char c : pass) { 
+							userPass +=c;
+						}
+						if (temp.getmPassword().equals(userPass)) {
+							tabbedPane.addTab("영업현황", null, pnBizList, null);
+							tabbedPane.addTab("영업그래프", null, pnBizGraph, null);
+							tabbedPane.addTab("프로그램관리", null, pnAdmin, null);
+							ml.setVisible(false);
+						} else {
+							JOptionPane.showMessageDialog(null, "해당 아이디가 존재하지 않거나 비밀번호가 틀립니다.");
+							ml.getTxtId().requestFocus();
+							tabbedPane.remove(pnBizList);
+							tabbedPane.remove(pnBizGraph);
+							tabbedPane.remove(pnAdmin);
+						}
+						mlTf = true;
+					}
+				});		
+		}
+	}
 	public void switchTab(int index){
 		tabbedPane.setSelectedIndex(index);
 	}
@@ -363,5 +376,8 @@ public class HairMain extends JFrame implements ChangeListener {
 		if(((JTabbedPane)e.getSource()).getSelectedIndex()==4){
 			pnBizList.setDefaultPnBizListMain();
 		}
+	}
+	private void isLogout() {
+		mlTf = false;
 	}
 }
