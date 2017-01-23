@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -225,13 +226,17 @@ public class HairOrder extends JPanel {
 		
 		pnImg = new JPanel();
 		pnCards.add(pnImg, "name_31439583877535");
-		pnImg.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblImg = new JLabel("");
-		pnImg.add(lblImg);
-		lblImg.setIcon(new ImageIcon("D:\\workspace\\workspace_mybatis\\bigdata_2st\\img\\HairEtc.jpg"));
-		
 		JPanel pnSubAdd = new JPanel();
+		ImageIcon iic = new ImageIcon(CustomerManageEdit.class.getResource("/img/desk.jpg"));
+		JLabel label_4 = new JLabel("");
+		Image img = iic.getImage();
+		Image newimg = img.getScaledInstance( 450, 300, java.awt.Image.SCALE_SMOOTH );  
+		iic = new ImageIcon( newimg );
+		pnImg.setLayout(new BorderLayout(0, 0));
+		label_4.setIcon(iic);
+		pnImg.add(label_4);
+
+		
 		pnCards.add(pnSubAdd, "name_30981526616213");
 		pnSubAdd.setLayout(new BorderLayout(0, 0));
 		

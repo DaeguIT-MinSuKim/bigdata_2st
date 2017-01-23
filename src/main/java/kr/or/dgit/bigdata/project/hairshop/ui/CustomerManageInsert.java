@@ -2,17 +2,16 @@ package kr.or.dgit.bigdata.project.hairshop.ui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
@@ -23,7 +22,6 @@ public class CustomerManageInsert extends JPanel {
 	private JTextField txtP1;
 	private JTextField txtP2;
 	private JTextField txtP3;
-	private JTable table;
 	private JTextField txtD1;
 	private JTextField txtD2;
 	private JTextField txtD3;
@@ -149,19 +147,17 @@ public class CustomerManageInsert extends JPanel {
 		txtDJ3.setText(cal.get(cal.DATE)+"");
 		pnDJ.add(txtDJ3);
 		
-		JPanel pnTable = new JPanel();
-		add(pnTable, BorderLayout.CENTER);
-		pnTable.setLayout(new BorderLayout(0, 0));
+		JPanel pnImg = new JPanel();
+		add(pnImg, BorderLayout.CENTER);
+		pnImg.setLayout(new BorderLayout(0, 0));
+		ImageIcon iic = new ImageIcon(CustomerManageEdit.class.getResource("/img/subImg.png"));
+		JLabel label_4 = new JLabel("");
+		Image img = iic.getImage();
+		Image newimg = img.getScaledInstance( 940, 480, java.awt.Image.SCALE_SMOOTH );  
+		iic = new ImageIcon( newimg );
+		label_4.setIcon(iic);
+		pnImg.add(label_4, BorderLayout.CENTER);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-					"고객 번호", "고객명", "생년월일", "가입일자", "전화번호"
-			}
-		));
-		pnTable.add(table, BorderLayout.NORTH);
 
 	}
 
@@ -253,14 +249,6 @@ public class CustomerManageInsert extends JPanel {
 
 	public void setTxtP3(JTextField txtP3) {
 		this.txtP3 = txtP3;
-	}
-
-	public JTable getTable() {
-		return table;
-	}
-
-	public void setTable(JTable table) {
-		this.table = table;
 	}
 	
 	public void insertNewCostomer(){
