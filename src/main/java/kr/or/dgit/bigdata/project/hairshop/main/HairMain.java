@@ -168,6 +168,12 @@ public class HairMain extends JFrame implements ChangeListener {
 				btnToMainActionPerformed(e);
 			}
 		});
+		pnHairOder.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				pnHairOderComponentShown(arg0);
+			}
+		});
 		tabbedPane.addTab("헤어주문", null, pnHairOder, null);//pnHairOrder 끝			
 		pnOrderList = new PnOrderList();//pnOrderList
 		pnOrderList.getBtnToMain3().addActionListener(new ActionListener() {
@@ -333,7 +339,10 @@ public class HairMain extends JFrame implements ChangeListener {
 	}	
 	public void switchTab(int index){
 		tabbedPane.setSelectedIndex(index);
-	}	
+	}
+	protected void pnHairOderComponentShown(ComponentEvent arg0) {
+		pnHairOder.getPnHairOderMain().setTxtInOrder(cNo, cName);		
+	}
 	public void showThisCard(String string) {
 		CardLayout cl = (CardLayout)(pnCusSearch.getPnCusSearchCards().getLayout());
         cl.show(pnCusSearch.getPnCusSearchCards(), string);
