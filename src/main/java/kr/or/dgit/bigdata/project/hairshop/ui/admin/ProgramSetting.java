@@ -1,6 +1,6 @@
 package kr.or.dgit.bigdata.project.hairshop.ui.admin;
 
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +14,6 @@ import kr.or.dgit.bigdata.project.hairshop.admin.setting.dao.ResetDB;
 import kr.or.dgit.bigdata.project.hairshop.admin.setting.service.ExportSettingService;
 import kr.or.dgit.bigdata.project.hairshop.admin.setting.service.ImportSettingService;
 import kr.or.dgit.bigdata.project.hairshop.admin.setting.service.ServiceSetting;
-import java.awt.GridLayout;
 
 public class ProgramSetting extends JFrame implements ActionListener {
 
@@ -94,6 +93,9 @@ public class ProgramSetting extends JFrame implements ActionListener {
 	protected void btnImportActionPerformed(ActionEvent e) {
 		ServiceSetting create = new ImportSettingService();
 		create.initSetting();
+		hairEvnetAdminPanel.setInitPanel();
+		hairinfoAdminPanel.setInitPanel();
+		adminSettingPanel.setinitPanel();
 	}
 	
 }
