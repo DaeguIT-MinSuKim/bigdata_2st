@@ -24,7 +24,7 @@ public class BizServiceTest {
 		bizService = null;
 	}
 
-	@Test
+	/*@Test
 	public void testSelectBizAndHairInfoEvent() {
 		List<Biz> bList = BizService.getInstance().selectBizAndHairInfoEvent();
 		Assert.assertNotNull(bList);
@@ -58,6 +58,13 @@ public class BizServiceTest {
 		for(Biz b:bList){
 			System.out.println(b);
 		}
+	}*/
+	@Test
+	public void testSelectCountTotalEachHairBiz() {
+		int hairType = BizService.getInstance().selectCountTotalEachHairBiz(1);
+		Assert.assertNotNull(hairType);
+		System.out.println(hairType);
+		
 	}
 }
 /*	@Test

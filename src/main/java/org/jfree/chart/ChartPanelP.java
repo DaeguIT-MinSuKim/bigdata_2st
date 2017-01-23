@@ -3,13 +3,16 @@ package org.jfree.chart;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.io.IOException;
+import java.util.List;
 
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import kr.or.dgit.bigdata.project.hairshop.dto.Hairinfo;
 import kr.or.dgit.bigdata.project.hairshop.fonts.Fonts;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
+import kr.or.dgit.bigdata.project.hairshop.service.HairinfoService;
 
 public class ChartPanelP extends ChartPanel {
 
@@ -63,26 +66,19 @@ public class ChartPanelP extends ChartPanel {
 		return dataset;
 	}
 
-	public void chartRefresh() {
-		String CUT = "커트";
-		String DRY = "드라이";
-		String SHAMPOO = "샴푸";
-		String PERM = "펌";
-		String MAGIC = "매직";
-		String TREATMENT = "트리트먼트";
-		String AMPLE = "앰플";
-		String ETC = "기타";
-
+	public void chartRefresh() {//그래프 새로갱신용 메소드 독립
+		List<Hairinfo> hList = HairinfoService.getInstance().selectHairInfoAll();
+		String[] hairTitle = new String[hList.size()];
 		String HAIRTYPE = "헤어종류";
-
-		dataset.addValue(BizService.getInstance().selectCountTotalEachHairBiz(1), CUT, HAIRTYPE);
-		dataset.addValue(BizService.getInstance().selectCountTotalEachHairBiz(2), DRY, HAIRTYPE);
-		dataset.addValue(BizService.getInstance().selectCountTotalEachHairBiz(3), SHAMPOO, HAIRTYPE);
-		dataset.addValue(BizService.getInstance().selectCountTotalEachHairBiz(4), PERM, HAIRTYPE);
-		dataset.addValue(BizService.getInstance().selectCountTotalEachHairBiz(5), MAGIC, HAIRTYPE);
-		dataset.addValue(BizService.getInstance().selectCountTotalEachHairBiz(6), TREATMENT, HAIRTYPE);
-		dataset.addValue(BizService.getInstance().selectCountTotalEachHairBiz(7), AMPLE, HAIRTYPE);
-		dataset.addValue(BizService.getInstance().selectCountTotalEachHairBiz(8), ETC, HAIRTYPE);
+		int j =1;
+		for (int i = 0; i < hairTitle.length; i++) {
+			hairTitle[i] = hList.get(i).gethName();
+		}
+		for (int i = 0; i < hairTitle.length; i++) {
+			dataset.addValue(BizService.getInstance().selectCountTotalEachHairBiz(j), hairTitle[i], HAIRTYPE);
+			j++;
+		}
+		j=0;
 	}
 
 }
