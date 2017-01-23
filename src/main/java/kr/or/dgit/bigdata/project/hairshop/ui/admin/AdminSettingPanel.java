@@ -77,6 +77,9 @@ public class AdminSettingPanel extends JPanel implements ActionListener, MouseLi
 		confirmPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		confirmPanel.setLayout(new BorderLayout());
 		add(confirmPanel);
+		LoginSet tempPanel = new LoginSet();
+		confirmPanel.add(tempPanel);
+		tempPanel.setVisible(false);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -95,7 +98,7 @@ public class AdminSettingPanel extends JPanel implements ActionListener, MouseLi
 		AdminSet addPanel = new AdminSet("추가");
 		addPanel.setmTable(table);
 		addPanel.setConfirmPanel(confirmPanel);
-		confirmPanel.add(new AdminSet("추가"));
+		confirmPanel.add(addPanel);
 		revalidate();
 		repaint();
 	}
@@ -109,6 +112,8 @@ public class AdminSettingPanel extends JPanel implements ActionListener, MouseLi
 		confirmPanel.add(loginUi);		
 		revalidate();
 		repaint();
+		btnUpdate.setEnabled(false);
+		btnDel.setEnabled(false);
 	}
 
 	protected void btnDelActionPerformed(ActionEvent e) {
@@ -140,5 +145,8 @@ public class AdminSettingPanel extends JPanel implements ActionListener, MouseLi
 		table.setTableWithData();
 		confirmPanel.repaint();
 		confirmPanel.revalidate();
+	}
+	public void setInitPanel(){
+		confirmPanel.removeAll();
 	}
 }

@@ -52,8 +52,7 @@ public class BizReportPanelByMonth extends JPanel implements ActionListener, Ite
 		
 		cmbYear = new JComboBox<>();
 		cmbYear.setMaximumRowCount(90);
-		srcPanel.add(cmbYear);
-		setcmbYear();		
+		srcPanel.add(cmbYear);		
 		cmbYear.addItemListener(this);
 		
 		btnSearch = new JButton("검색");
@@ -78,16 +77,22 @@ public class BizReportPanelByMonth extends JPanel implements ActionListener, Ite
 		btnPanel.add(btnPrint);
 		
 		add(btnPanel, BorderLayout.SOUTH);
+		setcmbYear();
 	}
 	
 	private void setcmbYear() {		
 		try{
 			Set<Integer> temp = BizService.getInstance().selectBDateYear();
 			Integer[] yList = temp.toArray(new Integer[temp.size()]);
+			if(yList.length==0){
+				cmbYear.setEnabled(false);
+				btnSearch.setEnabled(false);
+				return;
+			}
 			for(int year : yList){
 				cmbYear.addItem(year);
 			}
-		}catch(NullPointerException e){
+		}catch(Exception e){
 			cmbYear.setEnabled(false);
 			btnSearch.setEnabled(false);
 		}

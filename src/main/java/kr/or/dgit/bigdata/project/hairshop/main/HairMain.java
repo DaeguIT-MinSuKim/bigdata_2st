@@ -2,7 +2,6 @@ package kr.or.dgit.bigdata.project.hairshop.main;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +10,6 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -23,12 +21,16 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import org.apache.log4j.lf5.util.DateFormatManager;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.dto.Manager;
+import kr.or.dgit.bigdata.project.hairshop.fonts.Fonts;
 import kr.or.dgit.bigdata.project.hairshop.service.CustomerService;
 import kr.or.dgit.bigdata.project.hairshop.service.ManagerService;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnAdmin;
@@ -40,9 +42,6 @@ import kr.or.dgit.bigdata.project.hairshop.taps.PnHome;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnOrderList;
 import kr.or.dgit.bigdata.project.hairshop.ui.HomePanel;
 import kr.or.dgit.bigdata.project.hairshop.ui.admin.ManagerLogin;
-
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
 
 public class HairMain extends JFrame implements ChangeListener {
 
@@ -65,7 +64,20 @@ public class HairMain extends JFrame implements ChangeListener {
 	private JLabel lblTextTest;
 	private PnAdmin pnAdmin;
 	private boolean mlTf; //false면 관리자 모드 비접속, true면 관리자 모드 접속 중
+	Fonts f = new Fonts();
+	
+	
+	public static void setUIFont(javax.swing.plaf.FontUIResource f) {
+	    java.util.Enumeration keys = UIManager.getDefaults().keys();
+	    while (keys.hasMoreElements()) {
+	        Object key = keys.nextElement();
+	        Object value = UIManager.get(key);
+	        if (value instanceof javax.swing.plaf.FontUIResource)
+	            UIManager.put(key, f);
+	    }
+	}
 	public HairMain()  {
+		
 		setTitle("DGIT HAIR");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1100, 700);
@@ -78,10 +90,7 @@ public class HairMain extends JFrame implements ChangeListener {
 		tabbedPane.addChangeListener(this);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		try {
-			InputStream isNG = HairMain.class.getResourceAsStream("NANUMGOTHIC.TTF");
-			Font nanumG = Font.createFont(Font.TRUETYPE_FONT, isNG);
-			Font nanumGothic = nanumG.deriveFont(0, 20f);
-			tabbedPane.setFont(nanumGothic);
+			tabbedPane.setFont(f.getHanNa().deriveFont(0, 16f));
 		} catch (FontFormatException | IOException e1) {
 
 		}
@@ -118,7 +127,7 @@ public class HairMain extends JFrame implements ChangeListener {
 		});
 		tabbedPane.remove(pnBizList);
 		tabbedPane.remove(pnBizGraph);
-		tabbedPane.addTab("홈", null, pnHome, null);	//pnHome 탭 끝. 로그아웃 연동 추가 요망	
+		tabbedPane.addTab("  홈  ", null, pnHome, null);	//pnHome 탭 끝. 로그아웃 연동 추가 요망	
 		pnCusSearch = new PnCusSearch();//pnCusSearch
 		pnCusSearch.getPnSearchSub().getTableForAll().addMouseListener(new MouseAdapter() {
 			@Override
@@ -373,8 +382,15 @@ public class HairMain extends JFrame implements ChangeListener {
 		}
 	}
 	protected void tabbedPaneStateChanged(ChangeEvent e) {
-		if(((JTabbedPane)e.getSource()).getSelectedIndex()==4){
+		switch(((JTabbedPane)e.getSource()).getSelectedIndex()){
+		case 4:
 			pnBizList.setDefaultPnBizListMain();
+			break;
+		case 6:
+			pnAdmin.setDefaultPanel();
+			break;
+		default:
+				break;
 		}
 	}
 	private void isLogout() {

@@ -25,15 +25,12 @@ public class PnAdmin extends JPanel implements ActionListener {
 	/* main 화면 영업현황 tab 선택시 나타날 메인 화면 */
 	private JPanel pnAdminMain;
 	private JPanel pnAdminBtns;
-	private JButton btnHairinfo;
-	private JButton btnHairEvent;
 	private JButton btnSetting;
 	private JButton btnToLogout;
 	private HairinfoAdminPanel hairinfoPanel;
 	private HairEvnetAdminPanel hairEventPanel;
 	private JTabbedPane tabbedPane;
 	private AdminSettingPanel adminSettingPanel;
-	private JButton btnAdminSetting;
 
 	public void setTabbedPane(JTabbedPane tabbedPane) {
 		this.tabbedPane = tabbedPane;
@@ -53,8 +50,8 @@ public class PnAdmin extends JPanel implements ActionListener {
 		pnAdminMain.setBackground(new Color(240, 240, 240));
 		add(pnAdminMain, BorderLayout.CENTER);
 		GridBagLayout gbl_pnAdminMain = new GridBagLayout();
-		gbl_pnAdminMain.columnWidths = new int[]{30, 428, 428, 0};
-		gbl_pnAdminMain.rowHeights = new int[]{30, 271, 271, 0};
+		gbl_pnAdminMain.columnWidths = new int[]{0, 480, 480, 0};
+		gbl_pnAdminMain.rowHeights = new int[]{0, 270, 330, 0};
 		gbl_pnAdminMain.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_pnAdminMain.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		pnAdminMain.setLayout(gbl_pnAdminMain);
@@ -66,7 +63,6 @@ public class PnAdmin extends JPanel implements ActionListener {
 		gbc_hairinfoPanel.gridx = 1;
 		gbc_hairinfoPanel.gridy = 1;
 		pnAdminMain.add(hairinfoPanel, gbc_hairinfoPanel);
-		hairinfoPanel.setVisible(false);
 		
 		hairEventPanel = new HairEvnetAdminPanel();
 		GridBagConstraints gbc_hairEventPanel = new GridBagConstraints();
@@ -75,7 +71,6 @@ public class PnAdmin extends JPanel implements ActionListener {
 		gbc_hairEventPanel.gridx = 2;
 		gbc_hairEventPanel.gridy = 1;
 		pnAdminMain.add(hairEventPanel, gbc_hairEventPanel);
-		hairEventPanel.setVisible(false);
 		
 		adminSettingPanel = new AdminSettingPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -85,37 +80,20 @@ public class PnAdmin extends JPanel implements ActionListener {
 		gbc_panel.gridx = 1;
 		gbc_panel.gridy = 2;
 		pnAdminMain.add(adminSettingPanel, gbc_panel);
-		adminSettingPanel.setVisible(false);
 		
 		pnAdminBtns = new JPanel();
 		pnAdminBtns.setBorder(new EmptyBorder(0, 0, 0, 0));
-		pnAdminBtns.setBackground(new Color(230,230,250));
+		pnAdminBtns.setBackground(new Color(240, 240, 240));
 		add(pnAdminBtns, BorderLayout.EAST);
+		GridBagLayout gbl_pnAdminBtns = new GridBagLayout();
+		gbl_pnAdminBtns.columnWidths = new int[]{124, 0};
+		gbl_pnAdminBtns.rowHeights = new int[]{125, 125, 125, 125, 125, 0};
+		gbl_pnAdminBtns.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_pnAdminBtns.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		pnAdminBtns.setLayout(gbl_pnAdminBtns);
 		
-		btnHairinfo = new JButton("헤어정보관리");
-		btnHairinfo.addActionListener(this);
-		pnAdminBtns.setLayout(new GridLayout(0, 1, 0, 0));
-		btnHairinfo.setBorderPainted(false);
-		btnHairinfo.setFocusPainted(false);
-		btnHairinfo.setContentAreaFilled(true);
-		btnHairinfo.setBackground(new Color(248, 248, 255));
-		pnAdminBtns.add(btnHairinfo);
-		
-		btnHairEvent = new JButton("이벤트 관리");
-		btnHairEvent.addActionListener(this);
-		btnHairEvent.setBorderPainted(false);
-		btnHairEvent.setFocusPainted(false);
-		btnHairEvent.setContentAreaFilled(true);
-		btnHairEvent.setBackground(new Color(248, 248, 255));
-		pnAdminBtns.add(btnHairEvent);
-		
-		btnAdminSetting = new JButton("관리자 계정 관리");
-		btnAdminSetting.addActionListener(this);
-		btnAdminSetting.setBorderPainted(false);
-		btnAdminSetting.setFocusPainted(false);
-		btnAdminSetting.setContentAreaFilled(true);
-		btnAdminSetting.setBackground(new Color(248, 248, 255));
-		pnAdminBtns.add(btnAdminSetting);
+		btnToLogout = new JButton("로그 아웃");
+		btnToLogout.addActionListener(this);
 		
 		btnSetting = new JButton("프로그램세팅");
 		btnSetting.addActionListener(this);
@@ -123,51 +101,38 @@ public class PnAdmin extends JPanel implements ActionListener {
 		btnSetting.setFocusPainted(false);
 		btnSetting.setContentAreaFilled(true);
 		btnSetting.setBackground(new Color(248, 248, 255));
-		pnAdminBtns.add(btnSetting);
-		
-		btnToLogout = new JButton("로그 아웃");
-		btnToLogout.addActionListener(this);
+		GridBagConstraints gbc_btnSetting = new GridBagConstraints();
+		gbc_btnSetting.fill = GridBagConstraints.BOTH;
+		gbc_btnSetting.insets = new Insets(0, 0, 5, 0);
+		gbc_btnSetting.gridx = 0;
+		gbc_btnSetting.gridy = 3;
+		pnAdminBtns.add(btnSetting, gbc_btnSetting);
 		btnToLogout.setBorderPainted(false);
 		btnToLogout.setFocusPainted(false);
 		btnToLogout.setContentAreaFilled(true);
 		btnToLogout.setBackground(new Color(248, 248, 255));
-		pnAdminBtns.add(btnToLogout);
+		GridBagConstraints gbc_btnToLogout = new GridBagConstraints();
+		gbc_btnToLogout.fill = GridBagConstraints.BOTH;
+		gbc_btnToLogout.gridx = 0;
+		gbc_btnToLogout.gridy = 4;
+		pnAdminBtns.add(btnToLogout, gbc_btnToLogout);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnAdminSetting) {
-			btnAdminSettingActionPerformed(e);
-		}
 		if (e.getSource() == btnToLogout) {
 			btnToLogoutActionPerformed(e);
 		}
 		if (e.getSource() == btnSetting) {
 			btnSettingActionPerformed(e);
 		}
-		if (e.getSource() == btnHairEvent) {
-			btnHairEventActionPerformed(e);
-		}
-		if (e.getSource() == btnHairinfo) {
-			btnHairinfoActionPerformed(e);
-		}
-	}
-	protected void btnHairinfoActionPerformed(ActionEvent e) {
-		hairEventPanel.setVisible(false);
-		adminSettingPanel.setVisible(false);
-		hairinfoPanel.setInitPanel();
-		hairinfoPanel.setVisible(true);		
-	}
-	protected void btnHairEventActionPerformed(ActionEvent e) {
-		hairEventPanel.setInitPanel();
-		hairEventPanel.setVisible(true);
-		hairinfoPanel.setVisible(false);
-		adminSettingPanel.setVisible(false);
 	}
 	protected void btnSettingActionPerformed(ActionEvent e) {
-		hairEventPanel.setVisible(false);
-		hairinfoPanel.setVisible(false);
-		adminSettingPanel.setVisible(false);
-		new ProgramSetting();
+		setDefaultPanel();
+		ProgramSetting pSetting = new ProgramSetting();
+		pSetting.setAdminSettingPanel(adminSettingPanel);
+		pSetting.setHairEvnetAdminPanel(hairEventPanel);
+		pSetting.setHairinfoAdminPanel(hairinfoPanel);
+		
 	}
 	protected void btnToLogoutActionPerformed(ActionEvent e) {
 		if(JOptionPane.showConfirmDialog(null, "로그아웃하시겠습니까?", "로그아웃", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){
@@ -177,10 +142,11 @@ public class PnAdmin extends JPanel implements ActionListener {
 			tabbedPane.setSelectedIndex(0);
 		}		
 	}
-	protected void btnAdminSettingActionPerformed(ActionEvent e) {
-		hairEventPanel.setVisible(false);
-		hairinfoPanel.setVisible(false);
-		adminSettingPanel.setVisible(true);
+	
+	public void setDefaultPanel(){
+		hairEventPanel.setInitPanel();
+		hairinfoPanel.setInitPanel();
+		adminSettingPanel.setinitPanel();
 	}
 
 	public JButton getBtnToLogout() {

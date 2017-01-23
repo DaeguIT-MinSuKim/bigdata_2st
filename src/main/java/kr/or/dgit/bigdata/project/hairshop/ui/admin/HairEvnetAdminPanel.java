@@ -84,6 +84,7 @@ public class HairEvnetAdminPanel extends JPanel implements ActionListener, Mouse
 		setInputPanel(addPanel);		
 	}
 	protected void btnUpdatePerformed(ActionEvent e) {
+		btnUpdate.setEnabled(false);
 		HairEvent selected = table.getSelectedItemWithIndex(table.getSelectedRow());
 		HairEventSet updPanel = new HairEventSet("수정");
 		updPanel.setTextFields(selected);
@@ -112,6 +113,7 @@ public class HairEvnetAdminPanel extends JPanel implements ActionListener, Mouse
 	}
 	
 	public void setInitPanel(){
+		table.setTableWithData();
 		inputPanel.removeAll();
 	}
 }

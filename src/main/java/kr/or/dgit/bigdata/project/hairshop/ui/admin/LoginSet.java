@@ -16,6 +16,9 @@ import javax.swing.border.EmptyBorder;
 import kr.or.dgit.bigdata.project.hairshop.dto.Manager;
 import kr.or.dgit.bigdata.project.hairshop.list.ManagerTable;
 import kr.or.dgit.bigdata.project.hairshop.service.ManagerService;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class LoginSet extends JPanel implements ActionListener {
 	private JTextField tfmName;
@@ -44,33 +47,67 @@ public class LoginSet extends JPanel implements ActionListener {
 	 */
 	public LoginSet() {
 		setBorder(new EmptyBorder(10, 10, 10, 10));
-		setLayout(new GridLayout(0, 2, 10, 10));
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{215, 215, 0};
+		gridBagLayout.rowHeights = new int[]{56, 56, 56, 56, 56, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
+		
+		btnCancel = new JButton("취소");
+		btnCancel.addActionListener(this);
 		
 		JLabel lblmName = new JLabel("아이디");
 		lblmName.setHorizontalAlignment(SwingConstants.RIGHT);
-		add(lblmName);
-		lblmNo = new JLabel();
+		GridBagConstraints gbc_lblmName = new GridBagConstraints();
+		gbc_lblmName.fill = GridBagConstraints.BOTH;
+		gbc_lblmName.insets = new Insets(0, 0, 5, 5);
+		gbc_lblmName.gridx = 0;
+		gbc_lblmName.gridy = 0;
+		add(lblmName, gbc_lblmName);
 		tfmName = new JTextField();
 		tfmName.setHorizontalAlignment(SwingConstants.RIGHT);
-		add(tfmName);
+		GridBagConstraints gbc_tfmName = new GridBagConstraints();
+		gbc_tfmName.fill = GridBagConstraints.BOTH;
+		gbc_tfmName.insets = new Insets(0, 0, 5, 0);
+		gbc_tfmName.gridx = 1;
+		gbc_tfmName.gridy = 0;
+		add(tfmName, gbc_tfmName);
 		tfmName.setColumns(10);
 		
 		JLabel lblmPassword = new JLabel("비밀번호");
 		lblmPassword.setHorizontalAlignment(SwingConstants.RIGHT);
-		add(lblmPassword);
-
-		tfmPassword = new JPasswordField();
-		tfmPassword.setHorizontalAlignment(SwingConstants.RIGHT);
-		add(tfmPassword);
-		tfmPassword.setColumns(10);		
+		GridBagConstraints gbc_lblmPassword = new GridBagConstraints();
+		gbc_lblmPassword.fill = GridBagConstraints.BOTH;
+		gbc_lblmPassword.insets = new Insets(0, 0, 5, 5);
+		gbc_lblmPassword.gridx = 0;
+		gbc_lblmPassword.gridy = 1;
+		add(lblmPassword, gbc_lblmPassword);
+		
+				tfmPassword = new JPasswordField();
+				tfmPassword.setHorizontalAlignment(SwingConstants.RIGHT);
+				GridBagConstraints gbc_tfmPassword = new GridBagConstraints();
+				gbc_tfmPassword.fill = GridBagConstraints.BOTH;
+				gbc_tfmPassword.insets = new Insets(0, 0, 5, 0);
+				gbc_tfmPassword.gridx = 1;
+				gbc_tfmPassword.gridy = 1;
+				add(tfmPassword, gbc_tfmPassword);
+				tfmPassword.setColumns(10);
 		
 		btnOk = new JButton("로그인");
 		btnOk.addActionListener(this);				
-		add(btnOk);
-		
-		btnCancel = new JButton("취소");
-		btnCancel.addActionListener(this);
-		add(btnCancel);
+		GridBagConstraints gbc_btnOk = new GridBagConstraints();
+		gbc_btnOk.fill = GridBagConstraints.BOTH;
+		gbc_btnOk.insets = new Insets(0, 0, 0, 5);
+		gbc_btnOk.gridx = 0;
+		gbc_btnOk.gridy = 4;
+		add(btnOk, gbc_btnOk);
+		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
+		gbc_btnCancel.fill = GridBagConstraints.BOTH;
+		gbc_btnCancel.gridx = 1;
+		gbc_btnCancel.gridy = 4;
+		add(btnCancel, gbc_btnCancel);
+		lblmNo = new JLabel();
 	}
 	
 	public void setTextFields(Manager manager){
@@ -89,7 +126,9 @@ public class LoginSet extends JPanel implements ActionListener {
 	
 	private void btnCancelActionPerformed(ActionEvent arg0) {
 		tfmPassword.setText("");
-		
+		confirmPanel.removeAll();
+		confirmPanel.revalidate();
+		confirmPanel.repaint();
 	}
 	
 	protected void btnOkActionPerformed(ActionEvent arg0) {
