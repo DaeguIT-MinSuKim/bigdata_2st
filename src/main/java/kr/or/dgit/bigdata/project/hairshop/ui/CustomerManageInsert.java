@@ -28,6 +28,7 @@ public class CustomerManageInsert extends JPanel {
 	private JTextField txtDJ1;
 	private JTextField txtDJ2;
 	private JTextField txtDJ3;
+	private JPanel pnInsert;
 
 	/**
 	 * Create the panel.
@@ -35,7 +36,7 @@ public class CustomerManageInsert extends JPanel {
 	public CustomerManageInsert() {
 		setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JPanel pnInsert = new JPanel();
+		pnInsert = new JPanel();
 		pnInsert.setBorder(new EmptyBorder(20, 10, 20, 10));
 		add(pnInsert);
 		pnInsert.setLayout(new GridLayout(5, 2, 5, 10));
@@ -276,6 +277,14 @@ public class CustomerManageInsert extends JPanel {
 		CustomerService.getInstance().insertCustomer(insCtm);
 		
 		
+	}
+
+	public JPanel getPnInsert() {
+		return pnInsert;
+	}
+
+	public void setPnInsert(JPanel pnInsert) {
+		this.pnInsert = pnInsert;
 	}
 	
 

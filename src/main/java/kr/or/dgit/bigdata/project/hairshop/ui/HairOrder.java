@@ -69,6 +69,7 @@ public class HairOrder extends JPanel {
 	private JPanel pnCards;
 	private JPanel pnImg;
 	private CustomerManageInsert pnAddInput;
+	private JPanel pnAddInput2;
 	
 	/**
 	 * Create the panel.
@@ -241,7 +242,8 @@ public class HairOrder extends JPanel {
 		pnSubAdd.setLayout(new BorderLayout(0, 0));
 		
 		pnAddInput = new CustomerManageInsert();
-		pnSubAdd.add(pnAddInput, BorderLayout.CENTER);
+		pnAddInput2 = pnAddInput.getPnInsert();
+		pnSubAdd.add(pnAddInput2, BorderLayout.CENTER);
 		
 		JPanel pnAddBtnSub = new JPanel();
 		pnSubAdd.add(pnAddBtnSub, BorderLayout.SOUTH);
