@@ -136,7 +136,7 @@ public class HairMain extends JFrame implements ChangeListener {
 				btnSearchActionPerformed(e);
 			}
 		});
-		pnCusSearch.getBtnAdd().addActionListener(new ActionListener() {
+		pnCusSearch.getBtnAdd().addActionListener(new ActionListener() {//회원추가 패널 이동 버튼
 			public void actionPerformed(ActionEvent e) {
 				btnAddActionPerformed(e);
 			}
@@ -191,13 +191,14 @@ public class HairMain extends JFrame implements ChangeListener {
         List<Customer> customerForSize = CustomerService.getInstance().selectByAll();// 카운트 할 sql문을 만드는 게 좋음. 현재 임시용.
         int txtCno =customerForSize.size()+1;
         pnCusSearch.getPnCusAdd().getTxtCno().setText(txtCno+"");
-        
+        pnCusSearch.getBtnAdd().setEnabled(false);
 	}
 	protected void btnSearchActionPerformed(ActionEvent e) {
 		pnCusSearch.getPnSearchSub().revalidate();		
 		showThisCard("name_1666323161344197");        
 		pnCusSearch.getBtnSave().setEnabled(false);
         cardIndex =0;
+        pnCusSearch.getBtnAdd().setEnabled(true);
 	}
 	protected void btnSaveActionPerformed(ActionEvent e) {
 		switch (cardIndex) {
@@ -268,6 +269,7 @@ public class HairMain extends JFrame implements ChangeListener {
                 	pnCusSearch.getBtnSave().setEnabled(true);
         	        cardIndex =2;
         	        pnHairOder.getPnHairOderMain().setTxtInOrder(cNo, cName); // 수정된 내역이 있더라도 DB와 관련된것은 변동이 없는 cNo뿐이라 무관함.         			
+        	        pnCusSearch.getBtnAdd().setEnabled(true);
                 }
             }));
     		popup.add(new JMenuItem(new AbstractAction("삭제") {

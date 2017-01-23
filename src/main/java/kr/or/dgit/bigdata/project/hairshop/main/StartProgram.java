@@ -24,8 +24,8 @@ public class StartProgram{
 					HairMain frame = new HairMain();
 					frame.setBounds(100, 100, 1100, 700);
 					frame.setVisible(true);
-					frame.setLocationRelativeTo(null);
-		
+					frame.setLocationRelativeTo(null);					
+					
 				} catch (Exception e) {
 					StartProgram f = new StartProgram();
 					
