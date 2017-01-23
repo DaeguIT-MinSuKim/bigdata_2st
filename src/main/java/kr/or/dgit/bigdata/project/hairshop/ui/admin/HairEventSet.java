@@ -151,6 +151,8 @@ public class HairEventSet extends JPanel implements ActionListener, KeyListener 
 
 	protected void btnCancelActionPerformed(ActionEvent arg0) {
 		clearTF();
+		inputPanel.removeAll();
+		inputPanel.repaint();
 	}
 
 	private void clearTF() {
