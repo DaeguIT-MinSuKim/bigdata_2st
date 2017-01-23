@@ -55,22 +55,22 @@ public class ChartPanelP extends ChartPanel {
 		add(cP);
 	}
 
-	private CategoryDataset createDataset() {
+	public CategoryDataset createDataset() {
 	
-		final String CUT = "커트";
-		final String DRY = "드라이";
-		final String SHAMPOO = "샴푸";
-		final String PERM = "펌";
-		final String MAGIC = "매직";
-		final String TREATMENT = "트리트먼트";
-		final String AMPLE = "앰플";
-		final String ETC = "기타";
+		String CUT = "커트";
+		String DRY = "드라이";
+		String SHAMPOO = "샴푸";
+		String PERM = "펌";
+		String MAGIC = "매직";
+		String TREATMENT = "트리트먼트";
+		String AMPLE = "앰플";
+		String ETC = "기타";
 		 
-		final String HAIRTYPE = "헤어종류";
+		String HAIRTYPE = "헤어종류";
 		
 		
 
-		final DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
 			
 		 dataset.addValue(BizService.getInstance().selectCountTotalEachHairBiz(1), CUT, HAIRTYPE);
 		 dataset.addValue(BizService.getInstance().selectCountTotalEachHairBiz(2), DRY, HAIRTYPE);

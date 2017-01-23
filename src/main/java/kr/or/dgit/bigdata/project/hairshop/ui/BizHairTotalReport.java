@@ -91,6 +91,10 @@ public class BizHairTotalReport extends JPanel {
 		tfTotalBizPrice.setBounds(199, 124, 116, 21);
 		add(tfTotalBizPrice);
 		
+		reloadData();				
+	}
+
+	public void reloadData() {//초기화 수행위해 메소드로 분리
 		try {
 			int tBiz = BizService.getInstance().selectCountTotalBiz();
 			int tPrice = BizService.getInstance().selectCountTotalPrice();
@@ -103,22 +107,5 @@ public class BizHairTotalReport extends JPanel {
 			tfTotalBizCnt.setText("null");
 			tfTotalBizPrice.setText("null");
 		}
-		
-		
-//		임시 버튼 (삭제)
-//		JButton btnNewButton = new JButton("갱신(임시)");
-//		btnNewButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				int tBiz = BizService.getInstance().selectCountTotalBiz();
-//				int tPrice = BizService.getInstance().selectCountTotalPrice();
-//				int tCus = BizService.getInstance().selectCountTotalCustomer();
-//				tfTotalCusCnt.setText(String.valueOf(tCus));
-//				tfTotalBizCnt.setText(String.valueOf(tBiz));
-//				tfTotalBizPrice.setText(String.valueOf(tPrice));
-//			}
-//		});
-//		btnNewButton.setBounds(459, 86, 97, 23);
-//		add(btnNewButton);
-				
 	}
 }

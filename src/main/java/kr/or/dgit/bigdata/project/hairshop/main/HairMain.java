@@ -42,7 +42,6 @@ import kr.or.dgit.bigdata.project.hairshop.taps.PnCusSearch;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnHairOder;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnHome;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnOrderList;
-import kr.or.dgit.bigdata.project.hairshop.ui.BizHairTotalReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.HomePanel;
 import kr.or.dgit.bigdata.project.hairshop.ui.admin.ManagerLogin;
 
@@ -415,8 +414,8 @@ public class HairMain extends JFrame implements ChangeListener {
 	private void pnCusSearchComponentShown(ComponentEvent arg0) {
 		pnCusSearch.getTableInSearchForAll().reloadDataForAll();
 	}
-	private void pnBizGraphComponentShown(ComponentEvent arg0) {
-		pnBizGraph.setPanel(new ChartPanelP(chart));
-		pnBizGraph.setPanel_1(new BizHairTotalReport());
+	private void pnBizGraphComponentShown(ComponentEvent arg0) {//그래프 패널 초기화용
+		pnBizGraph.getPanel_1().reloadData();
+		pnBizGraph.getPanel().repaint();
 	}
 }
