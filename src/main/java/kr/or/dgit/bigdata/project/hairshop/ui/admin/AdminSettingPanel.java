@@ -77,6 +77,9 @@ public class AdminSettingPanel extends JPanel implements ActionListener, MouseLi
 		confirmPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		confirmPanel.setLayout(new BorderLayout());
 		add(confirmPanel);
+		LoginSet tempPanel = new LoginSet();
+		confirmPanel.add(tempPanel);
+		tempPanel.setVisible(false);
 	}
 
 	public void actionPerformed(ActionEvent e) {

@@ -50,8 +50,8 @@ public class PnAdmin extends JPanel implements ActionListener {
 		pnAdminMain.setBackground(new Color(240, 240, 240));
 		add(pnAdminMain, BorderLayout.CENTER);
 		GridBagLayout gbl_pnAdminMain = new GridBagLayout();
-		gbl_pnAdminMain.columnWidths = new int[]{30, 428, 428, 0};
-		gbl_pnAdminMain.rowHeights = new int[]{30, 271, 271, 0};
+		gbl_pnAdminMain.columnWidths = new int[]{0, 480, 480, 0};
+		gbl_pnAdminMain.rowHeights = new int[]{0, 270, 330, 0};
 		gbl_pnAdminMain.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_pnAdminMain.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		pnAdminMain.setLayout(gbl_pnAdminMain);
@@ -127,10 +127,12 @@ public class PnAdmin extends JPanel implements ActionListener {
 		}
 	}
 	protected void btnSettingActionPerformed(ActionEvent e) {
-		hairEventPanel.setInitPanel();
-		hairinfoPanel.setInitPanel();
-		adminSettingPanel.setInitPanel();
-		new ProgramSetting();
+		setDefaultPanel();
+		ProgramSetting pSetting = new ProgramSetting();
+		pSetting.setAdminSettingPanel(adminSettingPanel);
+		pSetting.setHairEvnetAdminPanel(hairEventPanel);
+		pSetting.setHairinfoAdminPanel(hairinfoPanel);
+		
 	}
 	protected void btnToLogoutActionPerformed(ActionEvent e) {
 		if(JOptionPane.showConfirmDialog(null, "로그아웃하시겠습니까?", "로그아웃", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){

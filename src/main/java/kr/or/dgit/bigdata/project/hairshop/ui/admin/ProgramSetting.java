@@ -1,7 +1,6 @@
 package kr.or.dgit.bigdata.project.hairshop.ui.admin;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,7 +14,7 @@ import kr.or.dgit.bigdata.project.hairshop.admin.setting.dao.ResetDB;
 import kr.or.dgit.bigdata.project.hairshop.admin.setting.service.ExportSettingService;
 import kr.or.dgit.bigdata.project.hairshop.admin.setting.service.ImportSettingService;
 import kr.or.dgit.bigdata.project.hairshop.admin.setting.service.ServiceSetting;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
 public class ProgramSetting extends JFrame implements ActionListener {
 
@@ -23,6 +22,21 @@ public class ProgramSetting extends JFrame implements ActionListener {
 	private JButton btnInit;
 	private JButton btnBackUp;
 	private JButton btnImport;
+	private AdminSettingPanel adminSettingPanel;
+	private HairEvnetAdminPanel hairEvnetAdminPanel;
+	private HairinfoAdminPanel hairinfoAdminPanel;
+
+	public void setHairEvnetAdminPanel(HairEvnetAdminPanel hairEvnetAdminPanel) {
+		this.hairEvnetAdminPanel = hairEvnetAdminPanel;
+	}
+
+	public void setHairinfoAdminPanel(HairinfoAdminPanel hairinfoAdminPanel) {
+		this.hairinfoAdminPanel = hairinfoAdminPanel;
+	}
+
+	public void setAdminSettingPanel(AdminSettingPanel adminSettingPanel) {
+		this.adminSettingPanel = adminSettingPanel;
+	}
 
 	/**
 	 * Create the frame.
@@ -37,7 +51,7 @@ public class ProgramSetting extends JFrame implements ActionListener {
 		
 		btnInit = new JButton("초기화");
 		btnInit.addActionListener(this);
-		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		contentPane.setLayout(new GridLayout(0, 3, 0, 0));
 		contentPane.add(btnInit);
 		
 		btnBackUp = new JButton("백업");
@@ -54,25 +68,30 @@ public class ProgramSetting extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnImport) {
-			btnNewButton_2ActionPerformed(e);
+			btnImportActionPerformed(e);
 		}
 		if (e.getSource() == btnBackUp) {
-			btnNewButton_1ActionPerformed(e);
+			btnBackUpActionPerformed(e);
 		}
 		if (e.getSource() == btnInit) {
-			btnNewButtonActionPerformed(e);
+			btnInitActionPerformed(e);
 		}
 	}
-	protected void btnNewButtonActionPerformed(ActionEvent e) {
-		new ResetDB().createDB();
-		JOptionPane.showMessageDialog(null, "초기화에 성공하였습니다.");
+	protected void btnInitActionPerformed(ActionEvent e) {		
+		if(JOptionPane.showConfirmDialog(null, "정말 초기화 하시겠습니까?","초기화",JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){
+			new ResetDB().createDB();
+			JOptionPane.showMessageDialog(null, "초기화에 성공하였습니다.");
+			hairEvnetAdminPanel.setInitPanel();
+			hairinfoAdminPanel.setInitPanel();
+			adminSettingPanel.setinitPanel();
+		}
 	}
-	protected void btnNewButton_1ActionPerformed(ActionEvent e) {
+	protected void btnBackUpActionPerformed(ActionEvent e) {
 		ServiceSetting create = new ExportSettingService();
 		create.initSetting();
 		
 	}
-	protected void btnNewButton_2ActionPerformed(ActionEvent e) {
+	protected void btnImportActionPerformed(ActionEvent e) {
 		ServiceSetting create = new ImportSettingService();
 		create.initSetting();
 	}

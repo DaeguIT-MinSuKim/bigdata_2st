@@ -6,7 +6,9 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -32,7 +34,12 @@ public class HomePanel extends JLayeredPane {
 		setLayout(null);
 
 		// 배경 이미지
-		icon = new ImageIcon("img/Main.png");
+		try {
+			icon = new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/img/Main.png")));
+		} catch (IOException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		}
 		JPanel ip = new JPanel(){
 			public void paintComponent(Graphics g){
 				g.drawImage(icon.getImage(), 0, 0, null);

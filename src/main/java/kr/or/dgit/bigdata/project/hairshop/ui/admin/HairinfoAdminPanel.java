@@ -82,6 +82,7 @@ public class HairinfoAdminPanel extends JPanel implements ActionListener, MouseL
 		setInputPanel(addPanel);		
 	}
 	protected void btnUpdatePerformed(ActionEvent e) {
+		btnUpdate.setEnabled(false);
 		Hairinfo selected = table.getSelectedItemWithIndex(table.getSelectedRow());
 		HairinfoSet updPanel = new HairinfoSet("수정");
 		updPanel.setTextFields(selected);
@@ -110,6 +111,7 @@ public class HairinfoAdminPanel extends JPanel implements ActionListener, MouseL
 	}
 	
 	public void setInitPanel(){
+		table.setTableWithData();
 		inputPanel.removeAll();
 	}
 }
