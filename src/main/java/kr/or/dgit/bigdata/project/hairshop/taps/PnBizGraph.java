@@ -32,4 +32,21 @@ public class PnBizGraph extends JPanel {
 		add(panel);
 	}
 
+	public BizHairTotalReport getPanel_1() {
+		return panel_1;
+	}
+
+	public void setPanel_1(BizHairTotalReport panel_1) {
+		this.panel_1 = panel_1;
+	}
+
+	public ChartPanelP getPanel() {
+		return panel;
+	}
+
+	public void setPanel(ChartPanelP panel) {
+		this.panel = panel;
+	}
+	
+
 }

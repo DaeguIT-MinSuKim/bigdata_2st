@@ -27,6 +27,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import org.apache.log4j.lf5.util.DateFormatManager;
+import org.jfree.chart.ChartPanelP;
+import org.jfree.chart.JFreeChart;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;
 import kr.or.dgit.bigdata.project.hairshop.dto.Manager;
@@ -40,6 +42,7 @@ import kr.or.dgit.bigdata.project.hairshop.taps.PnCusSearch;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnHairOder;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnHome;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnOrderList;
+import kr.or.dgit.bigdata.project.hairshop.ui.BizHairTotalReport;
 import kr.or.dgit.bigdata.project.hairshop.ui.HomePanel;
 import kr.or.dgit.bigdata.project.hairshop.ui.admin.ManagerLogin;
 
@@ -65,6 +68,7 @@ public class HairMain extends JFrame implements ChangeListener {
 	private PnAdmin pnAdmin;
 	private boolean mlTf; //false면 관리자 모드 비접속, true면 관리자 모드 접속 중
 	Fonts f = new Fonts();
+	private JFreeChart chart;
 	
 	
 	public static void setUIFont(javax.swing.plaf.FontUIResource f) {
@@ -412,6 +416,7 @@ public class HairMain extends JFrame implements ChangeListener {
 		pnCusSearch.getTableInSearchForAll().reloadDataForAll();
 	}
 	private void pnBizGraphComponentShown(ComponentEvent arg0) {
-		pnBizGraph = new PnBizGraph();
+		pnBizGraph.setPanel(new ChartPanelP(chart));
+		pnBizGraph.setPanel_1(new BizHairTotalReport());
 	}
 }
