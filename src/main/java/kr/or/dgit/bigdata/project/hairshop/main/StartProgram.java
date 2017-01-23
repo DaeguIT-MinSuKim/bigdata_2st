@@ -5,8 +5,11 @@ import java.util.Properties;
 
 import javax.swing.UIManager;
 
+import org.apache.ibatis.exceptions.PersistenceException;
+
 import com.jtattoo.plaf.mcwin.McWinLookAndFeel;
 
+import kr.or.dgit.bigdata.project.hairshop.admin.setting.dao.ResetDB;
 import kr.or.dgit.bigdata.project.hairshop.fonts.Fonts;
 
 public class StartProgram{
@@ -52,11 +55,10 @@ public class StartProgram{
 					frame.setBounds(100, 100, 1100, 700);
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);					
-					
+	
 				} catch (Exception e) {
-					StartProgram f = new StartProgram();
-					
-					
+					new ResetDB().createDB();
+					StartProgram f = new StartProgram();					
 					e.printStackTrace();
 				}
 				

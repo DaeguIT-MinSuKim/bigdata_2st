@@ -27,7 +27,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import org.apache.log4j.lf5.util.DateFormatManager;
-import org.jfree.chart.ChartPanelP;
 import org.jfree.chart.JFreeChart;
 
 import kr.or.dgit.bigdata.project.hairshop.dto.Customer;

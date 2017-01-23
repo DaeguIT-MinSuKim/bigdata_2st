@@ -16,7 +16,6 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import kr.or.dgit.bigdata.project.hairshop.fonts.Fonts;
-import kr.or.dgit.bigdata.project.hairshop.ui.admin.ManagerLogin;
 
 public class HomePanel extends JLayeredPane {
 	private JButton[] btns = {new JButton(), new JButton(), new JButton(), new JButton()};
