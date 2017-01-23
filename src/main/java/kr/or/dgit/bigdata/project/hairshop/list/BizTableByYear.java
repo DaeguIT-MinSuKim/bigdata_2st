@@ -50,5 +50,4 @@ public class BizTableByYear extends ListTableSetting {
 		}
 		return BizTableByMonth.setDatas(list);	
 	}
-	
 }
