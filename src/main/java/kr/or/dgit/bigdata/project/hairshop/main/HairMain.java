@@ -144,7 +144,7 @@ public class HairMain extends JFrame implements ChangeListener {
 				pnSearchSubTableForAllMouseReleased(arg0 ,pnCusSearch.getTableInSearchForAll());//
 			}
 		});
-		pnCusSearch.getPnSearchSub().addMouseListener(new MouseAdapter() {
+		pnCusSearch.getPnSearchSub().getTable().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				pnSearchSubTableForAllMouseReleased(arg0, pnCusSearch.getTableInSearch());//
