@@ -205,6 +205,12 @@ public class HairMain extends JFrame implements ChangeListener {
 		pnBizList = new PnBizList();
 		pnBizList.setTabbedPane(tabbedPane);
 		pnBizGraph = new PnBizGraph();
+		pnBizGraph.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				pnBizGraphComponentShown(arg0);
+			}
+		});
 		pnAdmin = new PnAdmin();
 		pnAdmin.setTabbedPane(tabbedPane);
 		pnAdmin.getBtnToLogout().addActionListener(new ActionListener() {					
@@ -407,5 +413,9 @@ public class HairMain extends JFrame implements ChangeListener {
 	}
 	private void pnCusSearchComponentShown(ComponentEvent arg0) {
 		pnCusSearch.getTableInSearchForAll().reloadDataForAll();
+	}
+	private void pnBizGraphComponentShown(ComponentEvent arg0) {//그래프 패널 초기화용
+		pnBizGraph.getPanel_1().reloadData();
+		pnBizGraph.getPanel().chartRefresh();
 	}
 }
