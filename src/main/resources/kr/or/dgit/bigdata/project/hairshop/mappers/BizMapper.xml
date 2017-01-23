@@ -18,10 +18,10 @@
 		left outer join hairshop.event e on b.eNo = e.eNo 
 	</select>
 	<select id="selectBizWithDates" resultMap="BizWithCsEventInfo">
-		select *from hairshop.view_biz where bDate &gt;= #{param1} and bDate &lt;#{param2} order by bDate
+		select *from hairshop.view_biz where bDate &gt;= #{param1} and bDate &lt;=#{param2} order by bDate
 	</select>
 	<select id="selectBizWithDatesCalTotal" parameterType="hashmap" resultType="hashmap">
-		select count(bNo) as cnt, sum(hPrice*(1-eDiscount)) as sum from view_biz where bDate &gt;= #{param1} and bDate &lt;#{param2}
+		select count(bNo) as cnt, sum(hPrice*(1-eDiscount)) as sum from view_biz where bDate &gt;= #{param1} and bDate &lt;=#{param2}
 	</select>
 	<select id="selectFromBizByCustomer" parameterType="int" resultMap="BizWithCsEventInfo">
 		select *from hairshop.view_biz where cNo=#{param1} order by bNo
