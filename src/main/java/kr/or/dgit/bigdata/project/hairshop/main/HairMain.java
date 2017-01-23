@@ -243,14 +243,15 @@ public class HairMain extends JFrame implements ChangeListener {
         pnCusSearch.getBtnAdd().setEnabled(true);
         pnCusSearch.getPnSearchSub().reloadDataForAll();//고객검색 내에서 회원검색 패널 이동버튼 클릭시 테이블 재검색 
 	}
-	protected void btnSaveActionPerformed(ActionEvent e) {
+	protected void btnSaveActionPerformed(ActionEvent e) {/////
 		switch (cardIndex) {
 		case 1:
 			pnCusSearch.getPnCusAdd().insertNewCostomer();
 			int directOderInAdd = JOptionPane.showConfirmDialog(null, "해당 고객 번호로 바로 주문 하시겠습니까?");
 			if(directOderInAdd==0){
 				pnHairOder.getPnHairOderMain().setTxtInOrder(Integer.parseInt(pnCusSearch.getPnCusAdd().getTxtCno().getText()),pnCusSearch.getPnCusAdd().getTxtCname().getText());
-				tabbedPane.setSelectedComponent(pnHairOder);				
+				tabbedPane.setSelectedComponent(pnHairOder);
+				pnHairOder.getPnHairOderMain().reloadData();
 			}
 			cardIndex =0;
 			pnCusSearch.getPnCusAdd().setClearTxt();
@@ -260,7 +261,8 @@ public class HairMain extends JFrame implements ChangeListener {
 			int directOderInEdit = JOptionPane.showConfirmDialog(null, "해당 고객 번호로 바로 주문 하시겠습니까?");
 			if(directOderInEdit==0){
 				pnHairOder.getPnHairOderMain().setTxtInOrder(Integer.parseInt(pnCusSearch.getPnCusEdit().getTxtCno().getText()),pnCusSearch.getPnCusEdit().getTxtCname().getText());
-				tabbedPane.setSelectedComponent(pnHairOder);				
+				tabbedPane.setSelectedComponent(pnHairOder);
+				pnHairOder.getPnHairOderMain().reloadData();
 			}
 			cardIndex =0;
 			break;		
