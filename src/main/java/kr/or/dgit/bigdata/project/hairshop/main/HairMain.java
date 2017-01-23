@@ -43,6 +43,8 @@ import kr.or.dgit.bigdata.project.hairshop.taps.PnHome;
 import kr.or.dgit.bigdata.project.hairshop.taps.PnOrderList;
 import kr.or.dgit.bigdata.project.hairshop.ui.HomePanel;
 import kr.or.dgit.bigdata.project.hairshop.ui.admin.ManagerLogin;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class HairMain extends JFrame implements ChangeListener {
 
@@ -177,6 +179,12 @@ public class HairMain extends JFrame implements ChangeListener {
 		});
 		tabbedPane.addTab("고객검색", null, pnCusSearch, null);			
 		pnHairOder = new PnHairOder();//pnHairOder
+		pnHairOder.getPnHairOderMain().getTfCName().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				pnHairOderPnHairOderMainTfCNameKeyTyped(arg0);
+			}
+		});
 		pnHairOder.getBtnOrder().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				btnOrderActionPerformed(arg0);
@@ -426,5 +434,8 @@ public class HairMain extends JFrame implements ChangeListener {
 	private void pnBizGraphComponentShown(ComponentEvent arg0) {//그래프 패널 초기화용
 		pnBizGraph.getPanel_1().reloadData();
 		pnBizGraph.getPanel().chartRefresh();
+	}
+	protected void pnHairOderPnHairOderMainTfCNameKeyTyped(KeyEvent arg0) {
+		pnHairOder.getPnHairOderMain().getTfCNo().setText("");
 	}
 }
