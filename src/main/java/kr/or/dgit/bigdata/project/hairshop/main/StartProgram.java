@@ -64,39 +64,5 @@ public class StartProgram{
 			}
 		});
 		
-	}
-	
-
-	
-
-	
-	//UIManager.put("EditorPane.font", f.getHanNa());
-	//UIManager.put("ToolBar.font", f.getHanNa());
-	//UIManager.put("Tree.font", f.getHanNa());
-	//UIManager.put("CheckBoxMenuItem.font", f.getHanNa());
-
-	//UIManager.put("Slider.font", f.getHanNa());
-	
-	//UIManager.put("Menu.acceleratorFont", f.getHanNa());
-	//UIManager.put("MenuBar.font", f.getHanNa());
-	//UIManager.put("PopupMenu.font", f.getHanNa());
-	//UIManager.put("MenuItem.font", f.getJua().deriveFont(16f));
-	//UIManager.put("MenuItem.acceleratorFont", f.getHanNa());
-	//UIManager.put("TextPane.font", f.getHanNa().deriveFont(40f));
-	//UIManager.put("ProgressBar.font", f.getHanNa());
-	//UIManager.put("CheckBox.font", f.getHanNa());
-	// UIManager.put("CheckBoxMenuItem.acceleratorFont", f.getHanNa());
-	//UIManager.put("FormattedTextField.font", f.getHanNa().deriveFont(40f));		
-	
-	//UIManager.put("RadioButton.font", f.getDoHyeon());
-	//UIManager.put("RadioButtonMenuItem.font", f.getHanNa());
-	//UIManager.put("RadioButtonMenuItem.acceleratorFont", f.getDoHyeon());
-	//UIManager.put("ToggleButton.font", f.getHanNa());					
-//	UIManager.put("TabbedPane.font", f.getDoHyeon());
-//	UIManager.put("Panel.font", f.getHanNa()); //JPanel
-//	UIManager.put("Viewport.font", f.getDoHyeon());
-	//UIManager.put("ScrollPane.font", f.getHanNa());
-	//UIManager.put("Spinner.font", f.getHanNa());
-	
-	
+	}	
 }
