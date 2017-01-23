@@ -16,11 +16,6 @@ public class CustomerHairTable extends ListTableSetting {
 	/* 헤어 검색이나 고객헤어정보 panel에서 table 사용 할 때 */
 	public CustomerHairTable() {}
 	
-	public void setTableWithData(Customer customer) {
-		setColumDataIndex(3);
-		setModel(new DefaultTableModel(getDatas(customer), getColumnData()));
-		tableSetAlignWidth();		
-	}
 	
 	public void setTableWithData(String startDate, String endDate) {
 		setColumDataIndex(3);
@@ -39,17 +34,6 @@ public class CustomerHairTable extends ListTableSetting {
 		if(!list.isEmpty()){
 			String[] tList = getcntSumIntValue(startDate, endDate);
 			Datas[list.size()] = new String[]{"","","","","총 금액  : ",tList[1]};
-		}
-		
-		return Datas;		
-	}
-	
-	private String[][] getDatas(Customer customer) {				
-		List<Biz> list = BizService.getInstance().selectFromBizByCustomer(customer.getcNo());
-		String[][] Datas = new String[list.size()][];
-		
-		for(int i=0; i<list.size(); i++){
-			Datas[i]=  list.get(i).toCSArray();
 		}
 		
 		return Datas;		

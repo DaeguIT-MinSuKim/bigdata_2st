@@ -466,7 +466,7 @@ public class HairOrder extends JPanel {
 		return rowDatas;
 	}
 
-	protected void btnSearchActionPerformed(ActionEvent arg0) {
+	protected void btnSearchActionPerformed(ActionEvent arg0) {// 검색하는 고객명이 null일시 전체 테이블
 		CardLayout cl = (CardLayout)(pnCards.getLayout());
 		cl.show(pnCards, "name_31439583877535");
 		reloadData();
