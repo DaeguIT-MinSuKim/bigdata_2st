@@ -26,7 +26,6 @@ public class PnBizGraph extends JPanel {
 		panel_1.getTfTotalCusCnt().setEditable(false);
 		panel_1.setBounds(195, 12, 690, 171);
 		add(panel_1);
-		
 		panel = new ChartPanelP(chart);
 		panel.setBounds(195, 195, 690, 430);
 		add(panel);
