@@ -1,25 +1,15 @@
 package org.jfree.chart;
 
-import org.jfree.chart.StandardChartTheme;
-
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import kr.or.dgit.bigdata.project.hairshop.fonts.Fonts;
 import kr.or.dgit.bigdata.project.hairshop.service.BizService;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
 
 public class ChartPanelP extends ChartPanel {
 
@@ -29,7 +19,7 @@ public class ChartPanelP extends ChartPanel {
 	
 	Fonts f = new Fonts();
 	
-	public ChartPanelP(JFreeChart chart) {
+	public ChartPanelP(JFreeChart chart) {//
 		super(chart);
 		String chartTitle = "hair";
 		chart = ChartFactory.createBarChart3D(chartTitle, "카테고리", "주문건수", createDataset(), PlotOrientation.VERTICAL, true, false, false);

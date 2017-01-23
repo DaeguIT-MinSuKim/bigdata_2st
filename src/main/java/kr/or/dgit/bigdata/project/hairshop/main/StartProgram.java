@@ -45,7 +45,7 @@ public class StartProgram{
 
 					UIManager.put("TextArea.font", f.getNanumGothic());
 					UIManager.put("OptionPane.font", f.getHanNa());
-					UIManager.put("OptionPane.messageFont", f.getHanNa());
+					UIManager.put("OptionPane.messageFont", f.getHanNa().deriveFont(16f));
 
 					
 					HairMain frame = new HairMain();

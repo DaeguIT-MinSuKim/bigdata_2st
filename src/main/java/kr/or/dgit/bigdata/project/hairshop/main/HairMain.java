@@ -128,7 +128,13 @@ public class HairMain extends JFrame implements ChangeListener {
 		tabbedPane.remove(pnBizList);
 		tabbedPane.remove(pnBizGraph);
 		tabbedPane.addTab("  홈  ", null, pnHome, null);	//pnHome 탭 끝. 로그아웃 연동 추가 요망	
-		pnCusSearch = new PnCusSearch();//pnCusSearch
+		pnCusSearch = new PnCusSearch();//
+		pnCusSearch.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				pnCusSearchComponentShown(arg0);
+			}
+		});
 		pnCusSearch.getPnSearchSub().getTableForAll().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -196,6 +202,12 @@ public class HairMain extends JFrame implements ChangeListener {
 		pnBizList = new PnBizList();
 		pnBizList.setTabbedPane(tabbedPane);
 		pnBizGraph = new PnBizGraph();
+		pnBizGraph.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				pnBizGraphComponentShown(arg0);
+			}
+		});
 		pnAdmin = new PnAdmin();
 		pnAdmin.setTabbedPane(tabbedPane);
 		pnAdmin.getBtnToLogout().addActionListener(new ActionListener() {					
@@ -395,5 +407,11 @@ public class HairMain extends JFrame implements ChangeListener {
 	}
 	private void isLogout() {
 		mlTf = false;
+	}
+	private void pnCusSearchComponentShown(ComponentEvent arg0) {
+		pnCusSearch.getTableInSearchForAll().reloadDataForAll();
+	}
+	private void pnBizGraphComponentShown(ComponentEvent arg0) {
+		pnBizGraph = new PnBizGraph();
 	}
 }

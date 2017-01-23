@@ -1,8 +1,5 @@
 package kr.or.dgit.bigdata.project.hairshop.taps;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-
 import javax.swing.JPanel;
 
 import org.jfree.chart.ChartPanelP;
