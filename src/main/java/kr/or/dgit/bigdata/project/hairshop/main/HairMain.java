@@ -179,6 +179,12 @@ public class HairMain extends JFrame implements ChangeListener {
 		});
 		tabbedPane.addTab("고객검색", null, pnCusSearch, null);			
 		pnHairOder = new PnHairOder();//pnHairOder
+		pnHairOder.getPnHairOderMain().getTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				pnHairOderPnHairOderMainTableMouseClicked(arg0);
+			}
+		});
 		pnHairOder.getPnHairOderMain().getTfCName().addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent arg0) {
@@ -278,7 +284,7 @@ public class HairMain extends JFrame implements ChangeListener {
 			break;  
 		}  		
 	}
-	protected void btnHairInfoActionPerformed(ActionEvent e) { // 테이블 보이기 추가
+	protected void btnHairInfoActionPerformed(ActionEvent e) { // 테이블 보이기 추가 //
 		tabbedPane.setEnabledAt(3, true);
 		tabbedPane.setSelectedComponent(pnOrderList);
 		Customer c = CustomerService.getInstance().searchCustomerByNo(Integer.parseInt(pnHairOder.getPnHairOderMain().getTfCNo().getText()));	
@@ -290,7 +296,12 @@ public class HairMain extends JFrame implements ChangeListener {
 		tabbedPane.setSelectedComponent(pnHome);
 	}
 	protected void btnOrderActionPerformed(ActionEvent e) {//////////////
-		pnHairOder.getPnHairOderMain().insertBizByOrder();
+		pnHairOder.getPnHairOderMain().insertBizByOrder();		
+		Customer c = CustomerService.getInstance().searchCustomerByNo(Integer.parseInt(pnHairOder.getPnHairOderMain().getTfCNo().getText()));	
+		DateFormatManager dfm = new DateFormatManager("yyyy-MM-dd");
+		pnOrderList.getPnOrderListMain().setTxtInHairIfo(c.getcNo(), c.getcName(), dfm.format(c.getcDob()));
+		pnOrderList.getPnOrderListMain().reloadData();
+		tabbedPane.setEnabledAt(3, true);
 		pnHairOder.getPnHairOderMain().setClearTxt();
 	}	
 	private void clickAndGetDataFromTable(JTable table) {		
@@ -395,7 +406,13 @@ public class HairMain extends JFrame implements ChangeListener {
 		tabbedPane.setSelectedIndex(index);
 	}
 	protected void pnHairOderComponentShown(ComponentEvent arg0) {////////////
-		pnHairOder.getPnHairOderMain().setTxtInOrder();		
+		pnHairOder.getPnHairOderMain().setTxtInOrder();
+		if (pnHairOder.getPnHairOderMain().getTfCNo().getText().equals("")) {
+			pnHairOder.getBtnHairInfo().setEnabled(false);
+		} else {
+			pnHairOder.getBtnHairInfo().setEnabled(true);
+		}
+		
 	}
 	public void showThisCard(String string) {
 		CardLayout cl = (CardLayout)(pnCusSearch.getPnCusSearchCards().getLayout());
@@ -437,5 +454,12 @@ public class HairMain extends JFrame implements ChangeListener {
 	}
 	protected void pnHairOderPnHairOderMainTfCNameKeyTyped(KeyEvent arg0) {
 		pnHairOder.getPnHairOderMain().getTfCNo().setText("");
+	}
+	protected void pnHairOderPnHairOderMainTableMouseClicked(MouseEvent arg0) {
+		if (pnHairOder.getPnHairOderMain().getTfCNo().getText().equals("")) {
+			pnHairOder.getBtnHairInfo().setEnabled(false);
+		} else {
+			pnHairOder.getBtnHairInfo().setEnabled(true);
+		}
 	}
 }

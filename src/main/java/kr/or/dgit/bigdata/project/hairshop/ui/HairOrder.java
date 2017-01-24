@@ -526,7 +526,7 @@ public class HairOrder extends JPanel {
 		}
 	}
 
-	protected void tableMouseClicked(MouseEvent arg0) {
+	protected void tableMouseClicked(MouseEvent arg0) {/////////////
 		try {
 			String cNo = table.getValueAt(table.getSelectedRow(), 0).toString();
 			String cName = table.getValueAt(table.getSelectedRow(), 1).toString();
