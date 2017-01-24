@@ -80,11 +80,9 @@ public class CustomerSearch extends JPanel implements ActionListener {
 		add(scrollPane, BorderLayout.CENTER);
 		
 		table = new CustomerSearchListForOne();
-		table.setCellSelectionEnabled(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		tableForAll = new CustomerSearchListForAll();
-		tableForAll.setCellSelectionEnabled(true);
 		tableForAll.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		scrollPane.setViewportView(tableForAll);
@@ -101,7 +99,11 @@ public class CustomerSearch extends JPanel implements ActionListener {
 	}
 
 	private void reloadData() {
-		DefaultTableModel model = new DefaultTableModel(getRowData(cName), getColumnData());
+		DefaultTableModel model = new DefaultTableModel(getRowData(cName), getColumnData()){
+			public boolean isCellEditable(int row, int column) {
+				return false;// This causes all cells to be not editable
+			}
+		};
 		table.setModel(model);
 		tableSetAlignWith();		
 	}
@@ -238,10 +240,13 @@ public class CustomerSearch extends JPanel implements ActionListener {
 		return rowDatas;
 	}
 	public void reloadDataForAll() {
-		DefaultTableModel model = new DefaultTableModel(getRowDataForAll(), getColumnData());
+		DefaultTableModel model = new DefaultTableModel(getRowDataForAll(), getColumnData()){
+			public boolean isCellEditable(int row, int column) {
+				return false;// This causes all cells to be not editable
+			}
+		};;
 		tableForAll.setModel(model);
 		tableSetAlignWithForAll();	
-		btnPrint.setEnabled(true);
 	}
 	private void searchClick() {
 		cName = txtSearch.getText();
