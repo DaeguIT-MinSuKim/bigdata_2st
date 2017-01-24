@@ -108,9 +108,6 @@ public class HairinfoAdminPanel extends JPanel implements ActionListener, MouseL
 	
 	protected void tableMouseClicked(MouseEvent e) {
 		btnUpdate.setEnabled(true);
-		inputPanel.removeAll();
-		inputPanel.repaint();
-		inputPanel.revalidate();
 	}
 	
 	public void setInitPanel(){
