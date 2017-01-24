@@ -447,6 +447,8 @@ public class HairMain extends JFrame implements ChangeListener {
 	}
 	private void pnCusSearchComponentShown(ComponentEvent arg0) {
 		pnCusSearch.getTableInSearchForAll().reloadDataForAll();
+		pnCusSearch.getBtnAdd().setEnabled(true);
+		pnCusSearch.getPnCusAdd().setClearTxt();
 	}
 	private void pnBizGraphComponentShown(ComponentEvent arg0) {//그래프 패널 초기화용
 		pnBizGraph.getPanel_1().reloadData();
