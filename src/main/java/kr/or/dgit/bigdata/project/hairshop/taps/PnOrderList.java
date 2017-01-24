@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import kr.or.dgit.bigdata.project.hairshop.list.CustomerHairTable;
 import kr.or.dgit.bigdata.project.hairshop.ui.HairOrderSearch;
+import java.awt.SystemColor;
 
 public class PnOrderList extends JPanel {
 
@@ -28,7 +29,7 @@ public class PnOrderList extends JPanel {
 		setLayout(null);
 		pnOrderListMain = new HairOrderSearch();
 		pnOrderListMain.setBounds(0, 0, 936, 622);
-		pnOrderListMain.setBackground(new Color(255, 192, 203));
+		pnOrderListMain.setBackground(SystemColor.control);
 		add(pnOrderListMain, BorderLayout.CENTER);
 		
 		pnOrderListBtns = new JPanel();
@@ -38,7 +39,6 @@ public class PnOrderList extends JPanel {
 		add(pnOrderListBtns);
 		
 		btnToMain3 = new JButton("메인화면");
-		btnToMain3.setFont(new Font("나눔고딕", Font.PLAIN, 16));
 		btnToMain3.setBorderPainted(false);
 		btnToMain3.setFocusPainted(false);
 		btnToMain3.setContentAreaFilled(true);

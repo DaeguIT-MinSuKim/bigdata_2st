@@ -57,7 +57,6 @@ public class BizHairTotalReport extends JPanel {
 		
 		JLabel label = new JLabel("헤어 현황");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("굴림", Font.BOLD, 16));
 		label.setBounds(12, 10, 87, 15);
 		add(label);
 		

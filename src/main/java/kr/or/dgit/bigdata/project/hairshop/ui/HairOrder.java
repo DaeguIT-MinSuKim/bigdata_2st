@@ -130,6 +130,9 @@ public class HairOrder extends JPanel {
 		tfCName.setColumns(10);
 
 		JButton btnSearch = new JButton("검색");
+		btnSearch.setBorderPainted(false);
+		btnSearch.setFocusPainted(false);
+		btnSearch.setContentAreaFilled(true);
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				btnSearchActionPerformed(arg0);
