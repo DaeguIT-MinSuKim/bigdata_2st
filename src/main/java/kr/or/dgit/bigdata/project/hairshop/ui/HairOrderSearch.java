@@ -106,6 +106,4 @@ public class HairOrderSearch extends JPanel {
 	public void reloadData() {			
 		table.reloadData(txtNo.getText(), chi);		
 	}
-
-
 }
