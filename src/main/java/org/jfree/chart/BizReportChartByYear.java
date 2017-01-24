@@ -36,7 +36,7 @@ public class BizReportChartByYear extends JFrame  {
 
 	private JFreeChart createChart(CategoryDataset dataset) {
 		// TODO Auto-generated method stub
-		JFreeChart chart = ChartFactory.createStackedBarChart(
+		JFreeChart chart = ChartFactory.createStackedBarChart3D(
 			      "년도별 매출 실적"
 			      , ""
 			      , "실적"

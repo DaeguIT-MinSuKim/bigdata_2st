@@ -33,7 +33,7 @@ public class BizReportChartByMonth extends JFrame  {
 
 	private JFreeChart createChart(CategoryDataset dataset, int year) {
 		// TODO Auto-generated method stub
-		JFreeChart chart = ChartFactory.createStackedBarChart(
+		JFreeChart chart = ChartFactory.createStackedBarChart3D(
 			      year+"년도 월별 매출 실적"
 			      , ""
 			      , "실적"
