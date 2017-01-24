@@ -97,5 +97,21 @@ public class ProgramSetting extends JFrame implements ActionListener {
 		hairinfoAdminPanel.setInitPanel();
 		adminSettingPanel.setinitPanel();
 	}
+
+	public JButton getBtnInit() {
+		return btnInit;
+	}
+
+	public void setBtnInit(JButton btnInit) {
+		this.btnInit = btnInit;
+	}
+
+	public JButton getBtnImport() {
+		return btnImport;
+	}
+
+	public void setBtnImport(JButton btnImport) {
+		this.btnImport = btnImport;
+	}
 	
 }

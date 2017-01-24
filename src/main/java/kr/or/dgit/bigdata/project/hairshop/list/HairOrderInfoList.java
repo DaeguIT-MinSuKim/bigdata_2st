@@ -24,5 +24,10 @@ public class HairOrderInfoList extends ListTableSetting {
 		}
 		return rowDatas;
 	}
+	public void reloadData(String[] chi) {
+		DefaultTableModel model = new DefaultTableModel(null, chi);
+		setModel(model);
+		tableSetAlignWidth();		
+	}
 	
 }

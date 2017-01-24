@@ -480,6 +480,16 @@ public class HairOrder extends JPanel {
 		table.setModel(model);
 		table.tableSetAlignWidth();
 	}
+	public void reloadDataInit() {
+		table.setColumDataIndex(1);
+		DefaultTableModel model = new DefaultTableModel(null, table.getColumnData()) {
+			public boolean isCellEditable(int row, int column) {
+				return false;// This causes all cells to be not editable
+			}
+		};
+		table.setModel(model);
+		table.tableSetAlignWidth();
+	}
 
 	String[][] getRowData(String cName) {
 		Map<String, Object> map = new HashMap<>();
@@ -571,6 +581,6 @@ public class HairOrder extends JPanel {
 		  tfTotal.setText("");
 		  cmbHName.setSelectedIndex(0);
 		  cmbEName.setSelectedIndex(0);
-		
+		  reloadDataInit();
 	}
 }
