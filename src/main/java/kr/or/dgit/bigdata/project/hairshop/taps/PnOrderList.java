@@ -42,7 +42,7 @@ public class PnOrderList extends JPanel {
 		btnToMain3.setBorderPainted(false);
 		btnToMain3.setFocusPainted(false);
 		btnToMain3.setContentAreaFilled(true);
-		btnToMain3.setBounds(2, 0, 140, 156);
+		btnToMain3.setBounds(2, 468, 140, 156);
 		pnOrderListBtns.setLayout(null);
 		btnToMain3.setBackground(new Color(248, 248, 255));
 		pnOrderListBtns.add(btnToMain3);	

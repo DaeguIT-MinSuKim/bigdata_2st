@@ -59,7 +59,7 @@ public class PnHairOder extends JPanel {
 		pnHairOderBtns.add(btnHairInfo);
 		
 		btnToMain2 = new JButton("메인화면");
-		btnToMain2.setBounds(2, 312, 140, 156);
+		btnToMain2.setBounds(2, 468, 140, 156);
 		btnToMain2.setBorderPainted(false);
 		btnToMain2.setFocusPainted(false);
 		btnToMain2.setContentAreaFilled(true);
