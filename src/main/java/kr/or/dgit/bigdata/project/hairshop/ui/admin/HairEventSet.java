@@ -95,7 +95,7 @@ public class HairEventSet extends JPanel implements ActionListener, KeyListener 
 	public void setTextFields(HairEvent hairEvent){
 		tfeName.setText(hairEvent.geteName());
 		tfeNo.setText(hairEvent.geteNo()+"");
-		tfeDiscount.setText((int)(hairEvent.geteDiscount()*100)+"");
+		tfeDiscount.setText((int)Math.floor(hairEvent.geteDiscount()*1000.0)/10+"");
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {

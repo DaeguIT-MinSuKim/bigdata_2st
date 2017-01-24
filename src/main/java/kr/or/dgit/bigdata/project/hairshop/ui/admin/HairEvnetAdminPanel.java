@@ -110,10 +110,15 @@ public class HairEvnetAdminPanel extends JPanel implements ActionListener, Mouse
 	
 	protected void tableMouseClicked(MouseEvent e) {
 		btnUpdate.setEnabled(true);
+		inputPanel.removeAll();
+		inputPanel.repaint();
+		inputPanel.revalidate();
 	}
 	
 	public void setInitPanel(){
 		table.setTableWithData();
 		inputPanel.removeAll();
+		inputPanel.repaint();
+		inputPanel.revalidate();
 	}
 }

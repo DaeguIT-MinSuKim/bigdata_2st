@@ -139,6 +139,7 @@ public class AdminSettingPanel extends JPanel implements ActionListener, MouseLi
 	protected void tableMouseClicked(MouseEvent e) {
 		btnUpdate.setEnabled(true);
 		btnDel.setEnabled(true);
+		setInitPanel();
 	}
 	public void setinitPanel(){
 		confirmPanel.removeAll();
@@ -148,5 +149,7 @@ public class AdminSettingPanel extends JPanel implements ActionListener, MouseLi
 	}
 	public void setInitPanel(){
 		confirmPanel.removeAll();
+		confirmPanel.repaint();
+		confirmPanel.revalidate();
 	}
 }

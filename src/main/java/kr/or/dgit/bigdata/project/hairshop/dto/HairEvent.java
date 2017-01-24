@@ -26,7 +26,7 @@ public class HairEvent {
 	}
 	public String geteDiscountForm(){
 		//헤어주문 프로그램에서 할인율 호출 시 00%형태로 보여주기 위해 만든 메소드
-		return Double.toString(eDiscount*100)+"%";
+		return Math.floor(eDiscount*1000.0)/10+"%";
 	}
 	/* CONSTURCTOR */
 	public HairEvent() {}
