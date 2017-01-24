@@ -34,18 +34,22 @@ public class BizTableByMonth extends ListTableSetting {
 			}					
 			if(!bList.isEmpty()){
 				HashMap<String, Object> res = BizService.getInstance().selectBizWithYearMonthCalTotal(searchMap);
-				String[] tList = getcntSumIntValue(res);				
-				String[] sList = new String[]{"", i+"월 소계", "", "",tList[0] ,tList[1]};
-				list.add(sList);
+				String[] tList = getcntSumIntValue(res);
+				if(tList != null){
+					String[] sList = new String[]{"", i+"월 소계", "", "",tList[0] ,tList[1]};
+					list.add(sList);
+				}
 			}					
 		}
 		
 		if(!list.isEmpty()){
 			searchMap.remove("month");
 			HashMap<String, Object> res = BizService.getInstance().selectBizWithYearMonthCalTotal(searchMap);
-			String[] tList = getcntSumIntValue(res);	
-			String[] sList = new String[]{"", "", "", "","총 계 : " , tList[1]};
-			list.add(sList);
+			String[] tList = getcntSumIntValue(res);
+			if(tList != null){
+				String[] sList = new String[]{"", "", "", "","총 계 : " , tList[1]};
+				list.add(sList);
+			}
 		}
 		
 		return setDatas(list);
@@ -53,6 +57,9 @@ public class BizTableByMonth extends ListTableSetting {
 
 	public static String[] getcntSumIntValue(HashMap<String, Object> calList) {
 		// DB에서 계산하여 넘어온 더블형의 값을 int로 변환
+		if(calList.get("sum")==null){
+			return null;
+		}
 		double dSum = (Double) calList.get("sum");
 		int iSum = (int)(dSum);
 		return new String[]{calList.get("cnt")+"건",String.format("%,d 원", iSum)};

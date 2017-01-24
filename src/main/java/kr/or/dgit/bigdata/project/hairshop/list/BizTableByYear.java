@@ -24,10 +24,10 @@ public class BizTableByYear extends ListTableSetting {
 	
 	private String[][] getDatas() {					
 		HashMap<String, Object> searchMap = new HashMap<>();
-		Set<Integer> temp = BizService.getInstance().selectBDateYear();
+		List<Integer> temp = BizService.getInstance().selectBDateYear();
 		Integer[] yList = temp.toArray(new Integer[temp.size()]);
 		ArrayList<Object> list = new ArrayList<>();				
-		for(int i = yList.length-1 ; i >= 0 ; i--){
+		for(int i = 0 ; i < yList.length ; i++){
 			searchMap.put("year", yList[i]);
 			List<Biz> bList = BizService.getInstance().selectBizWithYearMonth(searchMap);
 			for(Biz b:bList){
@@ -36,8 +36,10 @@ public class BizTableByYear extends ListTableSetting {
 			if(!bList.isEmpty()){
 				HashMap<String, Object> res = BizService.getInstance().selectBizWithYearMonthCalTotal(searchMap);
 				String[] tList = BizTableByMonth.getcntSumIntValue(res);
-				String[] sList = new String[]{"", yList[i]+"년 소계", "", "",tList[0] ,tList[1]};
-				list.add(sList);
+				if(tList != null){
+					String[] sList = new String[]{"", yList[i]+"년 소계", "", "",tList[0] ,tList[1]};
+					list.add(sList);
+				}
 			}
 		}
 		if(!list.isEmpty()){
@@ -45,8 +47,10 @@ public class BizTableByYear extends ListTableSetting {
 			String endDate = (yList[yList.length-1])+"12-31";
 			HashMap<String, Object> res = BizService.getInstance().selectBizWithDatesCalTotal(startDate, endDate);
 			String[] tList = BizTableByMonth.getcntSumIntValue(res);
-			String[] sList = new String[]{"", "", "", "","총 계 : " , tList[1]};
-			list.add(sList);
+			if(tList != null){
+				String[] sList = new String[]{"", "", "", "","총 계 : " , tList[1]};
+				list.add(sList);
+			}
 		}
 		return BizTableByMonth.setDatas(list);	
 	}

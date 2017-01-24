@@ -7,8 +7,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -82,16 +84,14 @@ public class BizReportPanelByMonth extends JPanel implements ActionListener, Ite
 	
 	private void setcmbYear() {		
 		try{
-			Set<Integer> temp = BizService.getInstance().selectBDateYear();
+			List<Integer> temp = BizService.getInstance().selectBDateYear();
 			Integer[] yList = temp.toArray(new Integer[temp.size()]);
 			if(yList.length==0){
 				cmbYear.setEnabled(false);
 				btnSearch.setEnabled(false);
 				return;
 			}
-			for(int i=yList.length-1; i >=0 ;i--){
-				cmbYear.addItem(yList[i]);
-			}
+			cmbYear.setModel(new DefaultComboBoxModel<>(yList));
 		}catch(Exception e){
 			cmbYear.setEnabled(false);
 			btnSearch.setEnabled(false);

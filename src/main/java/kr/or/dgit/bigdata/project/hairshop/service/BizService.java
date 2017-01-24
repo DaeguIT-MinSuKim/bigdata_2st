@@ -172,7 +172,7 @@ public class BizService {
 		}	
 	}
 	/* 유진 사용 */
-	public Set<Integer> selectBDateYear(){
+	public List<Integer> selectBDateYear(){
 		if (logger.isDebugEnabled()) {
 			logger.debug("selectBDateYear() - start");
 		}

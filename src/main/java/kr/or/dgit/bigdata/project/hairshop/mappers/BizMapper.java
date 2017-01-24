@@ -35,8 +35,8 @@ public interface BizMapper {
 	
 	public List<Biz> selectFromBizByCustomer(int cNo);
 	
-	@Select("select year from view_biz")
-	public Set<Integer> selectBDateYear();
+	@Select("select distinct year from view_biz order by year desc")
+	public List<Integer> selectBDateYear();
 	
 	public List<Biz> selectBizWithYearMonth(HashMap<String, Object> searchMap);
 	

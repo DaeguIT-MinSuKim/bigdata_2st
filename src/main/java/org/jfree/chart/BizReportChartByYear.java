@@ -84,7 +84,7 @@ public class BizReportChartByYear extends JFrame  {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		
 		List<Hairinfo> hList = HairinfoService.getInstance().selectHairInfoAll();
-		Set<Integer> tempList = BizService.getInstance().selectBDateYear();
+		List<Integer> tempList = BizService.getInstance().selectBDateYear();
 		Integer[] yList = tempList.toArray(new Integer[tempList.size()]);
 		HashMap<String, Object> searchMap = new HashMap<>();
 		
