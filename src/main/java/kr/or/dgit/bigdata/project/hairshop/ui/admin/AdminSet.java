@@ -21,6 +21,8 @@ import javax.swing.border.EmptyBorder;
 import kr.or.dgit.bigdata.project.hairshop.dto.Manager;
 import kr.or.dgit.bigdata.project.hairshop.list.ManagerTable;
 import kr.or.dgit.bigdata.project.hairshop.service.ManagerService;
+import java.awt.event.FocusListener;
+import java.awt.event.FocusEvent;
 
 public class AdminSet extends JPanel implements ActionListener, KeyListener {
 	private JTextField tfmName;
@@ -86,6 +88,7 @@ public class AdminSet extends JPanel implements ActionListener, KeyListener {
 		add(lblmPassword, gbc_lblmPassword);
 
 		tfmPassword = new JPasswordField();
+		tfmPassword.addKeyListener(this);
 		tfmPassword.setHorizontalAlignment(SwingConstants.RIGHT);
 		GridBagConstraints gbc_tfmPassword = new GridBagConstraints();
 		gbc_tfmPassword.fill = GridBagConstraints.BOTH;
@@ -226,6 +229,9 @@ public class AdminSet extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent arg0) {
 	}
 	public void keyReleased(KeyEvent arg0) {
+		if (arg0.getSource() == tfmPassword) {
+			tfmPasswordKeyReleased(arg0);
+		}
 		if (arg0.getSource() == tfmPassword2) {
 			passwordFieldKeyReleased(arg0);
 		}
@@ -243,5 +249,19 @@ public class AdminSet extends JPanel implements ActionListener, KeyListener {
 			btnOk.setEnabled(false);
 		}
 		
+	}
+
+	protected void tfmPasswordKeyReleased(KeyEvent arg0) {
+		if(tfmPassword2.getPassword().length != 0){
+			if(convertToString(tfmPassword).equals(convertToString(tfmPassword2))){
+				lblconfirm.setForeground(Color.GREEN);
+				lblconfirm.setText("비밀번호가 일치합니다.");
+				btnOk.setEnabled(true);
+			}else{
+				lblconfirm.setForeground(Color.red);
+				lblconfirm.setText("비밀번호가 일치하지 않습니다.");
+				btnOk.setEnabled(false);
+			}
+		}
 	}
 }
