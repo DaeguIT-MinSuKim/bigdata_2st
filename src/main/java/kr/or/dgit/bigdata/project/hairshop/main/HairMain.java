@@ -434,12 +434,14 @@ public class HairMain extends JFrame implements ChangeListener {
 	}
 
 	protected void pnHairOderComponentShown(ComponentEvent arg0) {////////////
+		pnHairOder.getPnHairOderMain().setArrOptionNames();
 		pnHairOder.getPnHairOderMain().setTxtInOrder();
 		if (pnHairOder.getPnHairOderMain().getTfCNo().getText().equals("")) {
 			pnHairOder.getBtnHairInfo().setEnabled(false);
 		} else {
 			pnHairOder.getBtnHairInfo().setEnabled(true);
 		}
+		
 
 	}
 
