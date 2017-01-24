@@ -12,8 +12,19 @@ public class ListTableSetting extends JTable {
 		TableColumnModel model = getColumnModel();
 		for (int i = 0; i < width.length; i++) {
 			model.getColumn(i).setPreferredWidth(width[i]);
+			isCellEditable(0, i);
+		}		
+	}
+	/* 테이블에서 수정 못하도록 하는 메소드. 유진 사용 테이블에서 적용 */
+	@Override
+	public boolean isCellEditable(int row, int column) {
+		if(column >= 0){
+			return false;
+		}else{
+			return true;
 		}
 	}
+	
 	public void tableSetAlignWidth() {//
 		if (ColumDataIndex == 1) {
 			tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4);
