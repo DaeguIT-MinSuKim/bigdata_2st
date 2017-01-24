@@ -292,7 +292,6 @@ public class HairMain extends JFrame implements ChangeListener {
 	protected void btnOrderActionPerformed(ActionEvent e) {//////////////
 		pnHairOder.getPnHairOderMain().insertBizByOrder();
 		pnHairOder.getPnHairOderMain().setClearTxt();
-		pnOrderList.getPnOrderListMain().reloadData();
 	}	
 	private void clickAndGetDataFromTable(JTable table) {		
 		cNo = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()); // 선택한 열의 0번째 인덱스 행을 출력
