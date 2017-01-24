@@ -526,6 +526,7 @@ public class HairOrder extends JPanel {
 			pnAddInput.insertNewCostomer();
 			tfCName.setText(pnAddInput.getTxtCname().getText());
 			tfCNo.setText(pnAddInput.getTxtCno().getText());
+			reloadData();
 		}
 	}
 

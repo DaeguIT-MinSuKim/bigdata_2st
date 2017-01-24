@@ -295,7 +295,7 @@ public class HairMain extends JFrame implements ChangeListener {
 	protected void btnToMainActionPerformed(ActionEvent e) {
 		tabbedPane.setSelectedComponent(pnHome);
 	}
-	protected void btnOrderActionPerformed(ActionEvent e) {//////////////
+	protected void btnOrderActionPerformed(ActionEvent e) {//주문 버튼
 		pnHairOder.getPnHairOderMain().insertBizByOrder();		
 		Customer c = CustomerService.getInstance().searchCustomerByNo(Integer.parseInt(pnHairOder.getPnHairOderMain().getTfCNo().getText()));	
 		DateFormatManager dfm = new DateFormatManager("yyyy-MM-dd");
@@ -303,6 +303,7 @@ public class HairMain extends JFrame implements ChangeListener {
 		pnOrderList.getPnOrderListMain().reloadData();
 		tabbedPane.setEnabledAt(3, true);
 		pnHairOder.getPnHairOderMain().setClearTxt();
+		pnHairOder.getPnHairOderMain().reloadDataForAll();
 	}	
 	private void clickAndGetDataFromTable(JTable table) {		
 		cNo = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()); // 선택한 열의 0번째 인덱스 행을 출력
