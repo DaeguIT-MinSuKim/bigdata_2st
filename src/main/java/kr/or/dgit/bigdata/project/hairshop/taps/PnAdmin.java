@@ -25,13 +25,14 @@ public class PnAdmin extends JPanel implements ActionListener {
 	/* main 화면 영업현황 tab 선택시 나타날 메인 화면 */
 	private JPanel pnAdminMain;
 	private JPanel pnAdminBtns;
-	private JButton btnSetting;
+	private JButton btnSetting;//초기화 백업 복원 버튼
 	private JButton btnToLogout;
 	private HairinfoAdminPanel hairinfoPanel;
 	private HairEvnetAdminPanel hairEventPanel;
 	private JTabbedPane tabbedPane;
 	private AdminSettingPanel adminSettingPanel;
-
+	private ProgramSetting pSetting;
+	
 	public void setTabbedPane(JTabbedPane tabbedPane) {
 		this.tabbedPane = tabbedPane;
 	}
@@ -128,7 +129,7 @@ public class PnAdmin extends JPanel implements ActionListener {
 	}
 	protected void btnSettingActionPerformed(ActionEvent e) {
 		setDefaultPanel();
-		ProgramSetting pSetting = new ProgramSetting();
+		pSetting = new ProgramSetting();
 		pSetting.setAdminSettingPanel(adminSettingPanel);
 		pSetting.setHairEvnetAdminPanel(hairEventPanel);
 		pSetting.setHairinfoAdminPanel(hairinfoPanel);
@@ -155,6 +156,22 @@ public class PnAdmin extends JPanel implements ActionListener {
 
 	public void setBtnToLogout(JButton btnToLogout) {
 		this.btnToLogout = btnToLogout;
+	}
+
+	public ProgramSetting getpSetting() {
+		return pSetting;
+	}
+
+	public void setpSetting(ProgramSetting pSetting) {
+		this.pSetting = pSetting;
+	}
+
+	public JButton getBtnSetting() {
+		return btnSetting;
+	}
+
+	public void setBtnSetting(JButton btnSetting) {
+		this.btnSetting = btnSetting;
 	}
 	
 }

@@ -119,4 +119,12 @@ public class HairOrderSearch extends JPanel {
 	public void reloadData() {			
 		table.reloadData(txtNo.getText(), chi);		
 	}
+	public void setClearTxt() {		
+		txtNo.setText("");
+		txtName.setText("");
+		txtD1.setText("");
+		txtD2.setText("");
+		txtD3.setText("");
+		table.reloadData(chi);	
+	}
 }

@@ -55,9 +55,8 @@ public class HairOrder extends JPanel {
 	private JTextField tfEDiscount;
 	private JTextField tfENo;
 	private JTextField tfTotal;
-	private String[] eventArr; // = {"기획", "생일", "일반", "조조"};
-	private String[] hairArr; // = {"커트", "드라이", "샴푸", "펌", "매직", "트리트먼트", "앰플",
-								// "기타"};
+	private String[] eventArr;
+	private String[] hairArr; 
 	private JComboBox cmbHName;
 	private JComboBox cmbEName;
 	private int hPriceInOrder;
@@ -152,15 +151,15 @@ public class HairOrder extends JPanel {
 		JLabel lblHName = new JLabel("헤어명");
 		pnForOrderMain.add(lblHName);
 		lblHName.setHorizontalAlignment(SwingConstants.CENTER);
-		setArrOptionNames(); //
 		cmbHName = new JComboBox();
+		cmbEName = new JComboBox();
+		setArrOptionNames(); //		
 		pnForOrderMain.add(cmbHName);
 		cmbHName.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				cmbHNameItemStateChanged(arg0);
 			}
 		});
-		cmbHName.setModel(new DefaultComboBoxModel(hairArr));
 
 		JLabel lblHNO = new JLabel("헤어번호");
 		pnForOrderMain.add(lblHNO);
@@ -188,14 +187,12 @@ public class HairOrder extends JPanel {
 		pnForOrderMain.add(lblEName);
 		lblEName.setHorizontalAlignment(SwingConstants.CENTER);
 
-		cmbEName = new JComboBox();
 		pnForOrderMain.add(cmbEName);
 		cmbEName.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				cmbENameItemStateChanged(e);
 			}
 		});
-		cmbEName.setModel(new DefaultComboBoxModel(eventArr));
 
 		JLabel lblEDiscount = new JLabel("할인율");
 		pnForOrderMain.add(lblEDiscount);
@@ -274,7 +271,7 @@ public class HairOrder extends JPanel {
 
 	}
 
-	private void setArrOptionNames() {// 옵션명들 입력
+	public void setArrOptionNames() {// 옵션명들 입력
 		List<Hairinfo> hList = HairinfoService.getInstance().selectHairInfoAll();
 		List<HairEvent> eList = HairEventService.getInstance().selectEventAll();
 		hairArr = new String[hList.size() + 1];
@@ -293,6 +290,8 @@ public class HairOrder extends JPanel {
 			eventArr[i] = eList.get(j).geteName();
 			j++;
 		}
+		cmbHName.setModel(new DefaultComboBoxModel(hairArr));	
+		cmbEName.setModel(new DefaultComboBoxModel(eventArr));
 	}
 
 	public void setTxtInOrder(int cNo, String cName) {
@@ -480,6 +479,16 @@ public class HairOrder extends JPanel {
 		table.setModel(model);
 		table.tableSetAlignWidth();
 	}
+	public void reloadDataInit() {
+		table.setColumDataIndex(1);
+		DefaultTableModel model = new DefaultTableModel(null, table.getColumnData()) {
+			public boolean isCellEditable(int row, int column) {
+				return false;// This causes all cells to be not editable
+			}
+		};
+		table.setModel(model);
+		table.tableSetAlignWidth();
+	}
 
 	String[][] getRowData(String cName) {
 		Map<String, Object> map = new HashMap<>();
@@ -571,6 +580,23 @@ public class HairOrder extends JPanel {
 		  tfTotal.setText("");
 		  cmbHName.setSelectedIndex(0);
 		  cmbEName.setSelectedIndex(0);
-		
+		  reloadDataInit();
 	}
+
+	public JComboBox getCmbHName() {
+		return cmbHName;
+	}
+
+	public void setCmbHName(JComboBox cmbHName) {
+		this.cmbHName = cmbHName;
+	}
+
+	public JComboBox getCmbEName() {
+		return cmbEName;
+	}
+
+	public void setCmbEName(JComboBox cmbEName) {
+		this.cmbEName = cmbEName;
+	}
+	
 }
