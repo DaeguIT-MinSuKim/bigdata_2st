@@ -89,8 +89,8 @@ public class BizReportPanelByMonth extends JPanel implements ActionListener, Ite
 				btnSearch.setEnabled(false);
 				return;
 			}
-			for(int year : yList){
-				cmbYear.addItem(year);
+			for(int i=yList.length-1; i >=0 ;i--){
+				cmbYear.addItem(yList[i]);
 			}
 		}catch(Exception e){
 			cmbYear.setEnabled(false);
