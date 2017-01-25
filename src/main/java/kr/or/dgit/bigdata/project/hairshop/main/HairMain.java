@@ -312,6 +312,7 @@ public class HairMain extends JFrame implements ChangeListener {
 		DateFormatManager dfm = new DateFormatManager("yyyy-MM-dd");
 		pnOrderList.getPnOrderListMain().setTxtInHairIfo(c.getcNo(), c.getcName(), dfm.format(c.getcDob()));
 		pnOrderList.getPnOrderListMain().reloadData();
+		pnHairOder.getPnHairOderMain().setClearTxt2();
 	}
 
 	protected void btnToMainActionPerformed(ActionEvent e) {
@@ -443,7 +444,7 @@ public class HairMain extends JFrame implements ChangeListener {
 		} else {
 			pnHairOder.getBtnHairInfo().setEnabled(true);
 		}
-		
+		pnHairOder.getPnHairOderMain().setClearTxt2();
 
 	}
 

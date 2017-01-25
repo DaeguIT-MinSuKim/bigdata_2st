@@ -130,6 +130,19 @@ insert into hairshop.customer(cName, cDob, cDoJoin, cPhone, cDel) values
 ('오달수', '1987-3-25', '2010-7-01','010-6523-7854', false),
 ('김일수', '1988-9-29', '2014-7-14','010-6512-8945', false);
 
+
+insert into hairshop.event values 
+(1, '기획' ,0.5),(2, '생일' ,0.3),(3, '일반' ,0.0),(4, '조조' ,0.2);
+
+insert into hairshop.hairinfo values (1,'커트',15000),
+(2,'드라이',12000),
+(3,'샴푸',5000),
+(4,'펌',38500),
+(5,'매직',95000),
+(6,'트리트먼트',35000),
+(7,'앰플',18000),
+(8,'기타',16000);
+
 insert into hairshop.biz(bDate,bTime,cNo,hNo,eNo) values
 ('2013-05-10','15:00:00',5,8,3),
 ('2013-05-11','11:15:00',6,7,2),
@@ -164,24 +177,7 @@ insert into hairshop.biz(bDate,bTime,cNo,hNo,eNo) values
 ('2016-12-14','05:10:00',2,7,2),
 ('2017-01-14','09:30:00',12,2,4);
 
-insert into hairshop.event values 
-(1, '기획' ,0.5),(2, '생일' ,0.3),(3, '일반' ,0.0),(4, '조조' ,0.2);
 
-insert into hairshop.hairinfo values (1,'커트',15000),
-(2,'드라이',12000),
-(3,'샴푸',5000),
-(4,'펌',38500),
-(5,'매직',95000),
-(6,'트리트먼트',35000),
-(7,'앰플',18000),
-(8,'기타',16000);
-
-insert into hairshop.biz values
-(1,'2000-05-10','15:00:00',1,5,3),
-(2,'2000-05-11','11:15:00',3,2,2),
-(3,'2001-05-12','04:00:00',2,1,3),
-(4,'2001-05-14','05:10:00',4,7,2),
-(5,'2001-05-14','09:30:00',2,4,4);
 
 CREATE OR REPLACE VIEW hairshop.view_biz
 AS select b.bNo, b.bDate,b.bTime,c.cNo,c.cName, c.cDel, 

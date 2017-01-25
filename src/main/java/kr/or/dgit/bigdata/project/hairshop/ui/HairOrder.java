@@ -598,5 +598,15 @@ public class HairOrder extends JPanel {
 	public void setCmbEName(JComboBox cmbEName) {
 		this.cmbEName = cmbEName;
 	}
+	public void setClearTxt2(){//주문버튼 누를 시에 텍스트필드 등 리셋
+		  tfHNo.setText("");
+		  tfHPrice.setText("");
+		  tfEDiscount.setText("");
+		  tfENo.setText("");
+		  tfTotal.setText("");
+		  cmbHName.setSelectedIndex(0);
+		  cmbEName.setSelectedIndex(0);
+		  reloadData();
+	}
 	
 }
