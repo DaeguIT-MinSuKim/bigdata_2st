@@ -128,9 +128,9 @@ public class BizReportPanelByMonth extends JPanel implements ActionListener, Ite
 	
 	protected void btnPrintActionPerformed(ActionEvent e) {
 		if(year!= -1){
-			BizTableByMonth prnTable =  new BizTableByMonth();
-			prnTable.setTableWithData(year);
-			new PrintFrame(prnTable, year+"년도 월별 실적");
+			JTable newTable = new JTable();//
+			newTable.setModel(resTable.getModel());	
+			new PrintFrame(newTable, year+"년도 월별 실적");
 		}
 	}
 	

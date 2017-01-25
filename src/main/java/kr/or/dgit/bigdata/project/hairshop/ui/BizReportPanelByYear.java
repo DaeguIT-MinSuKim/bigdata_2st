@@ -72,8 +72,8 @@ public class BizReportPanelByYear extends JPanel implements ActionListener {
 	}
 	
 	protected void btnPrintActionPerformed(ActionEvent e) {
-		BizTableByYear prnTable = new BizTableByYear();
-		prnTable.setTableWithData();
-		new PrintFrame(prnTable, "년도별 실적 조회");
+		JTable newTable = new JTable();//
+		newTable.setModel(resTable.getModel());	
+		new PrintFrame(newTable, "년도별 실적 조회");
 	}
 }

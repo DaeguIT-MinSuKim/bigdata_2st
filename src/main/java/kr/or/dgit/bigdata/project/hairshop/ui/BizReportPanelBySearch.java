@@ -91,9 +91,9 @@ public class BizReportPanelBySearch extends JPanel implements ActionListener {
 		btnPrint.setEnabled(true);
 	}	
 	protected void btnPrintActionPerformed(ActionEvent arg0) {
-		CustomerHairTable prnTable = new CustomerHairTable();
-		prnTable.setTableWithData(startDate, endDate);
-		new PrintFrame(prnTable, startDate+"~"+endDate+" 영업 실적");
+		JTable newTable = new JTable();//
+		newTable.setModel(resTable.getModel());	
+		new PrintFrame(newTable, startDate+"~"+endDate+" 영업 실적");
 	}
 	protected void startDatePickerDatePickerActionPerformed(ActionEvent arg0) {
 		btnPrint.setEnabled(false);
